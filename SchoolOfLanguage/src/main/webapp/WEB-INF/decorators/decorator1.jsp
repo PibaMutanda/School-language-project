@@ -10,10 +10,10 @@
 <!--    http://www.luckyryan.com/2013/02/06/setup-a-simple-spring-mvc-site-with-maven/  -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet"
-	href="<%=request.getContextPath()%>/resources/css/bootstrap.min.css">
 <link href="<%=request.getContextPath()%>/resources/css/style.css"
 	rel="stylesheet" type="text/css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/resources/css/bootstrap.min.css">
 <title><decorator:title>School Of Language</decorator:title></title>
 <decorator:head></decorator:head>
 </head>
@@ -93,14 +93,12 @@
     <span class="sr-only">Next</span>
   </a>
 </div>
-
-
 		
 		<div id="notification-message">
 	      <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
              <div class="modal-dialog modal-lg">
                 <div class="modal-content">
-                 
+                 <h4 style="color: green;">${messageSuccess}</h4>
                 </div>
              </div>
           </div>	
@@ -126,7 +124,6 @@
 				</nav>
 			</div>
 		</div>
-		<h4 style="color: green;">${messageSuccess}</h4>
 		<div class="container">
 			<div class="col-md-9 shool-decorator-body">
 				<decorator:body />
@@ -141,13 +138,12 @@
 
 	</footer>
 </body>
-<script src="<%=request.getContextPath()%>/resources/js/jquery.js"></script>
-<script
-	src="<%=request.getContextPath()%>/resources/js/bootstrap.min.js"></script>
 <script>
 	$(document).ready(function() {
 		$("#notification-message").show().delay(5000).fadeOut();
 	});
 </script>
-
+<script src="<%=request.getContextPath()%>/resources/js/jquery.js"></script>
+<script
+	src="<%=request.getContextPath()%>/resources/js/bootstrap.min.js"></script>
 </html>

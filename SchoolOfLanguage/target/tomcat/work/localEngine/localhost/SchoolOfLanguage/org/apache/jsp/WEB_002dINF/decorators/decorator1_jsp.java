@@ -70,14 +70,14 @@ public final class decorator1_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("<!--    http://www.luckyryan.com/2013/02/06/setup-a-simple-spring-mvc-site-with-maven/  -->\r\n");
       out.write("<meta charset=\"utf-8\">\r\n");
       out.write("<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\r\n");
-      out.write("<link rel=\"stylesheet\"\r\n");
-      out.write("\thref=\"");
-      out.print(request.getContextPath());
-      out.write("/resources/css/bootstrap.min.css\">\r\n");
       out.write("<link href=\"");
       out.print(request.getContextPath());
       out.write("/resources/css/style.css\"\r\n");
       out.write("\trel=\"stylesheet\" type=\"text/css\">\r\n");
+      out.write("<link rel=\"stylesheet\"\r\n");
+      out.write("\thref=\"");
+      out.print(request.getContextPath());
+      out.write("/resources/css/bootstrap.min.css\">\r\n");
       out.write("<title>");
       if (_jspx_meth_decorator_005ftitle_005f0(_jspx_page_context))
         return;
@@ -162,14 +162,14 @@ public final class decorator1_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("    <span class=\"sr-only\">Next</span>\r\n");
       out.write("  </a>\r\n");
       out.write("</div>\r\n");
-      out.write("\r\n");
-      out.write("\r\n");
       out.write("\t\t\r\n");
       out.write("\t\t<div id=\"notification-message\">\r\n");
       out.write("\t      <div class=\"modal fade bs-example-modal-lg\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myLargeModalLabel\" aria-hidden=\"true\">\r\n");
       out.write("             <div class=\"modal-dialog modal-lg\">\r\n");
       out.write("                <div class=\"modal-content\">\r\n");
-      out.write("                 \r\n");
+      out.write("                 <h4 style=\"color: green;\">");
+      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${messageSuccess}", java.lang.String.class, (PageContext)_jspx_page_context, null, false));
+      out.write("</h4>\r\n");
       out.write("                </div>\r\n");
       out.write("             </div>\r\n");
       out.write("          </div>\t\r\n");
@@ -195,9 +195,6 @@ public final class decorator1_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\t\t\t\t</nav>\r\n");
       out.write("\t\t\t</div>\r\n");
       out.write("\t\t</div>\r\n");
-      out.write("\t\t<h4 style=\"color: green;\">");
-      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${messageSuccess}", java.lang.String.class, (PageContext)_jspx_page_context, null, false));
-      out.write("</h4>\r\n");
       out.write("\t\t<div class=\"container\">\r\n");
       out.write("\t\t\t<div class=\"col-md-9 shool-decorator-body\">\r\n");
       out.write("\t\t\t\t");
@@ -215,6 +212,11 @@ public final class decorator1_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\r\n");
       out.write("\t</footer>\r\n");
       out.write("</body>\r\n");
+      out.write("<script>\r\n");
+      out.write("\t$(document).ready(function() {\r\n");
+      out.write("\t\t$(\"#notification-message\").show().delay(5000).fadeOut();\r\n");
+      out.write("\t});\r\n");
+      out.write("</script>\r\n");
       out.write("<script src=\"");
       out.print(request.getContextPath());
       out.write("/resources/js/jquery.js\"></script>\r\n");
@@ -222,12 +224,6 @@ public final class decorator1_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\tsrc=\"");
       out.print(request.getContextPath());
       out.write("/resources/js/bootstrap.min.js\"></script>\r\n");
-      out.write("<script>\r\n");
-      out.write("\t$(document).ready(function() {\r\n");
-      out.write("\t\t$(\"#notification-message\").show().delay(5000).fadeOut();\r\n");
-      out.write("\t});\r\n");
-      out.write("</script>\r\n");
-      out.write("\r\n");
       out.write("</html>");
     } catch (Throwable t) {
       if (!(t instanceof SkipPageException)){

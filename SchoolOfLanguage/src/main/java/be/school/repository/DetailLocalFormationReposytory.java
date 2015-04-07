@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import be.school.model.DetailLocalFormation;
+import be.school.model.Formation;
 import be.school.model.Local;
 import be.school.security.Seance;
 
@@ -46,5 +47,12 @@ public class DetailLocalFormationReposytory {
 		if(!delofos.isEmpty())
 			detailFormation = (DetailLocalFormation) delofos.get(0);
 		return detailFormation;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<DetailLocalFormation> FindAllByFormation(Formation formation){
+		return em.createQuery("select dlf from DetailLocalFormation dlf where dlf.formation= :formation")
+				.setParameter("formation", formation)
+				.getResultList();
 	}
 }

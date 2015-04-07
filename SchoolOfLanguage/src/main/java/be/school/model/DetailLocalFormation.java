@@ -75,8 +75,6 @@ public class DetailLocalFormation {
 		this.formation = formation;
 	}
 
-	
-
 	public Local getLocal() {
 		return local;
 	}
