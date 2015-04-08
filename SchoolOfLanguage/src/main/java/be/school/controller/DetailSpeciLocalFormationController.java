@@ -7,9 +7,13 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import be.school.model.DetailLocalFormation;
@@ -20,7 +24,6 @@ import be.school.repository.FormationRepository;
 import be.school.repository.LocalRepository;
 
 @Controller
-@RequestMapping("/detailformation")
 public class DetailSpeciLocalFormationController {
 	
    @Autowired
@@ -30,15 +33,14 @@ public class DetailSpeciLocalFormationController {
    
    @Autowired LocalRepository localRep;
    
-   @RequestMapping(value="/", method=RequestMethod.GET)
-   public ModelAndView detailSpeciLocalFormation(HttpServletRequest request){
+   @RequestMapping(value="/detailFormation", method=RequestMethod.GET)
+   public @ResponseBody ModelAndView detailSpeciLocalFormation(@RequestParam String titre){
 	   ModelAndView mv = new ModelAndView("detailformation");
-	   String id = request.getParameter("id");
 	   Local local=null;
-	   Formation formation = formationRep.findById(Long.parseLong(id));
+	  Formation formation = formationRep.findByTitre(titre);
 	   List<DetailLocalFormation> detailLocalFormations =dReposytory.FindAllByFormation(formation);
 	   if(detailLocalFormations.size()>0){
-	      local = localRep.findByDetalLocalFormation(detailLocalFormations.get(0));
+	      local = localRep.findByDetalLocalFormation(detailLocalFormations.get(0).getId());
 	      mv.addObject("local", local);
 	   }
 	   mv.addObject("detailLocalFormations", detailLocalFormations);
@@ -46,4 +48,15 @@ public class DetailSpeciLocalFormationController {
 	  
 	   return mv;
    }
+   
+   @ModelAttribute
+	public Formation findFormation(
+			@RequestParam(value = "formation", required = false) String titre) {
+		Formation formation = null;
+		if (titre == null)
+			formation = new Formation();
+		else
+			formation = formationRep.findByTitre(titre);
+		return formation;
+	}
 }

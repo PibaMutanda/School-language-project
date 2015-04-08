@@ -73,12 +73,14 @@ public final class formationlistdisplay_jsp extends org.apache.jasper.runtime.Ht
       out.write("<title>Insert title here</title>\r\n");
       out.write("</head>\r\n");
       out.write("<body>\r\n");
+      out.write("<form action=\"detailFormation\" method=\"get\">\r\n");
       out.write("<table class=\"table table-hover\">\r\n");
       out.write("    ");
       if (_jspx_meth_c_005fforEach_005f0(_jspx_page_context))
         return;
       out.write("\r\n");
-      out.write("</table>    \r\n");
+      out.write("</table> \r\n");
+      out.write("</form>   \r\n");
       out.write("</body>\r\n");
       out.write("<script src=\"");
       out.print(request.getContextPath());
@@ -108,9 +110,9 @@ public final class formationlistdisplay_jsp extends org.apache.jasper.runtime.Ht
     org.apache.taglibs.standard.tag.rt.core.ForEachTag _jspx_th_c_005fforEach_005f0 = (org.apache.taglibs.standard.tag.rt.core.ForEachTag) _005fjspx_005ftagPool_005fc_005fforEach_0026_005fvar_005fitems.get(org.apache.taglibs.standard.tag.rt.core.ForEachTag.class);
     _jspx_th_c_005fforEach_005f0.setPageContext(_jspx_page_context);
     _jspx_th_c_005fforEach_005f0.setParent(null);
-    // /WEB-INF/views/formationlistdisplay.jsp(18,4) name = items type = javax.el.ValueExpression reqTime = true required = false fragment = false deferredValue = true expectedTypeName = java.lang.Object deferredMethod = false methodSignature = null
-    _jspx_th_c_005fforEach_005f0.setItems(new org.apache.jasper.el.JspValueExpression("/WEB-INF/views/formationlistdisplay.jsp(18,4) '${listformations}'",_el_expressionfactory.createValueExpression(_jspx_page_context.getELContext(),"${listformations}",java.lang.Object.class)).getValue(_jspx_page_context.getELContext()));
-    // /WEB-INF/views/formationlistdisplay.jsp(18,4) name = var type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+    // /WEB-INF/views/formationlistdisplay.jsp(19,4) name = items type = javax.el.ValueExpression reqTime = true required = false fragment = false deferredValue = true expectedTypeName = java.lang.Object deferredMethod = false methodSignature = null
+    _jspx_th_c_005fforEach_005f0.setItems(new org.apache.jasper.el.JspValueExpression("/WEB-INF/views/formationlistdisplay.jsp(19,4) '${listformations}'",_el_expressionfactory.createValueExpression(_jspx_page_context.getELContext(),"${listformations}",java.lang.Object.class)).getValue(_jspx_page_context.getELContext()));
+    // /WEB-INF/views/formationlistdisplay.jsp(19,4) name = var type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
     _jspx_th_c_005fforEach_005f0.setVar("formation");
     int[] _jspx_push_body_count_c_005fforEach_005f0 = new int[] { 0 };
     try {
@@ -119,12 +121,9 @@ public final class formationlistdisplay_jsp extends org.apache.jasper.runtime.Ht
         do {
           out.write("\r\n");
           out.write("    <tr>\r\n");
-          out.write("       <td><a href=\"detailformation?id=");
-          out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${formation.id }", java.lang.String.class, (PageContext)_jspx_page_context, null, false));
-          out.write('"');
-          out.write('>');
+          out.write("       <td><input type=\"submit\" value=\"");
           out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${formation.titre }", java.lang.String.class, (PageContext)_jspx_page_context, null, false));
-          out.write("</a></td>\r\n");
+          out.write("\" name=\"titre\" class=\"btn btn-primary btn-lg btn-block\"></td>\r\n");
           out.write("    </tr>\r\n");
           out.write("    ");
           int evalDoAfterBody = _jspx_th_c_005fforEach_005f0.doAfterBody();

@@ -14,13 +14,15 @@
 <title>Insert title here</title>
 </head>
 <body>
+<form action="detailFormation" method="get">
 <table class="table table-hover">
     <c:forEach items="${listformations}" var="formation">
     <tr>
-       <td><a href="detailformation?id=${formation.id }">${formation.titre }</a></td>
+       <td><input type="submit" value="${formation.titre }" name="titre" class="btn btn-primary btn-lg btn-block"></td>
     </tr>
     </c:forEach>
-</table>    
+</table> 
+</form>   
 </body>
 <script src="<%=request.getContextPath()%>/resources/js/jquery.js"></script>
 <script

@@ -43,7 +43,9 @@ public class FormationRepository {
 		Formation formation=null;
 		List listForm = em
 				.createQuery("select f from Formation f where titre= :titre")
-				.setParameter("titre", titre).getResultList();
+				.setParameter("titre", titre)
+				.setMaxResults(1)
+				.getResultList();
 		if(!listForm.isEmpty())
 			formation = (Formation) listForm.get(0);
 		return formation;

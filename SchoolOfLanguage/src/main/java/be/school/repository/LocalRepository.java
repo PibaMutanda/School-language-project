@@ -45,10 +45,11 @@ public class LocalRepository {
 		return local;
 	}
 	
-	public Local findByDetalLocalFormation(DetailLocalFormation detailLocalFormation){
+	public Local findByDetalLocalFormation(Long id){
 		Local local=null;
-		List locaux= em.createQuery("select lc from Local lc join lc.detaiLocalFormations dlf where dlf.id= :id")
-				.setParameter("id", detailLocalFormation.getId())
+		List locaux= em.createQuery("select lc from Local lc join lc.detailLocalFormations dlf where dlf.id= :id")
+				.setParameter("id", id)
+				.setMaxResults(1)
 				.getResultList();
 		if(!locaux.isEmpty())
 			local = (Local) locaux.get(0);

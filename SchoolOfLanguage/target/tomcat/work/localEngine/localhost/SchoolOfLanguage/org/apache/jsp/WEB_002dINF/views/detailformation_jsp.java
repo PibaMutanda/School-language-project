@@ -71,7 +71,7 @@ public final class detailformation_jsp extends org.apache.jasper.runtime.HttpJsp
       out.write("</head>\r\n");
       out.write("<body>\r\n");
       out.write("   <table class=\"table table-hover\">\r\n");
-      out.write("   <tr><th>Titre</th><th>Local</th><th>Niveau</th><th>Capacité</th><th>Quota</th></tr>\r\n");
+      out.write("   <tr><th>Titre</th><th>Local</th><th>Niveau</th><th>S&eacute;ance<th>Capacité</th><th>Quota</th></tr>\r\n");
       out.write("   ");
       if (_jspx_meth_c_005fforEach_005f0(_jspx_page_context))
         return;
@@ -123,6 +123,8 @@ public final class detailformation_jsp extends org.apache.jasper.runtime.HttpJsp
           out.write("</td><td>");
           out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${detailLocalFormation.niveau }", java.lang.String.class, (PageContext)_jspx_page_context, null, false));
           out.write("</td><td>");
+          out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${detailLocalFormation.seance }", java.lang.String.class, (PageContext)_jspx_page_context, null, false));
+          out.write(" <td>");
           out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${local.capacite }", java.lang.String.class, (PageContext)_jspx_page_context, null, false));
           out.write("</td><td>");
           out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${detailLocalFormation.quota }", java.lang.String.class, (PageContext)_jspx_page_context, null, false));
