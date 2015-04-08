@@ -1,12 +1,15 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@taglib  uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c'%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@taglib  uri="http://www.springframework.org/tags/form" prefix="form" %>
 <html>
 <head>
-
-<title>Demande Inscription</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/resources/css/bootstrap.min.css">
+<link href="<%=request.getContextPath()%>/resources/css/style.css"
+	rel="stylesheet" type="text/css">
+<title></title>
 </head>
 <body>
      <c:forEach items="${messageError }" var="message">
@@ -22,8 +25,11 @@
       <td>${formation.titre }&nbsp;<input type="checkbox" value="${formation.id }" name="formations"></td>
       </c:forEach></tr>
 <!--       <tr><td><input type="hidden" name="dateReserv"></td><td><input type="hidden" name="dateRdv"> </td> </tr> -->
-      <tr><td><input type="submit" value="Envoyer"></td></tr>
+      <tr><td><input type="submit" value="Enregistrer" class="btn btn-primary"></td></tr>
      </table> 
      </form:form>
 </body>
+<script src="<%=request.getContextPath()%>/resources/js/jquery.js"></script>
+<script
+	src="<%=request.getContextPath()%>/resources/js/bootstrap.min.js"></script>
 </html>
