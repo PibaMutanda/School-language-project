@@ -5,6 +5,8 @@ import java.util.Set;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -20,29 +22,44 @@ import be.school.security.Seance;
 
 @Controller
 public class FormateurFormationController {
-	
+
 	FormateurRepository formateurRepository;
 	DetailLocalFormationReposytory detailLocalFormationReposytory;
 	FormationRepository formationRep;
 	LocalRepository localRep;
 
-@ModelAttribute("/formateurformationdisplay")	
- public ModelAndView formateurFormationDisplay(@RequestParam("id")Long id){
-	 ModelAndView mv = new ModelAndView("formformateurformation");
-	 Formateur formateur = formateurRepository.findById(id);
-	 List detailListForm =detailLocalFormationReposytory.findAll();
-	 Set<Local>setLocal=null;
-	 Set<Formation>setformation=null;
-	 
-	 for (Object dformation : detailListForm) {
-		setformation.add(formationRep.findById(((DetailLocalFormation) dformation).getFormation().getId()));
-		setLocal.add(localRep.findById(((DetailLocalFormation) dformation).getLocal().getId()));
+	@RequestMapping(value = "/formateurformationdisplay", method = RequestMethod.POST)
+	public ModelAndView formateurFormationDisplay(
+			@RequestParam("id") Long id) {
+		ModelAndView mv = new ModelAndView("formformateurformation");
+		Formateur formateur = formateurRepository.findById(id);
+		List detailListForm = detailLocalFormationReposytory.findAll();
+		Set<Local> setLocal = null;
+		Set<Formation> setformation = null;
+
+		for (Object dformation : detailListForm) {
+			setformation.add(formationRep
+					.findById(((DetailLocalFormation) dformation)
+							.getFormation().getId()));
+			setLocal.add(localRep.findById(((DetailLocalFormation) dformation)
+					.getLocal().getId()));
+		}
+
+		mv.addObject("formateur", formateur);
+		mv.addObject("setFormation", setformation);
+		mv.addObject("detailListForm", detailListForm);
+		mv.addObject("setLocal", setLocal);
+		return mv;
 	}
-	 
-	 mv.addObject("formateur", formateur);
-	 mv.addObject("setFormation",setformation);
-	 mv.addObject("detailListForm", detailListForm);
-	 mv.addObject("setLocal", setLocal);
-	 return mv;
- }
+
+	@ModelAttribute
+	public Formateur findFormateur(
+			@RequestParam(value="formateur", required = false) Long id) {
+		Formateur formateur = null;
+		if (id == null)
+			formateur = new Formateur();
+		else
+			formateur = formateurRepository.findById(id);
+		return formateur;
+	}
 }

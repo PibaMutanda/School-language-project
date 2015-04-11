@@ -117,7 +117,7 @@
 						<li><a href="localregister">Ajout Local</a></li>
 						<li><a href="participantregister">Ajout Participant</a></li>
 						<li><a href="detailformationregister">Associer niveau-formation</a></li>
-						<li><a href="formformateurformation">Associer formateur-formation</a> </li>
+						<li><a href="formateurlist">Liste Formateur</a> </li>
 						<li><a href="anneescolaireregister">Date Rentrée</a></li>
 						<li><a href="reservationregister">Soumettre une demande
 								pour inscription</a></li>

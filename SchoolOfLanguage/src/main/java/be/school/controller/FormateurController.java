@@ -1,6 +1,7 @@
 package be.school.controller;
 
 import java.beans.PropertyEditorSupport;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -69,6 +70,13 @@ public class FormateurController {
 			mv.setViewName("redirect:formateurlist");
 			
 		}
+		return mv;
+	}
+	@RequestMapping(value="/formateurlist", method = RequestMethod.GET)
+	public ModelAndView formateurDisplay(){
+		ModelAndView mv = new ModelAndView("formateurlist");
+		List<Formateur>formateurlist = formateurRepository.findAll();
+		mv.addObject("formateurlist", formateurlist);
 		return mv;
 	}
 }

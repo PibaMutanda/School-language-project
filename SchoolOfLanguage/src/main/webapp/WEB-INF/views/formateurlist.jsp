@@ -11,11 +11,11 @@
 <title></title>
 </head>
 <body>
-   <form action="formateurformationdisplay" >
+   <form action="formateurformationdisplay" method="post">
       <table  class="table table-hover">
-      <c:forEach items="${formateurlist }" var="formateur">
-<%--       <a href="formformateurformation?${formateur.id }" title="Associer une formation"><tr><td>${formateur.nom }</td><td>${formateur.prenom }</td></tr></a> --%>
-      <tr><td><input type="submit" name="${formateur.id }" value="${formateur.nom }  ${formateur.prenom}" class="btn btn-primary btn-lg btn-block"></td></tr>
+      <c:forEach items="${formateurlist}" var="formateur">
+      <tr><td><input type="hidden" name="id" value="${formateur.id}"></td></tr>
+      <tr><td><input type="submit" name="nom" value="${formateur.nom}" class="btn btn-primary btn-lg btn-block" title="Associer à une formation" ></td></tr>
       </c:forEach>
       </table>
    </form>   
