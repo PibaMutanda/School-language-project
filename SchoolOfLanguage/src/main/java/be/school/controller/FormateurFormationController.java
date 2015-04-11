@@ -3,7 +3,9 @@ package be.school.controller;
 import java.util.List;
 import java.util.Set;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,21 +20,25 @@ import be.school.repository.DetailLocalFormationReposytory;
 import be.school.repository.FormateurRepository;
 import be.school.repository.FormationRepository;
 import be.school.repository.LocalRepository;
-import be.school.security.Seance;
+
 
 @Controller
 public class FormateurFormationController {
 
+	@Autowired
 	FormateurRepository formateurRepository;
+	@Autowired
 	DetailLocalFormationReposytory detailLocalFormationReposytory;
+	@Autowired
 	FormationRepository formationRep;
+	@Autowired
 	LocalRepository localRep;
 
 	@RequestMapping(value = "/formateurformationdisplay", method = RequestMethod.POST)
 	public ModelAndView formateurFormationDisplay(
-			@RequestParam("id") Long id) {
+			Model formateur) {
 		ModelAndView mv = new ModelAndView("formformateurformation");
-		Formateur formateur = formateurRepository.findById(id);
+	//	Formateur formateur = formateurRepository.findById(id);
 		List detailListForm = detailLocalFormationReposytory.findAll();
 		Set<Local> setLocal = null;
 		Set<Formation> setformation = null;
