@@ -22,9 +22,9 @@
        <%--      <tr><td>Adresse</td><td><form:input path="adresse"/></td><td><form:errors path="adresse" cssStyle="color: red;"/></td></tr> --%>
             <tr><td>Mot de passe</td><td><form:password path="password"  /></td><td><form:errors path="password" cssStyle="color: red;"/></td></tr>
             <tr><td>Login</td><td><form:input path="login" /></td><td><form:errors path="login" cssStyle="color: red;"/></td></tr>
-       <%--      <tr><td>Formation</tr>
-            <tr><c:forEach items="${formations }" var="formation"><td>${formation.titre }</td><td><form:checkbox path="formations"/></td>
-            </c:forEach></tr> --%>
+<!--             <tr><td>Formation</tr> -->
+<%--             <tr><c:forEach items="${formations }" var="formation"><td>${formation.titre }</td><td><form:checkbox path="formations"/></td> --%>
+<%--             </c:forEach></tr>  --%>
             <tr><td><input type="submit" value="Enregistrer" class="btn btn-primary"></td></tr>
       </table>
       </form:form>

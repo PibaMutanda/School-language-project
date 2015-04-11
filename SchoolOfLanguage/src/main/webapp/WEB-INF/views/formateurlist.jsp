@@ -8,15 +8,17 @@
 	href="<%=request.getContextPath()%>/resources/css/bootstrap.min.css">
 <link href="<%=request.getContextPath()%>/resources/css/style.css"
 	rel="stylesheet" type="text/css">
-<title>Detail Formation</title>
+<title></title>
 </head>
 <body>
-   <table class="table table-hover">
-   <tr><th>Titre</th><th>Local</th><th>Niveau</th><th>S&eacute;ance<th>Capacité</th><th>Quota</th></tr>
-   <c:forEach items="${detailLocalFormations }" var="detailLocalFormation">
-   <tr><td>${formation.titre }</td><td>${local.numLocal }</td><td>${detailLocalFormation.niveau }</td><td>${detailLocalFormation.seance } <td>${local.capacite }</td><td>${detailLocalFormation.quota }</td></tr>
-   </c:forEach>
-   </table>
+   <form action="formateurformationdisplay" >
+      <table  class="table table-hover">
+      <c:forEach items="${formateurlist }" var="formateur">
+<%--       <a href="formformateurformation?${formateur.id }" title="Associer une formation"><tr><td>${formateur.nom }</td><td>${formateur.prenom }</td></tr></a> --%>
+      <tr><td><input type="submit" name="${formateur.id }" value="${formateur.nom }  ${formateur.prenom}" class="btn btn-primary btn-lg btn-block"></td></tr>
+      </c:forEach>
+      </table>
+   </form>   
 </body>
 <script src="<%=request.getContextPath()%>/resources/js/jquery.js"></script>
 <script

@@ -31,7 +31,7 @@ public class DetailLocalFormationReposytory {
 			em.merge(detailFormation);
 	}
 	
-	@SuppressWarnings("unchecked")
+	
 	public List<DetailLocalFormation> findAll(){
 		return em.createQuery("select nf from DetailLocalFormation nf").getResultList();
 	}

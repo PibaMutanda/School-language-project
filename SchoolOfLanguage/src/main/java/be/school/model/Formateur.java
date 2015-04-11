@@ -12,6 +12,7 @@ import javax.persistence.Transient;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
+import be.school.model.DetailLocalFormation;
 
 @Entity
 public class Formateur {
@@ -41,7 +42,7 @@ public class Formateur {
 	
 	@OneToMany
 	@JoinColumn
-	private Set<DetailLocalFormation> detailLocalFormations= new HashSet<DetailLocalFormation>();
+	private Set<DetailLocalFormation>detailLocalFormations= new HashSet<DetailLocalFormation>();
 
 	public String getNom() {
 		return nom;
@@ -87,14 +88,13 @@ public class Formateur {
 		this.login = login;
 	}
 
-	
-
 	public Set<DetailLocalFormation> getDetailLocalFormations() {
 		return detailLocalFormations;
 	}
 
-	public void setDetailLocalFormations(Set<DetailLocalFormation> nivFormations) {
-		this.detailLocalFormations = nivFormations;
+	public void setDetailLocalFormations(
+			Set<DetailLocalFormation> detailLocalFormations) {
+		this.detailLocalFormations = detailLocalFormations;
 	}
 
 	public Long getId() {
