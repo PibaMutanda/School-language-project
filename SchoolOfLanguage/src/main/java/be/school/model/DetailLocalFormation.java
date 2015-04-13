@@ -45,6 +45,9 @@ public class DetailLocalFormation {
 	@JoinColumn
 	private Set<RentreeScolaire> rentreeScolaires = new HashSet<RentreeScolaire>();
 
+	@ManyToOne
+	@JoinColumn(updatable=false,insertable=false)
+	private Participant participant;
 	
 	@JoinTable(name="Local_Seance")
 	@Enumerated(EnumType.ORDINAL)
@@ -77,6 +80,14 @@ public class DetailLocalFormation {
 
 	public Local getLocal() {
 		return local;
+	}
+
+	public Participant getParticipant() {
+		return participant;
+	}
+
+	public void setParticipant(Participant participant) {
+		this.participant = participant;
 	}
 
 	public void setLocal(Local local) {

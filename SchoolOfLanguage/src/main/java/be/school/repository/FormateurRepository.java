@@ -32,4 +32,5 @@ public class FormateurRepository {
 	public List<Formateur> findAll(){
 		return em.createQuery("Select f from Formateur f").getResultList();
 	}
+	
 }

@@ -1,5 +1,6 @@
 package be.school.controller;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -20,6 +21,7 @@ import be.school.repository.DetailLocalFormationReposytory;
 import be.school.repository.FormateurRepository;
 import be.school.repository.FormationRepository;
 import be.school.repository.LocalRepository;
+import be.school.security.Seance;
 
 
 @Controller
@@ -36,28 +38,34 @@ public class FormateurFormationController {
 
 	@RequestMapping(value = "/formateurformationdisplay", method = RequestMethod.POST)
 	public ModelAndView formateurFormationDisplay(
-			Model formateur) {
+			@RequestParam Long id) {
 		ModelAndView mv = new ModelAndView("formformateurformation");
-	//	Formateur formateur = formateurRepository.findById(id);
-		List detailListForm = detailLocalFormationReposytory.findAll();
-		Set<Local> setLocal = null;
-		Set<Formation> setformation = null;
-
-		for (Object dformation : detailListForm) {
-			setformation.add(formationRep
-					.findById(((DetailLocalFormation) dformation)
-							.getFormation().getId()));
-			setLocal.add(localRep.findById(((DetailLocalFormation) dformation)
-					.getLocal().getId()));
-		}
-
+		Formateur formateur = formateurRepository.findById(id);
+		List detailListForm = detailLocalFormationReposytory.findAllDistinct();
 		mv.addObject("formateur", formateur);
-		mv.addObject("setFormation", setformation);
 		mv.addObject("detailListForm", detailListForm);
-		mv.addObject("setLocal", setLocal);
 		return mv;
 	}
 
+
+	@RequestMapping(value="/formateurformsubmit", method=RequestMethod.POST)
+	public ModelAndView formformateurformationSubmit(@RequestParam Long formateur, @RequestParam Long formation){
+		ModelAndView mv=new ModelAndView("formformateurformation");
+		if(formation==0)
+		{
+			mv.addObject("messageError", "Choisir une formation");
+			return mv;
+		}
+		else{	
+		
+		Formateur formateur2 = formateurRepository.findById(formation);
+		          formateur2.addDetailLocalFormation(detailLocalFormationReposytory.findById(formation));
+		          formateurRepository.save(formateur2);
+		          mv.setViewName("redirect:formateurlist");
+		return mv;
+		}
+			
+	}
 	@ModelAttribute
 	public Formateur findFormateur(
 			@RequestParam(value="formateur", required = false) Long id) {

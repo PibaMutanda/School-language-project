@@ -36,7 +36,9 @@ public class DetailLocalFormationReposytory {
 		return em.createQuery("select nf from DetailLocalFormation nf").getResultList();
 	}
 	
-	
+	public List<DetailLocalFormation> findAllDistinct(){
+		return em.createQuery("select distinct df from DetailLocalFormation df").getResultList();
+	}
 	
 	public DetailLocalFormation findByLocalSession(Local local, Seance seance){
 		DetailLocalFormation detailFormation=null;

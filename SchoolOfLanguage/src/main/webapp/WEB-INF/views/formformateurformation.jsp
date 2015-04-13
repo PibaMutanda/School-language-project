@@ -11,29 +11,19 @@
 <title></title>
 </head>
 <body>
+      <h3>${formateur.prenom }  ${formateur.nom}</h3>
+        <c:forEach items="${messageError }" var="message">
+      <p id="messageErreur">${message }</p>
+     </c:forEach>
      <form action="formateurformsubmit" method="post">
-        ${formateur.nom }<br><br>
-     S&eacute;ance
-     <select name="seance">
-     <option value="">Choix</option>
-     <c:forEach items="${detailListForm.seance }" var="seance">
-     <option value="${detailListForm.id}">${seance }</option>
-     </c:forEach>   
-     </select>
-     Niveau:
-     <select name="niveau">
-     <option value="">Choix</option>
-     <c:forEach items="${detailListForm.niveau}" var="niveau">
-     <option value="${detailListForm.id}">${niveau}</option>
+     <input type="hidden" name="formateur" value="${formateur.id }">
+     Formation:
+     <select name="formation">
+     <option value="0" selected="selected">Choix</option>
+     <c:forEach items="${detailListForm}" var="formation">
+     <option value="${formation.id }">${formation.formation.titre }-${formation.seance }</option>
      </c:forEach>
-     </select>
-     Local:
-     <select name="local">
-     <option value="">Choix</option>
-     <c:forEach items="detailListForm.local" var="local">
-     <option value="${detailListForm.id }">${local.numLocal }</option>
-     </c:forEach>
-     </select>
+     </select> 
      <input type="submit" value="Enregistrer" class="btn btn-primary">
      </form>
 </body>

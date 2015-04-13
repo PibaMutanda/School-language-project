@@ -3,7 +3,9 @@ package be.school.model;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -12,6 +14,7 @@ import javax.persistence.Transient;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
+
 import be.school.model.DetailLocalFormation;
 
 @Entity
@@ -40,7 +43,7 @@ public class Formateur {
 	@NotEmpty(message="insérer le login")
 	private String login;
 	
-	@OneToMany
+	@OneToMany(fetch = FetchType.EAGER)
 	@JoinColumn
 	private Set<DetailLocalFormation>detailLocalFormations= new HashSet<DetailLocalFormation>();
 
@@ -97,6 +100,9 @@ public class Formateur {
 		this.detailLocalFormations = detailLocalFormations;
 	}
 
+	public void addDetailLocalFormation(DetailLocalFormation detailLocalFormation){
+		this.detailLocalFormations.add(detailLocalFormation);
+	}
 	public Long getId() {
 		return id;
 	}
