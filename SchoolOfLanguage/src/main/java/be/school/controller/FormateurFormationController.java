@@ -33,8 +33,7 @@ public class FormateurFormationController {
 	DetailLocalFormationReposytory detailLocalFormationReposytory;
 	@Autowired
 	FormationRepository formationRep;
-	@Autowired
-	LocalRepository localRep;
+
 
 	@RequestMapping(value = "/formateurformationdisplay", method = RequestMethod.POST)
 	public ModelAndView formateurFormationDisplay(
@@ -60,6 +59,7 @@ public class FormateurFormationController {
 		
 		Formateur formateur2 = formateurRepository.findById(formation);
 		          formateur2.addDetailLocalFormation(detailLocalFormationReposytory.findById(formation));
+		          
 		          formateurRepository.save(formateur2);
 		          mv.setViewName("redirect:formateurlist");
 		return mv;

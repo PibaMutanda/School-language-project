@@ -72,17 +72,9 @@ public class Participant {
 	@JoinColumn
 	private StatutProfessionnel statutProfessionnel;
 	
-	@OneToMany(mappedBy="participant",cascade=CascadeType.ALL)
+	@OneToMany(cascade=CascadeType.ALL)
 	private List<DetailLocalFormation> detailLocalFormations = new ArrayList<DetailLocalFormation>();
 	
-	public List<DetailLocalFormation> getDetailLocalFormations() {
-		return detailLocalFormations;
-	}
-
-	public void setDetailLocalFormations(
-			List<DetailLocalFormation> detailLocalFormations) {
-		this.detailLocalFormations = detailLocalFormations;
-	}
 
 	@ManyToOne
 	@JoinColumn
