@@ -1,7 +1,9 @@
 package be.school.model;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -11,6 +13,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
@@ -20,7 +23,7 @@ import javax.validation.constraints.Pattern;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
-public class Participant {
+public class Participant<E> {
 
 	@Id
 	@GeneratedValue
@@ -72,10 +75,10 @@ public class Participant {
 	@JoinColumn
 	private StatutProfessionnel statutProfessionnel;
 	
-	@OneToMany(cascade=CascadeType.ALL)
-	private List<DetailLocalFormation> detailLocalFormations = new ArrayList<DetailLocalFormation>();
-	
 
+	@ManyToMany(mappedBy="participants")
+	private Set<DetailLocalFormation> detailLocalFormations = new HashSet<DetailLocalFormation>();
+	
 	@ManyToOne
 	@JoinColumn
 	private Local local;
@@ -185,15 +188,6 @@ public class Participant {
 		this.gsm = gsm;
 	}
 
-	public StatutProfessionnel getStatutProfessionnel() {
-		return statutProfessionnel;
-	}
-
-	public void setStatutProfessionnel(StatutProfessionnel statutProfessionnel) {
-		this.statutProfessionnel = statutProfessionnel;
-	}
-
-
 	public List<Inscription> getInscriptions() {
 		return inscriptions;
 	}
@@ -202,22 +196,27 @@ public class Participant {
 		this.inscriptions = inscriptions;
 	}
 
-	public StatutProfessionnel getStatutProfessionel() {
+	
+   
+	public StatutProfessionnel getStatutProfessionnel() {
 		return statutProfessionnel;
 	}
 
-	public void setStatutProfessionel(StatutProfessionnel statutProfessionnel) {
+	public void setStatutProfessionnel(StatutProfessionnel statutProfessionnel) {
 		this.statutProfessionnel = statutProfessionnel;
 	}
 
-	public List<DetailLocalFormation> getDetailFormations() {
+	public Set<DetailLocalFormation> getDetailLocalFormations() {
 		return detailLocalFormations;
 	}
 
-	public void setDetailFormations(List<DetailLocalFormation> niveaux) {
-		this.detailLocalFormations = niveaux;
+	public void setDetailLocalFormations(
+			Set<DetailLocalFormation> detailLocalFormations) {
+		this.detailLocalFormations = detailLocalFormations;
 	}
-
+   public void addDetailLocalFormation(DetailLocalFormation detailLocalFormation){
+	   detailLocalFormations.add(detailLocalFormation);
+   }
 	public Local getLocal() {
 		return local;
 	}

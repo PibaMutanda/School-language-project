@@ -3,6 +3,7 @@ package be.school.model;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -10,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.Pattern;
@@ -41,6 +43,7 @@ public class DetailLocalFormation {
 	@JoinColumn
 	private Local local;
 
+	
 	@OneToMany
 	@JoinColumn
 	private Set<RentreeScolaire> rentreeScolaires = new HashSet<RentreeScolaire>();
@@ -50,6 +53,11 @@ public class DetailLocalFormation {
 	@Enumerated(EnumType.ORDINAL)
 	private Seance seance;
 
+
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinColumn
+	private Set<Participant>participants=new HashSet<Participant>();
+	
 	public Seance getSeance() {
 		return seance;
 	}
@@ -80,6 +88,19 @@ public class DetailLocalFormation {
 	}
 
 	
+	
+	
+	public Set<Participant> getParticipants() {
+		return participants;
+	}
+
+	public void setParticipants(Set<Participant> participants) {
+		this.participants = participants;
+	}
+
+	public void addPartcipant(Participant participant){
+		participants.add(participant);
+	}
 	public void setLocal(Local local) {
 		this.local = local;
 	}
