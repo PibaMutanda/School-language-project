@@ -17,8 +17,8 @@
      </c:forEach>
      <form:form modelAttribute="local" action="localsubmit">
      <table>
-        <tr><td>Numéro Local</td><td><form:input path="numLocal"/></td><td><form:errors path="numLocal" cssStyle="color: red;"/></td></tr>
-        <tr><td>Capacité</td><td><input type="number" name="capacite"></td><td><form:errors path="capacite" cssStyle="color: red;"/></td></tr>
+        <tr><td><form:input path="numLocal" placeholder="Numéro Local"/></td><td><form:errors path="numLocal" cssStyle="color: red;"/></td></tr>
+        <tr><td><input type="number" name="capacite" placeholder="Capacité"></td><td><form:errors path="capacite" cssStyle="color: red;"/></td></tr>
         <tr><td><input type="submit" value="Enregistrer" class="btn btn-primary"></td></tr>
      </table>
      </form:form>

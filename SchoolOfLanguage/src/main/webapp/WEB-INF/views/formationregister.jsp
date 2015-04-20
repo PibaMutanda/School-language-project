@@ -17,7 +17,7 @@
      </c:forEach>
      <form:form action="formationsubmit" modelAttribute="formation">
       <table>
-      <tr><td>Formation</td><td><form:input path="titre"/> </td><td><form:errors path="titre" cssStyle="color: red;"/></td></tr>
+      <tr><td><form:input path="titre" placeholder="Titre Formation"/> </td><td><form:errors path="titre" cssStyle="color: red;"/></td></tr>
    <%--    <tr><td>Quota</td><td><input type="number" name="quota"></td><td><form:errors path="quota" cssStyle="color: red;"/></td></tr> --%>
     <%--   <tr><td>Code Formation</td><td><form:input path="codeFormation"/> </td><td><form:errors path="codeFormation" cssStyle="color: red;" /></td></tr>--%>
       <tr><td><input type="submit" value="Enregistrer" class="btn btn-primary"></td></tr>

@@ -17,8 +17,8 @@
      </c:forEach>
      <form:form modelAttribute="statutProfessionnel" action="statutprofessionnelsubmit">
      <table>
-           <tr><td> Statut Professionnel</td>
-               <td><form:input path="statut"/></td>
+           <tr>
+               <td><form:input path="statut" placeholder="Statut Professionnel"/></td>
                <td><form:errors path="statut" cssStyle="color: #ff0000;"></form:errors></td>
            </tr>
            <tr>

@@ -17,10 +17,10 @@
      </c:forEach>
      <form:form action="reservationsubmit" modelAttribute="reservation">
      <table>
-      <tr><td>Nom</td><td><input type="text" name="nom" required></td><td><form:errors path="nom" cssStyle="color: red;"/></td></tr>
-      <tr><td>Prénom</td><td><input type="text" name="prenom" required></td><td><form:errors path="prenom" cssStyle="color: red;"/></td></tr>
-      <tr><td>E-mail</td><td><input type="email" name="email" required></td><td><form:errors path="email" cssStyle="color:red;"/><td></tr>
-      <tr><td>Gsm</td><td><input type="tel" name="gsm"></td><td><form:errors cssStyle="color:red;" path="gsm"/></td></tr>
+      <tr><td><input type="text" name="nom" placeholder="Nom" required></td><td><form:errors path="nom" cssStyle="color: red;"/></td></tr>
+      <tr><td><input type="text" name="prenom" placeholder="Prénom" required></td><td><form:errors path="prenom" cssStyle="color: red;"/></td></tr>
+      <tr><td><input type="email" name="email" placeholder="E-Mail" required></td><td><form:errors path="email" cssStyle="color:red;"/><td></tr>
+      <tr><td><input type="tel" name="gsm" placeholder="Gsm"></td><td><form:errors cssStyle="color:red;" path="gsm"/></td></tr>
       <tr><c:forEach items="${formations }" var="formation">
       <td>${formation.titre }&nbsp;<input type="checkbox" value="${formation.id }" name="formations"></td>
       </c:forEach></tr>

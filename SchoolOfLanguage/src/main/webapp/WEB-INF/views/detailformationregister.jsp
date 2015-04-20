@@ -33,8 +33,8 @@
      </select><br><br>
      Matin&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="seance" value="MATIN"> &nbsp;&nbsp;&nbsp;&nbsp;Soir&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="seance" value="SOIR"/>
      <table>            
-           <tr><td>Niveau</td><td><input type="number" name="niveau" >&nbsp;&nbsp;<form:errors path="niveau" cssStyle="color: red;"/></td></tr>
-           <tr><td>Quota</td><td><input type="number" name="quota" >&nbsp;&nbsp;<form:errors path="quota" cssStyle="color: red;"/></td></tr>
+           <tr><td><input type="number" name="niveau" placeholder="Niveau" >&nbsp;&nbsp;<form:errors path="niveau" cssStyle="color: red;"/></td></tr>
+           <tr><td><input type="number" name="quota"  placeholder="Quota">&nbsp;&nbsp;<form:errors path="quota" cssStyle="color: red;"/></td></tr>
            <tr><td><input type="submit" value="Enregistrer" class="btn btn-primary"></td></tr>
      </table>
      </form:form>

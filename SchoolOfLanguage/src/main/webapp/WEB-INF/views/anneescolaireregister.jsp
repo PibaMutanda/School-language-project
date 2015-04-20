@@ -17,7 +17,7 @@
      </c:forEach>
       <form:form modelAttribute="anneeScolaire" action="anneescolairesubmit">
       <table>
-            <tr><td>Rentrée</td><td><input type="date" name="dateScolaireDeb" required></td><td><form:errors path="dateScolaireDeb" cssStyle="color: red;"/></td></tr>
+            <tr><td>Rentrée</td><td><input type="date" name="dateScolaireDeb"  required></td><td><form:errors path="dateScolaireDeb" cssStyle="color: red;"/></td></tr>
             <tr><td><input type="submit" value="Enregister" class="btn btn-primary"></td></tr>
       </table>
       </form:form>

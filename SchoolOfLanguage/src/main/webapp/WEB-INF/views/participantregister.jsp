@@ -17,17 +17,17 @@
      </c:forEach>
      <form:form modelAttribute="participant" action="participantsubmit">
      <table>
-          <tr><td>Nom</td><td><form:input path="nom"/>&nbsp;&nbsp;<form:errors path="nom" cssStyle="color: red;"/></td></tr>
-          <tr><td>Prénom</td><td><form:input path="prenom"/>&nbsp;&nbsp;<form:errors path="prenom" cssStyle="color: red;"/></td></tr>
-          <tr><td>Gsm</td><td><form:input path="gsm"/>&nbsp;&nbsp;<form:errors path="gsm" cssStyle="color: red;"/></td></tr>
-          <tr><td>E-Mail</td><td><form:input path="email"/>&nbsp;&nbsp;<form:errors path="email" cssStyle="color: red;"/></td></tr>
-          <tr><td>Ville</td><td><form:input path="ville"/>&nbsp;&nbsp;<form:errors path="ville" cssStyle="color: red;"/>
-              &nbsp;&nbsp;Rue&nbsp;&nbsp;<form:input path="rue"/>&nbsp;&nbsp;<form:errors path="rue" cssStyle="color: red;"/>
-              &nbsp;&nbsp;Numéro&nbsp;&nbsp;<form:input path="numero"/>&nbsp;&nbsp;<form:errors path="numero" cssStyle="color: red;"/>&nbsp;&nbsp;
-              Code Postal&nbsp;&nbsp;<form:input path="codeP"/>&nbsp;&nbsp;<form:errors cssStyle="color: red;" path="codeP"/></td></tr>
-              <tr><td>Login</td><td><form:input path="login"/>&nbsp;&nbsp;<form:errors path="login" cssStyle="color: red;"/><td></tr>
-              <tr><td><form:hidden path="password"/></td></tr>
-              <tr><td>Sexe</td><td><form:radiobutton path="sexe" value="HOMME" />&nbsp;&nbsp;M&nbsp;&nbsp;<form:radiobutton path="sexe" value="FEMME"/>&nbsp;&nbsp;F&nbsp;&nbsp;
+          <tr><td><form:input path="nom" placeholder="Nom"/>&nbsp;&nbsp;<form:errors path="nom" cssStyle="color: red;"/></td></tr>
+          <tr><td><form:input path="prenom" placeholder="Prénom"/>&nbsp;&nbsp;<form:errors path="prenom" cssStyle="color: red;"/></td></tr>
+          <tr><td><form:input path="gsm" placeholder="Gsm"/>&nbsp;&nbsp;<form:errors path="gsm" cssStyle="color: red;"/></td></tr>
+          <tr><td><form:input path="email" placeholder="E-Mail"/>&nbsp;&nbsp;<form:errors path="email" cssStyle="color: red;"/></td></tr>
+          <tr><td><form:input path="ville"placeholder="Ville"/>&nbsp;&nbsp;<form:errors path="ville" cssStyle="color: red;"/>
+              &nbsp;&nbsp;<form:input path="rue" placeholder="Rue"/>&nbsp;&nbsp;<form:errors path="rue" cssStyle="color: red;"/>
+              &nbsp;&nbsp;<form:input path="numero" placeholder="Numéro"/>&nbsp;&nbsp;<form:errors path="numero" cssStyle="color: red;"/>&nbsp;&nbsp;
+              <form:input path="codeP" placeholder="Code Postal"/>&nbsp;&nbsp;<form:errors cssStyle="color: red;" path="codeP"/></td></tr>
+              <tr><td><form:input path="login" placeholder="Login"/>&nbsp;&nbsp;<form:errors path="login" cssStyle="color: red;"/><td></tr>
+              <tr><td><form:hidden path="password"/></td></tr><tr><td>Sexe</td></tr>
+              <tr><td><form:radiobutton path="sexe" value="HOMME" />&nbsp;&nbsp;M&nbsp;&nbsp;<form:radiobutton path="sexe" value="FEMME"/>&nbsp;&nbsp;F&nbsp;&nbsp;
                  <form:errors path="sexe" cssStyle="color: red;"/></td></tr>
               <tr><td><form:hidden path="matricule"/>   
         <tr><td><input type="submit" value="Enregistrer" class="btn btn-primary"></td></tr>          
