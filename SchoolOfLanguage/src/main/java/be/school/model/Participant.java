@@ -23,7 +23,7 @@ import javax.validation.constraints.Pattern;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
-public class Participant<E> {
+public class Participant {
 
 	@Id
 	@GeneratedValue
