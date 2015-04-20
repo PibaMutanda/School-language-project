@@ -1,8 +1,10 @@
 package be.school.model;
 
+
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -10,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.Pattern;
@@ -44,15 +47,17 @@ public class DetailLocalFormation {
 	@OneToMany
 	@JoinColumn
 	private Set<RentreeScolaire> rentreeScolaires = new HashSet<RentreeScolaire>();
-
-	@ManyToOne
-	@JoinColumn(updatable=false,insertable=false)
-	private Participant participant;
+   
 	
 	@JoinTable(name="Local_Seance")
 	@Enumerated(EnumType.ORDINAL)
 	private Seance seance;
 
+
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinColumn
+	private Set<Participant>participants=new HashSet<Participant>();
+	
 	public Seance getSeance() {
 		return seance;
 	}
@@ -82,14 +87,19 @@ public class DetailLocalFormation {
 		return local;
 	}
 
-	public Participant getParticipant() {
-		return participant;
+	
+	
+	public Set<Participant> getParticipants() {
+		return participants;
 	}
 
-	public void setParticipant(Participant participant) {
-		this.participant = participant;
+	public void setParticipants(Set<Participant> participants) {
+		this.participants = participants;
 	}
 
+	public void addPartcipant(Participant participant){
+		participants.add(participant);
+	}
 	public void setLocal(Local local) {
 		this.local = local;
 	}
