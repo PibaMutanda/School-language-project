@@ -45,7 +45,14 @@ public class FormateurFormationController {
 		mv.addObject("detailListForm", detailListForm);
 		return mv;
 	}
-
+     
+	@RequestMapping(value="/formateurdetaildisplay", method=RequestMethod.GET)
+	public ModelAndView displayDetailFormateur(@RequestParam Long id){
+		ModelAndView mv = new ModelAndView("formateurdetaildisplay");
+		Formateur formateur=formateurRepository.findById(id);
+		mv.addObject("formateur", formateur);
+		return mv;
+	}
 
 	@RequestMapping(value="/formateurformsubmit", method=RequestMethod.POST)
 	public ModelAndView formformateurformationSubmit(@RequestParam Long formateur, @RequestParam Long formation){
