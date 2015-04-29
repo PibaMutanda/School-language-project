@@ -10,6 +10,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -76,7 +77,7 @@ public class Participant {
 	private StatutProfessionnel statutProfessionnel;
 	
 
-	@ManyToMany(mappedBy="participants")
+	@ManyToMany(mappedBy="participants", cascade=CascadeType.ALL)
 	private Set<DetailLocalFormation> detailLocalFormations = new HashSet<DetailLocalFormation>();
 	
 	@ManyToOne

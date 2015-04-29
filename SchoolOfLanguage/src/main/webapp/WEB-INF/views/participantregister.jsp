@@ -19,7 +19,7 @@
      <table>
           <tr><td><form:input path="nom" placeholder="Nom"/>&nbsp;&nbsp;<form:errors path="nom" cssStyle="color: red;"/></td></tr>
           <tr><td><form:input path="prenom" placeholder="Prénom"/>&nbsp;&nbsp;<form:errors path="prenom" cssStyle="color: red;"/></td></tr>
-          <tr><td><form:input path="gsm" placeholder="Gsm"/>&nbsp;&nbsp;<form:errors path="gsm" cssStyle="color: red;"/></td></tr>
+          <tr><td><form:input path="gsm" placeholder="Gsm:+32 ou 0032"/>&nbsp;&nbsp;<form:errors path="gsm" cssStyle="color: red;"/></td></tr>
           <tr><td><form:input path="email" placeholder="E-Mail"/>&nbsp;&nbsp;<form:errors path="email" cssStyle="color: red;"/></td></tr>
           <tr><td><form:input path="ville"placeholder="Ville"/>&nbsp;&nbsp;<form:errors path="ville" cssStyle="color: red;"/>
               &nbsp;&nbsp;<form:input path="rue" placeholder="Rue"/>&nbsp;&nbsp;<form:errors path="rue" cssStyle="color: red;"/>

@@ -57,4 +57,15 @@ public class DetailLocalFormationReposytory {
 				.setParameter("formation", formation)
 				.getResultList();
 	}
+	
+	public DetailLocalFormation findByLocalFormation(Local local, Formation formation){
+		DetailLocalFormation detailFormation=null;
+		List<DetailLocalFormation> detailLocalFormations=em.createQuery("select df from DetailLocalFormation df where df.local= :local and df.formation= :formation")
+				                                           .setParameter("local", local)
+				                                           .setParameter("formation", formation)
+				                                           .getResultList();
+		if(!detailLocalFormations.isEmpty())
+			detailFormation=detailLocalFormations.get(0);
+			return detailFormation;	
+	}
 }

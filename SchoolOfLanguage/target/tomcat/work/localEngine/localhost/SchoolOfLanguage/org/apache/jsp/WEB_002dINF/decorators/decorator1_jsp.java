@@ -11,6 +11,13 @@ public final class decorator1_jsp extends org.apache.jasper.runtime.HttpJspBase
 
   private static java.util.List _jspx_dependants;
 
+  static {
+    _jspx_dependants = new java.util.ArrayList(3);
+    _jspx_dependants.add("/WEB-INF/includes/header.jsp");
+    _jspx_dependants.add("/WEB-INF/includes/menu.jsp");
+    _jspx_dependants.add("/WEB-INF/includes/footer.jsp");
+  }
+
   private org.apache.jasper.runtime.TagHandlerPool _005fjspx_005ftagPool_005fdecorator_005ftitle;
   private org.apache.jasper.runtime.TagHandlerPool _005fjspx_005ftagPool_005fdecorator_005fhead_005fnobody;
   private org.apache.jasper.runtime.TagHandlerPool _005fjspx_005ftagPool_005fdecorator_005fbody_005fnobody;
@@ -63,10 +70,8 @@ public final class decorator1_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\r\n");
       out.write("\r\n");
       out.write("\r\n");
-      out.write("\r\n");
       out.write("<html>\r\n");
       out.write("<head>\r\n");
-      out.write("\r\n");
       out.write("<!--    http://www.luckyryan.com/2013/02/06/setup-a-simple-spring-mvc-site-with-maven/  -->\r\n");
       out.write("<meta charset=\"utf-8\">\r\n");
       out.write("<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\r\n");
@@ -87,7 +92,8 @@ public final class decorator1_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\r\n");
       out.write("</head>\r\n");
       out.write("<body>\r\n");
-      out.write("\t<nav class=\"navbar navbar-inverse\" role=\"navigation\">\r\n");
+      out.write("\t");
+      out.write("<nav class=\"navbar navbar-inverse\" role=\"navigation\">\r\n");
       out.write("\t\t<div class=\"container-fluid\">\r\n");
       out.write("\t\t\t<a class=\"navbar-brand\" href=\"home\">School of Languages</a>\r\n");
       out.write("\t\t\t<div class=\"navbar-header\">\r\n");
@@ -174,25 +180,31 @@ public final class decorator1_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("             </div>\r\n");
       out.write("          </div>\t\r\n");
       out.write("\t\t</div>\r\n");
-      out.write("\t</div>\r\n");
+      out.write("\t</div>");
       out.write("\r\n");
       out.write("\t<div class=\"row\">\r\n");
       out.write("\t\t<div class=\"container-fluid\">\r\n");
       out.write("\t\t\t<div class=\"col-md-3\">\r\n");
       out.write("\t\t\t\t<nav>\r\n");
-      out.write("\t\t\t\t\t<ul role=\"menu\">\r\n");
-      out.write("\t\t\t\t\t\t<li><a href=\"statutprofessionnelregister\">Ajout Statut\r\n");
+      out.write("\t\t\t\t\t");
+      out.write("<html>\r\n");
+      out.write("    <ul role=\"menu\">\r\n");
+      out.write("     <li><a href=\"statutprofessionnelregister\">Ajout Statut\r\n");
       out.write("\t\t\t\t\t\t\t\tProfessionnel</a></li>\r\n");
       out.write("\t\t\t\t\t\t<li><a href=\"formateurregister\">Ajout Formateur</a></li>\r\n");
       out.write("\t\t\t\t\t\t<li><a href=\"formationregister\">Ajout Formation</a></li>\r\n");
       out.write("\t\t\t\t\t\t<li><a href=\"localregister\">Ajout Local</a></li>\r\n");
       out.write("\t\t\t\t\t\t<li><a href=\"participantregister\">Ajout Participant</a></li>\r\n");
+      out.write("\t\t\t\t\t\t <li><a href=\"participantformation\">Inscrire un participant au cours</a></li>\r\n");
       out.write("\t\t\t\t\t\t<li><a href=\"detailformationregister\">Associer niveau-formation</a></li>\r\n");
       out.write("\t\t\t\t\t\t<li><a href=\"formateurlist\">Liste Formateur</a> </li>\r\n");
       out.write("\t\t\t\t\t\t<li><a href=\"anneescolaireregister\">Date Rentrée</a></li>\r\n");
       out.write("\t\t\t\t\t\t<li><a href=\"reservationregister\">Soumettre une demande\r\n");
-      out.write("\t\t\t\t\t\t\t\tpour inscription</a></li>\r\n");
-      out.write("\t\t\t\t\t</ul>\r\n");
+      out.write("\t\t\t\t\t\t\t\tpour inscription</a></li>  \t\r\n");
+      out.write("\t</ul>\t\t\t\t\t\t\t\t\t\t\r\n");
+      out.write("</body>\r\n");
+      out.write("</html>");
+      out.write("\r\n");
       out.write("\t\t\t\t</nav>\r\n");
       out.write("\t\t\t</div>\r\n");
       out.write("\t\t</div>\r\n");
@@ -207,9 +219,10 @@ public final class decorator1_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\t</div>\r\n");
       out.write("\r\n");
       out.write("\t<footer class=\"school-footer\">\r\n");
-      out.write("\t\t<div class=\"container\">\r\n");
+      out.write("\t");
+      out.write("<div class=\"container\">\r\n");
       out.write("\t\t\t<span>This is my footer</span>\r\n");
-      out.write("\t\t</div>\r\n");
+      out.write("</div>");
       out.write("\r\n");
       out.write("\t</footer>\r\n");
       out.write("</body>\r\n");
