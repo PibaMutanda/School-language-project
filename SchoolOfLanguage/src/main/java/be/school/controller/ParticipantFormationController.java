@@ -39,21 +39,26 @@ public class ParticipantFormationController {
 	
 	@RequestMapping(value="/participantformation",method=RequestMethod.GET)
 	public ModelAndView participantForm(){
-		ModelAndView mv = new ModelAndView("participantformation");
-		List<Participant>listPart=participantRep.findAll();
-		List<Local>listLoca=localRep.findAll();
-		List<Formation>listForm=formationRep.findAll();
-		mv.addObject("listParticipant", listPart);
-		mv.addObject("listLocal", listLoca);
-		mv.addObject("listFormation", listForm);
-		return mv;
+		 ModelAndView mv = prepareModelAndView();
+		 return mv;
 	}
 
+	 private ModelAndView prepareModelAndView(){
+		 ModelAndView mv = new ModelAndView("participantformation");
+			List<Participant>listPart=participantRep.findAll();
+			List<Local>listLoca=localRep.findAll();
+			List<Formation>listForm=formationRep.findAll();
+			mv.addObject("listParticipant", listPart);
+			mv.addObject("listLocal", listLoca);
+			mv.addObject("listFormation", listForm);
+			return mv;
+		 
+	 }
 	@RequestMapping(value="/participantformationsubmit",method=RequestMethod.POST)
 	public ModelAndView participantFormationSubmit(@RequestParam Long participant,
 			@RequestParam Long formation,
 			@RequestParam Long local){
-		ModelAndView mv =new ModelAndView("participantformation");
+		ModelAndView mv = prepareModelAndView();
 		boolean flag=true;
 		if(participant==0){
 			mv.addObject("messageError", "Choisir un Participant");
@@ -65,6 +70,10 @@ public class ParticipantFormationController {
 		}
 		if(local==0){
 			mv.addObject("messagerError", "Choisir un local");
+			flag=false;
+		}
+		if(participantRep.findById(participant).getDetailLocalFormations().size()>=2){
+			mv.addObject("messageError","Le particiipant est déjà inscrit pour les deux seances");
 			flag=false;
 		}
 		/*
@@ -86,7 +95,6 @@ public class ParticipantFormationController {
 			Participant participant2=participantRep.findById(participant);
 			detailLocalFormation.addPartcipant(participant2);
 		    detailLocalFormaRep.save(detailLocalFormation);
-		//	participantRep.save(participant2);
 			mv.addObject("messageSuccess", "Inscription enregistrée pour "+participant2.getNom());
 			mv.setViewName("redirect: home");
 			return mv;

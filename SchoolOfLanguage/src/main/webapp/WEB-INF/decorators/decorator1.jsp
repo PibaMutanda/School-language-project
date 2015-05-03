@@ -36,12 +36,9 @@
 	<%@include file="/WEB-INF/includes/footer.jsp" %>
 	</footer>
 </body>
-<script>
-	$(document).ready(function() {
-		$("#notification-message").show().delay(5000).fadeOut();
-	});
-</script>
+
 <script src="<%=request.getContextPath()%>/resources/js/jquery.js"></script>
+<script src="<%=request.getContextPath()%>/resources/js/jquery-ui.min.js"></script>
 <script
 	src="<%=request.getContextPath()%>/resources/js/bootstrap.min.js"></script>
 </html>

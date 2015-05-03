@@ -63,6 +63,16 @@ public final class home_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${controllerMessage}", java.lang.String.class, (PageContext)_jspx_page_context, null, false));
       out.write("\n");
       out.write("</body>\n");
+      out.write("<script src=\"");
+      out.print(request.getContextPath());
+      out.write("/resources/js/jquery.js\"></script>\n");
+      out.write("<script src=\"");
+      out.print(request.getContextPath());
+      out.write("/resources/js/jquery-ui.min.js\"></script>\n");
+      out.write("<script\n");
+      out.write("\tsrc=\"");
+      out.print(request.getContextPath());
+      out.write("/resources/js/bootstrap.min.js\"></script>\n");
       out.write("</html>\n");
     } catch (Throwable t) {
       if (!(t instanceof SkipPageException)){

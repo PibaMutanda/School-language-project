@@ -17,6 +17,7 @@
       
 </body>
 <script src="<%=request.getContextPath()%>/resources/js/jquery.js"></script>
+<script src="<%=request.getContextPath()%>/resources/js/jquery-ui.min.js"></script>
 <script
 	src="<%=request.getContextPath()%>/resources/js/bootstrap.min.js"></script>
 </html>

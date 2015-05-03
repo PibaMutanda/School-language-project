@@ -77,7 +77,7 @@ public class Participant {
 	private StatutProfessionnel statutProfessionnel;
 	
 
-	@ManyToMany(mappedBy="participants", cascade=CascadeType.ALL)
+	@ManyToMany(mappedBy="participants", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	private Set<DetailLocalFormation> detailLocalFormations = new HashSet<DetailLocalFormation>();
 	
 	@ManyToOne

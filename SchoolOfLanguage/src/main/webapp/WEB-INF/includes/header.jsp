@@ -25,7 +25,9 @@
 			</div>
 		</div>
 	</nav>
-	
+<div id="notification-message"> 
+    <strong>${messageSuccess}</strong>
+</div>	
 	<div class="container">
 		<div class="jumbotron">
 			<h1><center> Hello World</center></h1>
@@ -73,14 +75,15 @@
     <span class="sr-only">Next</span>
   </a>
 </div>
-		
-		<div id="notification-message">
-	      <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-             <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                 <h4 style="color: green;">${messageSuccess}</h4>
-                </div>
-             </div>
-          </div>	
-		</div>
-	</div>
+
+</div>
+<script src="<%=request.getContextPath()%>/resources/js/jquery.js"></script>
+<script src="<%=request.getContextPath()%>/resources/js/jquery-ui.min.js"></script>
+<script
+	src="<%=request.getContextPath()%>/resources/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("#notification-message").show().delay(5000);
+		$("#notification-message").hide();
+	});
+</script>	
