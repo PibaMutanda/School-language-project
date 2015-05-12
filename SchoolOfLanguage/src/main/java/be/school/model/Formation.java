@@ -47,11 +47,14 @@ public class Formation {
 		this.titre = titre;
 	}
 
-	public List<DetailLocalFormation> getNiveauFormations() {
+	
+
+	public List<DetailLocalFormation> getDetailLocalFormations() {
 		return detailLocalFormations;
 	}
 
-	public void setNiveauFormations(List<DetailLocalFormation> detailLocalFormations) {
+	public void setDetailLocalFormations(
+			List<DetailLocalFormation> detailLocalFormations) {
 		this.detailLocalFormations = detailLocalFormations;
 	}
 

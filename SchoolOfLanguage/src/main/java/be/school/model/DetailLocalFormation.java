@@ -19,6 +19,7 @@ import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
+import be.school.security.Jour;
 import be.school.security.Seance;
 
 @Entity
@@ -45,16 +46,18 @@ public class DetailLocalFormation {
 	private Local local;
 
 	
-	@OneToMany
-	@JoinColumn
-	private Set<RentreeScolaire> rentreeScolaires = new HashSet<RentreeScolaire>();
+//	@OneToMany
+//	@JoinColumn
+//	private Set<RentreeScolaire> rentreeScolaires = new HashSet<RentreeScolaire>();
 
 	
 	@JoinTable(name="Local_Seance")
 	@Enumerated(EnumType.ORDINAL)
 	private Seance seance;
 
-
+    @Enumerated(EnumType.ORDINAL)
+	private Jour jour;
+    
 	@ManyToMany(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn
 	private Set<Participant>participants=new HashSet<Participant>();
@@ -88,9 +91,6 @@ public class DetailLocalFormation {
 		return local;
 	}
 
-	
-	
-	
 	public Set<Participant> getParticipants() {
 		return participants;
 	}
@@ -114,16 +114,24 @@ public class DetailLocalFormation {
 		this.niveau = niveau;
 	}
 
-	public Set<RentreeScolaire> getRentreeScolaires() {
-		return rentreeScolaires;
+//	public Set<RentreeScolaire> getRentreeScolaires() {
+//		return rentreeScolaires;
+//	}
+//
+//	public void setRentreeScolaires(Set<RentreeScolaire> rentreeScolaires) {
+//		this.rentreeScolaires = rentreeScolaires;
+//	}
+//    
+	public Jour getJour() {
+		return jour;
 	}
 
-	public void setRentreeScolaires(Set<RentreeScolaire> rentreeScolaires) {
-		this.rentreeScolaires = rentreeScolaires;
+	public void setJour(Jour jour) {
+		this.jour = jour;
 	}
 
 	public Long getId() {
 		return id;
-	};
+	}
 
 }

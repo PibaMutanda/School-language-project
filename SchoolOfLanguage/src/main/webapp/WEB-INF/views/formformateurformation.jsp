@@ -21,7 +21,7 @@
      <select name="formation">
      <option value="0" selected="selected">Choix</option>
      <c:forEach items="${detailListForm}" var="formation">
-     <option value="${formation.id }">${formation.formation.titre }-${formation.seance }</option>
+     <option value="${formation.id }">${formation.formation.titre }-${formation.seance } local ${formation.local.numLocal }-${formation.jour }</option>
      </c:forEach>
      </select> 
      <input type="submit" value="Enregistrer" class="btn btn-primary">

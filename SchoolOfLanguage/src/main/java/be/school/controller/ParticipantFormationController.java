@@ -46,10 +46,10 @@ public class ParticipantFormationController {
 	 private ModelAndView prepareModelAndView(){
 		 ModelAndView mv = new ModelAndView("participantformation");
 			List<Participant>listPart=participantRep.findAll();
-			List<Local>listLoca=localRep.findAll();
+			List<Local>listLocal=localRep.findAll();
 			List<Formation>listForm=formationRep.findAll();
 			mv.addObject("listParticipant", listPart);
-			mv.addObject("listLocal", listLoca);
+			mv.addObject("listLocal", listLocal);
 			mv.addObject("listFormation", listForm);
 			return mv;
 		 
@@ -59,22 +59,21 @@ public class ParticipantFormationController {
 			@RequestParam Long formation,
 			@RequestParam Long local){
 		ModelAndView mv = prepareModelAndView();
-		boolean flag=true;
-		if(participant==0){
+		if(participant==0||participant==null){
 			mv.addObject("messageError", "Choisir un Participant");
-			flag=false;
+			return mv;
 		}
-		if(formation==0){
+		if(formation==0||formation==null){
 			mv.addObject("messageError", "Choisir une formation");
-			flag=false;
+			return mv;
 		}
-		if(local==0){
+		if(local==0||local==null){
 			mv.addObject("messagerError", "Choisir un local");
-			flag=false;
+			return mv;
 		}
 		if(participantRep.findById(participant).getDetailLocalFormations().size()>=2){
 			mv.addObject("messageError","Le particiipant est déjà inscrit pour les deux seances");
-			flag=false;
+			return mv;
 		}
 		/*
 		 * Vérification si dans ce local, la formation
@@ -85,10 +84,9 @@ public class ParticipantFormationController {
 		boolean check = detailLocSerrv.isTeached(local2,formation2 );
 		if(check==false){
 			mv.addObject("messageError", "Cette formation n'est pas donnée dans ce local");
-			flag=false;
-		}
-		if(flag==false)
 			return mv;
+		}
+		
 		else
 		{
 			DetailLocalFormation detailLocalFormation=detailLocalFormaRep.findByLocalFormation(local2, formation2);

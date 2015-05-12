@@ -26,9 +26,9 @@
      <option value="${local.id }">${local.numLocal }</option>
      </c:forEach>
      </select><br><br>
-     Ann&eacute;e Scolaire&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<select name="rentreeScolaires"><option value="" selected="selected">Choix</option>
-     <c:forEach items="${listAnnee }" var="annee">
-     <option value="${annee.id }">${annee.dateScolaireDeb }</option>
+     Jour&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<select name="jour" class="form-control"><option value="" selected="selected">Choix</option>
+     <c:forEach items="${lesJours }" var="jour">
+     <option value="${jour }">${jour}</option>
      </c:forEach>
      </select><br><br>
      Matin&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="seance" value="MATIN"> &nbsp;&nbsp;&nbsp;&nbsp;Soir&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="seance" value="SOIR"/>

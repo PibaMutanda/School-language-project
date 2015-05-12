@@ -25,6 +25,7 @@ import be.school.repository.DetailLocalFormationReposytory;
 import be.school.repository.FormationRepository;
 import be.school.repository.LocalRepository;
 import be.school.repository.RentreeScolaireRepository;
+import be.school.security.Jour;
 import be.school.security.Seance;
 
 
@@ -87,38 +88,41 @@ public class DetailLocalFormationController {
 		DetailLocalFormation detailLocalFormation = null;
 		List<Formation> listFormation = formationRepos.findAll();
 		List<Local> listLocal = localRepos.findAll();
-		List<RentreeScolaire> listSchoolY = rentreeScoRep.findAll();
+	//	List<RentreeScolaire> listSchoolY = rentreeScoRep.findAll();
 		if (id == null) {
 			detailLocalFormation = new DetailLocalFormation();
 		} else {
 			detailLocalFormation = detailFormationReposytory.findById(id);
 
 		}
+		
 		mv.addObject("listLocal", listLocal);
 		mv.addObject("listFormation", listFormation);
 		mv.addObject("detailFormation", detailLocalFormation);
-		mv.addObject("listAnnee", listSchoolY);
+	//	mv.addObject("listAnnee", listSchoolY);
+	    mv.addObject("lesJours", Jour.values()) ;
 		return mv;
 	}
 
 	@RequestMapping(value = "/detailformationsubmit", method = RequestMethod.POST)
 	public ModelAndView detailFormationSubmit(
 			@RequestParam(value = "seance", required = false) Seance seance,
+			@RequestParam(value = "jour", required=false)Jour jour,
 			@Valid @ModelAttribute DetailLocalFormation detailLocalFormation,
 			Errors errors) {
 		ModelAndView mv = new ModelAndView("detailformationregister");
 	
-		if (detailLocalFormation.getFormation() == null) {
+		if (detailLocalFormation.getFormation() == null || detailLocalFormation.getFormation().equals("".trim())) {
 			mv.addObject("messageError",
 					"Faites un choix pour le champ formation");
 			return mv;
 		}
-		if (detailLocalFormation.getLocal()==null) {
+		if (detailLocalFormation.getLocal()==null||detailLocalFormation.getLocal().equals("".trim())) {
 			mv.addObject("messageError", "Choisir un local");
 			return mv;
 		}
-		if (detailLocalFormation.getRentreeScolaires().size() == 0) {
-			mv.addObject("messageError", "Saisir la rentrée");
+		if (detailLocalFormation.getJour() == null||detailLocalFormation.getJour().equals("".trim())) {
+			mv.addObject("messageError", "Choisir le jour");
 			return mv;
 		}
 			/* verification du quota par rapport à la capacité maximale */
@@ -133,7 +137,7 @@ public class DetailLocalFormationController {
 		
 
 		if (seance == null) {
-			mv.addObject("messageError", "Choisir une séance");
+			mv.addObject("messageError", "Choisir une séance Matin ou Soir");
 			return mv;
 		}
 		
