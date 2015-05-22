@@ -58,9 +58,10 @@ public class DetailLocalFormation {
     @Enumerated(EnumType.ORDINAL)
 	private Jour jour;
     
-	@ManyToMany(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn
-	private Set<Participant>participants=new HashSet<Participant>();
+	private Participant participant;
+	
 	
 	public Seance getSeance() {
 		return seance;
@@ -91,17 +92,21 @@ public class DetailLocalFormation {
 		return local;
 	}
 
-	public Set<Participant> getParticipants() {
-		return participants;
+	
+	/**
+	 * @return the participant
+	 */
+	public Participant getParticipant() {
+		return participant;
 	}
 
-	public void setParticipants(Set<Participant> participants) {
-		this.participants = participants;
+	/**
+	 * @param participant the participant to set
+	 */
+	public void setParticipant(Participant participant) {
+		this.participant = participant;
 	}
 
-	public void addPartcipant(Participant participant){
-		participants.add(participant);
-	}
 	public void setLocal(Local local) {
 		this.local = local;
 	}
@@ -134,4 +139,5 @@ public class DetailLocalFormation {
 		return id;
 	}
 
+	
 }

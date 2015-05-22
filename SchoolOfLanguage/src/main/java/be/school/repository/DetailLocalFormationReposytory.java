@@ -52,20 +52,23 @@ public class DetailLocalFormationReposytory {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<DetailLocalFormation> FindAllByFormation(Formation formation){
+	public List<DetailLocalFormation> findAllByFormation(Formation formation){
 		return em.createQuery("select dlf from DetailLocalFormation dlf where dlf.formation= :formation")
 				.setParameter("formation", formation)
 				.getResultList();
 	}
 	
-	public DetailLocalFormation findByLocalFormation(Local local, Formation formation){
+	public DetailLocalFormation findByLocalFormationNiveau(Local local, Formation formation,String niveau){
 		DetailLocalFormation detailFormation=null;
-		List<DetailLocalFormation> detailLocalFormations=em.createQuery("select df from DetailLocalFormation df where df.local= :local and df.formation= :formation")
+		List<DetailLocalFormation> detailLocalFormations=em.createQuery("select df from DetailLocalFormation df where df.local= :local and df.formation= :formation and df.niveau=:niveau")
 				                                           .setParameter("local", local)
 				                                           .setParameter("formation", formation)
+				                                           .setParameter("niveau", niveau)
 				                                           .getResultList();
 		if(!detailLocalFormations.isEmpty())
 			detailFormation=detailLocalFormations.get(0);
 			return detailFormation;	
 	}
+	
+	
 }

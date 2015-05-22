@@ -17,13 +17,14 @@ public class DetailLocalFormationService {
 	private DetailLocalFormationReposytory detailLocalFormationReposytory;
 	
 	
-	public boolean isTeached(Local local, Formation formation){
+	public boolean isTeached(Local local, Formation formation,String niveau){
 		DetailLocalFormation detailLocalFormation=null;
-		detailLocalFormation = detailLocalFormationReposytory.findByLocalFormation(local, formation);
+		detailLocalFormation = detailLocalFormationReposytory.findByLocalFormationNiveau(local, formation,niveau);
 		if(detailLocalFormation!=null)
 			return true;
 		else
 			return false;
 	}
+	
 	
 }

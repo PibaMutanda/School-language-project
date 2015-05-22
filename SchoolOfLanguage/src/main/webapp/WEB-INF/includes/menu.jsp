@@ -6,7 +6,8 @@
 						<li><a href="formationregister">Ajout Formation</a></li>
 						<li><a href="localregister">Ajout Local</a></li>
 						<li><a href="participantregister">Ajout Participant</a></li>
-						 <li><a href="participantformation">Inscrire un participant au cours</a></li>
+						 <li><a href="formationlistmenu">Inscrire un nouveau participant au cours</a></li>
+						 <li><a href="participantformationlistmenu">Réinscrire un participant au cours</a></li>
 						<li><a href="detailformationregister">Associer local-formation</a></li>
 						<li><a href="formateurlist">Liste Formateur</a> </li>
 						<li><a href="anneescolaireregister">Date Rentrée</a></li>

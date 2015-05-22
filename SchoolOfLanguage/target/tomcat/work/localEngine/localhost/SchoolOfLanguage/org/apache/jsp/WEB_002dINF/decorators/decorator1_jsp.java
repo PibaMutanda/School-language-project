@@ -204,7 +204,8 @@ public final class decorator1_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\t\t\t\t\t\t<li><a href=\"formationregister\">Ajout Formation</a></li>\r\n");
       out.write("\t\t\t\t\t\t<li><a href=\"localregister\">Ajout Local</a></li>\r\n");
       out.write("\t\t\t\t\t\t<li><a href=\"participantregister\">Ajout Participant</a></li>\r\n");
-      out.write("\t\t\t\t\t\t <li><a href=\"participantformation\">Inscrire un participant au cours</a></li>\r\n");
+      out.write("\t\t\t\t\t\t <li><a href=\"formationlistmenu\">Inscrire un nouveau participant au cours</a></li>\r\n");
+      out.write("\t\t\t\t\t\t <li><a href=\"participantformationlistmenu\">Réinscrire un participant au cours</a></li>\r\n");
       out.write("\t\t\t\t\t\t<li><a href=\"detailformationregister\">Associer local-formation</a></li>\r\n");
       out.write("\t\t\t\t\t\t<li><a href=\"formateurlist\">Liste Formateur</a> </li>\r\n");
       out.write("\t\t\t\t\t\t<li><a href=\"anneescolaireregister\">Date Rentrée</a></li>\r\n");

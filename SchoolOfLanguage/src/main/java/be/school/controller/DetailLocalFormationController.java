@@ -117,8 +117,13 @@ public class DetailLocalFormationController {
 					"Faites un choix pour le champ formation");
 			return mv;
 		}
+		
 		if (detailLocalFormation.getLocal()==null||detailLocalFormation.getLocal().equals("".trim())) {
 			mv.addObject("messageError", "Choisir un local");
+			return mv;
+		}
+		if(Integer.parseInt(detailLocalFormation.getNiveau())>9){
+			mv.addObject("messageError", "La valeur maximale pour le niveau est de 9");
 			return mv;
 		}
 		if (detailLocalFormation.getJour() == null||detailLocalFormation.getJour().equals("".trim())) {
@@ -137,7 +142,7 @@ public class DetailLocalFormationController {
 		
 
 		if (seance == null) {
-			mv.addObject("messageError", "Choisir une séance Matin ou Soir");
+			mv.addObject("messageError", "Choisir une séance du Matin ou du Soir");
 			return mv;
 		}
 		

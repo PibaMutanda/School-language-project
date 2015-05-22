@@ -33,7 +33,7 @@ public class DetailSpeciLocalFormationController {
 	   ModelAndView mv = new ModelAndView("detailformation");
 	   Local local=null;
 	  Formation formation = formationRep.findByTitre(titre);
-	   List<DetailLocalFormation> detailLocalFormations =dReposytory.FindAllByFormation(formation);
+	   List<DetailLocalFormation> detailLocalFormations =dReposytory.findAllByFormation(formation);
 	   if(detailLocalFormations.size()>0){
 	      local = localRep.findByDetalLocalFormation(detailLocalFormations.get(0).getId());
 	      mv.addObject("local", local);

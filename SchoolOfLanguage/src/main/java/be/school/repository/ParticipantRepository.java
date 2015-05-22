@@ -8,6 +8,7 @@ import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import be.school.model.Formation;
 import be.school.model.Participant;
 import be.school.model.Reservation;
 
@@ -34,6 +35,16 @@ public class ParticipantRepository {
 
 	public List<Participant> findAll(){
 		return em.createQuery("select p from Participant p").getResultList();
+	}
+	
+	public List<Participant> findAllNews(){
+		return em.createQuery("select p from Participant p join p.detailLocalFormations  dlf where dlf.formation is  null").getResultList();
+	}
+	
+	public List<Participant>findAllOlds(Formation formation){
+		return em.createQuery("select p from Participant p join p.detailLocalFormations dlf where dlf.formation = :formation")
+				.setParameter("formation", formation)
+				.getResultList();
 	}
 	public Participant findByEmail(String email){
 		Participant participant=null;

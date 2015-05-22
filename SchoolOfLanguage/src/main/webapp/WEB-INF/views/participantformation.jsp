@@ -2,6 +2,7 @@
     pageEncoding="utf-8"%>
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c'%>
 <%@taglib  uri="http://www.springframework.org/tags/form" prefix="form" %>
+
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,7 +13,7 @@
 <title></title>
 </head>
 <body>
-<h3>Ajout Participant</h3>
+<h3>Inscription d'un nouveau participant pour la formation: ${formation.titre }</h3>
      <c:forEach items="${messageError }" var="message">
       <p id="messageErreur">${message }</p>
      </c:forEach>
@@ -25,12 +26,8 @@
       <option value="${participant.id }" >${participant.prenom }   ${participant.nom}</option>
       </c:forEach>
       </select>
-       <select class="form-control" name="formation">
-       <option value="0">Formation</option>
-       <c:forEach items="${listFormation }" var="formation">
-       <option value="${formation.id }">${formation.titre }</option>
-       </c:forEach>
-       </select>
+      <input type="hidden" value="${formation.id }" name="formation">
+      <input type="hidden" value="${niveau }" name="niveau">
        <select class="form-control" name="local">
        <option value="0">Local</option>
        <c:forEach items="${listLocal }" var="local">
@@ -40,8 +37,7 @@
        <input type="submit" value="Enregistrer" class="btn btn-primary">
       </form>
      </table>
-     </div>
-     
+     </div>    
 </body>
 <script src="<%=request.getContextPath()%>/resources/js/jquery.js"></script>
 <script src="<%=request.getContextPath()%>/resources/js/jquery-ui.min.js"></script>
