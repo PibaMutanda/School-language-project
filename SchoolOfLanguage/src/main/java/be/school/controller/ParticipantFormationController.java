@@ -149,8 +149,10 @@ public class ParticipantFormationController {
 			DetailLocalFormation detailLocalFormation = detailLocalFormaRep
 					.findByLocalFormationNiveau(local2, formation2, niveau);
 			Participant participant2 = participantRep.findById(participant);
+			participant2.setLocal(local2);
 			detailLocalFormation.setParticipant(participant2);
 			detailLocalFormation.setNiveau(niveau);
+			participantRep.save(participant2);
 			detailLocalFormaRep.save(detailLocalFormation);
 			mv.addObject("messageSuccess", "Inscription enregistrée pour "
 					+ participant2.getNom());
@@ -197,8 +199,10 @@ public class ParticipantFormationController {
 			DetailLocalFormation detailLocalFormation = detailLocalFormaRep
 					.findByLocalFormationNiveau(local2, formation2, niveau);
 			Participant participant2 = participantRep.findById(participant);
+			participant2.setLocal(local2);
 			detailLocalFormation.setParticipant(participant2);
 			detailLocalFormation.setNiveau(niveau);
+			participantRep.save(participant2);
 			detailLocalFormaRep.save(detailLocalFormation);
 			mv.addObject("messageSuccess", "Inscription enregistrée pour "
 					+ participant2.getNom());

@@ -37,8 +37,10 @@ public class ParticipantRepository {
 		return em.createQuery("select p from Participant p").getResultList();
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<Participant> findAllNews(){
-		return em.createQuery("select p from Participant p join p.detailLocalFormations  dlf where dlf.formation is  null").getResultList();
+		return em.createQuery("select p from Participant p where p.local is null")
+				.getResultList();
 	}
 	
 	public List<Participant>findAllOlds(Formation formation){
