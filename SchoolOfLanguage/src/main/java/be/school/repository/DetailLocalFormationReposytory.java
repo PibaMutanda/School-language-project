@@ -31,7 +31,9 @@ public class DetailLocalFormationReposytory {
 			em.merge(detailFormation);
 	}
 	
-	
+	public void remove(Long id){
+		em.remove(findById(id));
+	}
 	public List<DetailLocalFormation> findAll(){
 		return em.createQuery("select nf from DetailLocalFormation nf").getResultList();
 	}

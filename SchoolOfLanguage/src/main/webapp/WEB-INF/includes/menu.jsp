@@ -10,6 +10,7 @@
 						 <li><a href="participantformationlistmenu">Réinscrire un participant au cours</a></li>
 						<li><a href="detailformationregister">Associer local-formation</a></li>
 						<li><a href="formateurlist">Liste Formateur</a> </li>
+						<li><a href="detaillocalformdisplay">Liste Locaux & Formations</a>
 						<li><a href="anneescolaireregister">Date Rentrée</a></li>
 						<li><a href="reservationregister">Soumettre une demande
 								pour inscription</a></li>  	

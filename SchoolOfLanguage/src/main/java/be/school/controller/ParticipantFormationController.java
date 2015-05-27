@@ -3,7 +3,6 @@ package be.school.controller;
 import java.util.HashSet;
 import java.util.List;
 
-import org.hsqldb.lib.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -141,7 +140,7 @@ public class ParticipantFormationController {
 		boolean check = detailLocSerrv.isTeached(local2, formation2, niveau);
 		if (check == false) {
 			mv.addObject("messageError",
-					"Cette formation n'est pas donnée dans ce local<br>Cliquer <a href=''>Ici</a> pour voir la liste des locaux liés au cours");
+					"Cette formation n'est pas donnée dans ce local<br>Cliquer <a href='detaillocalformdisplay'>Ici</a> pour voir la liste des locaux liés au cours");
 			return mv;
 		}
 
@@ -193,7 +192,7 @@ public class ParticipantFormationController {
 		boolean check = detailLocSerrv.isTeached(local2, formation2, niveau);
 		if (check == false) {
 			mv.addObject("messageError",
-					"Cette formation n'est pas donnée dans ce local<br>Cliquer <a href=''>Ici</a> pour voir la liste des locaux liés au cours");
+					"Cette formation n'est pas donnée dans ce local<br>Cliquer <a href='detaillocalformdisplay'>Ici</a> pour voir la liste des locaux liés au cours");
 			return mv;
 		} else {
 			DetailLocalFormation detailLocalFormation = detailLocalFormaRep
