@@ -19,6 +19,7 @@ import be.school.repository.FormationRepository;
 import be.school.repository.LocalRepository;
 import be.school.security.Jour;
 import be.school.security.Seance;
+import be.school.service.DetailLocalFormationService;
 
 @Controller
 public class DetailSpeciLocalFormationController {
@@ -26,9 +27,14 @@ public class DetailSpeciLocalFormationController {
    @Autowired
    private DetailLocalFormationReposytory dReposytory;
    
-   @Autowired FormationRepository formationRep;
+   @Autowired 
+   private FormationRepository formationRep;
    
-   @Autowired LocalRepository localRep;
+   @Autowired 
+   private LocalRepository localRep;
+   
+   @Autowired
+   private DetailLocalFormationService detailLocServ;
    
    @RequestMapping(value="/detailFormation", method=RequestMethod.GET)
    public @ResponseBody ModelAndView detailSpeciLocalFormation(@RequestParam String titre){
@@ -49,7 +55,18 @@ public class DetailSpeciLocalFormationController {
    @RequestMapping(value="/detaillocalformdisplay",method=RequestMethod.GET)
    public ModelAndView detailLocalFormDisplay(){
 	   ModelAndView mv = new ModelAndView("detaillocalformdisplay");
-	   mv.addObject("listDetLocalForm", dReposytory.findAll());
+	   List<DetailLocalFormation> listDetailLocalForm = dReposytory.findAll();
+	   /*
+	    * Calcul des places disponibles*/
+	   Long tabDisp[]=new Long[listDetailLocalForm.size()];
+	   int i=0;
+	   for (DetailLocalFormation detailLocalFormation : listDetailLocalForm) {
+		    Long disp= Long.parseLong(detailLocalFormation.getQuota()) - dReposytory.getParticipantNumber(detailLocalFormation.getLocal(), detailLocalFormation.getSeance());
+		   
+		    tabDisp[i++]=disp;
+	}
+	   mv.addObject("listDetLocalForm", listDetailLocalForm);
+	   mv.addObject("tabDispo", tabDisp);
 	   return mv;
    }
    
@@ -80,6 +97,11 @@ public class DetailSpeciLocalFormationController {
 	   }
 	  if(Integer.parseInt(niveau)>9){
 		  mv.addObject("messageError", "le niveau maximale est 9"); 
+		  return mv;
+	  }
+	  Formation formation1=formationRep.findById(formation);
+	  if(detailLocServ.isCheckForUpdate(local1, formation1, jour,seance)==false){
+		  mv.addObject("messageError", "Mise à jour non autorisé");
 		  return mv;
 	  }
 	   DetailLocalFormation detailLocalFormation=dReposytory.findById(id);

@@ -62,7 +62,8 @@ public class DetailLocalFormationReposytory {
 	
 	public DetailLocalFormation findByLocalFormationNiveau(Local local, Formation formation,String niveau){
 		DetailLocalFormation detailFormation=null;
-		List<DetailLocalFormation> detailLocalFormations=em.createQuery("select df from DetailLocalFormation df where df.local= :local and df.formation= :formation and df.niveau=:niveau")
+		@SuppressWarnings("unchecked")
+		List<DetailLocalFormation> detailLocalFormations=em.createQuery("select df from DetailLocalFormation df where df.local= :local and df.formation= :formation and df.niveau=:niveau",DetailLocalFormation.class)
 				                                           .setParameter("local", local)
 				                                           .setParameter("formation", formation)
 				                                           .setParameter("niveau", niveau)
@@ -72,5 +73,24 @@ public class DetailLocalFormationReposytory {
 			return detailFormation;	
 	}
 	
+	public DetailLocalFormation findByLocalFormation(Local local, Formation formation){
+		DetailLocalFormation detailFormation=null;
+		@SuppressWarnings("unchecked")
+		List<DetailLocalFormation> detailLocalFormations= em.createQuery("select df from DetailLocalFormation df where df.local= :local and df.formation= :formation")
+                .setParameter("local", local)
+                .setParameter("formation", formation)
+                .getResultList();
+		if(!detailLocalFormations.isEmpty())
+			detailFormation=detailLocalFormations.get(0);
+			return detailFormation;	
+	}
+	public Long getParticipantNumber(Local local,Seance seance){
+		return  (Long) em.createQuery("select count (distinct dlf.participant) from DetailLocalFormation dlf where dlf.local=:local and dlf.seance=:seance")
+				.setParameter("local", local)
+				.setParameter("seance", seance)
+				.getSingleResult();
+		
+	}
+
 	
 }

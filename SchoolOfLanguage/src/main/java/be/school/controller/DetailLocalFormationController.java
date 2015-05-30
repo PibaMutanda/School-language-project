@@ -130,6 +130,8 @@ public class DetailLocalFormationController {
 			mv.addObject("messageError", "Choisir le jour");
 			return mv;
 		}
+		
+		
 			/* verification du quota par rapport à la capacité maximale */
 			if (Integer.parseInt(detailLocalFormation.getQuota().trim()) > Integer
 					.parseInt(detailLocalFormation.getLocal().getCapacite().trim())) {

@@ -57,7 +57,7 @@ public class ParticipantFormationController {
 			@RequestParam(value = "niveau") String niveau) {
 		ModelAndView mv = new ModelAndView("participantformationold");
 		Formation formation = formationRep.findById(id);
-		HashSet<Participant>listSetPart = new HashSet<Participant>();
+		HashSet<Participant> listSetPart = new HashSet<Participant>();
 		List<Participant> listParticipant = participantRep
 				.findAllOlds(formation);
 		for (Participant participant : listParticipant) {
@@ -76,7 +76,7 @@ public class ParticipantFormationController {
 			@RequestParam(value = "niveau") String niveau) {
 		ModelAndView mv = new ModelAndView("participantformation");
 		Formation formation = formationRep.findById(id);
-		HashSet<Participant>listSetPart = new HashSet<Participant>();
+		HashSet<Participant> listSetPart = new HashSet<Participant>();
 		// List<DetailLocalFormation>listDetailForm=detailLocalFormaRep.findAllByFormation(formation);
 		List<Participant> listParticipant = participantRep.findAllNews();
 		for (Participant participant : listParticipant) {
@@ -131,6 +131,7 @@ public class ParticipantFormationController {
 					"Le particiipant est déjà inscrit pour les deux seances");
 			return mv;
 		}
+
 		/*
 		 * Vérification si dans ce local, la formation est effectivement bien
 		 * donnée
@@ -139,7 +140,8 @@ public class ParticipantFormationController {
 		Formation formation2 = formationRep.findById(formation);
 		boolean check = detailLocSerrv.isTeached(local2, formation2, niveau);
 		if (check == false) {
-			mv.addObject("messageError",
+			mv.addObject(
+					"messageError",
 					"Cette formation n'est pas donnée dans ce local<br>Cliquer <a href='detaillocalformdisplay'>Ici</a> pour voir la liste des locaux liés au cours");
 			return mv;
 		}
@@ -147,6 +149,13 @@ public class ParticipantFormationController {
 		else {
 			DetailLocalFormation detailLocalFormation = detailLocalFormaRep
 					.findByLocalFormationNiveau(local2, formation2, niveau);
+			long nbreInscri = detailLocalFormaRep.getParticipantNumber(local2,
+					detailLocalFormation.getSeance());
+			if (Long.parseLong(detailLocalFormation.getQuota()) < nbreInscri) {
+				mv.addObject("messageError",
+						"Le quota maximal est déjà atteint");
+				return mv;
+			}
 			Participant participant2 = participantRep.findById(participant);
 			participant2.setLocal(local2);
 			detailLocalFormation.setParticipant(participant2);
@@ -189,9 +198,11 @@ public class ParticipantFormationController {
 		 */
 		Local local2 = localRep.findById(local);
 		Formation formation2 = formationRep.findById(formation);
+
 		boolean check = detailLocSerrv.isTeached(local2, formation2, niveau);
 		if (check == false) {
-			mv.addObject("messageError",
+			mv.addObject(
+					"messageError",
 					"Cette formation n'est pas donnée dans ce local<br>Cliquer <a href='detaillocalformdisplay'>Ici</a> pour voir la liste des locaux liés au cours");
 			return mv;
 		} else {
@@ -201,6 +212,13 @@ public class ParticipantFormationController {
 			participant2.setLocal(local2);
 			detailLocalFormation.setParticipant(participant2);
 			detailLocalFormation.setNiveau(niveau);
+			boolean checking = detailLocSerrv.isSameLevelForSameForm(
+					detailLocalFormation, participant2, formation2, niveau);
+			if (checking == false) {
+				mv.addObject("messageError",
+						"Pour la même formation, un participant ne doit pas avoir le même niveau");
+				return mv;
+			}
 			participantRep.save(participant2);
 			detailLocalFormaRep.save(detailLocalFormation);
 			mv.addObject("messageSuccess", "Inscription enregistrée pour "
