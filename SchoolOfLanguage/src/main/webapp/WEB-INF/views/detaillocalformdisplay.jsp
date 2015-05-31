@@ -27,11 +27,11 @@
 			<th></th>
 		</tr>
 		<%
-		int i=0;
-		Long tab[]=(Long[])request.getAttribute("tabDispo");
+			int i = 0;
+			Long tab[] = (Long[]) request.getAttribute("tabDispo");
 		%>
-		<c:forEach items="${listDetLocalForm }" var="detLocalForm" >
-		
+		<c:forEach items="${listDetLocalForm }" var="detLocalForm">
+
 			<tr>
 				<td>${detLocalForm.formation.titre }</td><
 				<td>${detLocalForm.local.numLocal }</td>
@@ -40,13 +40,23 @@
 				<td>${detLocalForm.seance }</td>
 				<td>${detLocalForm.niveau }</td>
 				<td>${detLocalForm.quota }</td>
-				<td><%=tab[i++] %></td>
-				<td><a href="updateDetailLocalForm?id=${detLocalForm.id }"><span class="glyphicon glyphicon-pencil" title="Modifier"></span></a></td>
-				<td><a href="deleteDetailLocalForm?id=${detLocalForm.id }"><span class="glyphicon glyphicon-trash" title="Supprimer"></span></a></td>
+				<td><%=tab[i++]%></td>
+				<td><a href="updateDetailLocalForm?id=${detLocalForm.id }"><span
+						class="glyphicon glyphicon-pencil" title="Modifier"></span></a></td>
+				<td><a
+					href="javascript:deleteDetailLocalFunction('deleteDetailLocalForm?id=${detLocalForm.id }')"><span
+						class="glyphicon glyphicon-trash" title="Supprimer"></span></a></td>
 			</tr>
-		
+
 		</c:forEach>
 	</table>
+	<script type="text/javascript">
+		function deleteDetailLocalFunction(delUrl) {
+			if (confirm("Voulez-vous supprimer l'élément sélectionné ?")) {
+				document.location = delUrl;
+			}
+		}
+	</script>
 </body>
 <script src="<%=request.getContextPath()%>/resources/js/jquery.js"></script>
 <script

@@ -28,7 +28,6 @@ import be.school.repository.RentreeScolaireRepository;
 import be.school.security.Jour;
 import be.school.security.Seance;
 
-
 @Controller
 public class DetailLocalFormationController {
 
@@ -88,68 +87,71 @@ public class DetailLocalFormationController {
 		DetailLocalFormation detailLocalFormation = null;
 		List<Formation> listFormation = formationRepos.findAll();
 		List<Local> listLocal = localRepos.findAll();
-	//	List<RentreeScolaire> listSchoolY = rentreeScoRep.findAll();
+		// List<RentreeScolaire> listSchoolY = rentreeScoRep.findAll();
 		if (id == null) {
 			detailLocalFormation = new DetailLocalFormation();
 		} else {
 			detailLocalFormation = detailFormationReposytory.findById(id);
 
 		}
-		
+
 		mv.addObject("listLocal", listLocal);
 		mv.addObject("listFormation", listFormation);
 		mv.addObject("detailFormation", detailLocalFormation);
-	//	mv.addObject("listAnnee", listSchoolY);
-	    mv.addObject("lesJours", Jour.values()) ;
+		// mv.addObject("listAnnee", listSchoolY);
+		mv.addObject("lesJours", Jour.values());
 		return mv;
 	}
 
 	@RequestMapping(value = "/detailformationsubmit", method = RequestMethod.POST)
 	public ModelAndView detailFormationSubmit(
 			@RequestParam(value = "seance", required = false) Seance seance,
-			@RequestParam(value = "jour", required=false)Jour jour,
+			@RequestParam(value = "jour", required = false) Jour jour,
 			@Valid @ModelAttribute DetailLocalFormation detailLocalFormation,
 			Errors errors) {
 		ModelAndView mv = new ModelAndView("detailformationregister");
-	
-		if (detailLocalFormation.getFormation() == null || detailLocalFormation.getFormation().equals("".trim())) {
+
+		if (detailLocalFormation.getFormation() == null
+				|| detailLocalFormation.getFormation().equals("".trim())) {
 			mv.addObject("messageError",
 					"Faites un choix pour le champ formation");
 			return mv;
 		}
-		
-		if (detailLocalFormation.getLocal()==null||detailLocalFormation.getLocal().equals("".trim())) {
+
+		if (detailLocalFormation.getLocal() == null
+				|| detailLocalFormation.getLocal().equals("".trim())) {
 			mv.addObject("messageError", "Choisir un local");
 			return mv;
 		}
-		if(Integer.parseInt(detailLocalFormation.getNiveau())>9){
-			mv.addObject("messageError", "La valeur maximale pour le niveau est de 9");
+		if (Integer.parseInt(detailLocalFormation.getNiveau()) > 9) {
+			mv.addObject("messageError",
+					"La valeur maximale pour le niveau est de 9");
 			return mv;
 		}
-		if (detailLocalFormation.getJour() == null||detailLocalFormation.getJour().equals("".trim())) {
+		if (detailLocalFormation.getJour() == null
+				|| detailLocalFormation.getJour().equals("".trim())) {
 			mv.addObject("messageError", "Choisir le jour");
 			return mv;
 		}
-		
-		
-			/* verification du quota par rapport à la capacité maximale */
-			if (Integer.parseInt(detailLocalFormation.getQuota().trim()) > Integer
-					.parseInt(detailLocalFormation.getLocal().getCapacite().trim())) {
-				mv.addObject("messageError",
-						"Le quota est supérieur à la capacité maximun de "
-								+ detailLocalFormation.getLocal()
-										.getCapacite());
-				return mv;
-			}
-		
 
-		if (seance == null) {
-			mv.addObject("messageError", "Choisir une séance du Matin ou du Soir");
+		/* verification du quota par rapport à la capacité maximale */
+		if (Integer.parseInt(detailLocalFormation.getQuota().trim()) > Integer
+				.parseInt(detailLocalFormation.getLocal().getCapacite().trim())) {
+			mv.addObject("messageError",
+					"Le quota est supérieur à la capacité maximun de "
+							+ detailLocalFormation.getLocal().getCapacite());
 			return mv;
 		}
-		
-		DetailLocalFormation dLocalFormation = detailFormationReposytory.findByLocalSession(detailLocalFormation.getLocal(), seance);
-		if (dLocalFormation!=null) {
+
+		if (seance == null) {
+			mv.addObject("messageError",
+					"Choisir une séance du Matin ou du Soir");
+			return mv;
+		}
+
+		DetailLocalFormation dLocalFormation = detailFormationReposytory
+				.findByLocalSession(detailLocalFormation.getLocal(), seance);
+		if (dLocalFormation != null) {
 			mv.addObject("messageError",
 					"Le local est déjà reservé pour une séance du "
 							+ detailLocalFormation.getSeance());
@@ -162,8 +164,7 @@ public class DetailLocalFormationController {
 			detailLocalFormation.getLocal().setEstLibre(false);
 			localRepos.save(detailLocalFormation.getLocal());
 			detailFormationReposytory.save(detailLocalFormation);
-			
-			
+
 			mv.addObject("messageSuccess",
 					"Detail formation est enregistré avec succès");
 			mv.setViewName("redirect:home");

@@ -23,105 +23,120 @@ import be.school.service.DetailLocalFormationService;
 
 @Controller
 public class DetailSpeciLocalFormationController {
-	
-   @Autowired
-   private DetailLocalFormationReposytory dReposytory;
-   
-   @Autowired 
-   private FormationRepository formationRep;
-   
-   @Autowired 
-   private LocalRepository localRep;
-   
-   @Autowired
-   private DetailLocalFormationService detailLocServ;
-   
-   @RequestMapping(value="/detailFormation", method=RequestMethod.GET)
-   public @ResponseBody ModelAndView detailSpeciLocalFormation(@RequestParam String titre){
-	   ModelAndView mv = new ModelAndView("detailformation");
-	   Local local=null;
-	  Formation formation = formationRep.findByTitre(titre);
-	   List<DetailLocalFormation> detailLocalFormations =dReposytory.findAllByFormation(formation);
-	   if(detailLocalFormations.size()>0){
-	      local = localRep.findByDetalLocalFormation(detailLocalFormations.get(0).getId());
-	      mv.addObject("local", local);
-	   }
-	   mv.addObject("detailLocalFormations", detailLocalFormations);
-	   mv.addObject("formation", formation);
-	  
-	   return mv;
-   }
-   
-   @RequestMapping(value="/detaillocalformdisplay",method=RequestMethod.GET)
-   public ModelAndView detailLocalFormDisplay(){
-	   ModelAndView mv = new ModelAndView("detaillocalformdisplay");
-	   List<DetailLocalFormation> listDetailLocalForm = dReposytory.findAll();
-	   /*
-	    * Calcul des places disponibles*/
-	   Long tabDisp[]=new Long[listDetailLocalForm.size()];
-	   int i=0;
-	   for (DetailLocalFormation detailLocalFormation : listDetailLocalForm) {
-		    Long disp= Long.parseLong(detailLocalFormation.getQuota()) - dReposytory.getParticipantNumber(detailLocalFormation.getLocal(), detailLocalFormation.getSeance());
-		   
-		    tabDisp[i++]=disp;
+
+	@Autowired
+	private DetailLocalFormationReposytory dReposytory;
+
+	@Autowired
+	private FormationRepository formationRep;
+
+	@Autowired
+	private LocalRepository localRep;
+
+	@Autowired
+	private DetailLocalFormationService detailLocServ;
+
+	@RequestMapping(value = "/detailFormation", method = RequestMethod.GET)
+	public @ResponseBody ModelAndView detailSpeciLocalFormation(
+			@RequestParam String titre) {
+		ModelAndView mv = new ModelAndView("detailformation");
+		Local local = null;
+		Formation formation = formationRep.findByTitre(titre);
+		List<DetailLocalFormation> detailLocalFormations = dReposytory
+				.findAllByFormation(formation);
+		if (detailLocalFormations.size() > 0) {
+			local = localRep.findByDetalLocalFormation(detailLocalFormations
+					.get(0).getId());
+			mv.addObject("local", local);
+		}
+		mv.addObject("detailLocalFormations", detailLocalFormations);
+		mv.addObject("formation", formation);
+
+		return mv;
 	}
-	   mv.addObject("listDetLocalForm", listDetailLocalForm);
-	   mv.addObject("tabDispo", tabDisp);
-	   return mv;
-   }
-   
-   @RequestMapping(value="/updateDetailLocalForm",method=RequestMethod.GET)
-   public ModelAndView updateDetailLocalForm(@RequestParam(value="id")Long id){
-	   ModelAndView mv = new ModelAndView("updateDetailLocalForm");
-	   DetailLocalFormation detailLocalFormation=dReposytory.findById(id);
-	   List<Formation> formations = formationRep.findAll();
-	   List<Local>locaux=localRep.findAll();
-	   mv.addObject("detailLocalFormation", detailLocalFormation);
-	   mv.addObject("locaux", locaux);
-	   mv.addObject("formations", formations);
-	   mv.addObject("jours", Jour.values());
-	   mv.addObject("seances", Seance.values());
-	   
-	   return mv;
-   }
-   
-   @RequestMapping(value="/updatedetaillocalformsubmit",method=RequestMethod.POST)
-   public ModelAndView updateDetailLocalFormSubmit(@RequestParam(value="id")Long id, @RequestParam(value="formation")Long formation,
-		   @RequestParam(value="local")Long local, @RequestParam(value="jour")Jour jour,@RequestParam(value="seance")Seance seance,
-		   @RequestParam(value="niveau")String niveau,@RequestParam(value="quota")String quota){
-	   ModelAndView mv = new ModelAndView("updateDetailLocalForm");
-	   Local local1=localRep.findById(local);
-	   if(Integer.parseInt(local1.getCapacite()) <  Integer.parseInt(quota)){
-		   mv.addObject("messageError", "le quota dépasse la capacité maximale");
-		   return mv;
-	   }
-	  if(Integer.parseInt(niveau)>9){
-		  mv.addObject("messageError", "le niveau maximale est 9"); 
-		  return mv;
-	  }
-	  Formation formation1=formationRep.findById(formation);
-	  if(detailLocServ.isCheckForUpdate(local1, formation1, jour,seance)==false){
-		  mv.addObject("messageError", "Mise à jour non autorisé");
-		  return mv;
-	  }
-	   DetailLocalFormation detailLocalFormation=dReposytory.findById(id);
-	   detailLocalFormation.setFormation(formationRep.findById(formation));
-	   detailLocalFormation.setLocal(local1);
-	   detailLocalFormation.setJour(jour);
-	   detailLocalFormation.setNiveau(niveau);
-	   detailLocalFormation.setQuota(quota);
-	   detailLocalFormation.setSeance(seance);
-	   dReposytory.save(detailLocalFormation);
-	   mv.setViewName("redirect:detaillocalformdisplay");
-	   return mv;
-   }
-   
-//   @ModelAttribute
-//   public DetailLocalFormation findDetailLocalForm(@RequestParam(value="id")Long id){
-//	   DetailLocalFormation detailLocalFormation=dReposytory.findById(id);
-//	   return detailLocalFormation;
-//   }
-   @ModelAttribute
+
+	@RequestMapping(value = "/detaillocalformdisplay", method = RequestMethod.GET)
+	public ModelAndView detailLocalFormDisplay() {
+		ModelAndView mv = new ModelAndView("detaillocalformdisplay");
+		List<DetailLocalFormation> listDetailLocalForm = dReposytory.findAll();
+		/*
+		 * Calcul des places disponibles
+		 */
+		Long tabDisp[] = new Long[listDetailLocalForm.size()];
+		int i = 0;
+		for (DetailLocalFormation detailLocalFormation : listDetailLocalForm) {
+			Long disp = Long.parseLong(detailLocalFormation.getQuota())
+					- dReposytory.getParticipantNumber(
+							detailLocalFormation.getLocal(),
+							detailLocalFormation.getSeance());
+
+			tabDisp[i++] = disp;
+		}
+		mv.addObject("listDetLocalForm", listDetailLocalForm);
+		mv.addObject("tabDispo", tabDisp);
+		return mv;
+	}
+
+	@RequestMapping(value = "/deleteDetailLocalForm", method = RequestMethod.GET)
+	public String deleteDetailLocalFormation(@RequestParam(value = "id") Long id) {
+		dReposytory.remove(id);
+		return "detaillocalformdisplay";
+	}
+
+	@RequestMapping(value = "/updateDetailLocalForm", method = RequestMethod.GET)
+	public ModelAndView updateDetailLocalForm(
+			@RequestParam(value = "id") Long id) {
+		ModelAndView mv = new ModelAndView("updateDetailLocalForm");
+		DetailLocalFormation detailLocalFormation = dReposytory.findById(id);
+		List<Formation> formations = formationRep.findAll();
+		List<Local> locaux = localRep.findAll();
+		mv.addObject("detailLocalFormation", detailLocalFormation);
+		mv.addObject("locaux", locaux);
+		mv.addObject("formations", formations);
+		mv.addObject("jours", Jour.values());
+		mv.addObject("seances", Seance.values());
+
+		return mv;
+	}
+
+	@RequestMapping(value = "/updatedetaillocalformsubmit", method = RequestMethod.POST)
+	public ModelAndView updateDetailLocalFormSubmit(
+			@RequestParam(value = "id") Long id,
+			@RequestParam(value = "formation") Long formation,
+			@RequestParam(value = "local") Long local,
+			@RequestParam(value = "jour") Jour jour,
+			@RequestParam(value = "seance") Seance seance,
+			@RequestParam(value = "niveau") String niveau,
+			@RequestParam(value = "quota") String quota) {
+		ModelAndView mv = new ModelAndView("updateDetailLocalForm");
+		Local local1 = localRep.findById(local);
+		if (Integer.parseInt(local1.getCapacite()) < Integer.parseInt(quota)) {
+			mv.addObject("messageError",
+					"le quota dépasse la capacité maximale");
+			return mv;
+		}
+		if (Integer.parseInt(niveau) > 9) {
+			mv.addObject("messageError", "le niveau maximale est 9");
+			return mv;
+		}
+		Formation formation1 = formationRep.findById(formation);
+		if (detailLocServ.isCheckForUpdate(local1, formation1, jour, seance) == false) {
+			mv.addObject("messageError", "Mise à jour non autorisé");
+			return mv;
+		}
+		DetailLocalFormation detailLocalFormation = dReposytory.findById(id);
+		detailLocalFormation.setFormation(formationRep.findById(formation));
+		detailLocalFormation.setLocal(local1);
+		detailLocalFormation.setJour(jour);
+		detailLocalFormation.setNiveau(niveau);
+		detailLocalFormation.setQuota(quota);
+		detailLocalFormation.setSeance(seance);
+		dReposytory.save(detailLocalFormation);
+		mv.setViewName("redirect:detaillocalformdisplay");
+		return mv;
+	}
+
+	@ModelAttribute
 	public Formation findFormation(
 			@RequestParam(value = "formation", required = false) String titre) {
 		Formation formation = null;
