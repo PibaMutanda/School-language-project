@@ -43,8 +43,7 @@ public class Formateur {
 	@NotEmpty(message="insérer le login")
 	private String login;
 	
-	@OneToMany(fetch = FetchType.EAGER)
-	@JoinColumn
+	@OneToMany(fetch = FetchType.EAGER, mappedBy="formateur")
 	private Set<DetailLocalFormation>detailLocalFormations= new HashSet<DetailLocalFormation>();
 
 	public String getNom() {

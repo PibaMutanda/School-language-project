@@ -38,6 +38,9 @@ public class DetailLocalFormation {
 	@JoinColumn
 	private Local local;
 
+	@ManyToOne
+	@JoinColumn
+	private Formateur formateur;
 	
 //	@OneToMany
 //	@JoinColumn
@@ -79,6 +82,14 @@ public class DetailLocalFormation {
 
 	public void setFormation(Formation formation) {
 		this.formation = formation;
+	}
+
+	public Formateur getFormateur() {
+		return formateur;
+	}
+
+	public void setFormateur(Formateur formateur) {
+		this.formateur = formateur;
 	}
 
 	public Local getLocal() {

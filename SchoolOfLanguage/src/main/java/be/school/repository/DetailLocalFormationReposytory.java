@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import be.school.model.DetailLocalFormation;
+import be.school.model.Formateur;
 import be.school.model.Formation;
 import be.school.model.Local;
 import be.school.security.Seance;
@@ -41,7 +42,11 @@ public class DetailLocalFormationReposytory {
 	public List<DetailLocalFormation> findAllDistinct(){
 		return em.createQuery("select distinct df from DetailLocalFormation df").getResultList();
 	}
-	
+	public List<DetailLocalFormation> findAllByFormateur(Formateur formateur){
+		return em.createQuery("select dlf from DetailLocalFormation dlf where dlf.formateur=:formateur")
+				 .setParameter("formateur", formateur)
+				 .getResultList();
+	}
 	public DetailLocalFormation findByLocalSession(Local local, Seance seance){
 		DetailLocalFormation detailFormation=null;
 		List delofos = em.createQuery("select df from DetailLocalFormation df  where df.local= :local and  df.seance= :seance")
@@ -53,6 +58,12 @@ public class DetailLocalFormationReposytory {
 		return detailFormation;
 	}
 	
+	public List<DetailLocalFormation>findByFormationFormateur(Formation formation,Formateur formateur){
+		return em.createQuery("select dlf from DetailLocalFormation dlf where dlf.formation=:formation and dlf.formateur=:formateur")
+				.setParameter("formation", formation)
+				.setParameter("formateur", formateur)
+				.getResultList();
+	}
 	@SuppressWarnings("unchecked")
 	public List<DetailLocalFormation> findAllByFormation(Formation formation){
 		return em.createQuery("select dlf from DetailLocalFormation dlf where dlf.formation= :formation")

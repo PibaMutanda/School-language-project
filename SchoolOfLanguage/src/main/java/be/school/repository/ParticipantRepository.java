@@ -48,6 +48,11 @@ public class ParticipantRepository {
 				.setParameter("formation", formation).getResultList();
 	}
 
+	public Long getTotalParticipant(Long detailLocalForm){
+		return (Long) em.createQuery("select count(p) from Participant p join p.detailLocalFormations pdlf where pdlf.id=:id")
+				.setParameter("id", detailLocalForm)
+				.getSingleResult();
+	}
 	public Participant findByEmail(String email) {
 		Participant participant = null;
 		List participantList = em

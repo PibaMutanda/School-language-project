@@ -14,6 +14,7 @@
 						<li><a href="anneescolaireregister">Date Rentrée</a></li>
 						<li><a href="reservationregister">Soumettre une demande
 								pour inscription</a></li>  	
+					   <li><a href="displayprofplanning">Mon planning</a></li>			
 	</ul>										
 </body>
 </html>

@@ -12,11 +12,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import be.school.model.DetailLocalFormation;
+import be.school.model.Formateur;
 import be.school.model.Formation;
 import be.school.model.Local;
 import be.school.repository.DetailLocalFormationReposytory;
+import be.school.repository.FormateurRepository;
 import be.school.repository.FormationRepository;
 import be.school.repository.LocalRepository;
+import be.school.repository.ParticipantRepository;
 import be.school.security.Jour;
 import be.school.security.Seance;
 import be.school.service.DetailLocalFormationService;
@@ -36,6 +39,12 @@ public class DetailSpeciLocalFormationController {
 	@Autowired
 	private DetailLocalFormationService detailLocServ;
 
+	@Autowired
+	private FormateurRepository formateurRep;
+
+	@Autowired
+	private ParticipantRepository participantRep;
+	
 	@RequestMapping(value = "/detailFormation", method = RequestMethod.GET)
 	public @ResponseBody ModelAndView detailSpeciLocalFormation(
 			@RequestParam String titre) {
@@ -133,6 +142,22 @@ public class DetailSpeciLocalFormationController {
 		detailLocalFormation.setSeance(seance);
 		dReposytory.save(detailLocalFormation);
 		mv.setViewName("redirect:detaillocalformdisplay");
+		return mv;
+	}
+
+	@RequestMapping(value = "/displayprofplanning", method = RequestMethod.GET)
+	public ModelAndView displayProfPlanning(@RequestParam(value = "id") Long id) {
+		Formateur formateur = formateurRep.findById(id);
+		List<DetailLocalFormation> listPlanningProf = dReposytory
+				.findAllByFormateur(formateur);
+		Long tab[] = new Long[listPlanningProf.size()];
+		int cpt=0;
+		for (DetailLocalFormation detailLocalFormation : listPlanningProf) {
+               tab[cpt++]=participantRep.getTotalParticipant(detailLocalFormation.getId());
+		}
+		ModelAndView mv=new ModelAndView("displayprofplanning");
+		mv.addObject("planningProf",listPlanningProf);
+		mv.addObject("totalPart", tab);
 		return mv;
 	}
 
