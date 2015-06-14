@@ -1,3 +1,5 @@
+<%@page import="be.school.model.Formateur"%>
+<%@page import="be.school.model.Employe"%>
 <nav class="navbar navbar-inverse" role="navigation">
 		<div class="container-fluid">
 			<a class="navbar-brand" href="home">School of Languages</a>
@@ -21,7 +23,33 @@
 							<li class="divider"></li>
 							<li><a href="#">One more separated link</a></li>
 						</ul></li>
+						
 				</ul>
+				
+			</div>
+			<div class="collapse navbar-collapse navHeaderCollapse">
+			<ul class="nav navbar-nav navbar-right">
+			<%
+			 Formateur formateur =(Formateur) session.getAttribute("formateur");
+			 Employe employe=(Employe)session.getAttribute("employe");
+			 if(formateur!=null)
+			 {
+				 out.println("<li><a href='#'>"+formateur.getPrenom()+" "+formateur.getNom()+"</a></li>");
+			%>
+			<li><a href="logout" class="glyphicon glyphicon-lock">&nbsp;Déconnexion</a></li>
+			<%
+			 }
+			 else if(employe!=null){
+				 out.println("<li><a href='#'>"+employe.getNom()+"</a></li>");
+			%>
+			<li><a href="logout" class="glyphicon glyphicon-lock">&nbsp;Déconnexion</a></li>
+			<%
+			 }
+			 else{
+			%>
+			<li><a href="login">Connexion</a></li>
+			<%} %>
+			</ul>
 			</div>
 		</div>
 	</nav>

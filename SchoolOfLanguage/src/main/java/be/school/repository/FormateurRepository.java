@@ -33,4 +33,15 @@ public class FormateurRepository {
 		return em.createQuery("Select f from Formateur f").getResultList();
 	}
 	
+	public Formateur findByLoginAndPwd(String login, String password){
+		Formateur formateur=null;
+		List formateurs = em.createQuery("select f from Formateur f where f.login=:login and f.password=:password")
+				.setParameter("login", login)
+				.setParameter("password", password)
+				.getResultList();
+		if(!formateurs.isEmpty())
+			formateur=(Formateur)formateurs.get(0);
+		return formateur;
+	}
+	
 }

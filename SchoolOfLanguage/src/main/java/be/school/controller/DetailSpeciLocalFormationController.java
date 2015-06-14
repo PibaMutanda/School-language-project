@@ -44,7 +44,7 @@ public class DetailSpeciLocalFormationController {
 
 	@Autowired
 	private ParticipantRepository participantRep;
-	
+
 	@RequestMapping(value = "/detailFormation", method = RequestMethod.GET)
 	public @ResponseBody ModelAndView detailSpeciLocalFormation(
 			@RequestParam String titre) {
@@ -151,12 +151,13 @@ public class DetailSpeciLocalFormationController {
 		List<DetailLocalFormation> listPlanningProf = dReposytory
 				.findAllByFormateur(formateur);
 		Long tab[] = new Long[listPlanningProf.size()];
-		int cpt=0;
+		int cpt = 0;
 		for (DetailLocalFormation detailLocalFormation : listPlanningProf) {
-               tab[cpt++]=participantRep.getTotalParticipant(detailLocalFormation.getId());
+			tab[cpt++] = participantRep
+					.getTotalParticipant(detailLocalFormation.getId());
 		}
-		ModelAndView mv=new ModelAndView("displayprofplanning");
-		mv.addObject("planningProf",listPlanningProf);
+		ModelAndView mv = new ModelAndView("displayprofplanning");
+		mv.addObject("planningProf", listPlanningProf);
 		mv.addObject("totalPart", tab);
 		return mv;
 	}
