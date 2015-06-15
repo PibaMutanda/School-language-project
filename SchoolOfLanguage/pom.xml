@@ -179,6 +179,8 @@
 			<version>2.4</version>
 			<scope>provided</scope>
 		</dependency>
+		
+
 		<!-- Sitemesh -->
 		<dependency>
 			<groupId>opensymphony</groupId>
