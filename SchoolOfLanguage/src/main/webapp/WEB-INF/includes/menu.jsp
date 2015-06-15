@@ -1,11 +1,11 @@
-<%@page import="be.school.model.Formateur"%>
-<%@page import="be.school.model.Employe"%>
-<%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c'%>
 <html>
-
 <ul role="menu">
+<c:choose>
+    <c:when test="${formateur.id !=null }">
 	<li><a href="displayprofplanning?id=${formateur.id }">Mon
 			planning</a></li>
+	</c:when>	
+	<c:when test="${employe.id !=null }">	
 	<li><a href="statutprofessionnelregister">Ajout Statut
 			Professionnel</a></li>
 	<li><a href="formateurregister">Ajout Formateur</a></li>
@@ -22,6 +22,8 @@
 	<li><a href="anneescolaireregister">Date Rentrée</a></li>
 	<li><a href="reservationregister">Soumettre une demande pour
 			inscription</a></li>
+   </c:when>			
+</c:choose>			
 </ul>
 </body>
 </html>

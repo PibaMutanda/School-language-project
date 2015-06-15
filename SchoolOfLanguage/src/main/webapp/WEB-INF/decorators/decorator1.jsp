@@ -1,3 +1,4 @@
+<%@page import="java.nio.channels.SeekableByteChannel"%>
 <%@ page language="java" pageEncoding="UTF-8"
 	contentType="text/html;charset=utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -18,6 +19,8 @@
 <body>
 	<%@include file="/WEB-INF/includes/header.jsp"%>
 	<div class="row">
+	<c:choose>
+	 <c:when test="${formateur.id != null or employe.id != null }">
 		<div class="container-fluid">
 			<div class="col-md-3">
 				<nav>
@@ -30,8 +33,16 @@
 				<decorator:body />
 			</div>
 		</div>
+		</c:when>
+		<c:otherwise>
+		<div class="container">
+			<div class="col-md-12 shool-decorator-body">
+				<decorator:body />
+			</div>
+		</div>
+		</c:otherwise>
+	</c:choose>	
 	</div>
-
 	<footer class="school-footer">
 	<%@include file="/WEB-INF/includes/footer.jsp" %>
 	</footer>
