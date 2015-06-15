@@ -4,6 +4,7 @@
     <c:when test="${formateur.id !=null }">
 	<li><a href="displayprofplanning?id=${formateur.id }">Mon
 			planning</a></li>
+	<li><a href="updateFormateur?id=${formateur.id }">changer le Password</a></li>		
 	</c:when>	
 	<c:when test="${employe.id !=null }">	
 	<li><a href="statutprofessionnelregister">Ajout Statut

@@ -8,6 +8,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -28,17 +29,21 @@ public class FormateurController {
 
 	@Autowired
 	private FormateurRepository formateurRepository;
-	
-	@Autowired private FormationRepository formationRepository; 
-	
+
+	@Autowired
+	private FormationRepository formationRepository;
+
 	@InitBinder
-	protected void RegisterFormation(HttpServletRequest request, ServletRequestDataBinder binder){
-		binder.registerCustomEditor(Formation.class, new PropertyEditorSupport(){
-			public void setAsText(String text){
-				Formation formation = formationRepository.findById(Long.parseLong(text));
-				setValue(formation);
-			}
-		});
+	protected void RegisterFormation(HttpServletRequest request,
+			ServletRequestDataBinder binder) {
+		binder.registerCustomEditor(Formation.class,
+				new PropertyEditorSupport() {
+					public void setAsText(String text) {
+						Formation formation = formationRepository.findById(Long
+								.parseLong(text));
+						setValue(formation);
+					}
+				});
 	}
 
 	@RequestMapping(value = "/formateurregister", method = RequestMethod.GET)
@@ -64,19 +69,57 @@ public class FormateurController {
 		} else {
 			formateur.setPassword(SecurityUtils.md5Encode(formateur
 					.getPassword()));
-			mv.addObject("messageSuccess"," Formateur est  enregistré avec succès");
-			mv.addObject("listFormateur",formateurRepository.findAll());
+			mv.addObject("messageSuccess",
+					" Formateur est  enregistré avec succès");
+			mv.addObject("listFormateur", formateurRepository.findAll());
 			formateurRepository.save(formateur);
 			mv.setViewName("redirect:formateurlist");
-			
+
 		}
 		return mv;
 	}
-	@RequestMapping(value="/formateurlist", method = RequestMethod.GET)
-	public ModelAndView formateurDisplay(){
+
+	@RequestMapping(value = "/formateurlist", method = RequestMethod.GET)
+	public ModelAndView formateurDisplay() {
 		ModelAndView mv = new ModelAndView("formateurlist");
-		List<Formateur>formateurlist = formateurRepository.findAll();
+		List<Formateur> formateurlist = formateurRepository.findAll();
 		mv.addObject("formateurlist", formateurlist);
+		return mv;
+	}
+
+	@RequestMapping(value = "/updateFormateur", method = RequestMethod.GET)
+	public String updateFormateurDisplay() {
+		/*
+		 * Cette méthode retourne la page updateFormateur
+		 */
+		return "updateFormateur";
+	}
+
+	@RequestMapping(value = "/updateformateursubmit", method = RequestMethod.POST)
+	public ModelAndView updateFormateurSubmit(@RequestParam("id") Long id,
+			@RequestParam(value = "oldpassword") String oldpassword,
+			@RequestParam("nouvpassword") String noupassword,
+			@RequestParam("confpassword") String confpassword) {
+		ModelAndView mv = new ModelAndView("updateFormateur");
+		/*
+		 * Cette méthode traite de la modification de password
+		 */
+		Formateur formateur = formateurRepository.findById(id);
+		String motdepasse = SecurityUtils.md5Encode(oldpassword);
+		if (!motdepasse.equals(formateur.getPassword())) {
+			mv.addObject("messageError", "L'ancien password n'est pas correct");
+			return mv;
+		}
+		if (!noupassword.equals(confpassword)) {
+			mv.addObject("messageError",
+					"Saisir le même password de confirmation");
+			return mv;
+		}
+		formateur.setPassword(SecurityUtils.md5Encode(noupassword));
+		formateurRepository.save(formateur);
+		mv.addObject("messageSuccess",
+				"La modification   est  enregistrée avec succès");
+		mv.setViewName("redirect:home");
 		return mv;
 	}
 }
