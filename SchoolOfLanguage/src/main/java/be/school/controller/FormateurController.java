@@ -102,7 +102,7 @@ public class FormateurController {
 			@RequestParam("confpassword") String confpassword) {
 		ModelAndView mv = new ModelAndView("updateFormateur");
 		/*
-		 * Cette méthode traite de la modification de password
+		 * Cette méthode traite de la modification du password
 		 */
 		Formateur formateur = formateurRepository.findById(id);
 		String motdepasse = SecurityUtils.md5Encode(oldpassword);
