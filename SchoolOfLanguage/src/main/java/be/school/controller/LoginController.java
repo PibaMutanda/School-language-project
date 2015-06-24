@@ -53,6 +53,8 @@ public class LoginController {
 				Formateur formateur = loginService.loginFormateur(login,
 						password);
 				HttpSession sessionFormateur = request.getSession();
+				String mySession=formateur.getId()+formateur.getNom();
+				sessionFormateur.setAttribute("mySession", mySession);
 				sessionFormateur.setAttribute("formateur", formateur);
 			} catch (ObjectNotFoundException e) {
 				mv.addObject("messageError", "Login ou mot de passe incorrect");

@@ -1,6 +1,9 @@
 package be.school.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
@@ -34,6 +37,15 @@ public class Employe {
 	
 	@NotEmpty(message="insérer le login")
 	private String login;
+	
+	@Column(nullable = true)
+    @Enumerated(EnumType.STRING)
+	private Role roleEmploye;
+	
+	public enum Role{
+		SIMPLE,
+		ADMIN
+	}
 
 	public String getNom() {
 		return nom;
@@ -65,6 +77,14 @@ public class Employe {
 
 	public void setLogin(String login) {
 		this.login = login;
+	}
+
+	public Role getRoleEmploye() {
+		return roleEmploye;
+	}
+
+	public void setRoleEmploye(Role roleEmploye) {
+		this.roleEmploye = roleEmploye;
 	}
 
 	public Long getId() {
