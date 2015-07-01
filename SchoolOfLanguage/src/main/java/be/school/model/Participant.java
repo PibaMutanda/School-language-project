@@ -30,6 +30,7 @@ public class Participant {
 	private Long id;
 
 	/* Matricule est géré par l'application */
+	@Column(unique=true)
 	private String matricule;
 
 	@NotNull(message = "entrez votre mail")

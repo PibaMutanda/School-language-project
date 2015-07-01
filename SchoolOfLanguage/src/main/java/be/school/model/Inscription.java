@@ -1,44 +1,40 @@
 package be.school.model;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 
-import be.school.security.Seance;
 
 @Entity
+@NamedQueries({ @NamedQuery(name = "Inscription.findByDate", query = "select inscr from Inscription inscr where inscr.dateInscription=:dateInscr") })
 public class Inscription {
 
 	@Id
 	@GeneratedValue
 	private Long id;
-	
+
 	@ManyToOne
 	@JoinColumn
 	private Participant participant;
+
 	
+	private String communication;
+	
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(iso = ISO.DATE)
 	private Date dateInscription;
-	
-	@ElementCollection(targetClass=Seance.class)
-	@LazyCollection(LazyCollectionOption.FALSE)
-	@JoinTable(name="Inscription_seance")
-	@Enumerated(EnumType.ORDINAL)
-	private List<Seance> seances = new ArrayList<Seance>();
-	
-	
+
 	public Participant getParticipant() {
 		return participant;
 	}
@@ -55,18 +51,16 @@ public class Inscription {
 		this.dateInscription = dateInscription;
 	}
 
+	public String getCommunication() {
+		return communication;
+	}
+
+	public void setCommunication(String communication) {
+		this.communication = communication;
+	}
+
 	public Long getId() {
 		return id;
 	}
 
-	public List<Seance> getSeances() {
-		return seances;
-	}
-
-	public void setSeances(List<Seance> seances) {
-		this.seances = seances;
-	}
-
-
-	
 }

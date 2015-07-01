@@ -26,7 +26,7 @@ public class StatutProfessionelRepository {
 	}
 	
 
-	public List<StatutProfessionnel> getList(){
+	public List<StatutProfessionnel> findAll(){
 		return em.createQuery("select sp from StatutProfessionnel sp").getResultList();
 	}
 	

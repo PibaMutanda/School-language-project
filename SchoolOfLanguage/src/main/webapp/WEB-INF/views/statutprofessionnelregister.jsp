@@ -17,10 +17,17 @@
      </c:forEach>
      <form:form modelAttribute="statutProfessionnel" action="statutprofessionnelsubmit">
      <table>
+           <tr><td>
+              <form:label path="statut">Statut Professionnel</form:label>
+           </td></tr>
            <tr>
                <td><form:input path="statut" placeholder="Statut Professionnel"/></td>
                <td><form:errors path="statut" cssStyle="color: #ff0000;"></form:errors></td>
            </tr>
+           <tr><td>
+              <form:label path="prix">Prix</form:label>
+           </td></tr>
+           <tr><td><form:input path="prix" placeholder="Prix"/></td>
            <tr>
               <td><input type="submit" value="Enregistrer"  class="btn btn-primary"></td>
            </tr>       

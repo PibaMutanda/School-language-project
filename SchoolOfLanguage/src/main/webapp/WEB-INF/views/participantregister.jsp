@@ -29,6 +29,12 @@
               <tr><td><form:hidden path="password"/></td></tr><tr><td>Sexe</td></tr>
               <tr><td><form:radiobutton path="sexe" value="HOMME" />&nbsp;&nbsp;M&nbsp;&nbsp;<form:radiobutton path="sexe" value="FEMME"/>&nbsp;&nbsp;F&nbsp;&nbsp;
                  <form:errors path="sexe" cssStyle="color: red;"/></td></tr>
+             <tr><td> <form:select path="statutProfessionnel">
+              <form:option value="0"></form:option>
+              <c:forEach items="${listStatutProf }" var="statutProf">
+              <form:option value="${statutProf.id }">${statutProf.statut }</form:option>
+              </c:forEach>
+              </form:select></td></tr>   
               <tr><td><form:hidden path="matricule"/>   
         <tr><td><input type="submit" value="Enregistrer" class="btn btn-primary"></td></tr>          
      </table>

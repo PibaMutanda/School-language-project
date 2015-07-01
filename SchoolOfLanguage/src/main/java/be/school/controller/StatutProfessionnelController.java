@@ -42,7 +42,11 @@ public class StatutProfessionnelController {
 			@Valid @ModelAttribute StatutProfessionnel statutProfessionnel,
 			Errors errors) {
 		ModelAndView mv = new ModelAndView();
-
+        if(statutProfessionnel.getPrix()==null){
+        	mv.addObject("messageError", "Saisir le prix");
+        	mv.setViewName("statutprofessionnelregister");
+        	return mv;
+        }
 		// Vérification au niveau validation du controller
 		if (errors.hasErrors()) {
 			mv.addObject("statutProfessionnel", statutProfessionnel);
