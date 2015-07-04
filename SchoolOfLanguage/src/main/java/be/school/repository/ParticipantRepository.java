@@ -48,11 +48,13 @@ public class ParticipantRepository {
 				.setParameter("formation", formation).getResultList();
 	}
 
-	public Long getTotalParticipant(Long detailLocalForm){
-		return (Long) em.createQuery("select count(p) from Participant p join p.detailLocalFormations pdlf where pdlf.id=:id")
-				.setParameter("id", detailLocalForm)
-				.getSingleResult();
+	public Long getTotalParticipant(Long detailLocalForm) {
+		return (Long) em
+				.createQuery(
+						"select count(p) from Participant p join p.detailLocalFormations pdlf where pdlf.id=:id")
+				.setParameter("id", detailLocalForm).getSingleResult();
 	}
+
 	public Participant findByEmail(String email) {
 		Participant participant = null;
 		List participantList = em
@@ -72,5 +74,13 @@ public class ParticipantRepository {
 		if (!participantList.isEmpty())
 			participant = (Participant) participantList.get(0);
 		return participant;
+	}
+
+	public List<Participant> getParticipantListByDetailLocalFormation(
+			Long idDetailLocalForm) {
+		return em
+				.createQuery(
+						"select d.participant from Participant p join p.detailLocalFormations d  where d.id=:id")
+				.setParameter("id", idDetailLocalForm).getResultList();
 	}
 }

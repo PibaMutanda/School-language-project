@@ -16,7 +16,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
@@ -51,13 +50,7 @@ public class Participant {
 	private String numero;
 	@NotEmpty(message = "Indiquez la rue")
 	private String rue;
-	@NotEmpty(message = "Saisir le login")
-	private String login;
-
-	private String password;
-
-	@Transient
-	private String passwordConfir;
+	
 
 	@Enumerated(EnumType.STRING)
 	@NotNull(message = "Indiquez le sexe")
@@ -107,21 +100,7 @@ public class Participant {
 		this.ville = ville;
 	}
 
-	public String getLogin() {
-		return login;
-	}
-
-	public void setLogin(String login) {
-		this.login = login;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
+	
 
 	public String getCodeP() {
 		return codeP;
@@ -137,14 +116,6 @@ public class Participant {
 
 	public void setNumero(String numero) {
 		this.numero = numero;
-	}
-
-	public String getPasswordConfir() {
-		return passwordConfir;
-	}
-
-	public void setPasswordConfir(String passwordConfir) {
-		this.passwordConfir = passwordConfir;
 	}
 
 	public Sexe getSexe() {

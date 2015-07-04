@@ -67,9 +67,7 @@ public class ParticipantController {
 		if (errors.hasErrors()) {
 			mv.addObject("participant", participant);
 		} else {
-			participant.setPassword(SecurityUtils.md5Encode(participant
-					.getEmail()));
-			System.out.println("mot de passe " + participant.getPassword());
+			
 			char[] matrCode = new char[2];
 			try {
 				/*

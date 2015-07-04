@@ -9,35 +9,27 @@
 	href="<%=request.getContextPath()%>/resources/css/bootstrap.min.css">
 <link href="<%=request.getContextPath()%>/resources/css/style.css"
 	rel="stylesheet" type="text/css">
-<title>Planning Formateur</title>
+<title>Liste Participant</title>
 </head>
 <body>
-	<%
-		int idx = 0;
-		Long[] totalPart = (Long[]) request.getAttribute("totalPart");
-	%>
-	<table class="table table-striped">
+	<table class="table table-hover">
 		<tr>
-			<th>Formation</th>
-			<th>Local</th>
-			<th>Niveau</th>
-			<th>S&eacute;ance</th>
-			<th>Jour</th>
-			<th>Nombre Participant</th>
+			<th>SEXE</th>
+			<th>NOM</th>
+			<th>PRENOM</th>
+			<th>MATRICULE</th>
+			<th>ADRESSE-MAIL</th>
 		</tr>
-		<c:forEach items="${planningProf }" var="unPlanning">
+		<c:forEach items="${listdeparticipant }" var="participant">
 			<tr>
-				<td><a href="listparticipant?id=${unPlanning.id }" title="Voir la liste des participants">${unPlanning.formation.titre }</a></td>
-				<td>${unPlanning.local.numLocal }</td>
-				<td>${unPlanning.niveau }</td>
-				<td>${unPlanning.seance }</td>
-				<td>${unPlanning.jour }</td>
-				<td><%=totalPart[idx++]%></td>
-			</tr>
+				<td>${participant.sexe }</td>
+				<td>${participant.nom }</td>
+				<td>${participant.prenom }</td>
+				<td>${participant.matricule }</td>
+				<td>${participant.email }</td>
+			</tr>	
 		</c:forEach>
 	</table>
-
-
 </body>
 <script src="<%=request.getContextPath()%>/resources/js/jquery.js"></script>
 <script

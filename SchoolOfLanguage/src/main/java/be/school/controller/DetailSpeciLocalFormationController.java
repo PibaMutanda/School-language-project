@@ -162,6 +162,11 @@ public class DetailSpeciLocalFormationController {
 		return mv;
 	}
 
+	@RequestMapping(value="/listparticipant",method = RequestMethod.GET)
+	public ModelAndView showListParticipants(@RequestParam(value="id")Long id){
+		return new ModelAndView("listparticipant", "listdeparticipant", participantRep.getParticipantListByDetailLocalFormation(id));
+	}
+	
 	@ModelAttribute
 	public Formation findFormation(
 			@RequestParam(value = "formation", required = false) String titre) {

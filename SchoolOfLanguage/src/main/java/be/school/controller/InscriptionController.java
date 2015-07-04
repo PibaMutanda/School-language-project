@@ -75,13 +75,12 @@ public class InscriptionController {
 		Participant participant = participantRepository.findById(id);
 		String[] formations = request.getParameterValues("titre");
 		double sum = 0.0;
-		if (formations!=null) {
+		if (formations != null) {
 			for (String string : formations) {
 				if (participant != null)
 					sum += participant.getStatutProfessionnel().getPrix();
 			}
-		}
-		else
+		} else
 			mv.addObject("messageError", "Cochez au moins un cours");
 		if (participant != null && formations != null) {
 			String communicationforPaid = participant.getMatricule()
@@ -104,23 +103,22 @@ public class InscriptionController {
 		}
 		return mv;
 	}
-	
-	
-	@RequestMapping(value="/listinscription",method = RequestMethod.GET)
-	public String showListInscription(){
+
+	@RequestMapping(value = "/listinscription", method = RequestMethod.GET)
+	public String showListInscription() {
 		return "listinscription";
 	}
-	
-	
-	@RequestMapping(value="/listinscriptionsubmit", method = RequestMethod.POST)
-	public ModelAndView showListInscription(HttpServletRequest request){
+
+	@RequestMapping(value = "/listinscriptionsubmit", method = RequestMethod.POST)
+	public ModelAndView showListInscription(HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("listinscription");
 		String dateInscr = request.getParameter("dateInscription");
 		Date dateInscription = DateUtil.parseyyyyMMdd(dateInscr);
-		if(dateInscription.equals(""))
+		if (dateInscription.equals(""))
 			mv.addObject("messageError", "Choisir une date !");
 		else
-		mv.addObject("listinscription", inscriptionRepository.findByDate(dateInscription));
+			mv.addObject("listinscription",
+					inscriptionRepository.findByDate(dateInscription));
 		return mv;
 	}
 }
