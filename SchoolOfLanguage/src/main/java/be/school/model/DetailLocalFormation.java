@@ -47,7 +47,7 @@ public class DetailLocalFormation {
 //	private Set<RentreeScolaire> rentreeScolaires = new HashSet<RentreeScolaire>();
 
 	
-	@JoinTable(name="Local_Seance")
+//	@JoinTable(name="Local_Seance")
 	@Enumerated(EnumType.ORDINAL)
 	private Seance seance;
 

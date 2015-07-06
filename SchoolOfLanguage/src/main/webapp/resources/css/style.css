@@ -18,3 +18,10 @@ p#messageErreur{
 	font-family: sans-serif;
 	font-size: 14px;
 }
+
+.botton-footer {
+	border-top: 1px solid #b2b2b2;
+	margin-top: 10px;
+	padding-top: 10px;
+	color: #b2b2b2;
+}
