@@ -36,9 +36,12 @@
 			<div class="col-sm-2">
 				<h5>Follow Us</h5>
 				<ul class="unstyled">
-					<li><a href="https://twitter.com/"><img alt="Twitter" src="resources/images/twitter.jpg"></a></li>
-					<li><a href="https://www.facebook.com/"><img alt="Facebook" src="resources/images/facebook.jpg"></a></li>
-					<li><a href="https://fr.linkedin.com/"><img alt="LinkedIn" src="resources/images/linkedin.jpg"></a></li>
+					<li><a href="https://twitter.com/"><img alt="Twitter"
+							src="resources/images/twitter.jpg"></a></li>
+					<li><a href="https://www.facebook.com/"><img
+							alt="Facebook" src="resources/images/facebook.jpg"></a></li>
+					<li><a href="https://fr.linkedin.com/"><img alt="LinkedIn"
+							src="resources/images/linkedin.jpg"></a></li>
 				</ul>
 			</div>
 			<div class="col-sm-2">

@@ -42,7 +42,10 @@ public class DateUtil {
 	    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         return formatter.parse(str);
 	}
-
+    public static Date parseddMMyyyWithParseException(String str)throws ParseException {
+    	SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+    	return formatter.parse(str);
+    }
 	public static Date parseyyyyMMdd(String str) {
 	    try {
             return parseyyyyMMddWithParseException(str);
@@ -50,7 +53,15 @@ public class DateUtil {
             throw new RuntimeException(e);
         }
 	}
-
+	
+   public static Date parseddMMyyyy(String str){
+	   try {
+		return parseddMMyyyWithParseException(str);
+	} catch (ParseException e) {
+		
+		throw new RuntimeException();
+	}
+   }
 	public static String formatDuration(Date startDate, Date endDate) {
 		return formatDuration(startDate, endDate, false);
 	}

@@ -14,37 +14,36 @@ import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
-@NamedQueries({@NamedQuery(name="Employe.findAll", query="select e from Employe e"),
-	           @NamedQuery(name="Employe.findById",query="select e from Employe e where e.id=:id"),
-	           @NamedQuery(name="Employe.findByLoginAndPwd",query="select e from Employe e where e.login=:login and e.password=:password")
-})
+@NamedQueries({
+		@NamedQuery(name = "Employe.findAll", query = "select e from Employe e"),
+		@NamedQuery(name = "Employe.findById", query = "select e from Employe e where e.id=:id"),
+		@NamedQuery(name = "Employe.findByLoginAndPwd", query = "select e from Employe e where e.login=:login and e.password=:password") })
 public class Employe {
 
 	@Id
 	@GeneratedValue
 	private Long id;
-	
-	@NotEmpty(message="Insérer le nom de l'employé")
-	@Size(max=40, message="la taille maximun requise est de 40 caractères")
+
+	@NotEmpty(message = "Insérer le nom de l'employé")
+	@Size(max = 40, message = "la taille maximun requise est de 40 caractères")
 	private String nom;
-	
-	@NotEmpty(message="Insérer le mot de passe")
-	@Size(max=50, message="La taille maximun est de 50 caractères pour le mot de passe")
+
+	@NotEmpty(message = "Insérer le mot de passe")
+	@Size(max = 50, message = "La taille maximun est de 50 caractères pour le mot de passe")
 	private String password;
-	
+
 	@Transient
 	private String confirmPassword;
-	
-	@NotEmpty(message="insérer le login")
+
+	@NotEmpty(message = "insérer le login")
 	private String login;
-	
+
 	@Column(nullable = true)
-    @Enumerated(EnumType.STRING)
+	@Enumerated(EnumType.STRING)
 	private Role roleEmploye;
-	
-	public enum Role{
-		SIMPLE,
-		ADMIN
+
+	public enum Role {
+		SIMPLE, ADMIN
 	}
 
 	public String getNom() {
@@ -90,6 +89,5 @@ public class Employe {
 	public Long getId() {
 		return id;
 	}
-	
-	
+
 }

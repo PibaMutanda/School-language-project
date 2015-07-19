@@ -36,9 +36,11 @@ public class DetailLocalFormationService {
 				.findByLocalFormation(local, formation);
 		if (detailLocalFormation == null)
 			return false;
-		if (detailLocalFormation.getJour() == jour
-				&& detailLocalFormation.getSeance() == seance)
-			return false;
+		
+		//revoir le code ici
+	//	 if (detailLocalFormation.getJour() == jour
+		//		&& detailLocalFormation.getSeance() == seance)
+		//	return false;
 		else
 			return true;
 	}

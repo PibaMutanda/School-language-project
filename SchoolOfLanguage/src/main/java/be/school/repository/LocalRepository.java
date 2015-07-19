@@ -8,7 +8,6 @@ import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import be.school.model.DetailLocalFormation;
 import be.school.model.Local;
 
 @Repository
@@ -34,6 +33,7 @@ public class LocalRepository {
 		return em.createQuery("select l from Local l").getResultList();
 	}
 	
+	@SuppressWarnings("rawtypes")
 	public Local findByNum(String numLocal){
 		Local local=null;
 		List localList=em
@@ -45,6 +45,7 @@ public class LocalRepository {
 		return local;
 	}
 	
+	@SuppressWarnings("rawtypes")
 	public Local findByDetalLocalFormation(Long id){
 		Local local=null;
 		List locaux= em.createQuery("select lc from Local lc join lc.detailLocalFormations dlf where dlf.id= :id")

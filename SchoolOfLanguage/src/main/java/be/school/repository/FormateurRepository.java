@@ -29,10 +29,12 @@ public class FormateurRepository {
 		return em.find(Formateur.class, id);
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<Formateur> findAll(){
 		return em.createQuery("Select f from Formateur f").getResultList();
 	}
 	
+	@SuppressWarnings("rawtypes")
 	public Formateur findByLoginAndPwd(String login, String password){
 		Formateur formateur=null;
 		List formateurs = em.createQuery("select f from Formateur f where f.login=:login and f.password=:password")
