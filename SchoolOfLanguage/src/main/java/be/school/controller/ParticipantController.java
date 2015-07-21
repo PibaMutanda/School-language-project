@@ -19,18 +19,18 @@ import org.springframework.web.servlet.ModelAndView;
 
 import be.school.model.Participant;
 import be.school.model.StatutProfessionnel;
-import be.school.repository.ParticipantRepository;
-import be.school.repository.StatutProfessionelRepository;
+import be.school.repository.jpa.ParticipantRepositoryJpa;
+import be.school.repository.jpa.StatutProfessionelRepositoryJpa;
 import be.school.util.SecurityUtils;
 
 @Controller
 public class ParticipantController {
 
 	@Autowired
-	private ParticipantRepository participantRepository;
+	private ParticipantRepositoryJpa participantRepositoryJpa;
 
 	@Autowired
-	private StatutProfessionelRepository statutprofRepo;
+	private StatutProfessionelRepositoryJpa statutprofRepo;
 	
 	@InitBinder
 	protected void RegisterFormation(HttpServletRequest request,
@@ -54,7 +54,7 @@ public class ParticipantController {
 		if (id == null) {
 			participant = new Participant();
 		} else
-			participant = participantRepository.findById(id);
+			participant = participantRepositoryJpa.findById(id);
 		mv.addObject("participant",participant);
 		mv.addObject("listStatutProf", listStatutProf);
 		return mv;
@@ -86,8 +86,8 @@ public class ParticipantController {
 			do {
 				buffMatr = String.valueOf(matrCode)
 						+ SecurityUtils.generateRandomNumber(5);
-			} while (participantRepository.findByMaticule(buffMatr) != null);
-			Participant participant2 = participantRepository
+			} while (participantRepositoryJpa.findByMaticule(buffMatr) != null);
+			Participant participant2 = participantRepositoryJpa
 					.findByEmail(participant.getEmail());
 
 			if (participant2 != null) {
@@ -100,7 +100,7 @@ public class ParticipantController {
 			}
 			participant.setMatricule(buffMatr);
 			System.out.println("Matricule " + participant.getMatricule());
-			participantRepository.save(participant);
+			participantRepositoryJpa.save(participant);
 			mv.addObject("messageSuccess", "Le particiant est enregistré avec succès!");
 			mv.setViewName("redirect:home");
 		}

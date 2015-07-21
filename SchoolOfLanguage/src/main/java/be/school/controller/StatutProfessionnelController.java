@@ -12,15 +12,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import be.school.model.StatutProfessionnel;
-import be.school.repository.StatutProfessionelRepository;
+import be.school.repository.jpa.StatutProfessionelRepositoryJpa;
 
 @Controller
 public class StatutProfessionnelController {
 
 	@Autowired
-	private StatutProfessionelRepository staRepos;
+	private StatutProfessionelRepositoryJpa staRepos;
 
-	public void setStaRepos(StatutProfessionelRepository staRepos) {
+	public void setStaRepos(StatutProfessionelRepositoryJpa staRepos) {
 		this.staRepos = staRepos;
 	}
 

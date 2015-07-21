@@ -15,7 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import be.school.exception.ObjectAlreadyExistsException;
 import be.school.model.Formation;
-import be.school.repository.FormationRepository;
+import be.school.repository.jpa.FormationRepositoryJpa;
 import be.school.service.FormationService;
 import be.school.util.SecurityUtils;
 
@@ -25,7 +25,7 @@ public class FormationController {
 	@Autowired
 	FormationService formationService;
 	@Autowired
-	FormationRepository formationRepository;
+	FormationRepositoryJpa formationRepositoryJpa;
 
 	@RequestMapping(value = "/formationregister", method = RequestMethod.GET)
 	public ModelAndView formationRegister(
@@ -35,7 +35,7 @@ public class FormationController {
 		if (id == null)
 			formation = new Formation();
 		else
-			formation = formationRepository.findById(id);
+			formation = formationRepositoryJpa.findById(id);
 		mv.addObject("formation", formation);
 		return mv;
 	}
@@ -89,7 +89,7 @@ public class FormationController {
 	@RequestMapping(value="/formationlist",method = RequestMethod.GET)
 	public ModelAndView formationsDisplay(){
 		ModelAndView mv = new ModelAndView("formationlistdisplay");
-		List<Formation> listFormation= formationRepository.findAll();
+		List<Formation> listFormation= formationRepositoryJpa.findAll();
 		mv.addObject("listformations",listFormation);
 		return mv;
 	}

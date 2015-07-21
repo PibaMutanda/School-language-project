@@ -15,8 +15,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import be.school.model.Inscription;
 import be.school.model.Participant;
-import be.school.repository.InscriptionRepository;
-import be.school.repository.ParticipantRepository;
+import be.school.repository.jpa.InscriptionRepositoryJpa;
+import be.school.repository.jpa.ParticipantRepositoryJpa;
 import be.school.util.DateUtil;
 import be.school.util.SecurityUtils;
 
@@ -24,10 +24,10 @@ import be.school.util.SecurityUtils;
 public class InscriptionController {
 
 	@Autowired
-	private ParticipantRepository participantRepository;
+	private ParticipantRepositoryJpa participantRepositoryJpa;
 
 	@Autowired
-	private InscriptionRepository inscriptionRepository;
+	private InscriptionRepositoryJpa inscriptionRepositoryJpa;
 
 	@RequestMapping(value = "/inscriptionregister", method = RequestMethod.GET)
 	public String insriptionregister() {
@@ -40,7 +40,7 @@ public class InscriptionController {
 			@RequestParam(value = "email") String email) {
 		ModelAndView mv = new ModelAndView("inscriptionregister");
 
-		Participant participant = participantRepository
+		Participant participant = participantRepositoryJpa
 				.findByMaticule(matricule);
 		if (participant == null) {
 			mv.addObject("messageError", "Matricule incorrect");
@@ -63,7 +63,7 @@ public class InscriptionController {
 	public ModelAndView showFormValiderInscription(
 			@RequestParam(value = "id") Long id) {
 		ModelAndView mv = new ModelAndView("validerinscription");
-		Participant participant = participantRepository.findById(id);
+		Participant participant = participantRepositoryJpa.findById(id);
 		mv.addObject("participant", participant);
 		return mv;
 	}
@@ -72,7 +72,7 @@ public class InscriptionController {
 	public ModelAndView validerInscriptionSubmit(
 			@RequestParam(value = "id") Long id, HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("home");
-		Participant participant = participantRepository.findById(id);
+		Participant participant = participantRepositoryJpa.findById(id);
 		String[] formations = request.getParameterValues("titre");
 		double sum = 0.0;
 		if (formations != null) {
@@ -95,7 +95,7 @@ public class InscriptionController {
 							+ sum
 							+ "  sur le compte BE00 0000 0000 0000 en indiquant comme communication  "
 							+ communicationforPaid);
-			inscriptionRepository.save(inscription);
+			inscriptionRepositoryJpa.save(inscription);
 		} else {
 			mv.addObject(
 					"messageError",
@@ -118,7 +118,7 @@ public class InscriptionController {
 			mv.addObject("messageError", "Choisir une date !");
 		else
 			mv.addObject("listinscription",
-					inscriptionRepository.findByDate(dateInscription));
+					inscriptionRepositoryJpa.findByDate(dateInscription));
 		return mv;
 	}
 }

@@ -6,8 +6,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotEmpty;
@@ -16,6 +16,7 @@ import be.school.security.Jour;
 import be.school.security.Seance;
 
 @Entity
+@NamedQuery(name="DetailLocalFormation.findAll",query="select nf from DetailLocalFormation nf")
 public class DetailLocalFormation {
 
 	@Id

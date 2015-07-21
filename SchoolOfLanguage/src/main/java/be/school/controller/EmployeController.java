@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import be.school.model.Employe;
-import be.school.repository.EmployeRepository;
+import be.school.repository.jpa.EmployeRepositoryJpa;
 import be.school.util.SecurityUtils;
 
 
@@ -20,7 +20,7 @@ import be.school.util.SecurityUtils;
 public class EmployeController {
 	
 	@Autowired
-	private EmployeRepository employeRepo;
+	private EmployeRepositoryJpa employeRepo;
 	
 	@RequestMapping(value="/employeregister",method = RequestMethod.GET )
 	public ModelAndView employeRegister(@RequestParam(value="id",required=false)Long id){

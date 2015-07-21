@@ -20,18 +20,18 @@ import org.springframework.web.servlet.ModelAndView;
 
 import be.school.model.Formateur;
 import be.school.model.Formation;
-import be.school.repository.FormateurRepository;
-import be.school.repository.FormationRepository;
+import be.school.repository.jpa.FormateurRepositoryJpa;
+import be.school.repository.jpa.FormationRepositoryJpa;
 import be.school.util.SecurityUtils;
 
 @Controller
 public class FormateurController {
 
 	@Autowired
-	private FormateurRepository formateurRepository;
+	private FormateurRepositoryJpa formateurRepositoryJpa;
 
 	@Autowired
-	private FormationRepository formationRepository;
+	private FormationRepositoryJpa formationRepositoryJpa;
 
 	@InitBinder
 	protected void RegisterFormation(HttpServletRequest request,
@@ -39,7 +39,7 @@ public class FormateurController {
 		binder.registerCustomEditor(Formation.class,
 				new PropertyEditorSupport() {
 					public void setAsText(String text) {
-						Formation formation = formationRepository.findById(Long
+						Formation formation = formationRepositoryJpa.findById(Long
 								.parseLong(text));
 						setValue(formation);
 					}
@@ -54,7 +54,7 @@ public class FormateurController {
 		if (id == null)
 			formateur = new Formateur();
 		else
-			formateur = formateurRepository.findById(id);
+			formateur = formateurRepositoryJpa.findById(id);
 		mv.addObject("formateur", formateur);
 		return mv;
 	}
@@ -71,8 +71,8 @@ public class FormateurController {
 					.getPassword()));
 			mv.addObject("messageSuccess",
 					" Formateur est  enregistré avec succès");
-			mv.addObject("listFormateur", formateurRepository.findAll());
-			formateurRepository.save(formateur);
+			mv.addObject("listFormateur", formateurRepositoryJpa.findAll());
+			formateurRepositoryJpa.save(formateur);
 			mv.setViewName("redirect:formateurlist");
 
 		}
@@ -82,7 +82,7 @@ public class FormateurController {
 	@RequestMapping(value = "/formateurlist", method = RequestMethod.GET)
 	public ModelAndView formateurDisplay() {
 		ModelAndView mv = new ModelAndView("formateurlist");
-		List<Formateur> formateurlist = formateurRepository.findAll();
+		List<Formateur> formateurlist = formateurRepositoryJpa.findAll();
 		mv.addObject("formateurlist", formateurlist);
 		return mv;
 	}
@@ -104,7 +104,7 @@ public class FormateurController {
 		/*
 		 * Cette méthode traite de la modification du password
 		 */
-		Formateur formateur = formateurRepository.findById(id);
+		Formateur formateur = formateurRepositoryJpa.findById(id);
 		String motdepasse = SecurityUtils.md5Encode(oldpassword);
 		if (!motdepasse.equals(formateur.getPassword())) {
 			mv.addObject("messageError", "L'ancien password n'est pas correct");
@@ -116,7 +116,7 @@ public class FormateurController {
 			return mv;
 		}
 		formateur.setPassword(SecurityUtils.md5Encode(noupassword));
-		formateurRepository.save(formateur);
+		formateurRepositoryJpa.save(formateur);
 		mv.addObject("messageSuccess",
 				"La modification   est  enregistrée avec succès");
 		mv.setViewName("redirect:home");

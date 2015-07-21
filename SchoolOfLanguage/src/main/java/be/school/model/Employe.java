@@ -16,7 +16,6 @@ import org.hibernate.validator.constraints.NotEmpty;
 @Entity
 @NamedQueries({
 		@NamedQuery(name = "Employe.findAll", query = "select e from Employe e"),
-		@NamedQuery(name = "Employe.findById", query = "select e from Employe e where e.id=:id"),
 		@NamedQuery(name = "Employe.findByLoginAndPwd", query = "select e from Employe e where e.login=:login and e.password=:password") })
 public class Employe {
 

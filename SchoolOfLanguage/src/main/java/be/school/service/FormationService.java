@@ -7,14 +7,14 @@ import org.springframework.transaction.annotation.Transactional;
 
 import be.school.exception.ObjectAlreadyExistsException;
 import be.school.model.Formation;
-import be.school.repository.FormationRepository;
+import be.school.repository.jpa.FormationRepositoryJpa;
 
 @Service
 @Scope("singleton")
 public class FormationService {
 	
 	@Autowired
-	private FormationRepository foRepository;
+	private FormationRepositoryJpa foRepository;
 
 	public Formation registerFormation(String code, String titre)throws ObjectAlreadyExistsException{
 		if(foRepository.findByCodeFormation(code)!=null)

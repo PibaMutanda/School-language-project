@@ -1,4 +1,4 @@
-package be.school.repository;
+package be.school.repository.jpa;
 
 import java.util.Date;
 import java.util.List;

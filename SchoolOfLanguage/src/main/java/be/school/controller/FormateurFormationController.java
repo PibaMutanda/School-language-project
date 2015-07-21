@@ -13,25 +13,25 @@ import org.springframework.web.servlet.ModelAndView;
 import be.school.model.DetailLocalFormation;
 import be.school.model.Formateur;
 import be.school.model.Formation;
-import be.school.repository.DetailLocalFormationReposytory;
-import be.school.repository.FormateurRepository;
-import be.school.repository.FormationRepository;
+import be.school.repository.jpa.DetailLocalFormationReposytoryJpa;
+import be.school.repository.jpa.FormateurRepositoryJpa;
+import be.school.repository.jpa.FormationRepositoryJpa;
 
 @Controller
 public class FormateurFormationController {
 
 	@Autowired
-	FormateurRepository formateurRepository;
+	FormateurRepositoryJpa formateurRepositoryJpa;
 	@Autowired
-	DetailLocalFormationReposytory detailLocalFormationReposytory;
+	DetailLocalFormationReposytoryJpa detailLocalFormationReposytoryJpa;
 	@Autowired
-	FormationRepository formationRep;
+	FormationRepositoryJpa formationRep;
 
 	@RequestMapping(value = "/formateurformationdisplay", method = RequestMethod.POST)
 	public ModelAndView formateurFormationDisplay(@RequestParam Long id) {
 		ModelAndView mv = new ModelAndView("formformateurformation");
-		Formateur formateur = formateurRepository.findById(id);
-		List detailListForm = detailLocalFormationReposytory.findAllDistinct();
+		Formateur formateur = formateurRepositoryJpa.findById(id);
+		List detailListForm = detailLocalFormationReposytoryJpa.findAllDistinct();
 		mv.addObject("formateur", formateur);
 		mv.addObject("detailListForm", detailListForm);
 		return mv;
@@ -40,7 +40,7 @@ public class FormateurFormationController {
 	@RequestMapping(value = "/formateurdetaildisplay", method = RequestMethod.GET)
 	public ModelAndView displayDetailFormateur(@RequestParam Long id) {
 		ModelAndView mv = new ModelAndView("formateurdetaildisplay");
-		Formateur formateur = formateurRepository.findById(id);
+		Formateur formateur = formateurRepositoryJpa.findById(id);
 		mv.addObject("formateur", formateur);
 		return mv;
 	}
@@ -54,16 +54,16 @@ public class FormateurFormationController {
 			return mv;
 		} else {
 
-			Formateur formateur2 = formateurRepository.findById(formation);
+			Formateur formateur2 = formateurRepositoryJpa.findById(formation);
 			Formation formation2 = formationRep.findById(formation);
-			DetailLocalFormation detailFormation = detailLocalFormationReposytory
+			DetailLocalFormation detailFormation = detailLocalFormationReposytoryJpa
 					.findById(formation);
 			detailFormation.setFormation(formation2);
 			detailFormation.setFormateur(formateur2);
-			detailLocalFormationReposytory.save(detailFormation);
-			// formateur2.addDetailLocalFormation(detailLocalFormationReposytory.findById(formation));
+			detailLocalFormationReposytoryJpa.save(detailFormation);
+			// formateur2.addDetailLocalFormation(detailLocalFormationReposytoryJpa.findById(formation));
 
-			// formateurRepository.save(formateur2);
+			// formateurRepositoryJpa.save(formateur2);
 			mv.setViewName("redirect:formateurlist");
 			return mv;
 		}
@@ -77,7 +77,7 @@ public class FormateurFormationController {
 		if (id == null)
 			formateur = new Formateur();
 		else
-			formateur = formateurRepository.findById(id);
+			formateur = formateurRepositoryJpa.findById(id);
 		return formateur;
 	}
 }

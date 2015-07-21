@@ -17,7 +17,8 @@ import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 
 @Entity
-@NamedQueries({ @NamedQuery(name = "Inscription.findByDate", query = "select inscr from Inscription inscr where inscr.dateInscription=:dateInscr") })
+@NamedQueries({ @NamedQuery(name = "Inscription.findByDate", query = "select inscr from Inscription inscr where inscr.dateInscription=:dateInscr"),
+	            @NamedQuery(name="Inscription.findAll",query="select i from Inscription i")})
 public class Inscription {
 
 	@Id

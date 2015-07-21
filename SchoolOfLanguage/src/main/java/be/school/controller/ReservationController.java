@@ -26,22 +26,22 @@ import org.springframework.web.servlet.ModelAndView;
 
 import be.school.model.Formation;
 import be.school.model.Reservation;
-import be.school.repository.FormationRepository;
-import be.school.repository.ReservationRepository;
+import be.school.repository.jpa.FormationRepositoryJpa;
+import be.school.repository.jpa.ReservationRepositoryJpa;
 
 @Controller
 public class ReservationController {
 
 	@Autowired
-	private ReservationRepository reservationRepository;
+	private ReservationRepositoryJpa reservationRepositoryJpa;
 	@Autowired
-	private FormationRepository formationRepository;
+	private FormationRepositoryJpa formationRepositoryJpa;
 	
 	@InitBinder
 	protected void RegisterFormation(HttpServletRequest request, ServletRequestDataBinder binder){
 		binder.registerCustomEditor(Formation.class, new PropertyEditorSupport(){
 			public void setAsText(String text){
-				Formation formation = formationRepository.findById(Long.parseLong(text));
+				Formation formation = formationRepositoryJpa.findById(Long.parseLong(text));
 				setValue(formation);
 			}
 		});
@@ -60,9 +60,9 @@ public class ReservationController {
 		if (id == null) {
 			reservation = new Reservation();
 		} else {
-			reservation = reservationRepository.findById(id);
+			reservation = reservationRepositoryJpa.findById(id);
 		}
-		List formations = formationRepository.findAll();
+		List formations = formationRepositoryJpa.findAll();
 		mv.addObject("formations",formations);
 		mv.addObject("reservation", reservation);
 		return mv;
@@ -96,7 +96,7 @@ public class ReservationController {
 			mv.addObject("messageError", "Choisissez maximum deux formations");
 			return mv;
 		}
-		if(reservationRepository.findByEmail(reservation.getEmail())!=null){
+		if(reservationRepositoryJpa.findByEmail(reservation.getEmail())!=null){
 			mv.addObject("messageError","L'adresse é-mail existe déjà");
 			return mv;
 		}
@@ -105,7 +105,7 @@ public class ReservationController {
 
 		} else {
 			
-			reservationRepository.save(reservation);
+			reservationRepositoryJpa.save(reservation);
 			mv.addObject("messageSuccess",reservation.getNom()+" rendez-vous pour l'inscrisption est pris pour "+DateFormat.getDateInstance().format(reservation.getDateRdv()));
 			mv.setViewName("redirect:home");
 			

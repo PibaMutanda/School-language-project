@@ -15,11 +15,11 @@ import be.school.model.DetailLocalFormation;
 import be.school.model.Formateur;
 import be.school.model.Formation;
 import be.school.model.Local;
-import be.school.repository.DetailLocalFormationReposytory;
-import be.school.repository.FormateurRepository;
-import be.school.repository.FormationRepository;
-import be.school.repository.LocalRepository;
-import be.school.repository.ParticipantRepository;
+import be.school.repository.jpa.DetailLocalFormationReposytoryJpa;
+import be.school.repository.jpa.FormateurRepositoryJpa;
+import be.school.repository.jpa.FormationRepositoryJpa;
+import be.school.repository.jpa.LocalRepositoryJpa;
+import be.school.repository.jpa.ParticipantRepositoryJpa;
 import be.school.security.Jour;
 import be.school.security.Seance;
 import be.school.service.DetailLocalFormationService;
@@ -28,22 +28,22 @@ import be.school.service.DetailLocalFormationService;
 public class DetailSpeciLocalFormationController {
 
 	@Autowired
-	private DetailLocalFormationReposytory dReposytory;
+	private DetailLocalFormationReposytoryJpa dReposytory;
 
 	@Autowired
-	private FormationRepository formationRep;
+	private FormationRepositoryJpa formationRep;
 
 	@Autowired
-	private LocalRepository localRep;
+	private LocalRepositoryJpa localRep;
 
 	@Autowired
 	private DetailLocalFormationService detailLocServ;
 
 	@Autowired
-	private FormateurRepository formateurRep;
+	private FormateurRepositoryJpa formateurRep;
 
 	@Autowired
-	private ParticipantRepository participantRep;
+	private ParticipantRepositoryJpa participantRep;
 
 	@RequestMapping(value = "/detailFormation", method = RequestMethod.GET)
 	public @ResponseBody ModelAndView detailSpeciLocalFormation(
@@ -88,7 +88,7 @@ public class DetailSpeciLocalFormationController {
 
 	@RequestMapping(value = "/deleteDetailLocalForm", method = RequestMethod.GET)
 	public String deleteDetailLocalFormation(@RequestParam(value = "id") Long id) {
-		dReposytory.remove(id);
+		dReposytory.delete(id);
 		return "detaillocalformdisplay";
 	}
 

@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import be.school.model.RentreeScolaire;
-import be.school.repository.RentreeScolaireRepository;
+import be.school.repository.jpa.RentreeScolaireRepository;
 
 @Controller
 public class RentreeScolaireController {

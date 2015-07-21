@@ -8,7 +8,7 @@ import be.school.model.DetailLocalFormation;
 import be.school.model.Formation;
 import be.school.model.Local;
 import be.school.model.Participant;
-import be.school.repository.DetailLocalFormationReposytory;
+import be.school.repository.jpa.DetailLocalFormationReposytoryJpa;
 import be.school.security.Jour;
 import be.school.security.Seance;
 
@@ -17,11 +17,11 @@ import be.school.security.Seance;
 public class DetailLocalFormationService {
 
 	@Autowired
-	private DetailLocalFormationReposytory detailLocalFormationReposytory;
+	private DetailLocalFormationReposytoryJpa detailLocalFormationReposytoryJpa;
 
 	public boolean isTeached(Local local, Formation formation, String niveau) {
 		DetailLocalFormation detailLocalFormation = null;
-		detailLocalFormation = detailLocalFormationReposytory
+		detailLocalFormation = detailLocalFormationReposytoryJpa
 				.findByLocalFormationNiveau(local, formation, niveau);
 		if (detailLocalFormation != null)
 			return true;
@@ -32,7 +32,7 @@ public class DetailLocalFormationService {
 	public boolean isCheckForUpdate(Local local, Formation formation,
 			Jour jour, Seance seance) {
 		DetailLocalFormation detailLocalFormation = null;
-		detailLocalFormation = detailLocalFormationReposytory
+		detailLocalFormation = detailLocalFormationReposytoryJpa
 				.findByLocalFormation(local, formation);
 		if (detailLocalFormation == null)
 			return false;

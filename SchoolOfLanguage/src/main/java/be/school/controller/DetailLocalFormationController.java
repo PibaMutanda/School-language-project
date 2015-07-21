@@ -21,10 +21,10 @@ import be.school.model.DetailLocalFormation;
 import be.school.model.Formation;
 import be.school.model.Local;
 import be.school.model.RentreeScolaire;
-import be.school.repository.DetailLocalFormationReposytory;
-import be.school.repository.FormationRepository;
-import be.school.repository.LocalRepository;
-import be.school.repository.RentreeScolaireRepository;
+import be.school.repository.jpa.DetailLocalFormationReposytoryJpa;
+import be.school.repository.jpa.FormationRepositoryJpa;
+import be.school.repository.jpa.LocalRepositoryJpa;
+import be.school.repository.jpa.RentreeScolaireRepository;
 import be.school.security.Jour;
 import be.school.security.Seance;
 
@@ -32,13 +32,13 @@ import be.school.security.Seance;
 public class DetailLocalFormationController {
 
 	@Autowired
-	private DetailLocalFormationReposytory detailFormationReposytory;
+	private DetailLocalFormationReposytoryJpa detailFormationReposytory;
 
 	@Autowired
-	private FormationRepository formationRepos;
+	private FormationRepositoryJpa formationRepos;
 
 	@Autowired
-	private LocalRepository localRepos;
+	private LocalRepositoryJpa localRepos;
 
 	@Autowired
 	private RentreeScolaireRepository rentreeScoRep;

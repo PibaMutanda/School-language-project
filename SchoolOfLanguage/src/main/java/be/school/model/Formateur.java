@@ -9,6 +9,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 import javax.validation.constraints.Size;
@@ -18,6 +19,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 import be.school.model.DetailLocalFormation;
 
 @Entity
+@NamedQuery(name="Formateur.findAll",query="Select f from Formateur f")
 public class Formateur {
 
 	

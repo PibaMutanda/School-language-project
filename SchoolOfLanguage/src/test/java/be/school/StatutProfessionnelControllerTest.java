@@ -8,7 +8,7 @@ import org.junit.Test;
 
 import be.school.controller.StatutProfessionnelController;
 import be.school.model.StatutProfessionnel;
-import be.school.repository.StatutProfessionelRepository;
+import be.school.repository.jpa.StatutProfessionelRepositoryJpa;
 
 public class StatutProfessionnelControllerTest {
 
@@ -22,7 +22,7 @@ public class StatutProfessionnelControllerTest {
 
 	@Test
 	public void testFindStatutById() {
-		StatutProfessionelRepository stRepository = createMock(StatutProfessionelRepository.class);
+		StatutProfessionelRepositoryJpa stRepository = createMock(StatutProfessionelRepositoryJpa.class);
 		StatutProfessionnel stpr = new StatutProfessionnel();
 		stpr.setStatut("ANGLAIS");
 		expect(stRepository.findStatutByName("ANGLAIS")).andReturn(stpr);

@@ -12,13 +12,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import be.school.model.Local;
-import be.school.repository.LocalRepository;
+import be.school.repository.jpa.LocalRepositoryJpa;
 
 @Controller
 public class LocalController {
 
 	@Autowired
-	LocalRepository localRepository;
+	LocalRepositoryJpa localRepositoryJpa;
 
 	@RequestMapping(value = "/localregister", method = RequestMethod.GET)
 	public ModelAndView localRegister(
@@ -28,7 +28,7 @@ public class LocalController {
 		if (id == null) {
 			local = new Local();
 		} else {
-			local = localRepository.findById(id);
+			local = localRepositoryJpa.findById(id);
 		}
 		mv.addObject("local", local);
 		return mv;
@@ -42,13 +42,13 @@ public class LocalController {
 		if (errors.hasErrors()) {
 			mv.addObject("local", local);
 		} else {
-			Local local2 = localRepository.findByNum(local.getNumLocal());
+			Local local2 = localRepositoryJpa.findByNum(local.getNumLocal());
 			if(local2!=null){
 				mv.addObject("messageError","Local existe déjà");
 				return mv;
 			}
 			local.getNumLocal().trim();
-			localRepository.save(local);
+			localRepositoryJpa.save(local);
 			mv.addObject("messageSuccess","Local est enregistré avec succès");
 			mv.setViewName("redirect:home");
 		}

@@ -15,18 +15,18 @@ import org.springframework.web.servlet.ModelAndView;
 
 import be.school.model.Employe;
 import be.school.model.PublicationInscription;
-import be.school.repository.EmployeRepository;
-import be.school.repository.PublicationInscriptionRepository;
+import be.school.repository.jpa.EmployeRepositoryJpa;
+import be.school.repository.jpa.PublicationInscriptionRepositoryJpa;
 import be.school.util.DateUtil;
 
 @Controller
 public class PublicationInscriptionController {
 
 	@Autowired
-	private EmployeRepository employeResository;
+	private EmployeRepositoryJpa employeResository;
 
 	@Autowired
-	private PublicationInscriptionRepository publicationInscrRepo;
+	private PublicationInscriptionRepositoryJpa publicationInscrRepo;
 
 	@RequestMapping(value = "/publishinscription", method = RequestMethod.GET)
 	public String publishInscription() {
@@ -86,7 +86,6 @@ public class PublicationInscriptionController {
 			employeResository.save(employe);
 			publicationInscrRepo.save(publicationInscription);
 			mv.setViewName("showpublishinscription");
-
 			return mv;
 		}
 
