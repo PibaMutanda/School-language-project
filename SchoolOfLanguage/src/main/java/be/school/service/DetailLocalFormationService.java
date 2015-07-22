@@ -8,7 +8,7 @@ import be.school.model.DetailLocalFormation;
 import be.school.model.Formation;
 import be.school.model.Local;
 import be.school.model.Participant;
-import be.school.repository.jpa.DetailLocalFormationReposytoryJpa;
+import be.school.repository.DetailLocalFormationRepository;
 import be.school.security.Jour;
 import be.school.security.Seance;
 
@@ -17,7 +17,7 @@ import be.school.security.Seance;
 public class DetailLocalFormationService {
 
 	@Autowired
-	private DetailLocalFormationReposytoryJpa detailLocalFormationReposytoryJpa;
+	private DetailLocalFormationRepository detailLocalFormationReposytoryJpa;
 
 	public boolean isTeached(Local local, Formation formation, String niveau) {
 		DetailLocalFormation detailLocalFormation = null;

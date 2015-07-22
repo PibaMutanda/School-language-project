@@ -1,8 +1,6 @@
 package be.school.controller;
 
 import java.util.Date;
-import java.util.Enumeration;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -15,8 +13,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import be.school.model.Inscription;
 import be.school.model.Participant;
-import be.school.repository.jpa.InscriptionRepositoryJpa;
-import be.school.repository.jpa.ParticipantRepositoryJpa;
+import be.school.repository.InscriptionRepository;
+import be.school.repository.ParticipantRepository;
 import be.school.util.DateUtil;
 import be.school.util.SecurityUtils;
 
@@ -24,10 +22,10 @@ import be.school.util.SecurityUtils;
 public class InscriptionController {
 
 	@Autowired
-	private ParticipantRepositoryJpa participantRepositoryJpa;
+	private ParticipantRepository participantRepositoryJpa;
 
 	@Autowired
-	private InscriptionRepositoryJpa inscriptionRepositoryJpa;
+	private InscriptionRepository inscriptionRepositoryJpa;
 
 	@RequestMapping(value = "/inscriptionregister", method = RequestMethod.GET)
 	public String insriptionregister() {

@@ -26,16 +26,16 @@ import org.springframework.web.servlet.ModelAndView;
 
 import be.school.model.Formation;
 import be.school.model.Reservation;
-import be.school.repository.jpa.FormationRepositoryJpa;
-import be.school.repository.jpa.ReservationRepositoryJpa;
+import be.school.repository.FormationRepository;
+import be.school.repository.ReservationRepository;
 
 @Controller
 public class ReservationController {
 
 	@Autowired
-	private ReservationRepositoryJpa reservationRepositoryJpa;
+	private ReservationRepository reservationRepositoryJpa;
 	@Autowired
-	private FormationRepositoryJpa formationRepositoryJpa;
+	private FormationRepository formationRepositoryJpa;
 	
 	@InitBinder
 	protected void RegisterFormation(HttpServletRequest request, ServletRequestDataBinder binder){

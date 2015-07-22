@@ -12,13 +12,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import be.school.model.Local;
-import be.school.repository.jpa.LocalRepositoryJpa;
+import be.school.repository.LocalRepository;
 
 @Controller
 public class LocalController {
 
 	@Autowired
-	LocalRepositoryJpa localRepositoryJpa;
+	LocalRepository localRepositoryJpa;
 
 	@RequestMapping(value = "/localregister", method = RequestMethod.GET)
 	public ModelAndView localRegister(

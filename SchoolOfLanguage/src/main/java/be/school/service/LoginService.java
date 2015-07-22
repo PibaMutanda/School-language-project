@@ -7,8 +7,8 @@ import org.springframework.stereotype.Service;
 import be.school.exception.ObjectNotFoundException;
 import be.school.model.Employe;
 import be.school.model.Formateur;
-import be.school.repository.jpa.EmployeRepositoryJpa;
-import be.school.repository.jpa.FormateurRepositoryJpa;
+import be.school.repository.EmployeRepository;
+import be.school.repository.FormateurRepository;
 import be.school.util.SecurityUtils;
 
 @Service
@@ -16,10 +16,10 @@ import be.school.util.SecurityUtils;
 public class LoginService {
 	
 	@Autowired
-	private FormateurRepositoryJpa formateurRepositoryJpa;
+	private FormateurRepository formateurRepositoryJpa;
 	
 	@Autowired
-	private EmployeRepositoryJpa employeRepositoryJpa;
+	private EmployeRepository employeRepositoryJpa;
 	
 	public Formateur loginFormateur(String login, String password)throws ObjectNotFoundException{
 		Formateur formateur=formateurRepositoryJpa.findByLoginAndPwd(login, SecurityUtils.md5Encode(password));

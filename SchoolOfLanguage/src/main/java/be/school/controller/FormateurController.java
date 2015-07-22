@@ -8,7 +8,6 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -20,18 +19,18 @@ import org.springframework.web.servlet.ModelAndView;
 
 import be.school.model.Formateur;
 import be.school.model.Formation;
-import be.school.repository.jpa.FormateurRepositoryJpa;
-import be.school.repository.jpa.FormationRepositoryJpa;
+import be.school.repository.FormateurRepository;
+import be.school.repository.FormationRepository;
 import be.school.util.SecurityUtils;
 
 @Controller
 public class FormateurController {
 
 	@Autowired
-	private FormateurRepositoryJpa formateurRepositoryJpa;
+	private FormateurRepository formateurRepositoryJpa;
 
 	@Autowired
-	private FormationRepositoryJpa formationRepositoryJpa;
+	private FormationRepository formationRepositoryJpa;
 
 	@InitBinder
 	protected void RegisterFormation(HttpServletRequest request,

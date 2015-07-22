@@ -15,18 +15,18 @@ import org.springframework.web.servlet.ModelAndView;
 
 import be.school.model.Employe;
 import be.school.model.PublicationInscription;
-import be.school.repository.jpa.EmployeRepositoryJpa;
-import be.school.repository.jpa.PublicationInscriptionRepositoryJpa;
+import be.school.repository.EmployeRepository;
+import be.school.repository.PublicationInscriptionRepository;
 import be.school.util.DateUtil;
 
 @Controller
 public class PublicationInscriptionController {
 
 	@Autowired
-	private EmployeRepositoryJpa employeResository;
+	private EmployeRepository employeResository;
 
 	@Autowired
-	private PublicationInscriptionRepositoryJpa publicationInscrRepo;
+	private PublicationInscriptionRepository publicationInscrRepo;
 
 	@RequestMapping(value = "/publishinscription", method = RequestMethod.GET)
 	public String publishInscription() {

@@ -15,7 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import be.school.exception.ObjectAlreadyExistsException;
 import be.school.model.Formation;
-import be.school.repository.jpa.FormationRepositoryJpa;
+import be.school.repository.FormationRepository;
 import be.school.service.FormationService;
 import be.school.util.SecurityUtils;
 
@@ -25,7 +25,7 @@ public class FormationController {
 	@Autowired
 	FormationService formationService;
 	@Autowired
-	FormationRepositoryJpa formationRepositoryJpa;
+	FormationRepository formationRepositoryJpa;
 
 	@RequestMapping(value = "/formationregister", method = RequestMethod.GET)
 	public ModelAndView formationRegister(

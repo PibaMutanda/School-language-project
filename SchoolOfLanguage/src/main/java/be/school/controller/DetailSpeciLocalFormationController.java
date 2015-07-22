@@ -15,11 +15,11 @@ import be.school.model.DetailLocalFormation;
 import be.school.model.Formateur;
 import be.school.model.Formation;
 import be.school.model.Local;
-import be.school.repository.jpa.DetailLocalFormationReposytoryJpa;
-import be.school.repository.jpa.FormateurRepositoryJpa;
-import be.school.repository.jpa.FormationRepositoryJpa;
-import be.school.repository.jpa.LocalRepositoryJpa;
-import be.school.repository.jpa.ParticipantRepositoryJpa;
+import be.school.repository.DetailLocalFormationRepository;
+import be.school.repository.FormateurRepository;
+import be.school.repository.FormationRepository;
+import be.school.repository.LocalRepository;
+import be.school.repository.ParticipantRepository;
 import be.school.security.Jour;
 import be.school.security.Seance;
 import be.school.service.DetailLocalFormationService;
@@ -28,22 +28,22 @@ import be.school.service.DetailLocalFormationService;
 public class DetailSpeciLocalFormationController {
 
 	@Autowired
-	private DetailLocalFormationReposytoryJpa dReposytory;
+	private DetailLocalFormationRepository dReposytory;
 
 	@Autowired
-	private FormationRepositoryJpa formationRep;
+	private FormationRepository formationRep;
 
 	@Autowired
-	private LocalRepositoryJpa localRep;
+	private LocalRepository localRep;
 
 	@Autowired
 	private DetailLocalFormationService detailLocServ;
 
 	@Autowired
-	private FormateurRepositoryJpa formateurRep;
+	private FormateurRepository formateurRep;
 
 	@Autowired
-	private ParticipantRepositoryJpa participantRep;
+	private ParticipantRepository participantRep;
 
 	@RequestMapping(value = "/detailFormation", method = RequestMethod.GET)
 	public @ResponseBody ModelAndView detailSpeciLocalFormation(

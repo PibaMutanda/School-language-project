@@ -14,26 +14,26 @@ import be.school.model.DetailLocalFormation;
 import be.school.model.Formation;
 import be.school.model.Local;
 import be.school.model.Participant;
-import be.school.repository.jpa.DetailLocalFormationReposytoryJpa;
-import be.school.repository.jpa.FormationRepositoryJpa;
-import be.school.repository.jpa.LocalRepositoryJpa;
-import be.school.repository.jpa.ParticipantRepositoryJpa;
+import be.school.repository.DetailLocalFormationRepository;
+import be.school.repository.FormationRepository;
+import be.school.repository.LocalRepository;
+import be.school.repository.ParticipantRepository;
 import be.school.service.DetailLocalFormationService;
 
 @Controller
 public class ParticipantFormationController {
 
 	@Autowired
-	private ParticipantRepositoryJpa participantRep;
+	private ParticipantRepository participantRep;
 
 	@Autowired
-	private LocalRepositoryJpa localRep;
+	private LocalRepository localRep;
 
 	@Autowired
-	private FormationRepositoryJpa formationRep;
+	private FormationRepository formationRep;
 
 	@Autowired
-	private DetailLocalFormationReposytoryJpa detailLocalFormaRep;
+	private DetailLocalFormationRepository detailLocalFormaRep;
 
 	@Autowired
 	private DetailLocalFormationService detailLocSerrv;

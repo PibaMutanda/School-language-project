@@ -19,18 +19,18 @@ import org.springframework.web.servlet.ModelAndView;
 
 import be.school.model.Participant;
 import be.school.model.StatutProfessionnel;
-import be.school.repository.jpa.ParticipantRepositoryJpa;
-import be.school.repository.jpa.StatutProfessionelRepositoryJpa;
+import be.school.repository.ParticipantRepository;
+import be.school.repository.StatutProfessionnelRepository;
 import be.school.util.SecurityUtils;
 
 @Controller
 public class ParticipantController {
 
 	@Autowired
-	private ParticipantRepositoryJpa participantRepositoryJpa;
+	private ParticipantRepository participantRepositoryJpa;
 
 	@Autowired
-	private StatutProfessionelRepositoryJpa statutprofRepo;
+	private StatutProfessionnelRepository statutprofRepo;
 	
 	@InitBinder
 	protected void RegisterFormation(HttpServletRequest request,

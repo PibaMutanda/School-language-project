@@ -13,19 +13,19 @@ import org.springframework.web.servlet.ModelAndView;
 import be.school.model.DetailLocalFormation;
 import be.school.model.Formateur;
 import be.school.model.Formation;
-import be.school.repository.jpa.DetailLocalFormationReposytoryJpa;
-import be.school.repository.jpa.FormateurRepositoryJpa;
-import be.school.repository.jpa.FormationRepositoryJpa;
+import be.school.repository.DetailLocalFormationRepository;
+import be.school.repository.FormateurRepository;
+import be.school.repository.FormationRepository;
 
 @Controller
 public class FormateurFormationController {
 
 	@Autowired
-	FormateurRepositoryJpa formateurRepositoryJpa;
+	FormateurRepository formateurRepositoryJpa;
 	@Autowired
-	DetailLocalFormationReposytoryJpa detailLocalFormationReposytoryJpa;
+	DetailLocalFormationRepository detailLocalFormationReposytoryJpa;
 	@Autowired
-	FormationRepositoryJpa formationRep;
+	FormationRepository formationRep;
 
 	@RequestMapping(value = "/formateurformationdisplay", method = RequestMethod.POST)
 	public ModelAndView formateurFormationDisplay(@RequestParam Long id) {
