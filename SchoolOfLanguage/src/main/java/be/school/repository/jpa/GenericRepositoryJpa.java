@@ -6,6 +6,9 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
 import be.school.exception.RepositoryException;
 import be.school.repository.GenericRepository;
 
@@ -15,6 +18,8 @@ import be.school.repository.GenericRepository;
  *         Interface générique pour partager les mêmes méthodes entre chaque
  *         session bean
  */
+@Repository
+@Transactional
 public abstract class GenericRepositoryJpa<T> implements GenericRepository<T> {
 
 	// Initialisation implicite de l'EntityManager (voir définition dans

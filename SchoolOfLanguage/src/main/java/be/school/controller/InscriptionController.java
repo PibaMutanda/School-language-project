@@ -84,8 +84,9 @@ public class InscriptionController {
 			String communicationforPaid = participant.getMatricule()
 					+ SecurityUtils.generateRandomNumber(4);
 			Inscription inscription = new Inscription();
-			inscription.setCommunication(communicationforPaid);
+			inscription.setCommunicationPaie(communicationforPaid);
 			inscription.setParticipant(participant);
+			inscription.setMontantPaie(sum);
 			inscription.setDateInscription(new Date());
 			mv.addObject(
 					"messageSuccess",
@@ -119,4 +120,5 @@ public class InscriptionController {
 					inscriptionRepositoryJpa.findByDate(dateInscription));
 		return mv;
 	}
+	
 }

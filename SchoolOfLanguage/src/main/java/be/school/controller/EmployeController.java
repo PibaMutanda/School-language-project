@@ -36,7 +36,7 @@ public class EmployeController {
 	}
 
 	@RequestMapping(value="/employesubmit", method=RequestMethod.POST)
-	public ModelAndView employeSubmit( @Valid @ModelAttribute Employe employe,@RequestParam(value="role")Employe.Role role, Errors errors){
+	public ModelAndView employeSubmit(@Valid @ModelAttribute Employe employe,@RequestParam(value="role")Employe.Role role, Errors errors){
 		ModelAndView mv = new ModelAndView("employeregister");
 		if(errors.hasErrors()){
 			mv.addObject("employe", employe);

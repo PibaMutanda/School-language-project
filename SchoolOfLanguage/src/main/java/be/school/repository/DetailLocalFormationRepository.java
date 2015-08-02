@@ -2,11 +2,11 @@ package be.school.repository;
 
 import java.util.List;
 
+import be.school.enumClass.Seance;
 import be.school.model.DetailLocalFormation;
 import be.school.model.Formateur;
 import be.school.model.Formation;
 import be.school.model.Local;
-import be.school.security.Seance;
 
 public interface DetailLocalFormationRepository extends GenericRepository<DetailLocalFormation> {
 	

@@ -30,7 +30,9 @@ public class Inscription {
 	private Participant participant;
 
 	
-	private String communication;
+	private String communicationPaie;
+	
+	private double montantPaie;
 	
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(iso = ISO.DATE)
@@ -52,12 +54,23 @@ public class Inscription {
 		this.dateInscription = dateInscription;
 	}
 
-	public String getCommunication() {
-		return communication;
+	
+
+	public String getCommunicationPaie() {
+		return communicationPaie;
 	}
 
-	public void setCommunication(String communication) {
-		this.communication = communication;
+	public void setCommunicationPaie(String communicationPaie) {
+		this.communicationPaie = communicationPaie;
+	}
+
+	
+	public double getMontantPaie() {
+		return montantPaie;
+	}
+
+	public void setMontantPaie(double montantPaie) {
+		this.montantPaie = montantPaie;
 	}
 
 	public Long getId() {

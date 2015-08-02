@@ -5,12 +5,12 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import be.school.enumClass.Seance;
 import be.school.model.DetailLocalFormation;
 import be.school.model.Formateur;
 import be.school.model.Formation;
 import be.school.model.Local;
 import be.school.repository.DetailLocalFormationRepository;
-import be.school.security.Seance;
 
 @Repository
 @Transactional

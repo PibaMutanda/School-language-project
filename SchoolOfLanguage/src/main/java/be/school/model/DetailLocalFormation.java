@@ -12,8 +12,8 @@ import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
-import be.school.security.Jour;
-import be.school.security.Seance;
+import be.school.enumClass.Jour;
+import be.school.enumClass.Seance;
 
 @Entity
 @NamedQuery(name="DetailLocalFormation.findAll",query="select nf from DetailLocalFormation nf")

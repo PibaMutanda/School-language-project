@@ -25,7 +25,8 @@
 				<th>PRENOM</th>
 				<th>MATRICULE</th>
 				<th>E-MAIL</th>
-				<th>COMMUNICATION DE PAYEMENT</th>
+				<th>MONTANT PAYEMENT</th>
+				<th>COMMUNICATION  PAYEMENT</th>
 			</tr>
 			<c:forEach items="${listinscription}" var="inscription">
 				<tr>
@@ -34,7 +35,8 @@
 					<td>${inscription.participant.prenom }</td>
 					<td>${inscription.participant.matricule }</td>
 					<td>${inscription.participant.email }</td>
-					<td>${inscription.communication }</td>
+					<td>${inscription.montantPaie }
+					<td>${inscription.communicationPaie }</td>
 				</tr>
 			</c:forEach>
 		</table>

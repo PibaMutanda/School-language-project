@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
@@ -21,7 +22,9 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 @Entity
-@NamedQuery(name="Reservation.findAll", query="select r from Reservation r")
+@NamedQueries({
+		@NamedQuery(name = "Reservation.findListByDate", query = "select r from Reservation r where r.dateReserv like :dateReserv"),
+		@NamedQuery(name = "Reservation.findAll", query = "select r from Reservation r") })
 public class Reservation {
 
 	@Id
@@ -37,7 +40,7 @@ public class Reservation {
 	private String prenom;
 
 	@NotNull(message = "entrer votre mail")
-	@Column(unique=true)
+	@Column(unique = true)
 	@Pattern(message = "ville mail pas valide", regexp = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$")
 	private String email;
 
@@ -46,11 +49,11 @@ public class Reservation {
 	@DateTimeFormat(iso = ISO.DATE)
 	@Temporal(TemporalType.DATE)
 	private Date dateReserv;
-	
+
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(iso = ISO.DATE)
 	private Date dateRdv;
-	
+
 	@OneToMany
 	@JoinColumn
 	private List<Formation> formations = new ArrayList<Formation>();
@@ -71,7 +74,6 @@ public class Reservation {
 		this.prenom = prenom;
 	}
 
-	
 	public String getEmail() {
 		return email;
 	}
@@ -80,8 +82,6 @@ public class Reservation {
 		this.email = email;
 	}
 
-	
-
 	public List<Formation> getFormations() {
 		return formations;
 	}
@@ -89,9 +89,11 @@ public class Reservation {
 	public void setFormations(List<Formation> formations) {
 		this.formations = formations;
 	}
-    public void add(Formation formation){
-    	this.formations.add(formation);
-    }
+
+	public void add(Formation formation) {
+		this.formations.add(formation);
+	}
+
 	public String getGsm() {
 		return gsm;
 	}
@@ -107,21 +109,17 @@ public class Reservation {
 	public void setDateReserv(Date dateReserv) {
 		this.dateReserv = dateReserv;
 	}
-    
-	
-    
+
 	public Date getDateRdv() {
 		return dateRdv;
 	}
 
 	public void setDateRdv(Date dateRdv) {
-		
+
 		this.dateRdv = dateRdv;
 	}
 
 	public Long getId() {
 		return id;
 	}
-
-	
 }

@@ -1,9 +1,9 @@
-package be.school.security;
+package be.school.enumClass;
 
-public enum Jour {
-	LUNDI(1), MARDI(2), MERCREDI(3), JEUDI(4), VENDREDI(5);
+public enum Seance {
+	MATIN(1), SOIR(2);
 
-	private Jour(int index) {
+	private Seance(int index) {
 		this.index = index;
 	}
 
@@ -16,4 +16,5 @@ public enum Jour {
 	}
 
 	private int index;
+
 }

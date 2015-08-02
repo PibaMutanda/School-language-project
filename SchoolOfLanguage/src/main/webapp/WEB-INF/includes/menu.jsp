@@ -23,12 +23,13 @@
 					participant au cours</a></li>
 			<li><a href="detailformationregister">Associer
 					local-formation</a></li>
-			<li><a href="formateurlist">Liste Formateur</a></li>
-			<li><a href="detaillocalformdisplay">Liste Locaux &
+			<li><a href="formateurlist">La liste des Formateurs</a></li>
+			<li><a href="detaillocalformdisplay">La liste Locaux &
 					Formations</a></li>
 			<li><a href="publishinscription">Publier les dates
 					d&rsquo;inscriptions </a></li>
-			<li><a href="anneescolaireregister">Date Rentrée</a></li>
+			<li><a href="listinscription">La liste des r&eacute;inscriptions</a></li>	
+			<li><a href="listreservation">Agenda pour inscription</a></li>		
 		</c:when>
 
 		<c:when test="${employe.roleEmploye eq 'ADMIN' }">
@@ -46,12 +47,13 @@
 					participant au cours</a></li>
 			<li><a href="detailformationregister">Associer
 					local-formation</a></li>
-			<li><a href="formateurlist">Liste Formateur</a></li>
+			<li><a href="formateurlist">La liste des Formateurs</a></li>
 			<li><a href="detaillocalformdisplay">Liste Locaux &
 					Formations</a></li>
 			<li><a href="publishinscription">Publier les dates
 					d&rsquo;inscriptions </a></li>
-			<li><a href="anneescolaireregister">Date Rentrée</a></li>
+			<li><a href="listinscription">La liste des r&eacute;inscriptions</a></li>	
+			<li><a href="listreservation">Agenda pour inscription</a></li>		
 		</c:when>
 	</c:choose>
 </ul>

@@ -15,7 +15,7 @@
 	<c:forEach items="${messageError }" var="message">
 		<p id="messageErreur">${message }</p>
 	</c:forEach>
-	<form:form modelAttribute="employe" action="employesubmit">
+	<form:form action="employesubmit"  modelAttribute="employe">
 		<table  class="table table-condensed">
 		   
 		    <tr><td><form:label path="nom">Nom</form:label> </td></tr>

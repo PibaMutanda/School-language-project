@@ -4,13 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
+import be.school.enumClass.Jour;
+import be.school.enumClass.Seance;
 import be.school.model.DetailLocalFormation;
 import be.school.model.Formation;
 import be.school.model.Local;
 import be.school.model.Participant;
 import be.school.repository.DetailLocalFormationRepository;
-import be.school.security.Jour;
-import be.school.security.Seance;
 
 @Service
 @Scope("singleton")

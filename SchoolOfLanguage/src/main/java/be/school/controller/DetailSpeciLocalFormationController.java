@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import be.school.enumClass.Jour;
+import be.school.enumClass.Seance;
 import be.school.model.DetailLocalFormation;
 import be.school.model.Formateur;
 import be.school.model.Formation;
@@ -20,8 +22,6 @@ import be.school.repository.FormateurRepository;
 import be.school.repository.FormationRepository;
 import be.school.repository.LocalRepository;
 import be.school.repository.ParticipantRepository;
-import be.school.security.Jour;
-import be.school.security.Seance;
 import be.school.service.DetailLocalFormationService;
 
 @Controller

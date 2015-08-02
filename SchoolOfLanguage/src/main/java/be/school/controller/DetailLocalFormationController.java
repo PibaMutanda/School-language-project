@@ -17,16 +17,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import be.school.enumClass.Jour;
+import be.school.enumClass.Seance;
 import be.school.model.DetailLocalFormation;
 import be.school.model.Formation;
 import be.school.model.Local;
-import be.school.model.RentreeScolaire;
 import be.school.repository.DetailLocalFormationRepository;
 import be.school.repository.FormationRepository;
 import be.school.repository.LocalRepository;
-import be.school.repository.jpa.RentreeScolaireRepository;
-import be.school.security.Jour;
-import be.school.security.Seance;
 
 @Controller
 public class DetailLocalFormationController {
@@ -39,9 +37,6 @@ public class DetailLocalFormationController {
 
 	@Autowired
 	private LocalRepository localRepos;
-
-	@Autowired
-	private RentreeScolaireRepository rentreeScoRep;
 
 	@InitBinder
 	protected void RegisterFormation(HttpServletRequest request,
@@ -67,18 +62,7 @@ public class DetailLocalFormationController {
 		});
 	}
 
-	@InitBinder
-	protected void RegisterSchoolYear(HttpServletRequest request,
-			ServletRequestDataBinder binder) {
-		binder.registerCustomEditor(RentreeScolaire.class,
-				new PropertyEditorSupport() {
-					public void setAsText(String text) {
-						RentreeScolaire retScolaire = rentreeScoRep
-								.findById(Long.parseLong(text));
-						setValue(retScolaire);
-					}
-				});
-	}
+	
 
 	@RequestMapping(value = "/detailformationregister", method = RequestMethod.GET)
 	public ModelAndView detailFormationRegister(
@@ -205,14 +189,5 @@ public class DetailLocalFormationController {
 		return local;
 	}
 
-	@ModelAttribute
-	public RentreeScolaire findSchoolYear(
-			@RequestParam(value = "rentreeScolaires", required = false) Long id) {
-		RentreeScolaire rentreeSc = null;
-		if (id == null)
-			rentreeSc = new RentreeScolaire();
-		else
-			rentreeSc = rentreeScoRep.findById(id);
-		return rentreeSc;
-	}
+	
 }

@@ -36,22 +36,27 @@ public class ReservationController {
 	private ReservationRepository reservationRepositoryJpa;
 	@Autowired
 	private FormationRepository formationRepositoryJpa;
-	
+
 	@InitBinder
-	protected void RegisterFormation(HttpServletRequest request, ServletRequestDataBinder binder){
-		binder.registerCustomEditor(Formation.class, new PropertyEditorSupport(){
-			public void setAsText(String text){
-				Formation formation = formationRepositoryJpa.findById(Long.parseLong(text));
-				setValue(formation);
-			}
-		});
+	protected void RegisterFormation(HttpServletRequest request,
+			ServletRequestDataBinder binder) {
+		binder.registerCustomEditor(Formation.class,
+				new PropertyEditorSupport() {
+					public void setAsText(String text) {
+						Formation formation = formationRepositoryJpa
+								.findById(Long.parseLong(text));
+						setValue(formation);
+					}
+				});
 	}
 
 	@InitBinder
-	protected void initBinder(WebDataBinder binder){
+	protected void initBinder(WebDataBinder binder) {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-		binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false));
+		binder.registerCustomEditor(Date.class, new CustomDateEditor(
+				dateFormat, false));
 	}
+
 	@RequestMapping(value = "/reservationregister", method = RequestMethod.GET)
 	public ModelAndView reservationRegister(
 			@RequestParam(value = "id", required = false) Long id) {
@@ -63,7 +68,7 @@ public class ReservationController {
 			reservation = reservationRepositoryJpa.findById(id);
 		}
 		List formations = formationRepositoryJpa.findAll();
-		mv.addObject("formations",formations);
+		mv.addObject("formations", formations);
 		mv.addObject("reservation", reservation);
 		return mv;
 	}
@@ -71,48 +76,62 @@ public class ReservationController {
 	@RequestMapping(value = "/reservationsubmit", method = RequestMethod.POST)
 	@Transactional
 	public ModelAndView reservationSubmit(
-			@Valid @ModelAttribute Reservation reservation,Errors errors,  HttpServletRequest request) {
+			@Valid @ModelAttribute Reservation reservation, Errors errors,
+			HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("reservationregister");
 		Calendar cal = Calendar.getInstance();
-		         cal.setTime(new Date());
-		         if(cal.getTime().equals(Calendar.FRIDAY))
-		        	 cal.add(Calendar.DAY_OF_WEEK, 3);
-		         else if(cal.getTime().equals(Calendar.SATURDAY))
-		        	 cal.add(Calendar.DAY_OF_WEEK, 2);
-		         else 
-		        	 cal.add(Calendar.DAY_OF_WEEK, 1);
-		reservation.setDateRdv(cal.getTime());         
-		         
+		cal.setTime(new Date());
+		if (cal.getTime().equals(Calendar.FRIDAY))
+			cal.add(Calendar.DAY_OF_WEEK, 3);
+		else if (cal.getTime().equals(Calendar.SATURDAY))
+			cal.add(Calendar.DAY_OF_WEEK, 2);
+		else
+			cal.add(Calendar.DAY_OF_WEEK, 1);
+		reservation.setDateRdv(cal.getTime());
+
 		reservation.setDateReserv(new Date());
-		if(request.getParameterValues("formations")==null){
-			mv.addObject("messageError","Aucune formation disponible");
+		if (request.getParameterValues("formations") == null) {
+			mv.addObject("messageError", "Aucune formation disponible");
 			return mv;
 		}
-		if(request.getParameterValues("formations").length>2){
-			mv.addObject("messageError", "Maximum deux formations sont autorisées");
+		if (request.getParameterValues("formations").length > 2) {
+			mv.addObject("messageError",
+					"Maximum deux formations sont autorisées");
 			return mv;
 		}
-		if(request.getParameterValues("formations").length==0 ){
+		if (request.getParameterValues("formations").length == 0) {
 			mv.addObject("messageError", "Choisissez maximum deux formations");
 			return mv;
 		}
-		if(reservationRepositoryJpa.findByEmail(reservation.getEmail())!=null){
-			mv.addObject("messageError","L'adresse é-mail existe déjà");
+		if (reservationRepositoryJpa.findByEmail(reservation.getEmail()) != null) {
+			mv.addObject("messageError", "L'adresse é-mail existe déjà");
 			return mv;
 		}
 		if (errors.hasErrors()) {
 			mv.addObject("reservation", reservation);
 
 		} else {
-			
+
 			reservationRepositoryJpa.save(reservation);
-			mv.addObject("messageSuccess",reservation.getNom()+" rendez-vous pour l'inscrisption est pris pour "+DateFormat.getDateInstance().format(reservation.getDateRdv()));
+			mv.addObject(
+					"messageSuccess",
+					reservation.getNom()
+							+ " rendez-vous pour l'inscrisption est pris pour "
+							+ DateFormat.getDateInstance().format(
+									reservation.getDateRdv()));
 			mv.setViewName("redirect:home");
-			
+
 		}
 		return mv;
 	}
-	
-	//https://www.google.be/#q=how+to+call+BatchUpdateException
-	//http://docs.spring.io/spring/docs/current/spring-framework-reference/html/validation.html
-}  
+
+	@RequestMapping(value = "/listreservation", method = RequestMethod.GET)
+	public ModelAndView showlistReservation() {
+		ModelAndView mv = new ModelAndView("listreservation");
+		mv.addObject("listReservation",
+				reservationRepositoryJpa.findListByDate(new Date()));
+		return mv;
+	}
+	// https://www.google.be/#q=how+to+call+BatchUpdateException
+	// http://docs.spring.io/spring/docs/current/spring-framework-reference/html/validation.html
+}
