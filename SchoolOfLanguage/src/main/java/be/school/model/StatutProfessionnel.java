@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
@@ -21,7 +22,7 @@ public class StatutProfessionnel {
 	@NotEmpty(message = "Le statut ne doit pas être vide")
 	@Column(name = "statut", unique = true)
 	private String statut;
-    @NotEmpty(message="Saisir le prix")
+    @NotNull(message="Saisir le prix")
 	private Double prix;
 
 	public Double getPrix() {
