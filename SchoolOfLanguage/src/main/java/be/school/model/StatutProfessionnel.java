@@ -21,7 +21,7 @@ public class StatutProfessionnel {
 	@NotEmpty(message = "Le statut ne doit pas être vide")
 	@Column(name = "statut", unique = true)
 	private String statut;
-
+    @NotEmpty(message="Saisir le prix")
 	private Double prix;
 
 	public Double getPrix() {

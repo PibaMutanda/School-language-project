@@ -16,11 +16,15 @@
       <p id="messageErreur">${message }</p>
      </c:forEach>
       <form:form modelAttribute="formateur" action="formateursubmit">
-      <table>
+      <table class="table">
+            <tr><td>Nom</td></td>
             <tr><td><form:input path="nom" placeholder="Nom"/></td><td><form:errors path="nom" cssStyle="color: red;"/></td></tr>
+            <tr><td>Pr&eacute;nom</td></tr>
             <tr><td><form:input path="prenom" placeholder="Prénom"/></td><td><form:errors path="prenom" cssStyle="color: red;" /></td></tr>
        <%--      <tr><td>Adresse</td><td><form:input path="adresse"/></td><td><form:errors path="adresse" cssStyle="color: red;"/></td></tr> --%>
+            <tr><td>Password</td></tr>
             <tr><td><form:password  path="password"  placeholder="Mot de passe"/></td><td><form:errors path="password" cssStyle="color: red;"/></td></tr>
+            <tr><td>Login</td></tr>
             <tr><td><form:input path="login"  placeholder="Login"/></td><td><form:errors path="login" cssStyle="color: red;"/></td></tr>
 <!--             <tr><td>Formation</tr> -->
 <%--             <tr><c:forEach items="${formations }" var="formation"><td>${formation.titre }</td><td><form:checkbox path="formations"/></td> --%>

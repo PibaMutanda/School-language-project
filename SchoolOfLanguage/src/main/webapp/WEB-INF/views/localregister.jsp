@@ -16,8 +16,10 @@
       <p id="messageErreur">${message }</p>
      </c:forEach>
      <form:form modelAttribute="local" action="localsubmit">
-     <table>
+     <table class="table">
+        <tr><td>Local</td></tr>
         <tr><td><form:input path="numLocal" placeholder="Numéro Local"/></td><td><form:errors path="numLocal" cssStyle="color: red;"/></td></tr>
+        <tr><td>Capacit&eacute;</td></tr>
         <tr><td><input type="number" name="capacite" placeholder="Capacité"></td><td><form:errors path="capacite" cssStyle="color: red;"/></td></tr>
         <tr><td><input type="submit" value="Enregistrer" class="btn btn-primary"></td></tr>
      </table>

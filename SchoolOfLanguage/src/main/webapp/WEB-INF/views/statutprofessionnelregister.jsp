@@ -16,18 +16,19 @@
       <p id="messageErreur">${message }</p>
      </c:forEach>
      <form:form modelAttribute="statutProfessionnel" action="statutprofessionnelsubmit">
-     <table>
+     <table class="table">
            <tr><td>
-              <form:label path="statut">Statut Professionnel</form:label>
+              Statut Professionnel
            </td></tr>
            <tr>
                <td><form:input path="statut" placeholder="Statut Professionnel"/></td>
                <td><form:errors path="statut" cssStyle="color: #ff0000;"></form:errors></td>
            </tr>
            <tr><td>
-              <form:label path="prix">Prix</form:label>
+              Prix
            </td></tr>
            <tr><td><form:input path="prix" placeholder="Prix"/></td>
+               <td><form:errors path="prix" cssStyle="color: #ff0000;"></form:errors></td>
            <tr>
               <td><input type="submit" value="Enregistrer"  class="btn btn-primary"></td>
            </tr>       

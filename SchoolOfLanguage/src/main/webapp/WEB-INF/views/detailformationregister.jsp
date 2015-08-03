@@ -45,12 +45,14 @@
 		<br>
      Matin&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="seance"
 			value="MATIN"> &nbsp;&nbsp;&nbsp;&nbsp;Soir&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input
-			type="radio" name="seance" value="SOIR" />
+			type="radio" name="seance" value="SOIR" /><br><br>
 		<table>
+		   <tr> <td>Niveau</td></tr> 
 			<tr>
 				<td><input type="number" name="niveau" placeholder="Niveau">&nbsp;&nbsp;<form:errors
 						path="niveau" cssStyle="color: red;" /></td>
 			</tr>
+			<tr><td>Quota</td></tr>
 			<tr>
 				<td><input type="number" name="quota" placeholder="Quota">&nbsp;&nbsp;<form:errors
 						path="quota" cssStyle="color: red;" /></td>
