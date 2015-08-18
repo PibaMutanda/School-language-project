@@ -94,7 +94,7 @@ public class ParticipantController {
 				mv.addObject("messageError", "Cette adresse email existe déjà");
 				return mv;
 			}
-			if(participant.getStatutProfessionnel().equals("0")){
+			if(participant.getStatutProfessionnel().equals("0")|| participant.getStatutProfessionnel()==null){
 				mv.addObject("messageError", "Renseignez le statut professionnel");
 				return mv;
 			}

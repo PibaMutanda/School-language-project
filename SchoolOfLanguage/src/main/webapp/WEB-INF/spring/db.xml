@@ -10,7 +10,7 @@
 		 http://www.springframework.org/schema/aop 
     http://www.springframework.org/schema/aop/spring-aop-3.0.xsd "
 	default-autowire="byName">
-    <aop:aspectj-autoproxy proxy-target-class="true"/>
+<!--     <aop:aspectj-autoproxy proxy-target-class="true"/> -->
 	<!-- Scans within the base package of the application for @Components to 
 		configure as beans -->
 	<bean id="placeholderConfig"
