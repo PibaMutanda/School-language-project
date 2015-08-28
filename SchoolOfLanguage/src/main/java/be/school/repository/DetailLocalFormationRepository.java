@@ -2,6 +2,7 @@ package be.school.repository;
 
 import java.util.List;
 
+import be.school.enumClass.Jour;
 import be.school.enumClass.Seance;
 import be.school.model.DetailLocalFormation;
 import be.school.model.Formateur;
@@ -12,7 +13,7 @@ public interface DetailLocalFormationRepository extends GenericRepository<Detail
 	
 	 List<DetailLocalFormation> findAllDistinct();
 	 List<DetailLocalFormation> findAllByFormateur(Formateur formateur);
-     DetailLocalFormation findByLocalSession(Local local, Seance seance);
+     DetailLocalFormation findByLocalSession(Local local, Seance seance, Jour jour);
      List<DetailLocalFormation> findByFormationFormateur(Formation formation, Formateur formateur);
      List<DetailLocalFormation> findAllByFormation(Formation formation);
      DetailLocalFormation findByLocalFormationNiveau(Local local,Formation formation, String niveau);

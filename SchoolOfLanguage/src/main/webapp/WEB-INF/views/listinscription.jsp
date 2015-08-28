@@ -13,7 +13,7 @@
 <body>
 	<form action="listinscriptionsubmit" method="post">
 		<strong>Choisir Une Date</strong><input type="date" name="dateInscription" required="required"><br>
-		<input type="submit" value="Enregistrer" class="btn btn-primary">
+		<input type="submit" value="Voir la liste" class="btn btn-primary">
 	</form>
 	<br><br>
 	<hr>

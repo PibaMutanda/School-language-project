@@ -16,6 +16,7 @@ import be.school.model.Formation;
 import be.school.repository.DetailLocalFormationRepository;
 import be.school.repository.FormateurRepository;
 import be.school.repository.FormationRepository;
+import be.school.service.DetailLocalFormationService;
 
 @Controller
 public class FormateurFormationController {
@@ -26,12 +27,15 @@ public class FormateurFormationController {
 	DetailLocalFormationRepository detailLocalFormationReposytoryJpa;
 	@Autowired
 	FormationRepository formationRep;
+	@Autowired
+	DetailLocalFormationService detailLocalFormService;
 
 	@RequestMapping(value = "/formateurformationdisplay", method = RequestMethod.POST)
 	public ModelAndView formateurFormationDisplay(@RequestParam Long id) {
 		ModelAndView mv = new ModelAndView("formformateurformation");
 		Formateur formateur = formateurRepositoryJpa.findById(id);
-		List detailListForm = detailLocalFormationReposytoryJpa.findAllDistinct();
+		List detailListForm = detailLocalFormationReposytoryJpa
+				.findAllDistinct();
 		mv.addObject("formateur", formateur);
 		mv.addObject("detailListForm", detailListForm);
 		return mv;
@@ -58,9 +62,23 @@ public class FormateurFormationController {
 			Formation formation2 = formationRep.findById(formation);
 			DetailLocalFormation detailFormation = detailLocalFormationReposytoryJpa
 					.findById(formation);
-			detailFormation.setFormation(formation2);
-			detailFormation.setFormateur(formateur2);
-			detailLocalFormationReposytoryJpa.save(detailFormation);
+			if(detailFormation.getFormateur()==null){
+				detailFormation.setFormateur(formateur2);
+				detailFormation.setFormation(formation2);
+				detailLocalFormationReposytoryJpa.save(detailFormation);
+			}
+			
+			else{
+			if (detailLocalFormService.isAlreadyAffected(detailFormation, formateur2,
+					detailFormation.getSeance(), detailFormation.getJour()) == true) {
+				mv.addObject("messageError",
+						formateur2.getNom()
+								+ " est déjà pris pour une séance du "
+								+ detailFormation.getJour() + " "
+								+ detailFormation.getSeance());
+				return mv;
+			}
+			}
 			// formateur2.addDetailLocalFormation(detailLocalFormationReposytoryJpa.findById(formation));
 
 			// formateurRepositoryJpa.save(formateur2);

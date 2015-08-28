@@ -1,5 +1,9 @@
 <%@page import="be.school.model.Formateur"%>
 <%@page import="be.school.model.Employe"%>
+<html>
+<head>
+<link rel="stylesheet" href="resources/css/bootstrap.min.css">
+</head>
 <nav class="navbar navbar-inverse" role="navigation">
 	<div class="container-fluid">
 		<a class="navbar-brand" href="home">School of Languages</a>
@@ -7,7 +11,7 @@
 			<ul class="nav navbar-nav">
 				<li><a href="home"><span class="glyphicon glyphicon-home"
 						aria-hidden="true"></span></a></li>
-				<li><a href="formationlist">Consulter les formations</a></li>
+				<li><a href="formationlist">Nos formations</a></li>
 				<li><a href="showpublishinscription">Inscription</a></li>
 				<li><a href="#">Contact us</a></li>
 				<li><a href="#">About</a></li>
@@ -57,15 +61,17 @@
 </div>
 <div class="container">
 	<div class="jumbotron">
-		<h1>
-			<center>Hello World</center>
+		<h1 style="text-align: center;">
+			  Hello World
 		</h1>
-		<center>
+		<div style="text-align: center; background-color:buttonface;">
 			<a href="#" id="lien"><img
 				src="resources/images/imageLangue1.gif" alt="livre"></a>
-		</center>
+		</div>
 	</div>
 
+</div>
+<div style="float: right;">
 </div>
 <script src="<%=request.getContextPath()%>/resources/js/jquery.js"></script>
 <script
@@ -78,3 +84,4 @@
 		$("#notification-message").hide();
 	});
 </script>
+</html>

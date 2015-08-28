@@ -2,7 +2,7 @@
 <%
 	String mySession = (String) session.getAttribute("mySession");
 %>
-<ul role="menu" class="nav nav-pills nav-stacked">
+<ul role="menu" class="nav nav-pills nav-stacked menu-nav">
 	<c:choose>
 		<c:when test="${ not empty mySession  }">
 			<li><a href="displayprofplanning?id=${formateur.id }">Mon

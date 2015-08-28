@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import be.school.enumClass.Jour;
 import be.school.enumClass.Seance;
 import be.school.model.DetailLocalFormation;
+import be.school.model.Formateur;
 import be.school.model.Formation;
 import be.school.model.Local;
 import be.school.model.Participant;
@@ -36,11 +37,11 @@ public class DetailLocalFormationService {
 				.findByLocalFormation(local, formation);
 		if (detailLocalFormation == null)
 			return false;
-		
-		//revoir le code ici
-	//	 if (detailLocalFormation.getJour() == jour
-		//		&& detailLocalFormation.getSeance() == seance)
-		//	return false;
+
+		// revoir le code ici
+		// if (detailLocalFormation.getJour() == jour
+		// && detailLocalFormation.getSeance() == seance)
+		// return false;
 		else
 			return true;
 	}
@@ -54,6 +55,16 @@ public class DetailLocalFormationService {
 			if (detailLocalFormation.getNiveau().equals(niveau))
 				ok = true;
 		}
+		return ok;
+	}
+
+	public boolean isAlreadyAffected(DetailLocalFormation detailLocalFormation, Formateur formateur,
+			Seance seance, Jour jour) {
+		boolean ok = false;
+		if (detailLocalFormation.getFormateur().equals(formateur)
+				&& detailLocalFormation.getSeance() == seance
+				&& detailLocalFormation.getJour() == jour)
+			ok = true;
 		return ok;
 	}
 }

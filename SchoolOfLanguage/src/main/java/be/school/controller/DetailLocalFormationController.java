@@ -134,11 +134,11 @@ public class DetailLocalFormationController {
 		}
 
 		DetailLocalFormation dLocalFormation = detailFormationReposytory
-				.findByLocalSession(detailLocalFormation.getLocal(), seance);
+				.findByLocalSession(detailLocalFormation.getLocal(), seance,jour);
 		if (dLocalFormation != null) {
 			mv.addObject("messageError",
 					"Le local est déjà reservé pour une séance du "
-							+ detailLocalFormation.getSeance());
+							+ detailLocalFormation.getJour()+"  "+ detailLocalFormation.getSeance());
 			return mv;
 		}
 

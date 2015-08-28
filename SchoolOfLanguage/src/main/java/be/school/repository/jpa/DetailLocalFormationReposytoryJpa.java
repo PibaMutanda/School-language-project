@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import be.school.enumClass.Jour;
 import be.school.enumClass.Seance;
 import be.school.model.DetailLocalFormation;
 import be.school.model.Formateur;
@@ -34,12 +35,12 @@ public class DetailLocalFormationReposytoryJpa extends
 	}
 
 	@SuppressWarnings("rawtypes")
-	public DetailLocalFormation findByLocalSession(Local local, Seance seance) {
+	public DetailLocalFormation findByLocalSession(Local local, Seance seance,Jour jour) {
 		DetailLocalFormation detailFormation = null;
 		List delofos = em
 				.createQuery(
-						"select df from DetailLocalFormation df  where df.local= :local and  df.seance= :seance")
-				.setParameter("local", local).setParameter("seance", seance)
+						"select df from DetailLocalFormation df  where df.local= :local and  df.seance= :seance and df.jour= :jour")
+				.setParameter("local", local).setParameter("seance", seance).setParameter("jour", jour)
 				.getResultList();
 		if (!delofos.isEmpty())
 			detailFormation = (DetailLocalFormation) delofos.get(0);

@@ -94,12 +94,18 @@ public class ParticipantController {
 				mv.addObject("messageError", "Cette adresse email existe déjà");
 				return mv;
 			}
-			if(participant.getStatutProfessionnel().equals("0")|| participant.getStatutProfessionnel()==null){
+			try {
+				/*
+				 * le try catch juste pour gérer NPE */
+				participant.getStatutProfessionnel();
+			} catch (Exception e) {
+			
 				mv.addObject("messageError", "Renseignez le statut professionnel");
 				return mv;
 			}
+			
 			participant.setMatricule(buffMatr);
-			System.out.println("Matricule " + participant.getMatricule());
+		
 			participantRepositoryJpa.save(participant);
 			mv.addObject("messageSuccess", "Le particiant est enregistré avec succès!");
 			mv.setViewName("redirect:home");
