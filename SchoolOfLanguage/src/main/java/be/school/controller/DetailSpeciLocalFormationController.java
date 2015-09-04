@@ -130,7 +130,11 @@ public class DetailSpeciLocalFormationController {
 		}
 		Formation formation1 = formationRep.findById(formation);
 		if (detailLocServ.isCheckForUpdate(local1, formation1, jour, seance) == false) {
-			mv.addObject("messageError", "Mise à jour non autorisé");
+			mv.addObject("messageError", "Mise à jour non autorisée");
+			return mv;
+		}
+		if(dReposytory.findByLocalSession(local1, seance, jour)!=null){
+			mv.addObject("messageError","Le local est déjà reservé pour une séance du "+jour+"  "+seance);
 			return mv;
 		}
 		DetailLocalFormation detailLocalFormation = dReposytory.findById(id);

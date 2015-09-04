@@ -11,7 +11,7 @@
 <title></title>
 </head>
 <body>
-      <h3>${formateur.prenom }  ${formateur.nom}</h3>
+      <h3>Associer  ${formateur.prenom }  ${formateur.nom}  &agrave; une</h3>
         <c:forEach items="${messageError }" var="message">
       <p id="messageErreur">${message }</p>
      </c:forEach>

@@ -102,8 +102,6 @@ public class Participant {
 		this.ville = ville;
 	}
 
-	
-
 	public String getCodeP() {
 		return codeP;
 	}

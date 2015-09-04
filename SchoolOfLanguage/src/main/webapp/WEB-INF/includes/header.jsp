@@ -71,8 +71,7 @@
 	</div>
 
 </div>
-<div style="float: right;">
-</div>
+
 <script src="<%=request.getContextPath()%>/resources/js/jquery.js"></script>
 <script
 	src="<%=request.getContextPath()%>/resources/js/jquery-ui.min.js"></script>
