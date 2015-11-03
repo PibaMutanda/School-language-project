@@ -60,6 +60,7 @@ public class StatutProfessionnelController {
 			// vérification au niveau de la BD
 			if (statutpr == null) {
 				staRepos.save(statutProfessionnel);
+				mv.clear();
 			    mv.addObject("messageSuccess","Statut est enregistré avec succès");
 				mv.setViewName("redirect:home");
 				

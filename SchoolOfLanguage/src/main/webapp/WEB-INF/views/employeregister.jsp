@@ -12,11 +12,13 @@
 <title>Employe</title>
 </head>
 <body>
+<c:choose>
+  <c:when test="${not empty employe}">
 	<c:forEach items="${messageError }" var="message">
 		<p id="messageErreur">${message }</p>
 	</c:forEach>
 
-	<form:form action="employesubmit"  modelAttribute="employe">
+	<form:form modelAttribute="employe" action="employesubmit" >
 		<table  class="table table-condensed">
 		   
 		    <tr><td><form:label path="nom">Nom</form:label> </td></tr>
@@ -35,11 +37,11 @@
 				<td><form:errors path="password" cssStyle="color: red;" /></td>
 			</tr>
 			<tr>
-				<td><strong>Simple Employé</strong> <input type="radio" name="role" value="SIMPLE"></td>
+				<td><strong>Simple Employé </strong>   <form:radiobutton path="roleEmploye" value="SIMPLE"/></td>
 				
 			</tr>
 			<tr>
-				<td><strong>Admin</strong> <input type="radio" name="role" value="ADMIN"></td>
+				<td><strong>Admin</strong>  <form:radiobutton path="roleEmploye"  value="ADMIN"/></td>
 			</tr>
 			<tr>
 				<td><input type="submit" value="Enregistrer"
@@ -47,7 +49,11 @@
 			</tr>
 		</table>
 	</form:form>
-
+	</c:when>
+       <c:otherwise>
+     <%@ include file="/WEB-INF/bannedfile.html" %>
+     </c:otherwise>
+</c:choose>
 </body>
 <script src="<%=request.getContextPath()%>/resources/js/jquery.js"></script>
 <script src="<%=request.getContextPath()%>/resources/js/jquery-ui.min.js"></script>

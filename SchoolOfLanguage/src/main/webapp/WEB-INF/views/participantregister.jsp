@@ -12,6 +12,8 @@
 <title></title>
 </head>
 <body>
+   <c:choose>
+   <c:when test="${not empty employe}">
 	<c:forEach items="${messageError }" var="message">
 		<p id="messageErreur">${message }</p>
 	</c:forEach>
@@ -55,9 +57,11 @@
 				<td><form:radiobutton path="sexe" value="HOMME" />&nbsp;&nbsp;M&nbsp;&nbsp;<form:radiobutton
 						path="sexe" value="FEMME" />&nbsp;&nbsp;F&nbsp;&nbsp; <form:errors
 						path="sexe" cssStyle="color: red;" /></td>
+						
 			</tr>
 			<tr>
-				<td><form:select path="statutProfessionnel">
+			   
+				<td> Statut<br><br> <form:select path="statutProfessionnel">
 						<form:option value="0"></form:option>
 						<c:forEach items="${listStatutProf }" var="statutProf">
 							<form:option value="${statutProf.id }">${statutProf.statut }</form:option>
@@ -72,6 +76,11 @@
 			</tr>
 		</table>
 	</form:form>
+	</c:when>
+	 <c:otherwise>
+     <%@ include file="/WEB-INF/bannedfile.html" %>
+     </c:otherwise>
+	</c:choose>
 </body>
 <script src="<%=request.getContextPath()%>/resources/js/jquery.js"></script>
 <script

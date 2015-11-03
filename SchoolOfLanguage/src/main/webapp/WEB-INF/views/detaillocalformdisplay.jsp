@@ -13,6 +13,8 @@
 <title></title>
 </head>
 <body>
+<c:choose>
+<c:when test="${not empty employe }">
 	<table class="table table-striped">
 		<tr>
 			<th>Formation</th>
@@ -57,6 +59,11 @@
 			}
 		}
 	</script>
+	</c:when>
+	 <c:otherwise>
+     <%@ include file="/WEB-INF/bannedfile.html" %> 
+     </c:otherwise>
+	</c:choose>
 </body>
 <script src="<%=request.getContextPath()%>/resources/js/jquery.js"></script>
 <script

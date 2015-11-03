@@ -22,7 +22,7 @@ public class EmployeController {
 	@Autowired
 	private EmployeRepository employeRepo;
 	
-	@RequestMapping(value="/employeregister",method = RequestMethod.GET )
+	@RequestMapping(value="/employeregister",method=RequestMethod.GET )
 	public ModelAndView employeRegister(@RequestParam(value="id",required=false)Long id){
 		ModelAndView mv = new ModelAndView("employeregister");
 		Employe employe=null;
@@ -36,7 +36,7 @@ public class EmployeController {
 	}
 
 	@RequestMapping(value="/employesubmit", method=RequestMethod.POST)
-	public ModelAndView employeSubmit(@Valid @ModelAttribute Employe employe,@RequestParam(value="role")Employe.Role role, Errors errors){
+	public ModelAndView employeSubmit(@Valid @ModelAttribute Employe employe, Errors errors){
 		ModelAndView mv = new ModelAndView("employeregister");
 		if(errors.hasErrors()){
 			mv.addObject("employe", employe);
@@ -45,16 +45,16 @@ public class EmployeController {
 		else
 		{
 			employe.setPassword(SecurityUtils.md5Encode(employe.getPassword()));
-			employe.setRoleEmploye(role);
+		//	employe.setRoleEmploye(role);
+			employeRepo.save(employe);
 			mv.addObject("messageSuccess",
 					"Employé est  enregistré avec succès");
-			employeRepo.save(employe);
 			mv.setViewName("redirect:employelist");
 			return mv;		
 		}
 	}
 	
-	@RequestMapping(value="employelist", method=RequestMethod.GET)
+	@RequestMapping(value="/employelist", method=RequestMethod.GET)
 	public ModelAndView employeList(){
 		ModelAndView  mv = new ModelAndView("employelist");
 		mv.addObject("listEmploye", employeRepo.findAll());

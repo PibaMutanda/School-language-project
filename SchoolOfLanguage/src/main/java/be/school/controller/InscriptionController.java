@@ -89,11 +89,10 @@ public class InscriptionController {
 			inscription.setMontantPaie(sum);
 			inscription.setDateInscription(new Date());
 			mv.addObject(
-					"messageSuccess",
-					"Inscription enregistrée, Vous devez payer la somme de "
-							+ sum
-							+ "  sur le compte BE00 0000 0000 0000 en indiquant comme communication  "
-							+ communicationforPaid);
+					"messageSuccess",new StringBuilder(
+					"Inscription enregistrée, Vous devez payer la somme de ").append(String.valueOf(sum)).append(
+							 "  sur le compte BE00 0000 0000 0000 en indiquant comme communication  ").append(
+							communicationforPaid));
 			inscriptionRepositoryJpa.save(inscription);
 		} else {
 			mv.addObject(

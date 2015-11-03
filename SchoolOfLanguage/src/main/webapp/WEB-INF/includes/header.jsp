@@ -39,12 +39,12 @@
 						out.println("<li><a href='#'>" + formateur.getPrenom() + " "
 								+ formateur.getNom() + "</a></li>");
 				%>
-				<li><a href="logout" class="glyphicon glyphicon-lock">&nbsp;Déconnexion</a></li>
+				<li><a href="logout" class="glyphicon glyphicon-lock">&nbsp;D&eacute;connexion</a></li>
 				<%
 					} else if (employe != null) {
 						out.println("<li><a href='#'>" + employe.getNom() + "</a></li>");
 				%>
-				<li><a href="logout" class="glyphicon glyphicon-lock">&nbsp;Déconnexion</a></li>
+				<li><a href="logout" class="glyphicon glyphicon-lock">&nbsp;D&eacute;connexion</a></li>
 				<%
 					} else {
 				%>
@@ -61,13 +61,12 @@
 </div>
 <div class="container">
 	<div class="jumbotron">
-		<h1 style="text-align: center;">
-			  Hello World
-		</h1>
-		<div style="text-align: center; background-color:buttonface;">
+		<h2 style="text-align: center;">Hello World</h2>
+		<div style="text-align: center; background-color: buttonface;">
 			<a href="#" id="lien"><img
 				src="resources/images/imageLangue1.gif" alt="livre"></a>
 		</div>
+		<h2 style="text-align: center;">Hola mundo</h2>
 	</div>
 
 </div>

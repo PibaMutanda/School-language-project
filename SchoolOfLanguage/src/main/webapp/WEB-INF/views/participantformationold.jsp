@@ -13,6 +13,8 @@
 <title></title>
 </head>
 <body>
+    <c:choose>
+    <c:when test="${not empty employe }">
 	<h3>Réinscription d'un participant pour la formation:
 		${formation.titre }</h3>
 	<c:forEach items="${messageError }" var="message">
@@ -39,6 +41,11 @@
 			</form>
 		</table>
 	</div>
+	</c:when>
+	 <c:otherwise>
+     <%@ include file="/WEB-INF/bannedfile.html" %>
+     </c:otherwise>
+	</c:choose>
 </body>
 <script src="<%=request.getContextPath()%>/resources/js/jquery.js"></script>
 <script

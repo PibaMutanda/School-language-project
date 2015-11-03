@@ -32,7 +32,7 @@
 			</label>
 		</div>
 		<button type="submit" class="btn btn-primary">Submit</button>
-	</form>
+	</form><br><br>
 </body>
 <script src="<%=request.getContextPath()%>/resources/js/jquery.js"></script>
 <script

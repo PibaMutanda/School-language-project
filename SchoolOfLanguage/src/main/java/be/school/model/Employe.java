@@ -23,7 +23,7 @@ public class Employe {
 	@GeneratedValue
 	private Long id;
 
-	@NotEmpty(message = "Insérer le nom de l'employé")
+	@NotEmpty(message = "Insérer le nom")
 	@Size(max = 40, message = "la taille maximun requise est de 40 caractères")
 	private String nom;
 

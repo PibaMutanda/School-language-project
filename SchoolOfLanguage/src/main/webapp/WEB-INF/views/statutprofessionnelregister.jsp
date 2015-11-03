@@ -12,6 +12,8 @@
 <title></title>
 </head>
 <body>
+    <c:choose>
+    <c:when test="${not empty employe }">
      <c:forEach items="${messageError }" var="message">
       <p id="messageErreur">${message }</p>
      </c:forEach>
@@ -34,6 +36,11 @@
            </tr>       
      </table>
      </form:form>
+     </c:when>
+     <c:otherwise>
+     <%@ include file="/WEB-INF/bannedfile.html" %>
+     </c:otherwise>
+    </c:choose> 
 </body>
 <script src="<%=request.getContextPath()%>/resources/js/jquery.js"></script>
 <script src="<%=request.getContextPath()%>/resources/js/jquery-ui.min.js"></script>

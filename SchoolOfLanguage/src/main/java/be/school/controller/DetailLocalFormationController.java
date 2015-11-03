@@ -67,7 +67,7 @@ public class DetailLocalFormationController {
 	@RequestMapping(value = "/detailformationregister", method = RequestMethod.GET)
 	public ModelAndView detailFormationRegister(
 			@RequestParam(value = "id", required = false) Long id) {
-		ModelAndView mv = new ModelAndView("detailformationregister");
+	//	ModelAndView mv = new ModelAndView("detailformationregister");
 		DetailLocalFormation detailLocalFormation = null;
 		List<Formation> listFormation = formationRepos.findAll();
 		List<Local> listLocal = localRepos.findAll();
@@ -78,12 +78,12 @@ public class DetailLocalFormationController {
 			detailLocalFormation = detailFormationReposytory.findById(id);
 
 		}
-
-		mv.addObject("listLocal", listLocal);
-		mv.addObject("listFormation", listFormation);
-		mv.addObject("detailFormation", detailLocalFormation);
+		ModelAndView mv = prepareModelAndView(detailLocalFormation, listLocal, listFormation, Jour.values());
+//		mv.addObject("listLocal", listLocal);
+//		mv.addObject("listFormation", listFormation);
+//		mv.addObject("detailFormation", detailLocalFormation);
 		// mv.addObject("listAnnee", listSchoolY);
-		mv.addObject("lesJours", Jour.values());
+	//	mv.addObject("lesJours", Jour.values());
 		return mv;
 	}
 
@@ -93,7 +93,7 @@ public class DetailLocalFormationController {
 			@RequestParam(value = "jour", required = false) Jour jour,
 			@Valid @ModelAttribute DetailLocalFormation detailLocalFormation,
 			Errors errors) {
-		ModelAndView mv = new ModelAndView("detailformationregister");
+		ModelAndView mv =  new ModelAndView("detailformationregister");
 
 		if (detailLocalFormation.getFormation() == null
 				|| detailLocalFormation.getFormation().equals("".trim())) {
@@ -155,6 +155,15 @@ public class DetailLocalFormationController {
 
 		}
 
+		return mv;
+	}
+	
+	private ModelAndView prepareModelAndView(DetailLocalFormation detailLocalFormation,List listLocal,List listFormation, Jour[] lesJours){
+		ModelAndView mv = new ModelAndView("detailformationregister");
+		mv.addObject("detailLocalFormation", detailLocalFormation);
+		mv.addObject("listLocal", listLocal);
+		mv.addObject("listFormation", listFormation);
+		mv.addObject("lesJours", lesJours);
 		return mv;
 	}
 

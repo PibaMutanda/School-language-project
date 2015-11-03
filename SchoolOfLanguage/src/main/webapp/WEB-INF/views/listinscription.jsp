@@ -11,6 +11,8 @@
 <title>Liste Inscription</title>
 </head>
 <body>
+<c:choose>
+ <c:when test="${not empty employe }">
 	<form action="listinscriptionsubmit" method="post">
 		<strong>Choisir Une Date</strong><input type="date" name="dateInscription" required="required"><br>
 		<input type="submit" value="Voir la liste" class="btn btn-primary">
@@ -41,7 +43,11 @@
 			</c:forEach>
 		</table>
 	</c:if>
-
+	</c:when>
+	 <c:otherwise>
+     <%@ include file="/WEB-INF/bannedfile.html" %>
+     </c:otherwise>
+</c:choose>
 </body>
 <script src="<%=request.getContextPath()%>/resources/js/jquery.js"></script>
 <script

@@ -12,34 +12,41 @@
 <title>Inscription</title>
 </head>
 <body>
-	<c:forEach items="${messageError }" var="message">
-		<p id="messageErreur">${message }</p>
-	</c:forEach>
-	<form action="publishinscriptionsubmit" method="post"
-		class="form-horizontal">
-		<input type="hidden" name="id" value="${employe.id }">
-		<div class="form-group">
-			<label for="inputDateDeb" class="col-sm-2 control-label">D&eacute;but
-				inscription</label>
-			<div class="col-sm-10">
-				<input type="date" class="form-control" id="inputDateDeb"
-					name="dateDeb" required="required">
-			</div>
-		</div>
-		<div class="form-group">
-			<label for="inputDateFin" class="col-sm-2 control-label">Fin
-				inscription</label>
-			<div class="col-sm-10">
-				<input type="date" class="form-control" id="inputDateFin"
-					name="dateFin" required="required">
-			</div>
-		</div>
-		<div class="form-group">
-			<div class="col-sm-offset-2 col-sm-10">
-				<button type="submit" class="btn btn-primary">Enregistrer</button>
-			</div>
-		</div>
-	</form>
+	<c:choose>
+		<c:when test="${not empty employe }">
+			<c:forEach items="${messageError }" var="message">
+				<p id="messageErreur">${message }</p>
+			</c:forEach>
+			<form action="publishinscriptionsubmit" method="post"
+				class="form-horizontal">
+				<input type="hidden" name="id" value="${employe.id }">
+				<div class="form-group">
+					<label for="inputDateDeb" class="col-sm-2 control-label">D&eacute;but
+						inscription</label>
+					<div class="col-sm-10">
+						<input type="date" class="form-control" id="inputDateDeb"
+							name="dateDeb" required="required">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="inputDateFin" class="col-sm-2 control-label">Fin
+						inscription</label>
+					<div class="col-sm-10">
+						<input type="date" class="form-control" id="inputDateFin"
+							name="dateFin" required="required">
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-offset-2 col-sm-10">
+						<button type="submit" class="btn btn-primary">Enregistrer</button>
+					</div>
+				</div>
+			</form>
+		</c:when>
+		<c:otherwise>
+			<%@ include file="/WEB-INF/bannedfile.html"%>
+		</c:otherwise>
+	</c:choose>
 </body>
 <script src="<%=request.getContextPath()%>/resources/js/jquery.js"></script>
 <script
