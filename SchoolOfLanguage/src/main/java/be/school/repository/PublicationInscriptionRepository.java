@@ -4,9 +4,21 @@ import java.util.Date;
 
 import be.school.model.PublicationInscription;
 
-public interface PublicationInscriptionRepository extends GenericRepository<PublicationInscription> {
-	
+/**
+ * PublicationInscriptionRepository interface
+ * 
+ * @author P. Mutanda
+ *
+ */
+public interface PublicationInscriptionRepository extends
+		GenericRepository<PublicationInscription> {
+
+	/**
+	 * 
+	 * @param dateDeb
+	 * @param dateFin
+	 * @return
+	 */
 	PublicationInscription findByDate(Date dateDeb, Date dateFin);
-	
 
 }

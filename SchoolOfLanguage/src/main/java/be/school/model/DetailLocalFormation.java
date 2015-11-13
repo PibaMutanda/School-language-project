@@ -15,8 +15,14 @@ import org.hibernate.validator.constraints.NotEmpty;
 import be.school.enumClass.Jour;
 import be.school.enumClass.Seance;
 
+/**
+ * DetailLocalFormation class
+ * 
+ * @author P. Mutanda
+ *
+ */
 @Entity
-@NamedQuery(name="DetailLocalFormation.findAll",query="select nf from DetailLocalFormation nf")
+@NamedQuery(name = "DetailLocalFormation.findAll", query = "select nf from DetailLocalFormation nf")
 public class DetailLocalFormation {
 
 	@Id
@@ -42,53 +48,77 @@ public class DetailLocalFormation {
 	@ManyToOne
 	@JoinColumn
 	private Formateur formateur;
-	
-//	@OneToMany
-//	@JoinColumn
-//	private Set<RentreeScolaire> rentreeScolaires = new HashSet<RentreeScolaire>();
 
-	
-//	@JoinTable(name="Local_Seance")
 	@Enumerated(EnumType.ORDINAL)
 	private Seance seance;
 
-    @Enumerated(EnumType.ORDINAL)
+	@Enumerated(EnumType.ORDINAL)
 	private Jour jour;
-    
+
 	@ManyToOne
 	@JoinColumn
 	private Participant participant;
-	
-	
+
+	/**
+	 * 
+	 * @return
+	 */
 	public Seance getSeance() {
 		return seance;
 	}
 
+	/**
+	 * 
+	 * @param seance
+	 */
 	public void setSeance(Seance seance) {
 		this.seance = seance;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public String getQuota() {
 		return quota;
 	}
 
+	/**
+	 * 
+	 * @param quota
+	 */
 	public void setQuota(String quota) {
 		this.quota = quota;
 	}
 
-	
+	/**
+	 * 
+	 * @return
+	 */
 	public Formation getFormation() {
 		return formation;
 	}
 
+	/**
+	 * 
+	 * @param formation
+	 */
 	public void setFormation(Formation formation) {
 		this.formation = formation;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public Formateur getFormateur() {
 		return formateur;
 	}
 
+	/**
+	 * 
+	 * @param formateur
+	 */
 	public void setFormateur(Formateur formateur) {
 		this.formateur = formateur;
 	}
@@ -97,7 +127,6 @@ public class DetailLocalFormation {
 		return local;
 	}
 
-	
 	/**
 	 * @return the participant
 	 */
@@ -106,43 +135,59 @@ public class DetailLocalFormation {
 	}
 
 	/**
-	 * @param participant the participant to set
+	 * @param participant
+	 *            the participant to set
 	 */
 	public void setParticipant(Participant participant) {
 		this.participant = participant;
 	}
 
+	/**
+	 * 
+	 * @param local
+	 */
 	public void setLocal(Local local) {
 		this.local = local;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public String getNiveau() {
 		return niveau;
 	}
 
+	/**
+	 * 
+	 * @param niveau
+	 */
 	public void setNiveau(String niveau) {
 		this.niveau = niveau;
 	}
 
-//	public Set<RentreeScolaire> getRentreeScolaires() {
-//		return rentreeScolaires;
-//	}
-//
-//	public void setRentreeScolaires(Set<RentreeScolaire> rentreeScolaires) {
-//		this.rentreeScolaires = rentreeScolaires;
-//	}
-//    
+	/**
+	 * 
+	 * @return
+	 */
 	public Jour getJour() {
 		return jour;
 	}
 
+	/**
+	 * 
+	 * @param jour
+	 */
 	public void setJour(Jour jour) {
 		this.jour = jour;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public Long getId() {
 		return id;
 	}
 
-	
 }

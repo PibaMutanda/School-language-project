@@ -85,13 +85,12 @@ public class SecurityUtils {
 	 */
 
 	public static String generateRandomNumber(int nbr) {
-		String gen = "";
+		StringBuilder gen = new StringBuilder();
 		for (int i = 0; i < nbr; i++) {
 			int buff = (int) (Math.random() * 10);
-			gen = gen + buff;
-
+			 gen.append(String.valueOf(buff));
 		}
-		return gen;
+		return gen.toString();
 	}
 
 }

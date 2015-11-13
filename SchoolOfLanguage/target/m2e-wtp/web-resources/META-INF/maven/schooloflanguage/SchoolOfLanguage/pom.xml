@@ -16,6 +16,7 @@
 		<java.version>1.8</java.version>
 		<junit.version>4.8.2</junit.version>
 		<sitemesh.version>2.4.2</sitemesh.version>
+		<mockito.version>1.9.5</mockito.version>
 	</properties>
 	<scm>
 		<connection>scm:git:https://github.com/PibaMutanda/School-language-project.git</connection>
@@ -142,6 +143,18 @@
 			<version>1.2</version>
 		</dependency>
 		<!-- Test Dependencies -->
+		<!-- TESTING -->
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-all</artifactId>
+			<version>${mockito.version}</version>
+		</dependency>
+		<!-- Easy mock -->
+		<dependency>
+			<groupId>org.easymock</groupId>
+			<artifactId>easymock</artifactId>
+			<version>3.1</version>
+		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
@@ -195,12 +208,7 @@
 			<artifactId>sitemesh</artifactId>
 			<version>${sitemesh.version}</version>
 		</dependency>
-		<!-- Easy mock -->
-		<dependency>
-			<groupId>org.easymock</groupId>
-			<artifactId>easymock</artifactId>
-			<version>3.1</version>
-		</dependency>
+		
 		<dependency>
 			<groupId>org.glassfish.external</groupId>
 			<artifactId>commons-codec-repackaged</artifactId>

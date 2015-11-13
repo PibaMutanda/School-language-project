@@ -10,16 +10,17 @@ import be.school.controller.StatutProfessionnelController;
 import be.school.model.StatutProfessionnel;
 import be.school.repository.jpa.StatutProfessionelRepositoryJpa;
 
+/**
+ * test for StatutProfessionnelController class
+ * @author P. Mutanda
+ *
+ */
 public class StatutProfessionnelControllerTest {
 
-	
 
-	@Test
-	@Ignore
-	public void testGetList() {
-		fail("Not yet implemented");
-	}
-
+	/**
+	 * {@inheritDoc}
+	 */
 	@Test
 	public void testFindStatutById() {
 		StatutProfessionelRepositoryJpa stRepository = createMock(StatutProfessionelRepositoryJpa.class);
