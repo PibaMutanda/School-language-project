@@ -13,6 +13,12 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
+/**
+ * Classe Employe
+ * 
+ * @author P. Mutanda
+ *
+ */
 @Entity
 @NamedQueries({
 		@NamedQuery(name = "Employe.findAll", query = "select e from Employe e"),
@@ -41,22 +47,45 @@ public class Employe {
 	@Enumerated(EnumType.STRING)
 	private Role roleEmploye;
 
+	/**
+	 * 
+	 * @author P. Mutanda
+	 *
+	 */
 	public enum Role {
 		SIMPLE, ADMIN
 	}
 
+	/**
+	 * 
+	 * @return retourne le nom de l'employé
+	 */
 	public String getNom() {
 		return nom;
 	}
 
+	/**
+	 * 
+	 * @param nom
+	 *            nom
+	 */
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
 
+	/**
+	 * 
+	 * @return retourne le mot de passe
+	 */
 	public String getPassword() {
 		return password;
 	}
 
+	/**
+	 * 
+	 * @param password
+	 *            mot de passe
+	 */
 	public void setPassword(String password) {
 		this.password = password;
 	}
@@ -69,22 +98,44 @@ public class Employe {
 		this.confirmPassword = confirmPassword;
 	}
 
+	/**
+	 * 
+	 * @return le login
+	 */
 	public String getLogin() {
 		return login;
 	}
 
+	/**
+	 * 
+	 * @param login
+	 *            login
+	 */
 	public void setLogin(String login) {
 		this.login = login;
 	}
 
+	/**
+	 * 
+	 * @return retourne le role de l'employé
+	 */
 	public Role getRoleEmploye() {
 		return roleEmploye;
 	}
 
+	/**
+	 * 
+	 * @param roleEmploye
+	 *            roleEmploye
+	 */
 	public void setRoleEmploye(Role roleEmploye) {
 		this.roleEmploye = roleEmploye;
 	}
 
+	/**
+	 * 
+	 * @return retourne id
+	 */
 	public Long getId() {
 		return id;
 	}

@@ -61,7 +61,7 @@ public class DetailLocalFormation {
 
 	/**
 	 * 
-	 * @return
+	 * @return retourne une séance
 	 */
 	public Seance getSeance() {
 		return seance;
@@ -70,6 +70,7 @@ public class DetailLocalFormation {
 	/**
 	 * 
 	 * @param seance
+	 *            seance
 	 */
 	public void setSeance(Seance seance) {
 		this.seance = seance;
@@ -77,7 +78,7 @@ public class DetailLocalFormation {
 
 	/**
 	 * 
-	 * @return
+	 * @return retourne le quota
 	 */
 	public String getQuota() {
 		return quota;
@@ -86,6 +87,7 @@ public class DetailLocalFormation {
 	/**
 	 * 
 	 * @param quota
+	 *            quota
 	 */
 	public void setQuota(String quota) {
 		this.quota = quota;
@@ -93,7 +95,7 @@ public class DetailLocalFormation {
 
 	/**
 	 * 
-	 * @return
+	 * @return retourne une formation
 	 */
 	public Formation getFormation() {
 		return formation;
@@ -102,6 +104,7 @@ public class DetailLocalFormation {
 	/**
 	 * 
 	 * @param formation
+	 *            formation
 	 */
 	public void setFormation(Formation formation) {
 		this.formation = formation;
@@ -109,7 +112,7 @@ public class DetailLocalFormation {
 
 	/**
 	 * 
-	 * @return
+	 * @return retourne un formateur
 	 */
 	public Formateur getFormateur() {
 		return formateur;
@@ -118,17 +121,22 @@ public class DetailLocalFormation {
 	/**
 	 * 
 	 * @param formateur
+	 *            formateur
 	 */
 	public void setFormateur(Formateur formateur) {
 		this.formateur = formateur;
 	}
 
+	/**
+	 * 
+	 * @return retourne le local
+	 */
 	public Local getLocal() {
 		return local;
 	}
 
 	/**
-	 * @return the participant
+	 * @return retourne le participant
 	 */
 	public Participant getParticipant() {
 		return participant;
@@ -145,6 +153,7 @@ public class DetailLocalFormation {
 	/**
 	 * 
 	 * @param local
+	 *            local
 	 */
 	public void setLocal(Local local) {
 		this.local = local;
@@ -152,7 +161,7 @@ public class DetailLocalFormation {
 
 	/**
 	 * 
-	 * @return
+	 * @return retourne le niveau de la formation
 	 */
 	public String getNiveau() {
 		return niveau;
@@ -161,6 +170,7 @@ public class DetailLocalFormation {
 	/**
 	 * 
 	 * @param niveau
+	 *            niveau
 	 */
 	public void setNiveau(String niveau) {
 		this.niveau = niveau;
@@ -168,7 +178,7 @@ public class DetailLocalFormation {
 
 	/**
 	 * 
-	 * @return
+	 * @return retourne le jour
 	 */
 	public Jour getJour() {
 		return jour;
@@ -177,6 +187,7 @@ public class DetailLocalFormation {
 	/**
 	 * 
 	 * @param jour
+	 *            jour
 	 */
 	public void setJour(Jour jour) {
 		this.jour = jour;
@@ -184,7 +195,7 @@ public class DetailLocalFormation {
 
 	/**
 	 * 
-	 * @return
+	 * @return retourne id
 	 */
 	public Long getId() {
 		return id;

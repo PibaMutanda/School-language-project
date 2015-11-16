@@ -62,12 +62,15 @@ public class DetailLocalFormationController {
 		});
 	}
 
-	
-
+	/**
+	 * 
+	 * @param id
+	 * @return
+	 */
 	@RequestMapping(value = "/detailformationregister", method = RequestMethod.GET)
 	public ModelAndView detailFormationRegister(
 			@RequestParam(value = "id", required = false) Long id) {
-	//	ModelAndView mv = new ModelAndView("detailformationregister");
+		// ModelAndView mv = new ModelAndView("detailformationregister");
 		DetailLocalFormation detailLocalFormation = null;
 		List<Formation> listFormation = formationRepos.findAll();
 		List<Local> listLocal = localRepos.findAll();
@@ -78,22 +81,35 @@ public class DetailLocalFormationController {
 			detailLocalFormation = detailFormationReposytory.findById(id);
 
 		}
-		ModelAndView mv = prepareModelAndView(detailLocalFormation, listLocal, listFormation, Jour.values());
-//		mv.addObject("listLocal", listLocal);
-//		mv.addObject("listFormation", listFormation);
-//		mv.addObject("detailFormation", detailLocalFormation);
+		ModelAndView mv = prepareModelAndView(detailLocalFormation, listLocal,
+				listFormation, Jour.values());
+		// mv.addObject("listLocal", listLocal);
+		// mv.addObject("listFormation", listFormation);
+		// mv.addObject("detailFormation", detailLocalFormation);
 		// mv.addObject("listAnnee", listSchoolY);
-	//	mv.addObject("lesJours", Jour.values());
+		// mv.addObject("lesJours", Jour.values());
 		return mv;
 	}
 
+	/**
+	 * 
+	 * @param seance
+	 *            seance
+	 * @param jour
+	 *            jour
+	 * @param detailLocalFormation
+	 *            detailLocalFormation
+	 * @param errors
+	 *            erreurs
+	 * @return modelAndView
+	 */
 	@RequestMapping(value = "/detailformationsubmit", method = RequestMethod.POST)
 	public ModelAndView detailFormationSubmit(
 			@RequestParam(value = "seance", required = false) Seance seance,
 			@RequestParam(value = "jour", required = false) Jour jour,
 			@Valid @ModelAttribute DetailLocalFormation detailLocalFormation,
 			Errors errors) {
-		ModelAndView mv =  new ModelAndView("detailformationregister");
+		ModelAndView mv = new ModelAndView("detailformationregister");
 
 		if (detailLocalFormation.getFormation() == null
 				|| detailLocalFormation.getFormation().equals("".trim())) {
@@ -134,11 +150,13 @@ public class DetailLocalFormationController {
 		}
 
 		DetailLocalFormation dLocalFormation = detailFormationReposytory
-				.findByLocalSession(detailLocalFormation.getLocal(), seance,jour);
+				.findByLocalSession(detailLocalFormation.getLocal(), seance,
+						jour);
 		if (dLocalFormation != null) {
 			mv.addObject("messageError",
 					"Le local est déjà reservé pour une séance du "
-							+ detailLocalFormation.getJour()+"  "+ detailLocalFormation.getSeance());
+							+ detailLocalFormation.getJour() + "  "
+							+ detailLocalFormation.getSeance());
 			return mv;
 		}
 
@@ -157,8 +175,10 @@ public class DetailLocalFormationController {
 
 		return mv;
 	}
-	
-	private ModelAndView prepareModelAndView(DetailLocalFormation detailLocalFormation,List listLocal,List listFormation, Jour[] lesJours){
+
+	private ModelAndView prepareModelAndView(
+			DetailLocalFormation detailLocalFormation, List listLocal,
+			List listFormation, Jour[] lesJours) {
 		ModelAndView mv = new ModelAndView("detailformationregister");
 		mv.addObject("detailLocalFormation", detailLocalFormation);
 		mv.addObject("listLocal", listLocal);
@@ -167,6 +187,12 @@ public class DetailLocalFormationController {
 		return mv;
 	}
 
+	/**
+	 * 
+	 * @param id
+	 *            du detailFormationReposytory
+	 * @return modelAndView
+	 */
 	@RequestMapping(value = "/detailformation", method = RequestMethod.GET)
 	public ModelAndView detailFormation(Long id) {
 		DetailLocalFormation detailLocalFormation = detailFormationReposytory
@@ -198,5 +224,4 @@ public class DetailLocalFormationController {
 		return local;
 	}
 
-	
 }

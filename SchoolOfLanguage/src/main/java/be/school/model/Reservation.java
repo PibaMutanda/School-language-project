@@ -21,6 +21,12 @@ import javax.validation.constraints.Size;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
+/**
+ * Reservation class
+ * 
+ * @author P. Mutanda
+ *
+ */
 @Entity
 @NamedQueries({
 		@NamedQuery(name = "Reservation.findListByDate", query = "select r from Reservation r where r.dateReserv like :dateReserv"),
@@ -58,67 +64,139 @@ public class Reservation {
 	@JoinColumn
 	private List<Formation> formations = new ArrayList<Formation>();
 
+	/**
+	 * 
+	 * @return retourne le nom
+	 */
 	public String getNom() {
 		return nom;
 	}
 
+	/**
+	 * 
+	 * @param nom
+	 *            nom
+	 */
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
 
+	/**
+	 * 
+	 * @return retourne le prénom
+	 */
 	public String getPrenom() {
 		return prenom;
 	}
 
+	/**
+	 * 
+	 * @param prenom
+	 *            prénom
+	 */
 	public void setPrenom(String prenom) {
 		this.prenom = prenom;
 	}
 
+	/**
+	 * 
+	 * @return retourne é-mail
+	 */
 	public String getEmail() {
 		return email;
 	}
 
+	/**
+	 * 
+	 * @param email
+	 *            é-mail
+	 */
 	public void setEmail(String email) {
 		this.email = email;
 	}
 
+	/**
+	 * 
+	 * @return retourne formations
+	 */
 	public List<Formation> getFormations() {
 		return formations;
 	}
 
+	/**
+	 * 
+	 * @param formations
+	 *            formations
+	 */
 	public void setFormations(List<Formation> formations) {
 		this.formations = formations;
 	}
 
+	/**
+	 * 
+	 * @param formation
+	 *            formation
+	 */
 	public void add(Formation formation) {
 		this.formations.add(formation);
 	}
 
+	/**
+	 * 
+	 * @return retourne le Gsm
+	 */
 	public String getGsm() {
 		return gsm;
 	}
 
+	/**
+	 * 
+	 * @param gsm
+	 *            Gsm
+	 */
 	public void setGsm(String gsm) {
 		this.gsm = gsm;
 	}
 
+	/**
+	 * 
+	 * @return retourne la date pour la réservation
+	 */
 	public Date getDateReserv() {
 		return dateReserv;
 	}
 
+	/**
+	 * 
+	 * @param dateReserv
+	 *            dateReserv
+	 */
 	public void setDateReserv(Date dateReserv) {
 		this.dateReserv = dateReserv;
 	}
 
+	/**
+	 * 
+	 * @return retourne la date du rendez-vous
+	 */
 	public Date getDateRdv() {
 		return dateRdv;
 	}
 
+	/**
+	 * 
+	 * @param dateRdv
+	 *            dateRdv
+	 */
 	public void setDateRdv(Date dateRdv) {
 
 		this.dateRdv = dateRdv;
 	}
 
+	/**
+	 * 
+	 * @return retourne Id
+	 */
 	public Long getId() {
 		return id;
 	}

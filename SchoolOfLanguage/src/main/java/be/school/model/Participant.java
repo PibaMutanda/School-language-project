@@ -22,8 +22,14 @@ import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
+/**
+ * Participant class
+ * 
+ * @author P. Mutanda
+ *
+ */
 @Entity
-@NamedQuery(name="Participant.findAll",query="select p from Participant p")
+@NamedQuery(name = "Participant.findAll", query = "select p from Participant p")
 public class Participant {
 
 	@Id
@@ -31,7 +37,7 @@ public class Participant {
 	private Long id;
 
 	/* Matricule est géré par l'application */
-	@Column(unique=true)
+	@Column(unique = true)
 	private String matricule;
 
 	@NotNull(message = "entrez votre mail")
@@ -52,12 +58,16 @@ public class Participant {
 	private String numero;
 	@NotEmpty(message = "Indiquez la rue")
 	private String rue;
-	
 
 	@Enumerated(EnumType.STRING)
 	@NotNull(message = "Indiquez le sexe")
 	private Sexe sexe;
 
+	/**
+	 * 
+	 * @author P. Mutanda
+	 *
+	 */
 	public enum Sexe {
 		HOMME, FEMME;
 	}
@@ -69,133 +79,265 @@ public class Participant {
 	@JoinColumn
 	private StatutProfessionnel statutProfessionnel;
 
-	@OneToMany(mappedBy = "participant",fetch=FetchType.EAGER)
+	@OneToMany(mappedBy = "participant", fetch = FetchType.EAGER)
 	private Set<DetailLocalFormation> detailLocalFormations = new HashSet<DetailLocalFormation>();
 
 	@ManyToOne
 	@JoinColumn
 	private Local local;
-	
-	
 
+	/**
+	 * 
+	 * @return retourne le nom
+	 */
 	public String getNom() {
 		return nom;
 	}
 
+	/**
+	 * 
+	 * @param nom
+	 *            nom
+	 */
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
 
+	/**
+	 * 
+	 * @return retourne le prénom
+	 */
 	public String getPrenom() {
 		return prenom;
 	}
 
+	/**
+	 * 
+	 * @param prenom
+	 *            prénom
+	 */
 	public void setPrenom(String prenom) {
 		this.prenom = prenom;
 	}
 
+	/**
+	 * 
+	 * @return retourne ville
+	 */
 	public String getVille() {
 		return ville;
 	}
 
+	/**
+	 * 
+	 * @param ville
+	 *            ville
+	 */
 	public void setVille(String ville) {
 		this.ville = ville;
 	}
 
+	/**
+	 * 
+	 * @return retourne code postal
+	 */
 	public String getCodeP() {
 		return codeP;
 	}
 
+	/**
+	 * 
+	 * @param codeP
+	 *            code postal
+	 */
 	public void setCodeP(String codeP) {
 		this.codeP = codeP;
 	}
 
+	/**
+	 * 
+	 * @return retourne le numero pour l'adresse
+	 */
 	public String getNumero() {
 		return numero;
 	}
 
+	/**
+	 * 
+	 * @param numero
+	 *            numéro
+	 */
 	public void setNumero(String numero) {
 		this.numero = numero;
 	}
 
+	/**
+	 * 
+	 * @return retourne le sexe
+	 */
 	public Sexe getSexe() {
 		return sexe;
 	}
 
+	/**
+	 * 
+	 * @param sexe
+	 *            sexe
+	 */
 	public void setSexe(Sexe sexe) {
 		this.sexe = sexe;
 	}
 
+	/**
+	 * 
+	 * @return retourne rue
+	 */
 	public String getRue() {
 		return rue;
 	}
 
+	/**
+	 * 
+	 * @param rue
+	 *            rue
+	 */
 	public void setRue(String rue) {
 		this.rue = rue;
 	}
 
+	/**
+	 * 
+	 * @return retourne le matricule du participant
+	 */
 	public String getMatricule() {
 		return matricule;
 	}
 
+	/**
+	 * 
+	 * @param matricule
+	 *            matricule
+	 */
 	public void setMatricule(String matricule) {
 		this.matricule = matricule;
 	}
 
+	/**
+	 * 
+	 * @return retourne é-mail
+	 */
 	public String getEmail() {
 		return email;
 	}
 
+	/**
+	 * 
+	 * @param email
+	 *            email
+	 */
 	public void setEmail(String email) {
 		this.email = email;
 	}
 
+	/**
+	 * 
+	 * @return retourne le Gsm
+	 */
 	public String getGsm() {
 		return gsm;
 	}
 
+	/**
+	 * 
+	 * @param gsm
+	 *            gsm
+	 */
 	public void setGsm(String gsm) {
 		this.gsm = gsm;
 	}
 
+	/**
+	 * 
+	 * @return retourne la liste d'inscriptions
+	 */
 	public List<Inscription> getInscriptions() {
 		return inscriptions;
 	}
 
+	/**
+	 * 
+	 * @param inscriptions
+	 *            inscriptions
+	 */
 	public void setInscriptions(List<Inscription> inscriptions) {
 		this.inscriptions = inscriptions;
 	}
 
+	/**
+	 * 
+	 * @return statut professionnel
+	 */
 	public StatutProfessionnel getStatutProfessionnel() {
 		return statutProfessionnel;
 	}
 
+	/**
+	 * 
+	 * @param statutProfessionnel
+	 *            Statut professionnel
+	 */
 	public void setStatutProfessionnel(StatutProfessionnel statutProfessionnel) {
 		this.statutProfessionnel = statutProfessionnel;
 	}
 
+	/**
+	 * 
+	 * @return retourne l'ensemble de detailLocalFormations
+	 */
 	public Set<DetailLocalFormation> getDetailLocalFormations() {
 		return detailLocalFormations;
 	}
 
+	/**
+	 * 
+	 * @param detailLocalFormations
+	 *            detailLocalFormations
+	 */
 	public void setDetailLocalFormations(
 			Set<DetailLocalFormation> detailLocalFormations) {
 		this.detailLocalFormations = detailLocalFormations;
 	}
 
+	/**
+	 * 
+	 * @param detailLocalFormation
+	 */
 	public void addDetailLocalFormation(
 			DetailLocalFormation detailLocalFormation) {
 		detailLocalFormations.add(detailLocalFormation);
 	}
 
+	/**
+	 * 
+	 * @return retourne local
+	 */
 	public Local getLocal() {
 		return local;
 	}
 
+	/**
+	 * 
+	 * @param local
+	 *            local
+	 */
 	public void setLocal(Local local) {
 		this.local = local;
 	}
 
+	/**
+	 * 
+	 * @return retourne Id
+	 */
 	public Long getId() {
 		return id;
 	}
