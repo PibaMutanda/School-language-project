@@ -28,16 +28,20 @@ public interface DetailLocalFormationRepository extends
 	/**
 	 * 
 	 * @param formateur
-	 * @return
+	 *            formateur
+	 * @return retourne la liste de detailLocalFormation du formateur
 	 */
 	List<DetailLocalFormation> findAllByFormateur(Formateur formateur);
 
 	/**
 	 * 
 	 * @param local
+	 *            local
 	 * @param seance
+	 *            séance
 	 * @param jour
-	 * @return
+	 *            jour
+	 * @return retourne detailLocalFormation
 	 */
 	DetailLocalFormation findByLocalSession(Local local, Seance seance,
 			Jour jour);
@@ -45,8 +49,11 @@ public interface DetailLocalFormationRepository extends
 	/**
 	 * 
 	 * @param formation
+	 *            formation
 	 * @param formateur
-	 * @return
+	 *            formateur
+	 * @return retourne la liste de detailLocalFormation par formation et
+	 *         formateur
 	 */
 	List<DetailLocalFormation> findByFormationFormateur(Formation formation,
 			Formateur formateur);
@@ -54,16 +61,20 @@ public interface DetailLocalFormationRepository extends
 	/**
 	 * 
 	 * @param formation
-	 * @return
+	 *            formation
+	 * @return retourne la liste de detailLocalFormation par formation
 	 */
 	List<DetailLocalFormation> findAllByFormation(Formation formation);
 
 	/**
 	 * 
 	 * @param local
+	 *            local
 	 * @param formation
+	 *            formation
 	 * @param niveau
-	 * @return
+	 *            niveau
+	 * @return retourne detailLocalFormation
 	 */
 	DetailLocalFormation findByLocalFormationNiveau(Local local,
 			Formation formation, String niveau);
@@ -71,16 +82,21 @@ public interface DetailLocalFormationRepository extends
 	/**
 	 * 
 	 * @param local
+	 *            local
 	 * @param formation
-	 * @return
+	 *            formation
+	 * @return retourne DetailLocalFormation par local et formation
 	 */
 	DetailLocalFormation findByLocalFormation(Local local, Formation formation);
 
 	/**
 	 * 
 	 * @param local
+	 *            local
 	 * @param seance
-	 * @return
+	 *            séance
+	 * @return retourne Id du participant affecté à un local et une séance
+	 *         donnés
 	 */
 	Long getParticipantNumber(Local local, Seance seance);
 

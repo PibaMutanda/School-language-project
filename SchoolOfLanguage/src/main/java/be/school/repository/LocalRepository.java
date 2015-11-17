@@ -12,14 +12,16 @@ public interface LocalRepository extends GenericRepository<Local> {
 	/**
 	 * 
 	 * @param numLocal
-	 * @return
+	 *            numéro du local
+	 * @return retourne un local
 	 */
 	Local findByNum(String numLocal);
 
 	/**
 	 * 
 	 * @param id
-	 * @return
+	 *            id local
+	 * @return retourne un local
 	 */
 	Local findByDetalLocalFormation(Long id);
 }

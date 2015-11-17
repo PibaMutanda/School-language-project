@@ -16,14 +16,16 @@ public interface ReservationRepository extends GenericRepository<Reservation> {
 	/**
 	 * 
 	 * @param email
-	 * @return
+	 *            é-mail
+	 * @return retourne une réservation pour une inscription
 	 */
 	Reservation findByEmail(String email);
 
 	/**
 	 * 
 	 * @param date
-	 * @return
+	 *            date
+	 * @return retourne la liste de réservation par date
 	 */
 	List<Reservation> findListByDate(Date date);
 }

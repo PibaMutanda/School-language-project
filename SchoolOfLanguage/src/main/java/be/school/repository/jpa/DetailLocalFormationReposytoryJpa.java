@@ -13,12 +13,21 @@ import be.school.model.Formation;
 import be.school.model.Local;
 import be.school.repository.DetailLocalFormationRepository;
 
+/**
+ * DetailLocalFormationReposytoryJpa class
+ * 
+ * @author P. Mutanda
+ *
+ */
 @Repository
 @Transactional
 public class DetailLocalFormationReposytoryJpa extends
 		GenericRepositoryJpa<DetailLocalFormation> implements
 		DetailLocalFormationRepository {
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@SuppressWarnings("unchecked")
 	public List<DetailLocalFormation> findAllDistinct() {
 		return em
@@ -26,6 +35,9 @@ public class DetailLocalFormationReposytoryJpa extends
 				.getResultList();
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@SuppressWarnings("unchecked")
 	public List<DetailLocalFormation> findAllByFormateur(Formateur formateur) {
 		return em
@@ -34,19 +46,26 @@ public class DetailLocalFormationReposytoryJpa extends
 				.setParameter("formateur", formateur).getResultList();
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@SuppressWarnings("rawtypes")
-	public DetailLocalFormation findByLocalSession(Local local, Seance seance,Jour jour) {
+	public DetailLocalFormation findByLocalSession(Local local, Seance seance,
+			Jour jour) {
 		DetailLocalFormation detailFormation = null;
 		List delofos = em
 				.createQuery(
 						"select df from DetailLocalFormation df  where df.local= :local and  df.seance= :seance and df.jour= :jour")
-				.setParameter("local", local).setParameter("seance", seance).setParameter("jour", jour)
-				.getResultList();
+				.setParameter("local", local).setParameter("seance", seance)
+				.setParameter("jour", jour).getResultList();
 		if (!delofos.isEmpty())
 			detailFormation = (DetailLocalFormation) delofos.get(0);
 		return detailFormation;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@SuppressWarnings("unchecked")
 	public List<DetailLocalFormation> findByFormationFormateur(
 			Formation formation, Formateur formateur) {
@@ -57,6 +76,9 @@ public class DetailLocalFormationReposytoryJpa extends
 				.setParameter("formateur", formateur).getResultList();
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@SuppressWarnings("unchecked")
 	public List<DetailLocalFormation> findAllByFormation(Formation formation) {
 		return em
@@ -65,6 +87,9 @@ public class DetailLocalFormationReposytoryJpa extends
 				.setParameter("formation", formation).getResultList();
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public DetailLocalFormation findByLocalFormationNiveau(Local local,
 			Formation formation, String niveau) {
 		DetailLocalFormation detailFormation = null;
@@ -81,6 +106,9 @@ public class DetailLocalFormationReposytoryJpa extends
 		return detailFormation;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public DetailLocalFormation findByLocalFormation(Local local,
 			Formation formation) {
 		DetailLocalFormation detailFormation = null;
@@ -95,6 +123,9 @@ public class DetailLocalFormationReposytoryJpa extends
 		return detailFormation;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public Long getParticipantNumber(Local local, Seance seance) {
 		return (Long) em
 				.createQuery(

@@ -8,11 +8,21 @@ import org.springframework.transaction.annotation.Transactional;
 import be.school.model.Formation;
 import be.school.repository.FormationRepository;
 
+/**
+ * 
+ * FormationRepositoryJpa class
+ * 
+ * @author P. Mutanda
+ *
+ */
 @Repository
 @Transactional
 public class FormationRepositoryJpa extends GenericRepositoryJpa<Formation>
 		implements FormationRepository {
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@SuppressWarnings("rawtypes")
 	public Formation findByCodeFormation(String cdeFormation) {
 		Formation formation = null;
@@ -25,6 +35,9 @@ public class FormationRepositoryJpa extends GenericRepositoryJpa<Formation>
 		return formation;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@SuppressWarnings("rawtypes")
 	public Formation findByTitre(String titre) {
 		Formation formation = null;

@@ -8,11 +8,20 @@ import org.springframework.transaction.annotation.Transactional;
 import be.school.model.Formateur;
 import be.school.repository.FormateurRepository;
 
+/**
+ * FormateurRepositoryJpa class
+ * 
+ * @author P. Mutanda
+ *
+ */
 @Repository
 @Transactional
 public class FormateurRepositoryJpa extends GenericRepositoryJpa<Formateur>
 		implements FormateurRepository {
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@SuppressWarnings("rawtypes")
 	public Formateur findByLoginAndPwd(String login, String password) {
 		Formateur formateur = null;

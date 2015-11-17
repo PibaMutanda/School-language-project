@@ -13,14 +13,16 @@ public interface FormationRepository extends GenericRepository<Formation> {
 	/**
 	 * 
 	 * @param cdeFormation
-	 * @return
+	 *            code de la formation
+	 * @return retourne la formation
 	 */
 	Formation findByCodeFormation(String cdeFormation);
 
 	/**
 	 * 
 	 * @param titre
-	 * @return
+	 *            titre de la formation
+	 * @return retourne une formation
 	 */
 	Formation findByTitre(String titre);
 }

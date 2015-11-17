@@ -22,8 +22,10 @@ import be.school.repository.GenericRepository;
 @Transactional
 public abstract class GenericRepositoryJpa<T> implements GenericRepository<T> {
 
-	// Initialisation implicite de l'EntityManager (voir définition dans
-	// persistence.xml)
+
+	/**
+	 * Initialisation implicite de l'EntityManager (voir définition dans persistence.xml)
+	 */
 	@PersistenceContext(unitName = "schooloflanguage")
 	protected EntityManager em;
 
@@ -40,11 +42,17 @@ public abstract class GenericRepositoryJpa<T> implements GenericRepository<T> {
 				.getGenericSuperclass()).getActualTypeArguments()[0];
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public T findById(Long id) {
 		return em.find(persistenceClass, id);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public List<T> findAll() {
 		return em
@@ -53,6 +61,9 @@ public abstract class GenericRepositoryJpa<T> implements GenericRepository<T> {
 						persistenceClass).getResultList();
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void save(T t) {
 		if (t == null)
@@ -61,6 +72,9 @@ public abstract class GenericRepositoryJpa<T> implements GenericRepository<T> {
 
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void delete(T t) {
 		if (t == null)
@@ -74,6 +88,9 @@ public abstract class GenericRepositoryJpa<T> implements GenericRepository<T> {
 
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void delete(Long id) {
 		T entity = em.find(persistenceClass, id);

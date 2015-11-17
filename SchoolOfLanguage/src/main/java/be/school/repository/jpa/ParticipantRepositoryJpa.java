@@ -9,11 +9,20 @@ import be.school.model.Formation;
 import be.school.model.Participant;
 import be.school.repository.ParticipantRepository;
 
+/**
+ * ParticipantRepositoryJpa class
+ * 
+ * @author P. Mutanda
+ *
+ */
 @Repository
 @Transactional
 public class ParticipantRepositoryJpa extends GenericRepositoryJpa<Participant>
 		implements ParticipantRepository {
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@SuppressWarnings("unchecked")
 	public List<Participant> findAllNews() {
 		return em.createQuery(
@@ -21,6 +30,9 @@ public class ParticipantRepositoryJpa extends GenericRepositoryJpa<Participant>
 				.getResultList();
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@SuppressWarnings("unchecked")
 	public List<Participant> findAllOlds(Formation formation) {
 		return em
@@ -29,6 +41,9 @@ public class ParticipantRepositoryJpa extends GenericRepositoryJpa<Participant>
 				.setParameter("formation", formation).getResultList();
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public Long getTotalParticipant(Long detailLocalForm) {
 		return (Long) em
 				.createQuery(
@@ -36,6 +51,9 @@ public class ParticipantRepositoryJpa extends GenericRepositoryJpa<Participant>
 				.setParameter("id", detailLocalForm).getSingleResult();
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@SuppressWarnings("rawtypes")
 	public Participant findByEmail(String email) {
 		Participant participant = null;
@@ -47,6 +65,9 @@ public class ParticipantRepositoryJpa extends GenericRepositoryJpa<Participant>
 		return participant;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@SuppressWarnings("rawtypes")
 	public Participant findByMaticule(String matricule) {
 		Participant participant = null;
@@ -59,6 +80,9 @@ public class ParticipantRepositoryJpa extends GenericRepositoryJpa<Participant>
 		return participant;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@SuppressWarnings("unchecked")
 	public List<Participant> getParticipantListByDetailLocalFormation(
 			Long idDetailLocalForm) {

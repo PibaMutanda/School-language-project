@@ -15,7 +15,8 @@ public interface InscriptionRepository extends GenericRepository<Inscription> {
 	/**
 	 * 
 	 * @param dateInsc
-	 * @return
+	 *            date d'inscription
+	 * @return retourne la liste d'inscriptions
 	 */
 	List<Inscription> findByDate(Date dateInsc);
 }

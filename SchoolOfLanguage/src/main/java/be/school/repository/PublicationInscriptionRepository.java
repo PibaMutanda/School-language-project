@@ -16,8 +16,10 @@ public interface PublicationInscriptionRepository extends
 	/**
 	 * 
 	 * @param dateDeb
+	 *            date de début
 	 * @param dateFin
-	 * @return
+	 *            date de fin
+	 * @return retourne publication inscription
 	 */
 	PublicationInscription findByDate(Date dateDeb, Date dateFin);
 

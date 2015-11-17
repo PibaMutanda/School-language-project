@@ -3,19 +3,27 @@ package be.school.repository.jpa;
 import java.util.Date;
 import java.util.List;
 
-
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import be.school.model.PublicationInscription;
 import be.school.repository.PublicationInscriptionRepository;
 
+/**
+ * PublicationInscriptionRepositoryJpa class
+ * 
+ * @author P. Mutanda
+ *
+ */
 @Repository
 @Transactional
 public class PublicationInscriptionRepositoryJpa extends
 		GenericRepositoryJpa<PublicationInscription> implements
 		PublicationInscriptionRepository {
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@SuppressWarnings("unchecked")
 	public PublicationInscription findByDate(Date dateDeb, Date dateFin) {
 		PublicationInscription publicationInscription = null;

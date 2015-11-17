@@ -11,9 +11,9 @@ import be.school.model.Formateur;
 public interface FormateurRepository extends GenericRepository<Formateur> {
 	/**
 	 * 
-	 * @param login
-	 * @param password
-	 * @return
+	 * @param login login formateur
+	 * @param password mot de passe formateur
+	 * @return retourne un formateur
 	 */
 	Formateur findByLoginAndPwd(String login, String password);
 }

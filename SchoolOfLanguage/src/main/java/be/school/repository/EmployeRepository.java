@@ -13,9 +13,9 @@ public interface EmployeRepository extends GenericRepository<Employe> {
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @param login
-	 * @param password
-	 * @return
+	 * @param login login employe
+	 * @param password mot de passe employe
+	 * @return retourne employe
 	 */
 	Employe findByLoginAndPwd(String login, String password);
 }

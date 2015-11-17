@@ -15,42 +15,49 @@ public interface ParticipantRepository extends GenericRepository<Participant> {
 
 	/**
 	 * 
-	 * @return
+	 * @return retourne la liste de participants
 	 */
 	List<Participant> findAllNews();
 
 	/**
 	 * 
 	 * @param formation
-	 * @return
+	 *            formation
+	 * @return retourne la liste de participants déjà inscrits pour une
+	 *         formation
 	 */
 	List<Participant> findAllOlds(Formation formation);
 
 	/**
 	 * 
 	 * @param detailLocalForm
-	 * @return
+	 *            detailLocalform
+	 * @return retourne le nombre total de participants
 	 */
 	Long getTotalParticipant(Long detailLocalForm);
 
 	/**
 	 * 
 	 * @param email
-	 * @return
+	 *            email
+	 * @return retourne un participant par son é-mail
 	 */
 	Participant findByEmail(String email);
 
 	/**
 	 * 
 	 * @param matricule
-	 * @return
+	 *            matricule du participant
+	 * @return retourne un participant par son matricule
 	 */
 	Participant findByMaticule(String matricule);
 
 	/**
 	 * 
 	 * @param idDetailLocalForm
-	 * @return
+	 *            id de detailLocalFormation
+	 * @return retourne la liste de participants qui sont identifiés dans un
+	 *         local
 	 */
 	List<Participant> getParticipantListByDetailLocalFormation(
 			Long idDetailLocalForm);

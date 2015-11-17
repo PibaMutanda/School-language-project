@@ -9,11 +9,20 @@ import org.springframework.transaction.annotation.Transactional;
 import be.school.model.Reservation;
 import be.school.repository.ReservationRepository;
 
+/**
+ * ReservationRepositoryJpa class
+ * 
+ * @author P. Mutanda
+ *
+ */
 @Repository
 @Transactional
 public class ReservationRepositoryJpa extends GenericRepositoryJpa<Reservation>
 		implements ReservationRepository {
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@SuppressWarnings("rawtypes")
 	public Reservation findByEmail(String email) {
 		Reservation reservation = null;
@@ -25,6 +34,9 @@ public class ReservationRepositoryJpa extends GenericRepositoryJpa<Reservation>
 		return reservation;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Reservation> findListByDate(Date date) {

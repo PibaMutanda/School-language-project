@@ -8,12 +8,21 @@ import org.springframework.transaction.annotation.Transactional;
 import be.school.model.StatutProfessionnel;
 import be.school.repository.StatutProfessionnelRepository;
 
+/**
+ * StatutProfessionelRepositoryJpa class
+ * 
+ * @author P. Mutanda
+ *
+ */
 @Repository
 @Transactional
 public class StatutProfessionelRepositoryJpa extends
 		GenericRepositoryJpa<StatutProfessionnel> implements
 		StatutProfessionnelRepository {
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@SuppressWarnings("rawtypes")
 	public StatutProfessionnel findStatutByName(String name) {
 		StatutProfessionnel statutProfessionnel = null;
