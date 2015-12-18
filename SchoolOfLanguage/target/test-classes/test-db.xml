@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:mvc="http://www.springframework.org/schema/mvc"
@@ -41,7 +40,7 @@
 
 
 	<tx:annotation-driven />
-
+    <context:component-scan base-package="be.school" />	
 	<bean
 		class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
 	

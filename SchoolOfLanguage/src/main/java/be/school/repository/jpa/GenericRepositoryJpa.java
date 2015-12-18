@@ -24,7 +24,7 @@ public abstract class GenericRepositoryJpa<T> implements GenericRepository<T> {
 
 
 	/**
-	 * Initialisation implicite de l'EntityManager (voir définition dans persistence.xml)
+	 * Initialisation de l'EntityManager (voir définition dans persistence.xml)
 	 */
 	@PersistenceContext(unitName = "schooloflanguage")
 	protected EntityManager em;

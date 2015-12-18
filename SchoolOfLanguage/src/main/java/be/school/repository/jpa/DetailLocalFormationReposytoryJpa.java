@@ -2,6 +2,8 @@ package be.school.repository.jpa;
 
 import java.util.List;
 
+import javax.persistence.Query;
+
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -40,10 +42,11 @@ public class DetailLocalFormationReposytoryJpa extends
 	 */
 	@SuppressWarnings("unchecked")
 	public List<DetailLocalFormation> findAllByFormateur(Formateur formateur) {
-		return em
-				.createQuery(
-						"select dlf from DetailLocalFormation dlf where dlf.formateur=:formateur")
-				.setParameter("formateur", formateur).getResultList();
+		Query query = em
+				.createQuery("select dlf from DetailLocalFormation dlf where dlf.formateur=:formateur");
+		query.setParameter("formateur", formateur);
+		return query.getResultList();
+
 	}
 
 	/**
@@ -53,11 +56,17 @@ public class DetailLocalFormationReposytoryJpa extends
 	public DetailLocalFormation findByLocalSession(Local local, Seance seance,
 			Jour jour) {
 		DetailLocalFormation detailFormation = null;
-		List delofos = em
-				.createQuery(
-						"select df from DetailLocalFormation df  where df.local= :local and  df.seance= :seance and df.jour= :jour")
-				.setParameter("local", local).setParameter("seance", seance)
-				.setParameter("jour", jour).getResultList();
+		Query query = em
+				.createQuery("select df from DetailLocalFormation df  where df.local= :local and  df.seance= :seance and df.jour= :jour");
+		query.setParameter("local", local);
+		query.setParameter("seance", seance);
+		query.setParameter("jour", jour);
+		List delofos = query.getResultList();
+		// List delofos = em
+		// .createQuery(
+		// "select df from DetailLocalFormation df  where df.local= :local and  df.seance= :seance and df.jour= :jour")
+		// .setParameter("local", local).setParameter("seance", seance)
+		// .setParameter("jour", jour).getResultList();
 		if (!delofos.isEmpty())
 			detailFormation = (DetailLocalFormation) delofos.get(0);
 		return detailFormation;
@@ -67,7 +76,8 @@ public class DetailLocalFormationReposytoryJpa extends
 	 * {@inheritDoc}
 	 */
 	@SuppressWarnings("unchecked")
-	public List<DetailLocalFormation> findByFormationFormateur(
+	public List<DetailLocalFormation> findByFormationFormateur( // method not
+																// use
 			Formation formation, Formateur formateur) {
 		return em
 				.createQuery(
@@ -81,10 +91,11 @@ public class DetailLocalFormationReposytoryJpa extends
 	 */
 	@SuppressWarnings("unchecked")
 	public List<DetailLocalFormation> findAllByFormation(Formation formation) {
-		return em
-				.createQuery(
-						"select dlf from DetailLocalFormation dlf where dlf.formation= :formation")
-				.setParameter("formation", formation).getResultList();
+		Query query = em
+				.createQuery("select dlf from DetailLocalFormation dlf where dlf.formation= :formation");
+		query.setParameter("formation", formation);
+		return query.getResultList();
+
 	}
 
 	/**
@@ -93,14 +104,15 @@ public class DetailLocalFormationReposytoryJpa extends
 	public DetailLocalFormation findByLocalFormationNiveau(Local local,
 			Formation formation, String niveau) {
 		DetailLocalFormation detailFormation = null;
+		Query query = em
+				.createQuery("select df from DetailLocalFormation df where df.local= :local and df.formation= :formation and df.niveau=:niveau");
+		query.setParameter("local", local);
+		query.setParameter("formation", formation);
+		query.setParameter("niveau", niveau);
+		@SuppressWarnings("unchecked")
+		List<DetailLocalFormation> detailLocalFormations = query
+				.getResultList();
 
-		List<DetailLocalFormation> detailLocalFormations = em
-				.createQuery(
-						"select df from DetailLocalFormation df where df.local= :local and df.formation= :formation and df.niveau=:niveau",
-						DetailLocalFormation.class)
-				.setParameter("local", local)
-				.setParameter("formation", formation)
-				.setParameter("niveau", niveau).getResultList();
 		if (!detailLocalFormations.isEmpty())
 			detailFormation = detailLocalFormations.get(0);
 		return detailFormation;
@@ -112,12 +124,13 @@ public class DetailLocalFormationReposytoryJpa extends
 	public DetailLocalFormation findByLocalFormation(Local local,
 			Formation formation) {
 		DetailLocalFormation detailFormation = null;
+		Query query = em
+				.createQuery("select df from DetailLocalFormation df where df.local= :local and df.formation= :formation");
+		query.setParameter("local", local);
+		query.setParameter("formation", formation);
 		@SuppressWarnings("unchecked")
-		List<DetailLocalFormation> detailLocalFormations = em
-				.createQuery(
-						"select df from DetailLocalFormation df where df.local= :local and df.formation= :formation")
-				.setParameter("local", local)
-				.setParameter("formation", formation).getResultList();
+		List<DetailLocalFormation> detailLocalFormations = query
+				.getResultList();
 		if (!detailLocalFormations.isEmpty())
 			detailFormation = detailLocalFormations.get(0);
 		return detailFormation;

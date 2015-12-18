@@ -11,7 +11,7 @@ import be.school.model.Employe;
 public interface EmployeRepository extends GenericRepository<Employe> {
 
 	/**
-	 * {@inheritDoc}
+	 * 
 	 * 
 	 * @param login login employe
 	 * @param password mot de passe employe

@@ -13,6 +13,11 @@ import be.school.model.Local;
 import be.school.model.Participant;
 import be.school.repository.DetailLocalFormationRepository;
 
+/**
+ * DetailLocalFormationService class
+ * @author P. Mutanda
+ *
+ */
 @Service
 @Scope("singleton")
 public class DetailLocalFormationService {
@@ -20,6 +25,13 @@ public class DetailLocalFormationService {
 	@Autowired
 	private DetailLocalFormationRepository detailLocalFormationReposytoryJpa;
 
+	/**
+	 * 
+	 * @param local local
+	 * @param formation formation
+	 * @param niveau niveau
+	 * @return retourne vrai si la formation du niveau x est  donnée dans ce local sinon faux
+	 */
 	public boolean isTeached(Local local, Formation formation, String niveau) {
 		DetailLocalFormation detailLocalFormation = null;
 		detailLocalFormation = detailLocalFormationReposytoryJpa
@@ -30,6 +42,14 @@ public class DetailLocalFormationService {
 			return false;
 	}
 
+	/**
+	 * 
+	 * @param local local
+	 * @param formation formation
+	 * @param jour jour
+	 * @param seance séance
+	 * @return 
+	 */
 	public boolean isCheckForUpdate(Local local, Formation formation,
 			Jour jour, Seance seance) {
 		DetailLocalFormation detailLocalFormation = null;
@@ -46,6 +66,14 @@ public class DetailLocalFormationService {
 			return true;
 	}
 
+	/**
+	 * 
+	 * @param detailLocalFormation
+	 * @param participant
+	 * @param formation
+	 * @param niveau
+	 * @return
+	 */
 	public boolean isSameLevelForSameForm(
 			DetailLocalFormation detailLocalFormation, Participant participant,
 			Formation formation, String niveau) {
@@ -58,6 +86,14 @@ public class DetailLocalFormationService {
 		return ok;
 	}
 
+	/**
+	 * 
+	 * @param detailLocalFormation
+	 * @param formateur
+	 * @param seance
+	 * @param jour
+	 * @return
+	 */
 	public boolean isAlreadyAffected(DetailLocalFormation detailLocalFormation, Formateur formateur,
 			Seance seance, Jour jour) {
 		boolean ok = false;

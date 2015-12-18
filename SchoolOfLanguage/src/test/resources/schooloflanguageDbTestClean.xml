@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+	<Employe />
+	<Formateur />
+	<Formation />
+	<Reservation />
+	<LocalCours />
+	<StatutProfessionnel />
+	<Participant />
+	<Inscription />
+	<DetailLocalFormation />
+	<PublicationInscription />
+</dataset>

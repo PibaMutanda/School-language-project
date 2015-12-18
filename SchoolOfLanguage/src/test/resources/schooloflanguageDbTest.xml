@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+	<Employe id="1" nom="Marlin" password="martin" login="Martin"
+		roleEmploye="SIMPLE" />
+	<Employe id="2" nom="Justine" password="justine" login="Justine"
+		roleEmploye="ADMIN" />
+	<Formateur id="1" nom="Mutanda" prenom="Piba" password="mutandapasswd"
+		login="mutanda" />
+	<Formateur id="2" nom="Michaux" prenom="Michel" password="michaux"
+		login="michaux" />
+	<Formation id="1" codeFormation="En05" titre="Anglais" />
+	<Formation id="2" codeFormation="Fr04" titre="French" />
+	<Reservation id="1" nom="Ndala" prenom="Jean" email="ndalejen@live.ze"
+		gsm="0013245670" dateReserv="2016-1-5" dateRdv="2016-1-6" />
+	<Reservation id="2" nom="Nauno" prenom="Luc" email="naunou@live.ze"
+		gsm="0013276470" dateReserv="2016-5-7" dateRdv="2016-5-8" />
+	<LocalCours id="1" capacite="20" numLocal="4F" estLibre="false" />
+	<LocalCours id="2" capacite="15" numLocal="3G" estLibre="true" />
+	<StatutProfessionnel id="1" statut="Employe" prix="200" />
+	<StatutProfessionnel id="2" statut="Chomeur" prix="100" />
+	<Participant id="1" matricule="451L" email="piautanda@live.com"
+		gsm="0111145234" nom="Mutanda" prenom="Piba" ville="Brussels" codeP="1050"
+		numero="220F" rue="Adolphhe Buyl" sexe="HOMME" local_id="1"
+		statutProfessionnel_id="1" />
+	<Participant id="2" matricule="245" email="piutnda@live.com"
+		gsm="0174585234" nom="Patou" prenom="Charles" ville="Brussels" codeP="1050"
+		numero="2" rue="Panthere" sexe="HOMME" local_id="1"
+		statutProfessionnel_id="2" />
+	<Participant id="3" matricule="784" email="jgfpiutnda@live.com"
+		gsm="0174588888" nom="Marine" prenom="Joelle" ville="Brussels" codeP="1040"
+		numero="5" rue="du bois" sexe="FEMME" local_id="2"
+		statutProfessionnel_id="2" />
+	<Inscription id="1" communicationPaie="12455f" montantPaie="200"
+		dateInscription="2016-06-02" participant_id="1" />
+	<Inscription id="2" communicationPaie="654ghdd"
+		montantPaie="100" dateInscription="2016-06-02" participant_id="2" />
+	<DetailLocalFormation id="1" jour="1" niveau="2"
+		quota="10" seance="1" formateur_id="1" formation_id="1" local_id="1"
+		participant_id="1" />
+	<DetailLocalFormation id="2" jour="1" niveau="2"
+		quota="10" seance="1" formateur_id="2" formation_id="2" local_id="2"
+		participant_id="3" />
+	<DetailLocalFormation id="3" jour="2" niveau="3"
+		quota="15" seance="1" formateur_id="1" formation_id="2" local_id="2"
+		participant_id="2" />
+	<PublicationInscription id="1"
+		messageInscription="message publication" dateDebInscr="2016-4-20"
+		dateFinInscr="2016-5-1" employe_id="1" />
+	<PublicationInscription id="2"
+		messageInscription="publication date " dateDebInscr="2016-8-10"
+		dateFinInscr="2016-8-25" employe_id="2" />
+</dataset>

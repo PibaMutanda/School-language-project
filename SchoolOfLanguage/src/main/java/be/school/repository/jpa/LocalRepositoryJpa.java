@@ -2,6 +2,8 @@ package be.school.repository.jpa;
 
 import java.util.List;
 
+import javax.persistence.Query;
+
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,9 +27,10 @@ public class LocalRepositoryJpa extends GenericRepositoryJpa<Local> implements
 	@SuppressWarnings("rawtypes")
 	public Local findByNum(String numLocal) {
 		Local local = null;
-		List localList = em
-				.createQuery("select l from Local l where numLocal = :numLocal")
-				.setParameter("numLocal", numLocal).getResultList();
+		Query query = em
+				.createQuery("select l from Local l where numLocal = :numLocal");
+		query.setParameter("numLocal", numLocal);
+		List localList = query.getResultList();
 		if (!localList.isEmpty())
 			local = (Local) localList.get(0);
 		return local;
@@ -39,10 +42,11 @@ public class LocalRepositoryJpa extends GenericRepositoryJpa<Local> implements
 	@SuppressWarnings("rawtypes")
 	public Local findByDetalLocalFormation(Long id) {
 		Local local = null;
-		List locaux = em
-				.createQuery(
-						"select lc from Local lc join lc.detailLocalFormations dlf where dlf.id= :id")
-				.setParameter("id", id).setMaxResults(1).getResultList();
+		Query query = em
+				.createQuery("select lc from Local lc join lc.detailLocalFormations dlf where dlf.id= :id");
+		query.setParameter("id", id);
+		query.setMaxResults(1);
+		List locaux = query.getResultList();
 		if (!locaux.isEmpty())
 			local = (Local) locaux.get(0);
 		return local;

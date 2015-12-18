@@ -19,9 +19,9 @@ public interface DetailLocalFormationRepository extends
 		GenericRepository<DetailLocalFormation> {
 
 	/**
-	 * retourne la liste de detailLocationFormation
 	 * 
 	 * @return
+	 *     retourne la liste de detailLocationFormation
 	 */
 	List<DetailLocalFormation> findAllDistinct();
 

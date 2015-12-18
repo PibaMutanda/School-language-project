@@ -9,10 +9,10 @@
 <!--    http://www.luckyryan.com/2013/02/06/setup-a-simple-spring-mvc-site-with-maven/  -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link href="<%=request.getContextPath()%>/resources/css/style.css"
+<link href="resources/css/style.css"
 	rel="stylesheet" type="text/css">
 <link rel="stylesheet"
-	href="<%=request.getContextPath()%>/resources/css/bootstrap.min.css">
+	href="resources/css/bootstrap.min.css">
 <title><decorator:title>School Of Language</decorator:title></title>
 <decorator:head></decorator:head>
 </head>
@@ -48,9 +48,9 @@
 	</footer>
 </body>
 
-<script src="<%=request.getContextPath()%>/resources/js/jquery.js"></script>
-<script src="<%=request.getContextPath()%>/resources/js/jquery-ui.min.js"></script>
+<script src="resources/js/jquery.js"></script>
+<script src="resources/js/jquery-ui.min.js"></script>
 <script
-	src="<%=request.getContextPath()%>/resources/js/bootstrap.min.js"></script>
-<script src="<%=request.getContextPath()%>/resources/js/angular.min.js"></script>	
+	src="resources/js/bootstrap.min.js"></script>
+<script src="resources/js/angular.min.js"></script>	
 </html>
