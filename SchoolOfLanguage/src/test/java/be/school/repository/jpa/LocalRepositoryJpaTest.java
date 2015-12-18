@@ -13,7 +13,10 @@ import org.springframework.test.context.support.DependencyInjectionTestExecution
 import org.springframework.test.context.support.DirtiesContextTestExecutionListener;
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 
+import be.school.enumClass.Jour;
+import be.school.model.DetailLocalFormation;
 import be.school.model.Local;
+import be.school.repository.DetailLocalFormationRepository;
 import be.school.repository.LocalRepository;
 
 import com.github.springtestdbunit.DbUnitTestExecutionListener;
@@ -33,6 +36,8 @@ public class LocalRepositoryJpaTest {
 	@Autowired
 	private LocalRepository localRepository;
 
+	@Autowired
+	private DetailLocalFormationRepository detailLocalFormationRepository;
 	
 	@SuppressWarnings("unchecked")
 	@Test
@@ -51,11 +56,21 @@ public class LocalRepositoryJpaTest {
 	public void tesNottFindByNum() {
 		Local local = localRepository.findByNum("45");
 		assertThat(local, nullValue());
+		
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Test
 	public void testFindByDetalLocalFormation() {
-		fail("Not yet implemented");
+		DetailLocalFormation detailLocalFormation = detailLocalFormationRepository.findById(2L);
+		Local local = localRepository.findByDetalLocalFormation(detailLocalFormation.getId());
+		assertThat(local, allOf(hasProperty("id", is(Long.valueOf("2"))),
+				hasProperty("capacite", is("15")),
+				hasProperty("estLibre", is(Boolean.valueOf("true"))),
+				hasProperty("numLocal", is("3G"))
+						));
+		assertEquals("10", detailLocalFormation.getQuota());
+		assertEquals(Jour.MARDI, detailLocalFormation.getJour());
 	}
 
 }
