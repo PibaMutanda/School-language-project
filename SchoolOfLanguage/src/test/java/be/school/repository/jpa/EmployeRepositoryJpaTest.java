@@ -20,30 +20,31 @@ import com.github.springtestdbunit.DbUnitTestExecutionListener;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.github.springtestdbunit.annotation.DatabaseTearDown;
 
-
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations ={"/test-context.xml"})
-@TestExecutionListeners({DependencyInjectionTestExecutionListener.class,
-	DirtiesContextTestExecutionListener.class,
-	TransactionalTestExecutionListener.class,
-	DbUnitTestExecutionListener.class})
-@DatabaseSetup(value="/schooloflanguageDbTest.xml")
-@DatabaseTearDown(value="/schooloflanguageDbTestClean.xml")
+@ContextConfiguration(locations = { "/test-context.xml" })
+@TestExecutionListeners({ DependencyInjectionTestExecutionListener.class,
+		DirtiesContextTestExecutionListener.class,
+		TransactionalTestExecutionListener.class,
+		DbUnitTestExecutionListener.class })
+@DatabaseSetup(value = "/schooloflanguageDbTest.xml")
+@DatabaseTearDown(value = "/schooloflanguageDbTestClean.xml")
 public class EmployeRepositoryJpaTest {
 
 	@Autowired
 	private EmployeRepository employeRepository;
-	
+
 	@Test
 	public void testFindByLoginAndPwd() {
-		Employe employe = employeRepository.findByLoginAndPwd("Justine", "justine");
+		Employe employe = employeRepository.findByLoginAndPwd("Justine",
+				"justine");
 		assertEquals(2, employe.getId().longValue());
 		assertThat(employe.getNom(), is("Justine"));
 	}
-   
+
 	@Test
-	public void testUnSuccessFindByLoginAndPwd(){
-		Employe employe = employeRepository.findByLoginAndPwd("Julien", "password");
+	public void testUnSuccessFindByLoginAndPwd() {
+		Employe employe = employeRepository.findByLoginAndPwd("Julien",
+				"password");
 		assertEquals(null, employe);
 	}
 }

@@ -5,6 +5,9 @@
 <title>Home</title>
 </head>
 <body>
+	<div id="notification-message">
+		<strong>${messageSuccess}</strong>
+	</div>
 	<div id="carousel-example-generic" class="carousel slide"
 		data-ride="carousel">
 		<!-- Indicators -->
@@ -52,8 +55,8 @@
 	${controllerMessage}
 </body>
 <script src="resources/js/jquery.js"></script>
+<script src="resources/js/jquery-ui.min.js"></script>
+<script src="resources/js/bootstrap.min.js"></script>
 <script
-	src="resources/js/jquery-ui.min.js"></script>
-<script
-	src="resources/js/bootstrap.min.js"></script>
+	src="resources/js/scriptMessage.js"></script>
 </html>

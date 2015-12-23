@@ -21,8 +21,15 @@ import be.school.model.Participant;
 import be.school.model.StatutProfessionnel;
 import be.school.repository.ParticipantRepository;
 import be.school.repository.StatutProfessionnelRepository;
+import be.school.util.NotificationUtil;
 import be.school.util.SecurityUtils;
 
+/**
+ * ParticipantController Class
+ * 
+ * @author P. Mutanda
+ *
+ */
 @Controller
 public class ParticipantController {
 
@@ -31,20 +38,26 @@ public class ParticipantController {
 
 	@Autowired
 	private StatutProfessionnelRepository statutprofRepo;
-	
+
 	@InitBinder
 	protected void RegisterFormation(HttpServletRequest request,
 			ServletRequestDataBinder binder) {
 		binder.registerCustomEditor(StatutProfessionnel.class,
 				new PropertyEditorSupport() {
 					public void setAsText(String text) {
-						StatutProfessionnel statutProfessionnel = statutprofRepo.findById(Long
-								.parseLong(text));
+						StatutProfessionnel statutProfessionnel = statutprofRepo
+								.findById(Long.parseLong(text));
 						setValue(statutProfessionnel);
 					}
 				});
 	}
-	
+
+	/**
+	 * 
+	 * @param id
+	 *            id du participant
+	 * @return retourne ModelAndView
+	 */
 	@RequestMapping(value = "/participantregister", method = RequestMethod.GET)
 	public ModelAndView participantRegister(
 			@RequestParam(value = "id", required = false) Long id) {
@@ -55,11 +68,19 @@ public class ParticipantController {
 			participant = new Participant();
 		} else
 			participant = participantRepositoryJpa.findById(id);
-		mv.addObject("participant",participant);
+		mv.addObject("participant", participant);
 		mv.addObject("listStatutProf", listStatutProf);
 		return mv;
 	}
 
+	/**
+	 * 
+	 * @param participant
+	 *            participant
+	 * @param errors
+	 *            erreurs
+	 * @return retourne ModelAndview
+	 */
 	@RequestMapping(value = "/participantsubmit", method = RequestMethod.POST)
 	public ModelAndView participantSubmit(
 			@Valid @ModelAttribute Participant participant, Errors errors) {
@@ -67,16 +88,20 @@ public class ParticipantController {
 		if (errors.hasErrors()) {
 			mv.addObject("participant", participant);
 		} else {
-			
+
 			char[] matrCode = new char[2];
 			try {
 				/*
-				 * ce morceau de code volontairement implementé ainsi pour attribuer un matriule.
-				 * Supposant qu'un participant a un nom ou prenom dont la taille est sup à 3 char*/
-				if(participant.getNom().length()>=3)
-				matrCode = participant.getNom().substring(0, 3).toCharArray();
+				 * ce morceau de code volontairement implementé ainsi pour
+				 * attribuer un matriule. Supposant qu'un participant a un nom
+				 * ou prenom dont la taille est sup à 3 char
+				 */
+				if (participant.getNom().length() >= 3)
+					matrCode = participant.getNom().substring(0, 3)
+							.toCharArray();
 				else
-					matrCode=participant.getPrenom().substring(0,3).toCharArray();
+					matrCode = participant.getPrenom().substring(0, 3)
+							.toCharArray();
 
 			} catch (Exception e) {
 				mv.addObject("messageError", "Saisir le nom du  Participant");
@@ -96,18 +121,21 @@ public class ParticipantController {
 			}
 			try {
 				/*
-				 * le try catch juste pour gérer NPE */
+				 * le try catch juste pour gérer NPE
+				 */
 				participant.getStatutProfessionnel();
 			} catch (Exception e) {
-			
-				mv.addObject("messageError", "Renseignez le statut professionnel");
+
+				mv.addObject("messageError",
+						"Renseignez le statut professionnel");
 				return mv;
 			}
-			
+
 			participant.setMatricule(buffMatr);
-		
+
 			participantRepositoryJpa.save(participant);
-			mv.addObject("messageSuccess", "Le particiant est enregistré avec succès!");
+			NotificationUtil.addNotificationMessage(participant.getNom()
+					+ " est enregistré avec succès!");
 			mv.setViewName("redirect:home");
 		}
 		return mv;

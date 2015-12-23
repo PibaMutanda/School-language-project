@@ -25,6 +25,7 @@ public class ParticipantRepositoryJpa extends GenericRepositoryJpa<Participant>
 	 */
 	@SuppressWarnings("unchecked")
 	public List<Participant> findAllNews() {
+	
 		return em.createQuery(
 				"select p from Participant p where p.local is null")
 				.getResultList();

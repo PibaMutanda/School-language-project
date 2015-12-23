@@ -18,6 +18,17 @@
 		<sitemesh.version>2.4.2</sitemesh.version>
 		<mockito.version>1.9.5</mockito.version>
 	</properties>
+	
+	 <!--
+        SCM configuration is necessary in order to enable Maven to manage
+        the version of the project when releasing a new version on the
+        Jenkins build server.
+        The configuration varies depending on which provider is used
+        (for example, Git, Subversion, etc).
+        In this example, Git is used.
+        Reference: http://maven.apache.org/pom.html#SCM
+    -->
+    
 	<scm>
 		<connection>scm:git:https://github.com/PibaMutanda/School-language-project.git</connection>
 	</scm>
@@ -269,7 +280,22 @@
 					<downloadJavadocs>true</downloadJavadocs>
 				</configuration>
 			</plugin>
-
+            <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <version>2.10.3</version>
+                        <executions>
+                            <execution>
+                               <id>attach-javadocs</id>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <show>private</show>
+                        </configuration>
+                    </plugin> 
 			<!-- Plugin to run and test through maven -->
 			<plugin>
 				<groupId>org.mortbay.jetty</groupId>

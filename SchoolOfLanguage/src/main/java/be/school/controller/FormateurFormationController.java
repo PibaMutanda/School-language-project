@@ -17,7 +17,14 @@ import be.school.repository.DetailLocalFormationRepository;
 import be.school.repository.FormateurRepository;
 import be.school.repository.FormationRepository;
 import be.school.service.DetailLocalFormationService;
+import be.school.util.NotificationUtil;
 
+/**
+ * FormateurFormationController class
+ * 
+ * @author P. Mutanda
+ *
+ */
 @Controller
 public class FormateurFormationController {
 
@@ -30,7 +37,13 @@ public class FormateurFormationController {
 	@Autowired
 	DetailLocalFormationService detailLocalFormService;
 
-	@RequestMapping(value = "/formateurformationdisplay", method = RequestMethod.POST)
+	/**
+	 * 
+	 * @param id
+	 *            id formateur
+	 * @return retourne un formulaire pour associer un formateur à une formation
+	 */
+	@RequestMapping(value = "/formateurformationdisplay", method = RequestMethod.GET)
 	public ModelAndView formateurFormationDisplay(@RequestParam Long id) {
 		ModelAndView mv = new ModelAndView("formformateurformation");
 		Formateur formateur = formateurRepositoryJpa.findById(id);
@@ -41,6 +54,12 @@ public class FormateurFormationController {
 		return mv;
 	}
 
+	/**
+	 * 
+	 * @param id
+	 *            id du formateur
+	 * @return retourne la page detail formation
+	 */
 	@RequestMapping(value = "/formateurdetaildisplay", method = RequestMethod.GET)
 	public ModelAndView displayDetailFormateur(@RequestParam Long id) {
 		ModelAndView mv = new ModelAndView("formateurdetaildisplay");
@@ -49,6 +68,14 @@ public class FormateurFormationController {
 		return mv;
 	}
 
+	/**
+	 * 
+	 * @param formateur
+	 *            formateur du formation
+	 * @param formation
+	 *            formation donnée
+	 * @return retourne soit le formulaire en cas de failure ou succ
+	 */
 	@RequestMapping(value = "/formateurformsubmit", method = RequestMethod.POST)
 	public ModelAndView formformateurformationSubmit(
 			@RequestParam Long formateur, @RequestParam Long formation) {
@@ -62,32 +89,39 @@ public class FormateurFormationController {
 			Formation formation2 = formationRep.findById(formation);
 			DetailLocalFormation detailFormation = detailLocalFormationReposytoryJpa
 					.findById(formation);
-			if(detailFormation.getFormateur()==null){
+			if (detailFormation.getFormateur() == null) {
 				detailFormation.setFormateur(formateur2);
 				detailFormation.setFormation(formation2);
 				detailLocalFormationReposytoryJpa.save(detailFormation);
 			}
-			
-			else{
-			if (detailLocalFormService.isAlreadyAffected(detailFormation, formateur2,
-					detailFormation.getSeance(), detailFormation.getJour()) == true) {
-				mv.addObject("messageError",
-						formateur2.getNom()
-								+ " est déjà pris pour une séance du "
-								+ detailFormation.getJour() + " "
-								+ detailFormation.getSeance());
-				return mv;
-			}
-			}
-			// formateur2.addDetailLocalFormation(detailLocalFormationReposytoryJpa.findById(formation));
 
-			// formateurRepositoryJpa.save(formateur2);
+			else {
+				if (detailLocalFormService.isAlreadyAffected(detailFormation,
+						formateur2, detailFormation.getSeance(),
+						detailFormation.getJour()) == true) {
+					mv.addObject("messageError",
+							formateur2.getNom()
+									+ " est déjà pris pour une séance de "
+									+ detailFormation.getJour() + " "
+									+ detailFormation.getSeance());
+					return mv;
+				}
+			}
+			NotificationUtil.addNotificationMessage(formateur2.getNom()
+					+ " est affecté(e) avec succès au cours de "
+					+ formation2.getTitre());
 			mv.setViewName("redirect:formateurlist");
 			return mv;
 		}
 
 	}
 
+	/**
+	 * 
+	 * @param id
+	 *            id du formateur
+	 * @return retourne le formateur
+	 */
 	@ModelAttribute
 	public Formateur findFormateur(
 			@RequestParam(value = "formateur", required = false) Long id) {

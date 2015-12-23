@@ -23,7 +23,14 @@ import be.school.repository.FormationRepository;
 import be.school.repository.LocalRepository;
 import be.school.repository.ParticipantRepository;
 import be.school.service.DetailLocalFormationService;
+import be.school.util.NotificationUtil;
 
+/**
+ * DetailSpeciLocalFormationController class
+ * 
+ * @author P. Mutanda
+ *
+ */
 @Controller
 public class DetailSpeciLocalFormationController {
 
@@ -45,6 +52,12 @@ public class DetailSpeciLocalFormationController {
 	@Autowired
 	private ParticipantRepository participantRep;
 
+	/**
+	 * 
+	 * @param titre
+	 *            titre de la formation
+	 * @return {@link ModelAndView}
+	 */
 	@RequestMapping(value = "/detailFormation", method = RequestMethod.GET)
 	public @ResponseBody ModelAndView detailSpeciLocalFormation(
 			@RequestParam String titre) {
@@ -64,6 +77,10 @@ public class DetailSpeciLocalFormationController {
 		return mv;
 	}
 
+	/**
+	 * 
+	 * @return {@link ModelAndView}
+	 */
 	@RequestMapping(value = "/detaillocalformdisplay", method = RequestMethod.GET)
 	public ModelAndView detailLocalFormDisplay() {
 		ModelAndView mv = new ModelAndView("detaillocalformdisplay");
@@ -86,12 +103,26 @@ public class DetailSpeciLocalFormationController {
 		return mv;
 	}
 
+	/**
+	 * 
+	 * @param id
+	 *            id du detailLocaLformation
+	 * @return une vue
+	 */
 	@RequestMapping(value = "/deleteDetailLocalForm", method = RequestMethod.GET)
 	public String deleteDetailLocalFormation(@RequestParam(value = "id") Long id) {
+		NotificationUtil
+				.addNotificationMessage("suppression effectuée avec succès");
 		dReposytory.delete(id);
 		return "detaillocalformdisplay";
 	}
 
+	/**
+	 * 
+	 * @param id
+	 *            du detail à modifier
+	 * @return {@link ModelAndView}
+	 */
 	@RequestMapping(value = "/updateDetailLocalForm", method = RequestMethod.GET)
 	public ModelAndView updateDetailLocalForm(
 			@RequestParam(value = "id") Long id) {
@@ -108,6 +139,24 @@ public class DetailSpeciLocalFormationController {
 		return mv;
 	}
 
+	/**
+	 * 
+	 * @param id
+	 *            id du detaillocalFormation
+	 * @param formation
+	 *            formation donnée
+	 * @param local
+	 *            local
+	 * @param jour
+	 *            jour
+	 * @param seance
+	 *            seance
+	 * @param niveau
+	 *            niveau
+	 * @param quota
+	 *            quota
+	 * @return {@link ModelAndView}
+	 */
 	@RequestMapping(value = "/updatedetaillocalformsubmit", method = RequestMethod.POST)
 	public ModelAndView updateDetailLocalFormSubmit(
 			@RequestParam(value = "id") Long id,
@@ -133,8 +182,10 @@ public class DetailSpeciLocalFormationController {
 			mv.addObject("messageError", "Mise à jour non autorisée");
 			return mv;
 		}
-		if(dReposytory.findByLocalSession(local1, seance, jour)!=null){
-			mv.addObject("messageError","Le local est déjà reservé pour une séance du "+jour+"  "+seance);
+		if (dReposytory.findByLocalSession(local1, seance, jour) != null) {
+			mv.addObject("messageError",
+					"Le local est déjà reservé pour une séance du " + jour
+							+ "  " + seance);
 			return mv;
 		}
 		DetailLocalFormation detailLocalFormation = dReposytory.findById(id);
@@ -145,10 +196,18 @@ public class DetailSpeciLocalFormationController {
 		detailLocalFormation.setQuota(quota);
 		detailLocalFormation.setSeance(seance);
 		dReposytory.save(detailLocalFormation);
+		NotificationUtil
+				.addNotificationMessage("Modification est faites avec succès!");
 		mv.setViewName("redirect:detaillocalformdisplay");
 		return mv;
 	}
 
+	/**
+	 * 
+	 * @param id
+	 *            id du formateur
+	 * @return {@link ModelAndView}
+	 */
 	@RequestMapping(value = "/displayprofplanning", method = RequestMethod.GET)
 	public ModelAndView displayProfPlanning(@RequestParam(value = "id") Long id) {
 		Formateur formateur = formateurRep.findById(id);
@@ -166,11 +225,24 @@ public class DetailSpeciLocalFormationController {
 		return mv;
 	}
 
-	@RequestMapping(value="/listparticipant",method = RequestMethod.GET)
-	public ModelAndView showListParticipants(@RequestParam(value="id")Long id){
-		return new ModelAndView("listparticipant", "listdeparticipant", participantRep.getParticipantListByDetailLocalFormation(id));
+	/**
+	 * 
+	 * @param id
+	 *            id du detailLocalformation
+	 * @return {@link ModelAndView}
+	 */
+	@RequestMapping(value = "/listparticipant", method = RequestMethod.GET)
+	public ModelAndView showListParticipants(@RequestParam(value = "id") Long id) {
+		return new ModelAndView("listparticipant", "listdeparticipant",
+				participantRep.getParticipantListByDetailLocalFormation(id));
 	}
-	
+
+	/**
+	 * 
+	 * @param titre
+	 *            titre de la formation
+	 * @return retourne une formation
+	 */
 	@ModelAttribute
 	public Formation findFormation(
 			@RequestParam(value = "formation", required = false) String titre) {

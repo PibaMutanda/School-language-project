@@ -25,7 +25,14 @@ import be.school.model.Local;
 import be.school.repository.DetailLocalFormationRepository;
 import be.school.repository.FormationRepository;
 import be.school.repository.LocalRepository;
+import be.school.util.NotificationUtil;
 
+/**
+ * DetailLocalFormationController class
+ * 
+ * @author P. Mutanda
+ *
+ */
 @Controller
 public class DetailLocalFormationController {
 
@@ -65,7 +72,8 @@ public class DetailLocalFormationController {
 	/**
 	 * 
 	 * @param id
-	 * @return
+	 *            id detailLocaFormation
+	 * @return {@link ModelAndView}
 	 */
 	@RequestMapping(value = "/detailformationregister", method = RequestMethod.GET)
 	public ModelAndView detailFormationRegister(
@@ -94,14 +102,14 @@ public class DetailLocalFormationController {
 	/**
 	 * 
 	 * @param seance
-	 *            seance
+	 *            seance pour la formation
 	 * @param jour
-	 *            jour
+	 *            jour de la formation
 	 * @param detailLocalFormation
 	 *            detailLocalFormation
 	 * @param errors
 	 *            erreurs
-	 * @return modelAndView
+	 * @return {@link ModelAndView}
 	 */
 	@RequestMapping(value = "/detailformationsubmit", method = RequestMethod.POST)
 	public ModelAndView detailFormationSubmit(
@@ -166,9 +174,8 @@ public class DetailLocalFormationController {
 			detailLocalFormation.getLocal().setEstLibre(false);
 			localRepos.save(detailLocalFormation.getLocal());
 			detailFormationReposytory.save(detailLocalFormation);
-
-			mv.addObject("messageSuccess",
-					"Detail formation est enregistré avec succès");
+			NotificationUtil
+					.addNotificationMessage("Detail formation est enregistré avec succès");
 			mv.setViewName("redirect:home");
 
 		}
@@ -176,6 +183,18 @@ public class DetailLocalFormationController {
 		return mv;
 	}
 
+	/**
+	 * 
+	 * @param detailLocalFormation
+	 *            detailLocalFormation
+	 * @param listLocal
+	 *            listLocal
+	 * @param listFormation
+	 *            listFormation
+	 * @param lesJours
+	 *            lesJours
+	 * @return {@link ModelAndView}
+	 */
 	private ModelAndView prepareModelAndView(
 			DetailLocalFormation detailLocalFormation, List listLocal,
 			List listFormation, Jour[] lesJours) {
@@ -190,8 +209,8 @@ public class DetailLocalFormationController {
 	/**
 	 * 
 	 * @param id
-	 *            du detailFormationReposytory
-	 * @return modelAndView
+	 *            id du detailFormationReposytory
+	 * @return {@link ModelAndView}
 	 */
 	@RequestMapping(value = "/detailformation", method = RequestMethod.GET)
 	public ModelAndView detailFormation(Long id) {
@@ -202,6 +221,12 @@ public class DetailLocalFormationController {
 		return mv;
 	}
 
+	/**
+	 * 
+	 * @param id
+	 *            id de la formation
+	 * @return retourne une formation
+	 */
 	@ModelAttribute
 	public Formation findFormation(
 			@RequestParam(value = "formation", required = false) Long id) {
@@ -213,6 +238,12 @@ public class DetailLocalFormationController {
 		return formation;
 	}
 
+	/**
+	 * 
+	 * @param id
+	 *            id du local
+	 * @return retourne un local
+	 */
 	@ModelAttribute
 	public Local findLocal(
 			@RequestParam(value = "locaux", required = false) Long id) {

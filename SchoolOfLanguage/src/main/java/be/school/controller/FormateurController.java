@@ -21,8 +21,15 @@ import be.school.model.Formateur;
 import be.school.model.Formation;
 import be.school.repository.FormateurRepository;
 import be.school.repository.FormationRepository;
+import be.school.util.NotificationUtil;
 import be.school.util.SecurityUtils;
 
+/**
+ * FormateurController controller class
+ * 
+ * @author P. Mutanda
+ *
+ */
 @Controller
 public class FormateurController {
 
@@ -38,13 +45,19 @@ public class FormateurController {
 		binder.registerCustomEditor(Formation.class,
 				new PropertyEditorSupport() {
 					public void setAsText(String text) {
-						Formation formation = formationRepositoryJpa.findById(Long
-								.parseLong(text));
+						Formation formation = formationRepositoryJpa
+								.findById(Long.parseLong(text));
 						setValue(formation);
 					}
 				});
 	}
 
+	/**
+	 * 
+	 * @param id
+	 *            id du formateur
+	 * @return une vue pour enregistrer un formateur
+	 */
 	@RequestMapping(value = "/formateurregister", method = RequestMethod.GET)
 	public ModelAndView formateurRegister(
 			@RequestParam(value = "id", required = false) Long id) {
@@ -58,6 +71,14 @@ public class FormateurController {
 		return mv;
 	}
 
+	/**
+	 * 
+	 * @param formateur
+	 *            données du formateur
+	 * @param errors
+	 *            message d'erreur à envoyer en cas de failure
+	 * @return retourne soit une success vue ou le formulaire en cas de failure
+	 */
 	@RequestMapping(value = "/formateursubmit", method = RequestMethod.POST)
 	public ModelAndView formateurSubmit(
 			@Valid @ModelAttribute Formateur formateur, Errors errors) {
@@ -66,18 +87,22 @@ public class FormateurController {
 			mv.addObject("formateur", formateur);
 			mv.setViewName("formateurregister");
 		} else {
+			mv.setViewName("redirect:formateurlist");
 			formateur.setPassword(SecurityUtils.md5Encode(formateur
 					.getPassword()));
-			mv.addObject("messageSuccess",
-					" Formateur est  enregistré avec succès");
 			mv.addObject("listFormateur", formateurRepositoryJpa.findAll());
 			formateurRepositoryJpa.save(formateur);
-			mv.setViewName("redirect:formateurlist");
+			NotificationUtil.addNotificationMessage(formateur.getNom()
+					+ "  est enregistré avec succès");
 
 		}
 		return mv;
 	}
 
+	/**
+	 * 
+	 * @return retourne la liste des formateurs
+	 */
 	@RequestMapping(value = "/formateurlist", method = RequestMethod.GET)
 	public ModelAndView formateurDisplay() {
 		ModelAndView mv = new ModelAndView("formateurlist");
@@ -86,14 +111,29 @@ public class FormateurController {
 		return mv;
 	}
 
+	/**
+	 * 
+	 * @return retourne la page updateFormateur
+	 */
 	@RequestMapping(value = "/updateFormateur", method = RequestMethod.GET)
 	public String updateFormateurDisplay() {
-		/*
-		 * Cette méthode retourne la page updateFormateur
-		 */
+
 		return "updateFormateur";
 	}
 
+	/**
+	 * 
+	 * @param id
+	 *            id du formateur
+	 * @param oldpassword
+	 *            ancien mot de passe
+	 * @param noupassword
+	 *            nouveau mot de passe
+	 * @param confpassword
+	 *            nouveau mot de passe
+	 * @return retourne le formulaire en cas de failure ou home page en cas de
+	 *         success
+	 */
 	@RequestMapping(value = "/updateformateursubmit", method = RequestMethod.POST)
 	public ModelAndView updateFormateurSubmit(@RequestParam("id") Long id,
 			@RequestParam(value = "oldpassword") String oldpassword,
@@ -116,8 +156,8 @@ public class FormateurController {
 		}
 		formateur.setPassword(SecurityUtils.md5Encode(noupassword));
 		formateurRepositoryJpa.save(formateur);
-		mv.addObject("messageSuccess",
-				"La modification   est  enregistrée avec succès");
+		NotificationUtil
+				.addNotificationMessage("La modification   est  enregistrée avec succès");
 		mv.setViewName("redirect:home");
 		return mv;
 	}

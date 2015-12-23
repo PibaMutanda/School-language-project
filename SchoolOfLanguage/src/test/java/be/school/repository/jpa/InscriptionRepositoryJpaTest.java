@@ -6,7 +6,6 @@ import static org.hamcrest.Matchers.*;
 import java.util.Date;
 import java.util.List;
 
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,27 +24,28 @@ import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.github.springtestdbunit.annotation.DatabaseTearDown;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations ={"/test-context.xml"})
-@TestExecutionListeners({DependencyInjectionTestExecutionListener.class,
-	DirtiesContextTestExecutionListener.class,
-	TransactionalTestExecutionListener.class,
-	DbUnitTestExecutionListener.class})
-@DatabaseSetup(value="/schooloflanguageDbTest.xml")
-@DatabaseTearDown(value="/schooloflanguageDbTestClean.xml")
+@ContextConfiguration(locations = { "/test-context.xml" })
+@TestExecutionListeners({ DependencyInjectionTestExecutionListener.class,
+		DirtiesContextTestExecutionListener.class,
+		TransactionalTestExecutionListener.class,
+		DbUnitTestExecutionListener.class })
+@DatabaseSetup(value = "/schooloflanguageDbTest.xml")
+@DatabaseTearDown(value = "/schooloflanguageDbTestClean.xml")
 public class InscriptionRepositoryJpaTest {
 
 	@Autowired
 	private InscriptionRepository inscriptionRepository;
-	
+
 	@Test
 	public void testFindByDate() {
-	  Inscription inscription = inscriptionRepository.findById(1L);
-     List<Inscription>list = inscriptionRepository.findByDate(inscription.getDateInscription());
-     assertThat(list.size(), is(2));
-     assertEquals("2016-06-02", list.get(0).getDateInscription().toString());
-		
+		Inscription inscription = inscriptionRepository.findById(1L);
+		List<Inscription> list = inscriptionRepository.findByDate(inscription
+				.getDateInscription());
+		assertThat(list.size(), is(2));
+		assertEquals("2016-06-02", list.get(0).getDateInscription().toString());
+
 	}
-	
+
 	@Test
 	public void testDateNotFind() {
 		List<Inscription> list = inscriptionRepository.findByDate(new Date());

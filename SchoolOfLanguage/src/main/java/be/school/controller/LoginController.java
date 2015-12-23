@@ -14,18 +14,39 @@ import be.school.exception.ObjectNotFoundException;
 import be.school.model.Employe;
 import be.school.model.Formateur;
 import be.school.service.LoginService;
+import be.school.util.NotificationUtil;
 
+/**
+ * LoginController Class
+ * 
+ * @author P. Mutanda
+ *
+ */
 @Controller
 public class LoginController {
 
 	@Autowired
 	private LoginService loginService;
 
+	/**
+	 * 
+	 * @return retourne la page login
+	 */
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String showLoginPage() {
 		return "login";
 	}
 
+	/**
+	 * 
+	 * @param login
+	 *            login de user
+	 * @param password
+	 *            mot de passe de user
+	 * @param request
+	 *            requête
+	 * @return retourne ModelAndView
+	 */
 	@RequestMapping(value = "/loginsubmit", method = RequestMethod.POST)
 	public ModelAndView loginSubmit(
 			@RequestParam(value = "login") String login,
@@ -53,19 +74,23 @@ public class LoginController {
 				Formateur formateur = loginService.loginFormateur(login,
 						password);
 				HttpSession sessionFormateur = request.getSession();
-				String mySession=formateur.getId()+formateur.getNom();
+				String mySession = formateur.getId() + formateur.getNom();
 				sessionFormateur.setAttribute("mySession", mySession);
 				sessionFormateur.setAttribute("formateur", formateur);
+				NotificationUtil.addNotificationMessage("Welcome "
+						+ formateur.getNom());
 			} catch (ObjectNotFoundException e) {
 				mv.addObject("messageError", "Login ou mot de passe incorrect");
 				return mv;
 			}
 		} else {
 			try {
-				
+
 				Employe employe = loginService.loginEmploye(login, password);
 				HttpSession sessionEmploye = request.getSession();
 				sessionEmploye.setAttribute("employe", employe);
+				NotificationUtil.addNotificationMessage("Welcome "
+						+ employe.getNom());
 			} catch (ObjectNotFoundException e) {
 				mv.addObject("messageError", "Login ou mot de passe incorrect");
 				return mv;

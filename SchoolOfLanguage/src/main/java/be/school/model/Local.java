@@ -63,7 +63,7 @@ public class Local {
 
 	/**
 	 * 
-	 * @return retourne une boolean
+	 * @return retourne un boolean
 	 */
 	public boolean isEstLibre() {
 		return estLibre;
@@ -100,7 +100,7 @@ public class Local {
 
 	/**
 	 * 
-	 * @return retourne capacité
+	 * @return retourne la capacité maximale d'un local
 	 */
 	public String getCapacite() {
 		return capacite;
@@ -117,7 +117,7 @@ public class Local {
 
 	/**
 	 * 
-	 * @return retourne un ensemble de participants
+	 * @return retourne un set des participants
 	 */
 	public Set<Participant> getParticipants() {
 		return participants;

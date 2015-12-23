@@ -19,6 +19,14 @@ import be.school.repository.FormationRepository;
 import be.school.repository.LocalRepository;
 import be.school.repository.ParticipantRepository;
 import be.school.service.DetailLocalFormationService;
+import be.school.util.NotificationUtil;
+
+/**
+ * ParticipantFormationController Class
+ * 
+ * @author P. Mutanda
+ *
+ */
 
 @Controller
 public class ParticipantFormationController {
@@ -38,6 +46,14 @@ public class ParticipantFormationController {
 	@Autowired
 	private DetailLocalFormationService detailLocSerrv;
 
+	/**
+	 * 
+	 * @param id
+	 *            id du participant
+	 * @param niveau
+	 *            niveau participant
+	 * @return retourne ModelAndView
+	 */
 	@RequestMapping(value = "/participantformation", method = RequestMethod.GET)
 	public ModelAndView participantForm(@RequestParam(value = "id") Long id,
 			@RequestParam(value = "niveau") String niveau) {
@@ -45,6 +61,14 @@ public class ParticipantFormationController {
 		return mv;
 	}
 
+	/**
+	 * 
+	 * @param id
+	 *            id de la formation
+	 * @param niveau
+	 *            niveau de la formation
+	 * @return retourne ModelAndView
+	 */
 	@RequestMapping(value = "/participantformationold", method = RequestMethod.GET)
 	public ModelAndView formationList(@RequestParam(value = "id") Long id,
 			@RequestParam(value = "niveau") String niveau) {
@@ -52,6 +76,14 @@ public class ParticipantFormationController {
 		return mv;
 	}
 
+	/**
+	 * 
+	 * @param id
+	 *            id de la formation
+	 * @param niveau
+	 *            niveau de la formation
+	 * @return retourne ModelAndView
+	 */
 	private ModelAndView prepareModelAndView2(
 			@RequestParam(value = "id") Long id,
 			@RequestParam(value = "niveau") String niveau) {
@@ -71,6 +103,14 @@ public class ParticipantFormationController {
 		return mv;
 	}
 
+	/**
+	 * 
+	 * @param id
+	 *            id de la formation
+	 * @param niveau
+	 *            de la formation
+	 * @return retourne ModelAndView
+	 */
 	private ModelAndView prepareModelAndView(
 			@RequestParam(value = "id") Long id,
 			@RequestParam(value = "niveau") String niveau) {
@@ -91,6 +131,10 @@ public class ParticipantFormationController {
 
 	}
 
+	/**
+	 * 
+	 * @return retourne ModelAndView
+	 */
 	@RequestMapping(value = "/participantformationlistmenu", method = RequestMethod.GET)
 	public ModelAndView getListFormation2() {
 		ModelAndView mv = new ModelAndView("participantformationlistmenu");
@@ -98,6 +142,10 @@ public class ParticipantFormationController {
 		return mv;
 	}
 
+	/**
+	 * 
+	 * @return retourne ModelAndView
+	 */
 	@RequestMapping(value = "/formationlistmenu", method = RequestMethod.GET)
 	public ModelAndView getListFormation() {
 		ModelAndView mv = new ModelAndView("formationlistmenu");
@@ -105,8 +153,18 @@ public class ParticipantFormationController {
 		return mv;
 	}
 
-	/*
+	/**
 	 * This method will be called by dispatcher to save new participant
+	 * 
+	 * @param participant
+	 *            participant
+	 * @param formation
+	 *            formation
+	 * @param local
+	 *            local
+	 * @param niveau
+	 *            niveau
+	 * @return retourne ModelAndView
 	 */
 	@RequestMapping(value = "/participantformationsubmit", method = RequestMethod.POST)
 	public ModelAndView participantFormationSubmit(
@@ -162,16 +220,27 @@ public class ParticipantFormationController {
 			detailLocalFormation.setNiveau(niveau);
 			participantRep.save(participant2);
 			detailLocalFormaRep.save(detailLocalFormation);
-			mv.addObject("messageSuccess", "Inscription enregistrée pour "
-					+ participant2.getNom());
+			NotificationUtil
+					.addNotificationMessage("Inscription enregistrée avec succès pour "
+							+ participant2.getNom());
 			mv.setViewName("redirect: home");
 			return mv;
 		}
 
 	}
 
-	/*
+	/**
 	 * Spring MVC will call this method to save old participant
+	 * 
+	 * @param participant
+	 *            participant
+	 * @param formation
+	 *            formation
+	 * @param local
+	 *            local
+	 * @param niveau
+	 *            niveau
+	 * @return ModelAndView
 	 */
 	@RequestMapping(value = "/participantformationoldsubmit", method = RequestMethod.POST)
 	public ModelAndView participantFormationOldSubmit(
@@ -221,8 +290,9 @@ public class ParticipantFormationController {
 			}
 			participantRep.save(participant2);
 			detailLocalFormaRep.save(detailLocalFormation);
-			mv.addObject("messageSuccess", "Inscription enregistrée pour "
-					+ participant2.getNom());
+			NotificationUtil
+					.addNotificationMessage("Inscription enregistrée avec succès pour "
+							+ participant2.getNom());
 			mv.setViewName("redirect: home");
 			return mv;
 		}

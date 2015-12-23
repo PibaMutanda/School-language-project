@@ -17,8 +17,15 @@ import be.school.exception.ObjectAlreadyExistsException;
 import be.school.model.Formation;
 import be.school.repository.FormationRepository;
 import be.school.service.FormationService;
+import be.school.util.NotificationUtil;
 import be.school.util.SecurityUtils;
 
+/**
+ * FormationController class
+ * 
+ * @author P. Mutanda
+ *
+ */
 @Controller
 public class FormationController {
 
@@ -27,6 +34,12 @@ public class FormationController {
 	@Autowired
 	FormationRepository formationRepositoryJpa;
 
+	/**
+	 * 
+	 * @param id
+	 *            id formation
+	 * @return retourne la page formulaire pour enregistrer une formation
+	 */
 	@RequestMapping(value = "/formationregister", method = RequestMethod.GET)
 	public ModelAndView formationRegister(
 			@RequestParam(value = "id", required = false) Long id) {
@@ -40,7 +53,16 @@ public class FormationController {
 		return mv;
 	}
 
-	@RequestMapping(value="/formationsubmit", method=RequestMethod.POST)
+	/**
+	 * 
+	 * @param formation
+	 *            formation à en registrer
+	 * @param errors
+	 *            erreurs lors d'encodage
+	 * @return retourne soit une page formulaire en cas de failure ou la page
+	 *         liste de formations
+	 */
+	@RequestMapping(value = "/formationsubmit", method = RequestMethod.POST)
 	public ModelAndView formationSubmit(
 			@Valid @ModelAttribute Formation formation, Errors errors) {
 
@@ -68,16 +90,17 @@ public class FormationController {
 			try {
 				Formation formation1 = formationService.registerFormation(
 						formation.getCodeFormation(), formation.getTitre());
-				
+
 				if (formation1 != null) {
-					//mv.addObject("id",formation1.getId());
-					mv.addObject("messageSuccess","Formation est enregistrée avec succès");
-					mv.setViewName("redirect:formationlist"); 
+					// mv.addObject("id",formation1.getId());
+					NotificationUtil.addNotificationMessage(formation1
+							.getTitre() + " est enregistrée avec succès");
+					mv.setViewName("redirect:formationlist");
 				}
-			
+
 			} catch (ObjectAlreadyExistsException e) {
-				mv.addObject("messageError", "Impossible d'ajouter la formation "
-						+ e.getMessage());
+				mv.addObject("messageError",
+						"Impossible d'ajouter la formation " + e.getMessage());
 				mv.setViewName("formationregister");
 				return mv;
 			}
@@ -85,12 +108,16 @@ public class FormationController {
 
 		return mv;
 	}
-	
-	@RequestMapping(value="/formationlist",method = RequestMethod.GET)
-	public ModelAndView formationsDisplay(){
+
+	/**
+	 * 
+	 * @return retourne la liste de formations données
+	 */
+	@RequestMapping(value = "/formationlist", method = RequestMethod.GET)
+	public ModelAndView formationsDisplay() {
 		ModelAndView mv = new ModelAndView("formationlistdisplay");
-		List<Formation> listFormation= formationRepositoryJpa.findAll();
-		mv.addObject("listformations",listFormation);
+		List<Formation> listFormation = formationRepositoryJpa.findAll();
+		mv.addObject("listformations", listFormation);
 		return mv;
 	}
 

@@ -30,6 +30,10 @@
 		gsm="0174588888" nom="Marine" prenom="Joelle" ville="Brussels" codeP="1040"
 		numero="5" rue="du bois" sexe="FEMME" local_id="2"
 		statutProfessionnel_id="2" />
+	<Participant id="4" matricule="623" email="myemail@live.com"
+		gsm="7013256480" nom="Yaya" prenom="Emerine" ville="Saint-gilles"
+		codeP="1040" numero="22" rue="Victoire" sexe="FEMME"
+		statutProfessionnel_id="2" />
 	<Inscription id="1" communicationPaie="12455f" montantPaie="200"
 		dateInscription="2016-06-02" participant_id="1" />
 	<Inscription id="2" communicationPaie="654ghdd"

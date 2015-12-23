@@ -18,7 +18,14 @@ import be.school.model.PublicationInscription;
 import be.school.repository.EmployeRepository;
 import be.school.repository.PublicationInscriptionRepository;
 import be.school.util.DateUtil;
+import be.school.util.NotificationUtil;
 
+/**
+ * PublicationInscriptionController Class
+ * 
+ * @author P. Mutanda
+ *
+ */
 @Controller
 public class PublicationInscriptionController {
 
@@ -28,11 +35,19 @@ public class PublicationInscriptionController {
 	@Autowired
 	private PublicationInscriptionRepository publicationInscrRepo;
 
+	/**
+	 * 
+	 * @return retourne la page vue
+	 */
 	@RequestMapping(value = "/publishinscription", method = RequestMethod.GET)
 	public String publishInscription() {
 		return "publishinscription";
 	}
 
+	/**
+	 * 
+	 * @return retourne ModelAndView
+	 */
 	@RequestMapping(value = "/showpublishinscription", method = RequestMethod.GET)
 	public ModelAndView showPublishInscription() {
 		ModelAndView mv = new ModelAndView("showpublishinscription");
@@ -48,6 +63,14 @@ public class PublicationInscriptionController {
 		return mv;
 	}
 
+	/**
+	 * 
+	 * @param id
+	 *            id de l'employé qui publie la date d'inscription
+	 * @param request
+	 *            requête
+	 * @return retourne ModelAndView
+	 */
 	@RequestMapping(value = "/publishinscriptionsubmit", method = RequestMethod.POST)
 	public ModelAndView publishInscriptionSubmit(
 			@RequestParam(value = "id") Long id, HttpServletRequest request) {
@@ -69,7 +92,7 @@ public class PublicationInscriptionController {
 				messageErrors
 						.add("La date doit être postérieure à la date courante");
 			if (dateDeb.after(dateFin))
-				messageErrors.add("Saisir correctement l'ordre des dates");
+				messageErrors.add("Saisir correctement l'ordre de dates");
 		}
 		if (messageErrors.size() > 0) {
 			mv.addObject("messageError", messageErrors);
@@ -85,6 +108,8 @@ public class PublicationInscriptionController {
 			publicationInscription.setEmploye(employe);
 			employeResository.save(employe);
 			publicationInscrRepo.save(publicationInscription);
+			NotificationUtil
+					.addNotificationMessage("Les dates des inscriptions sont publiées!!");
 			mv.setViewName("showpublishinscription");
 			return mv;
 		}

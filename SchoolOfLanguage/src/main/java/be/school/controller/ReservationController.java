@@ -28,7 +28,14 @@ import be.school.model.Formation;
 import be.school.model.Reservation;
 import be.school.repository.FormationRepository;
 import be.school.repository.ReservationRepository;
+import be.school.util.NotificationUtil;
 
+/**
+ * ReservationController Class
+ * 
+ * @author P. Mutanda
+ *
+ */
 @Controller
 public class ReservationController {
 
@@ -57,6 +64,12 @@ public class ReservationController {
 				dateFormat, false));
 	}
 
+	/**
+	 * 
+	 * @param id
+	 *            id de la réservation
+	 * @return retourne ModelAndView
+	 */
 	@RequestMapping(value = "/reservationregister", method = RequestMethod.GET)
 	public ModelAndView reservationRegister(
 			@RequestParam(value = "id", required = false) Long id) {
@@ -67,12 +80,22 @@ public class ReservationController {
 		} else {
 			reservation = reservationRepositoryJpa.findById(id);
 		}
-		List formations = formationRepositoryJpa.findAll();
+		List<Formation> formations = formationRepositoryJpa.findAll();
 		mv.addObject("formations", formations);
 		mv.addObject("reservation", reservation);
 		return mv;
 	}
 
+	/**
+	 * 
+	 * @param reservation
+	 *            réservation
+	 * @param errors
+	 *            erreurs
+	 * @param request
+	 *            requête
+	 * @return {@link ModelAndView}
+	 */
 	@RequestMapping(value = "/reservationsubmit", method = RequestMethod.POST)
 	@Transactional
 	public ModelAndView reservationSubmit(
@@ -113,18 +136,20 @@ public class ReservationController {
 		} else {
 
 			reservationRepositoryJpa.save(reservation);
-			mv.addObject(
-					"messageSuccess",
-					reservation.getNom()
-							+ " rendez-vous pour l'inscrisption est pris pour "
-							+ DateFormat.getDateInstance().format(
-									reservation.getDateRdv()));
+			NotificationUtil.addNotificationMessage(reservation.getNom()
+					+ " rendez-vous pour l'inscrisption est pris pour "
+					+ DateFormat.getDateInstance().format(
+							reservation.getDateRdv()));
 			mv.setViewName("redirect:home");
 
 		}
 		return mv;
 	}
 
+	/**
+	 * 
+	 * @return {@inheritDoc}
+	 */
 	@RequestMapping(value = "/listreservation", method = RequestMethod.GET)
 	public ModelAndView showlistReservation() {
 		ModelAndView mv = new ModelAndView("listreservation");

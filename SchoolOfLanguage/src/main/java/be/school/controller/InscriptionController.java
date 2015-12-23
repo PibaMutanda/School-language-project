@@ -16,8 +16,15 @@ import be.school.model.Participant;
 import be.school.repository.InscriptionRepository;
 import be.school.repository.ParticipantRepository;
 import be.school.util.DateUtil;
+import be.school.util.NotificationUtil;
 import be.school.util.SecurityUtils;
 
+/**
+ * InscriptionController Class
+ * 
+ * @author P. Mutanda
+ *
+ */
 @Controller
 public class InscriptionController {
 
@@ -27,11 +34,23 @@ public class InscriptionController {
 	@Autowired
 	private InscriptionRepository inscriptionRepositoryJpa;
 
+	/**
+	 * 
+	 * @return retourne un formulaire pour inscription
+	 */
 	@RequestMapping(value = "/inscriptionregister", method = RequestMethod.GET)
 	public String insriptionregister() {
 		return "inscriptionregister";
 	}
 
+	/**
+	 * 
+	 * @param matricule
+	 *            matricule de l'étudiant
+	 * @param email
+	 *            email de du participant
+	 * @return retourne ModelAndView
+	 */
 	@RequestMapping(value = "/inscriptionsubmit", method = RequestMethod.POST)
 	public ModelAndView inscriptionsubmit(
 			@RequestParam(value = "matricule") String matricule,
@@ -57,6 +76,12 @@ public class InscriptionController {
 		return mv;
 	}
 
+	/**
+	 * 
+	 * @param id
+	 *            id du participant
+	 * @return retourne ModelAndView
+	 */
 	@RequestMapping(value = "/validerinscription", method = RequestMethod.GET)
 	public ModelAndView showFormValiderInscription(
 			@RequestParam(value = "id") Long id) {
@@ -66,6 +91,14 @@ public class InscriptionController {
 		return mv;
 	}
 
+	/**
+	 * 
+	 * @param id
+	 *            id du participant
+	 * @param request
+	 *            requête
+	 * @return retourne ModelAndView
+	 */
 	@RequestMapping(value = "/validerinscriptionsubmit", method = RequestMethod.POST)
 	public ModelAndView validerInscriptionSubmit(
 			@RequestParam(value = "id") Long id, HttpServletRequest request) {
@@ -88,12 +121,13 @@ public class InscriptionController {
 			inscription.setParticipant(participant);
 			inscription.setMontantPaie(sum);
 			inscription.setDateInscription(new Date());
-			mv.addObject(
-					"messageSuccess",new StringBuilder(
-					"Inscription enregistrée, Vous devez payer la somme de ").append(String.valueOf(sum)).append(
-							 "  sur le compte BE00 0000 0000 0000 en indiquant comme communication  ").append(
-							communicationforPaid));
 			inscriptionRepositoryJpa.save(inscription);
+			NotificationUtil
+					.addNotificationMessage(new StringBuilder(
+							"Votre inscription est enregistrée, Vous devez payer la somme de ")
+							.append(String.valueOf(sum))
+							.append("  sur le compte BE00 0000 0000 0000 en indiquant comme communication  ")
+							.append(communicationforPaid).toString());
 		} else {
 			mv.addObject(
 					"messageError",
@@ -102,11 +136,21 @@ public class InscriptionController {
 		return mv;
 	}
 
+	/**
+	 * 
+	 * @return retourne la liste d'inscription
+	 */
 	@RequestMapping(value = "/listinscription", method = RequestMethod.GET)
 	public String showListInscription() {
 		return "listinscription";
 	}
 
+	/**
+	 * 
+	 * @param request
+	 *            requête
+	 * @return retourne ModelAndView
+	 */
 	@RequestMapping(value = "/listinscriptionsubmit", method = RequestMethod.POST)
 	public ModelAndView showListInscription(HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("listinscription");
@@ -119,5 +163,5 @@ public class InscriptionController {
 					inscriptionRepositoryJpa.findByDate(dateInscription));
 		return mv;
 	}
-	
+
 }

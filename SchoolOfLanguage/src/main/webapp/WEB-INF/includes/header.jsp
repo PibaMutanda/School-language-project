@@ -1,8 +1,22 @@
+<%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c'%>
 <%@page import="be.school.model.Formateur"%>
 <%@page import="be.school.model.Employe"%>
 <html>
 <head>
 <link rel="stylesheet" href="resources/css/bootstrap.min.css">
+<script>
+ $(document).ready(function(){
+// 	$("#notification-message").show().delay(5000).fadeOut();   // Was hidden at the beginning.
+	
+	var tId;
+
+	$("#notification-message").hide().slideDown();
+	clearTimeout(tId);
+	tId=setTimeout(function(){
+	  $("#notification-message").hide();        
+	}, 5000);
+});
+</script>
 </head>
 <nav class="navbar navbar-inverse" role="navigation">
 	<div class="container-fluid">
@@ -56,8 +70,18 @@
 		</div>
 	</div>
 </nav>
+<div>
+<c:if test="${!empty sessionScope.notifications}">
 <div id="notification-message">
-	<strong>${messageSuccess}</strong>
+   <div class="alert alert-success" role="alert">
+         <span class="glyphicon glyphicon-thumbs-up icon-white"></span>
+          <c:forEach items="${sessionScope.notifications}"   var="notif">
+            ${notif.text}<br/>
+          </c:forEach>
+       <% session.removeAttribute("notifications"); %>
+   </div>	
+</div>
+</c:if>
 </div>
 <div class="container">
 	<div class="jumbotron">
@@ -71,15 +95,9 @@
 
 </div>
 
-<script src="<%=request.getContextPath()%>/resources/js/jquery.js"></script>
+<script src="resources/js/jquery.js"></script>
 <script
-	src="<%=request.getContextPath()%>/resources/js/jquery-ui.min.js"></script>
+	src="resources/js/jquery-ui.min.js"></script>
 <script
-	src="<%=request.getContextPath()%>/resources/js/bootstrap.min.js"></script>
-<script type="text/javascript">
-	$(document).ready(function() {
-		$("#notification-message").show().delay(5000);
-		$("#notification-message").hide();
-	});
-</script>
+	src="resources/js/bootstrap.min.js"></script>
 </html>
