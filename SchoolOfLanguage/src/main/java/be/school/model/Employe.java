@@ -112,6 +112,7 @@ public class Employe {
 	 *            login
 	 */
 	public void setLogin(String login) {
+		login=login.toLowerCase();
 		this.login = login;
 	}
 

@@ -61,15 +61,31 @@ public class ParticipantController {
 	@RequestMapping(value = "/participantregister", method = RequestMethod.GET)
 	public ModelAndView participantRegister(
 			@RequestParam(value = "id", required = false) Long id) {
-		ModelAndView mv = new ModelAndView("participantregister");
-		List listStatutProf = statutprofRepo.findAll();
+		ModelAndView mv = null;
+		// List<StatutProfessionnel> listStatutProf = statutprofRepo.findAll();
 		Participant participant = null;
 		if (id == null) {
 			participant = new Participant();
-		} else
+		} else {
 			participant = participantRepositoryJpa.findById(id);
+		}
+		mv = prepareModelAndView(participant);
+		return mv;
+	}
+
+	/**
+	 * 
+	 * @param list
+	 *            list la liste de statut
+	 * @param participant
+	 *            particpant
+	 * @return retourne ModelAndview
+	 */
+	private ModelAndView prepareModelAndView(Participant participant) {
+		ModelAndView mv = new ModelAndView("participantregister");
+		List<StatutProfessionnel> listStatut = statutprofRepo.findAll();
 		mv.addObject("participant", participant);
-		mv.addObject("listStatutProf", listStatutProf);
+		mv.addObject("listStatutProf", listStatut);
 		return mv;
 	}
 
@@ -84,7 +100,7 @@ public class ParticipantController {
 	@RequestMapping(value = "/participantsubmit", method = RequestMethod.POST)
 	public ModelAndView participantSubmit(
 			@Valid @ModelAttribute Participant participant, Errors errors) {
-		ModelAndView mv = new ModelAndView("participantregister");
+		ModelAndView mv = prepareModelAndView(participant);
 		if (errors.hasErrors()) {
 			mv.addObject("participant", participant);
 		} else {

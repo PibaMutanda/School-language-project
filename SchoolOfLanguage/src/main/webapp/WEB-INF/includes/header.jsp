@@ -6,15 +6,15 @@
 <link rel="stylesheet" href="resources/css/bootstrap.min.css">
 <script>
  $(document).ready(function(){
-// 	$("#notification-message").show().delay(5000).fadeOut();   // Was hidden at the beginning.
+ 	$("#notification-message").show().delay(5000).fadeOut();   // Was hidden at the beginning.
 	
-	var tId;
+// 	var tId;
 
-	$("#notification-message").hide().slideDown();
-	clearTimeout(tId);
-	tId=setTimeout(function(){
-	  $("#notification-message").hide();        
-	}, 5000);
+// 	$("#notification-message").hide().slideDown();
+// 	clearTimeout(tId);
+// 	tId=setTimeout(function(){
+// 	  $("#notification-message").hide();        
+// 	}, 5000);
 });
 </script>
 </head>

@@ -236,6 +236,7 @@ public class Participant {
 	 *            email
 	 */
 	public void setEmail(String email) {
+		email=email.toLowerCase();
 		this.email = email;
 	}
 

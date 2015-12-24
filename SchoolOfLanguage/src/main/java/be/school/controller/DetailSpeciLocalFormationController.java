@@ -61,11 +61,27 @@ public class DetailSpeciLocalFormationController {
 	@RequestMapping(value = "/detailFormation", method = RequestMethod.GET)
 	public @ResponseBody ModelAndView detailSpeciLocalFormation(
 			@RequestParam String titre) {
-		ModelAndView mv = new ModelAndView("detailformation");
-		Local local = null;
+
 		Formation formation = formationRep.findByTitre(titre);
 		List<DetailLocalFormation> detailLocalFormations = dReposytory
 				.findAllByFormation(formation);
+		ModelAndView mv = prepareModelAndView(detailLocalFormations, formation);
+		return mv;
+	}
+
+	/**
+	 * 
+	 * @param detailLocalFormations
+	 *            detailLocalFormations
+	 * @param formation
+	 *            formation
+	 * @return {@link ModelAndView}
+	 */
+	private ModelAndView prepareModelAndView(
+			List<DetailLocalFormation> detailLocalFormations,
+			Formation formation) {
+		ModelAndView mv = new ModelAndView("detailformation");
+		Local local = null;
 		if (detailLocalFormations.size() > 0) {
 			local = localRep.findByDetalLocalFormation(detailLocalFormations
 					.get(0).getId());
@@ -73,7 +89,6 @@ public class DetailSpeciLocalFormationController {
 		}
 		mv.addObject("detailLocalFormations", detailLocalFormations);
 		mv.addObject("formation", formation);
-
 		return mv;
 	}
 
@@ -126,6 +141,17 @@ public class DetailSpeciLocalFormationController {
 	@RequestMapping(value = "/updateDetailLocalForm", method = RequestMethod.GET)
 	public ModelAndView updateDetailLocalForm(
 			@RequestParam(value = "id") Long id) {
+		ModelAndView mv = prepareUpdateDetailLocalForm(id);
+		return mv;
+	}
+
+	/**
+	 * 
+	 * @param id
+	 *            id detailLocalFormation
+	 * @return {@link ModelAndView}
+	 */
+	private ModelAndView prepareUpdateDetailLocalForm(Long id) {
 		ModelAndView mv = new ModelAndView("updateDetailLocalForm");
 		DetailLocalFormation detailLocalFormation = dReposytory.findById(id);
 		List<Formation> formations = formationRep.findAll();
@@ -135,7 +161,6 @@ public class DetailSpeciLocalFormationController {
 		mv.addObject("formations", formations);
 		mv.addObject("jours", Jour.values());
 		mv.addObject("seances", Seance.values());
-
 		return mv;
 	}
 
@@ -166,7 +191,7 @@ public class DetailSpeciLocalFormationController {
 			@RequestParam(value = "seance") Seance seance,
 			@RequestParam(value = "niveau") String niveau,
 			@RequestParam(value = "quota") String quota) {
-		ModelAndView mv = new ModelAndView("updateDetailLocalForm");
+		ModelAndView mv = prepareUpdateDetailLocalForm(id);
 		Local local1 = localRep.findById(local);
 		if (Integer.parseInt(local1.getCapacite()) < Integer.parseInt(quota)) {
 			mv.addObject("messageError",
@@ -182,24 +207,31 @@ public class DetailSpeciLocalFormationController {
 			mv.addObject("messageError", "Mise à jour non autorisée");
 			return mv;
 		}
-		if (dReposytory.findByLocalSession(local1, seance, jour) != null) {
+
+		DetailLocalFormation detailLocalForm = dReposytory.findByLocalSession(
+				local1, seance, jour);
+		if (detailLocalForm != null && detailLocalForm.getId() == id) {
+			DetailLocalFormation detailLocalFormation = dReposytory
+					.findById(id);
+			detailLocalFormation.setFormation(formationRep.findById(formation));
+			detailLocalFormation.setLocal(local1);
+			detailLocalFormation.setJour(jour);
+			detailLocalFormation.setNiveau(niveau);
+			detailLocalFormation.setQuota(quota);
+			detailLocalFormation.setSeance(seance);
+			dReposytory.save(detailLocalFormation);
+			NotificationUtil
+					.addNotificationMessage("Modification est faites avec succès!");
+			mv.setViewName("redirect:detaillocalformdisplay");
+			return mv;
+
+		} else {
 			mv.addObject("messageError",
 					"Le local est déjà reservé pour une séance du " + jour
 							+ "  " + seance);
 			return mv;
 		}
-		DetailLocalFormation detailLocalFormation = dReposytory.findById(id);
-		detailLocalFormation.setFormation(formationRep.findById(formation));
-		detailLocalFormation.setLocal(local1);
-		detailLocalFormation.setJour(jour);
-		detailLocalFormation.setNiveau(niveau);
-		detailLocalFormation.setQuota(quota);
-		detailLocalFormation.setSeance(seance);
-		dReposytory.save(detailLocalFormation);
-		NotificationUtil
-				.addNotificationMessage("Modification est faites avec succès!");
-		mv.setViewName("redirect:detaillocalformdisplay");
-		return mv;
+
 	}
 
 	/**

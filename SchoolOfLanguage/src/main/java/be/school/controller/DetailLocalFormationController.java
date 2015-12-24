@@ -78,24 +78,16 @@ public class DetailLocalFormationController {
 	@RequestMapping(value = "/detailformationregister", method = RequestMethod.GET)
 	public ModelAndView detailFormationRegister(
 			@RequestParam(value = "id", required = false) Long id) {
-		// ModelAndView mv = new ModelAndView("detailformationregister");
+		ModelAndView mv = prepareModelAndView();
 		DetailLocalFormation detailLocalFormation = null;
-		List<Formation> listFormation = formationRepos.findAll();
-		List<Local> listLocal = localRepos.findAll();
-		// List<RentreeScolaire> listSchoolY = rentreeScoRep.findAll();
+
 		if (id == null) {
 			detailLocalFormation = new DetailLocalFormation();
 		} else {
 			detailLocalFormation = detailFormationReposytory.findById(id);
 
 		}
-		ModelAndView mv = prepareModelAndView(detailLocalFormation, listLocal,
-				listFormation, Jour.values());
-		// mv.addObject("listLocal", listLocal);
-		// mv.addObject("listFormation", listFormation);
-		// mv.addObject("detailFormation", detailLocalFormation);
-		// mv.addObject("listAnnee", listSchoolY);
-		// mv.addObject("lesJours", Jour.values());
+		mv.addObject("detailLocalFormation", detailLocalFormation);
 		return mv;
 	}
 
@@ -117,7 +109,7 @@ public class DetailLocalFormationController {
 			@RequestParam(value = "jour", required = false) Jour jour,
 			@Valid @ModelAttribute DetailLocalFormation detailLocalFormation,
 			Errors errors) {
-		ModelAndView mv = new ModelAndView("detailformationregister");
+		ModelAndView mv = prepareModelAndView();
 
 		if (detailLocalFormation.getFormation() == null
 				|| detailLocalFormation.getFormation().equals("".trim())) {
@@ -131,6 +123,11 @@ public class DetailLocalFormationController {
 			mv.addObject("messageError", "Choisir un local");
 			return mv;
 		}
+		if (detailLocalFormation.getNiveau() == null
+				|| detailLocalFormation.getNiveau().equals("".trim())) {
+			mv.addObject("messageError", "Choisir le niveau");
+			return mv;
+		}
 		if (Integer.parseInt(detailLocalFormation.getNiveau()) > 9) {
 			mv.addObject("messageError",
 					"La valeur maximale pour le niveau est de 9");
@@ -141,13 +138,18 @@ public class DetailLocalFormationController {
 			mv.addObject("messageError", "Choisir le jour");
 			return mv;
 		}
-
+		if (detailLocalFormation.getQuota() == null
+				|| detailLocalFormation.getQuota().equals("".trim())) {
+			mv.addObject("messageError", "Choisir un quota");
+			return mv;
+		}
 		/* verification du quota par rapport à la capacité maximale */
 		if (Integer.parseInt(detailLocalFormation.getQuota().trim()) > Integer
 				.parseInt(detailLocalFormation.getLocal().getCapacite().trim())) {
 			mv.addObject("messageError",
 					"Le quota est supérieur à la capacité maximun de "
-							+ detailLocalFormation.getLocal().getCapacite());
+							+ detailLocalFormation.getLocal().getCapacite()
+							+ " participants");
 			return mv;
 		}
 
@@ -169,7 +171,8 @@ public class DetailLocalFormationController {
 		}
 
 		if (errors.hasErrors()) {
-			mv.addObject("detailFormation", detailLocalFormation);
+			mv.addObject("messageError",
+					"Une erreur est survenue lors de l'encodage");
 		} else {
 			detailLocalFormation.getLocal().setEstLibre(false);
 			localRepos.save(detailLocalFormation.getLocal());
@@ -185,24 +188,15 @@ public class DetailLocalFormationController {
 
 	/**
 	 * 
-	 * @param detailLocalFormation
-	 *            detailLocalFormation
-	 * @param listLocal
-	 *            listLocal
-	 * @param listFormation
-	 *            listFormation
-	 * @param lesJours
-	 *            lesJours
 	 * @return {@link ModelAndView}
 	 */
-	private ModelAndView prepareModelAndView(
-			DetailLocalFormation detailLocalFormation, List listLocal,
-			List listFormation, Jour[] lesJours) {
+	private ModelAndView prepareModelAndView() {
 		ModelAndView mv = new ModelAndView("detailformationregister");
-		mv.addObject("detailLocalFormation", detailLocalFormation);
-		mv.addObject("listLocal", listLocal);
-		mv.addObject("listFormation", listFormation);
-		mv.addObject("lesJours", lesJours);
+		List<Local> listLocal2 = localRepos.findAll();
+		List<Formation> listForm = formationRepos.findAll();
+		mv.addObject("listLocal", listLocal2);
+		mv.addObject("listFormation", listForm);
+		mv.addObject("lesJours", Jour.values());
 		return mv;
 	}
 

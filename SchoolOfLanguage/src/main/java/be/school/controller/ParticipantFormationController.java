@@ -171,20 +171,24 @@ public class ParticipantFormationController {
 			@RequestParam Long participant, @RequestParam Long formation,
 			@RequestParam Long local, @RequestParam String niveau) {
 		ModelAndView mv = prepareModelAndView(formation, niveau);
-		if (participant == 0 || participant == null) {
-			mv.addObject("messageError", "Choisir un Participant");
+		if (participant.longValue() == 0 || participant == null) {
+			mv.addObject("messageError", "Il faut hoisir un Participant");
 			return mv;
 		}
-		if (formation == 0 || formation == null) {
-			mv.addObject("messageError", "Choisir une formation");
+		if ("0".equals(formation) || formation == null) {
+			mv.addObject("messageError", "Il faut choisir une formation");
 			return mv;
 		}
-		if (local == 0 || local == null) {
+		if (local.longValue() == 0 || local == null) {
 			mv.addObject("messagerError", "Choisir un local");
 			return mv;
 		}
+		if (null == participantRep.findById(participant)) {
+			mv.addObject("messageError", "Veuiller choisir un particpant");
+			return mv;
+		}
 		if (participantRep.findById(participant).getDetailLocalFormations()
-				.size() >= 2) {
+				.size() > 2) {
 			mv.addObject("messageError",
 					"Le particiipant est déjà inscrit pour les deux seances");
 			return mv;
@@ -247,10 +251,14 @@ public class ParticipantFormationController {
 			@RequestParam Long participant, @RequestParam Long formation,
 			@RequestParam Long local, @RequestParam String niveau) {
 		ModelAndView mv = prepareModelAndView2(formation, niveau);
-		if (participant == 0 || participant == null) {
+		if (participant.longValue() == 0 || participant == null) {
 			mv.addObject("messageError", "Choisir un Participant");
-			if (local == 0 || local == null) {
+			if ("0".equals(local) || local == null) {
 				mv.addObject("messagerError", "Choisir un local");
+				return mv;
+			}
+			if (null == participantRep.findById(participant)) {
+				mv.addObject("messageError", "Veuiller choisir un particpant");
 				return mv;
 			}
 			if (participantRep.findById(participant).getDetailLocalFormations()
