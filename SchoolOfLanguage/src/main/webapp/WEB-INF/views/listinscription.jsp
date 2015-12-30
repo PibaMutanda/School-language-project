@@ -5,8 +5,8 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
-	href="<%=request.getContextPath()%>/resources/css/bootstrap.min.css">
-<link href="<%=request.getContextPath()%>/resources/css/style.css"
+	href="resources/css/bootstrap.min.css">
+<link href="resources/css/style.css"
 	rel="stylesheet" type="text/css">
 <title>Liste Inscription</title>
 </head>
@@ -20,6 +20,7 @@
 	<br><br>
 	<hr>
 	<c:if test="${ not empty listinscription  }">
+	  <span style="text-align: right; color: green; font-size: large;" >La liste du : ${dateChoose }</span>
 		<table class="table table-hover">
 			<tr>
 				<th>SEXE</th>
@@ -37,7 +38,7 @@
 					<td>${inscription.participant.prenom }</td>
 					<td>${inscription.participant.matricule }</td>
 					<td>${inscription.participant.email }</td>
-					<td>${inscription.montantPaie }
+					<td>${inscription.montantPaie } €</td>
 					<td>${inscription.communicationPaie }</td>
 				</tr>
 			</c:forEach>
@@ -49,9 +50,9 @@
      </c:otherwise>
 </c:choose>
 </body>
-<script src="<%=request.getContextPath()%>/resources/js/jquery.js"></script>
+<script src="resources/js/jquery.js"></script>
 <script
-	src="<%=request.getContextPath()%>/resources/js/jquery-ui.min.js"></script>
+	src="resources/js/jquery-ui.min.js"></script>
 <script
-	src="<%=request.getContextPath()%>/resources/js/bootstrap.min.js"></script>
+	src="resources/js/bootstrap.min.js"></script>
 </html>

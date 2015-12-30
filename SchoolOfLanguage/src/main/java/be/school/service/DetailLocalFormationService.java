@@ -78,11 +78,19 @@ public class DetailLocalFormationService {
 			DetailLocalFormation detailLocalFormation, Participant participant,
 			Formation formation, String niveau) {
 		boolean ok = false;
-		if (detailLocalFormation.getParticipant().equals(participant)
-				&& detailLocalFormation.getFormation().equals(formation)) {
-			if (detailLocalFormation.getNiveau().equals(niveau))
-				ok = true;
+
+		for (Participant part: detailLocalFormation.getParticipants()) {
+			if(part.getId()==participant.getId() && detailLocalFormation.getFormation().equals(formation)){
+				if (detailLocalFormation.getNiveau().equals(niveau))
+					ok = true;
+				    break;
+			}
 		}
+//		if (detailLocalFormation.getParticipant().equals(participant)
+//				&& detailLocalFormation.getFormation().equals(formation)) {
+//			if (detailLocalFormation.getNiveau().equals(niveau))
+//				ok = true;
+//		}
 		return ok;
 	}
 

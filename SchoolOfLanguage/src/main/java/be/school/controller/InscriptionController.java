@@ -1,6 +1,7 @@
 package be.school.controller;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -39,8 +40,23 @@ public class InscriptionController {
 	 * @return retourne un formulaire pour inscription
 	 */
 	@RequestMapping(value = "/inscriptionregister", method = RequestMethod.GET)
-	public String insriptionregister() {
+	public String inscriptionregister() {
 		return "inscriptionregister";
+	}
+
+	/**
+	 * 
+	 * @return retourne ModelAndView
+	 */
+	private ModelAndView prepareModelAnd() {
+		ModelAndView mv = new ModelAndView("listinscription");
+		Date currentDate = new Date();
+		String strDate = DateUtil.formatddMMyyyyHHmm(currentDate);
+		List<Inscription> listInsc = inscriptionRepositoryJpa
+				.findByDate(currentDate);
+		mv.addObject("listinscription", listInsc);
+		mv.addObject("dateChoose", strDate);
+		return mv;
 	}
 
 	/**
@@ -107,7 +123,8 @@ public class InscriptionController {
 		String[] formations = request.getParameterValues("titre");
 		double sum = 0.0;
 		if (formations != null) {
-			for (String string : formations) {
+			for (@SuppressWarnings("unused")
+			String string : formations) {
 				if (participant != null)
 					sum += participant.getStatutProfessionnel().getPrix();
 			}
@@ -122,12 +139,15 @@ public class InscriptionController {
 			inscription.setMontantPaie(sum);
 			inscription.setDateInscription(new Date());
 			inscriptionRepositoryJpa.save(inscription);
-			NotificationUtil
-					.addNotificationMessage(new StringBuilder(
-							"Votre inscription est enregistrée, Vous devez payer la somme de ")
-							.append(String.valueOf(sum))
-							.append("  sur le compte BE00 0000 0000 0000 en indiquant comme communication  ")
-							.append(communicationforPaid).toString());
+			String message = new StringBuilder(
+					"Votre r&eacute;inscription est enregistrée, Vous devez payer la somme de ")
+					.append(String.valueOf(sum))
+					.append("  sur le compte BE00 0000 0000 0000 en indiquant comme communication  ")
+					.append("<strong>")
+					.append(communicationforPaid)
+					.append("</strong>")
+					.toString();
+			NotificationUtil.addCommunicationMessage(message);
 		} else {
 			mv.addObject(
 					"messageError",
@@ -141,8 +161,8 @@ public class InscriptionController {
 	 * @return retourne la liste d'inscription
 	 */
 	@RequestMapping(value = "/listinscription", method = RequestMethod.GET)
-	public String showListInscription() {
-		return "listinscription";
+	public ModelAndView showListInscription() {
+		return prepareModelAnd();
 	}
 
 	/**
@@ -158,9 +178,11 @@ public class InscriptionController {
 		Date dateInscription = DateUtil.parseyyyyMMdd(dateInscr);
 		if (dateInscription.equals(""))
 			mv.addObject("messageError", "Choisir une date !");
-		else
+		else {
 			mv.addObject("listinscription",
 					inscriptionRepositoryJpa.findByDate(dateInscription));
+			mv.addObject("dateChoose", DateUtil.formatddMMyyyy(dateInscription));
+		}
 		return mv;
 	}
 

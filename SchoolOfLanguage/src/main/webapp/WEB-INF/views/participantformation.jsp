@@ -7,8 +7,8 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
-	href="<%=request.getContextPath()%>/resources/css/bootstrap.min.css">
-<link href="<%=request.getContextPath()%>/resources/css/style.css"
+	href="resources/css/bootstrap.min.css">
+<link href="resources/css/style.css"
 	rel="stylesheet" type="text/css">
 <title></title>
 </head>
@@ -16,7 +16,7 @@
 	<c:choose>
 		<c:when test="${not empty employe }">
 			<h3>Inscription d'un nouveau participant pour la formation:
-				${formation.titre }</h3>
+				${formation.titre } Niveau: ${niveau }</h3>
 			<c:forEach items="${messageError }" var="message">
 				<p id="messageErreur">${message }</p>
 			</c:forEach>
@@ -47,9 +47,9 @@
 		</c:otherwise>
 	</c:choose>
 </body>
-<script src="<%=request.getContextPath()%>/resources/js/jquery.js"></script>
+<script src="resources/js/jquery.js"></script>
 <script
-	src="<%=request.getContextPath()%>/resources/js/jquery-ui.min.js"></script>
+	src="resources/js/jquery-ui.min.js"></script>
 <script
-	src="<%=request.getContextPath()%>/resources/js/bootstrap.min.js"></script>
+	src="resources/js/bootstrap.min.js"></script>
 </html>

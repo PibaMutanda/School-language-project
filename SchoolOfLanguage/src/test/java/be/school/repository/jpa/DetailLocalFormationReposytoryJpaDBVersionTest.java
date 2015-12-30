@@ -68,7 +68,7 @@ public class DetailLocalFormationReposytoryJpaDBVersionTest {
 		Local local = detailLocalFormation.getLocal();
 		Seance seance = detailLocalFormation.getSeance();
 		Long result = detailLocalFormationRepository.getParticipantNumber(
-				local, seance);
+				local, seance,detailLocalFormation.getId());
 		assertThat(result.longValue(), is(2l));
 		System.out.println("total " + result);
 	}

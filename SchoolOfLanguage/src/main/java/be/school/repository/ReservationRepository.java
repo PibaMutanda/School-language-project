@@ -28,4 +28,6 @@ public interface ReservationRepository extends GenericRepository<Reservation> {
 	 * @return retourne la liste de réservation par date
 	 */
 	List<Reservation> findListByDate(Date date);
+
+	
 }

@@ -31,6 +31,24 @@ public class NotificationUtil {
 		httpSession.setAttribute("notifications",notifications);
 	}
 	
+	
+	/** Sets a message string to be displayed by the next JSP in the Notification bar */
+	public static void addCommunicationMessage(String notification){
+	    
+		
+		 HttpSession httpSession = ContextUtil.getHttpSession();
+	       
+	    @SuppressWarnings("unchecked")
+		List<Notification> notifications=(List<Notification>) httpSession.getAttribute("notifications");
+	    
+	    if(notifications==null){
+	    	notifications = new ArrayList<Notification>();
+	    }
+    	notifications.add(new Notification(notification));
+	    
+		httpSession.setAttribute("communications",notifications);
+	}
+	
 	static public class  Notification{
 		String text;
 		public Notification (String text){

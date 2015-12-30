@@ -36,7 +36,7 @@ public class LoginService {
 	 */
 	public Formateur loginFormateur(String login, String password)
 			throws ObjectNotFoundException {
-		Formateur formateur = formateurRepositoryJpa.findByLoginAndPwd(login,
+		Formateur formateur = formateurRepositoryJpa.findByLoginAndPwd(login.toLowerCase(),
 				SecurityUtils.md5Encode(password));
 		if (formateur == null)
 			throw new ObjectNotFoundException("Login ou mot de passe incorrect");
@@ -54,7 +54,7 @@ public class LoginService {
 	 */
 	public Employe loginEmploye(String login, String password)
 			throws ObjectNotFoundException {
-		Employe employe = employeRepositoryJpa.findByLoginAndPwd(login,
+		Employe employe = employeRepositoryJpa.findByLoginAndPwd(login.toLowerCase(),
 				SecurityUtils.md5Encode(password));
 		if (employe == null)
 			throw new ObjectNotFoundException("Login ou mot de passe incorrect");

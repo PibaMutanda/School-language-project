@@ -73,16 +73,26 @@ public class ReservationController {
 	@RequestMapping(value = "/reservationregister", method = RequestMethod.GET)
 	public ModelAndView reservationRegister(
 			@RequestParam(value = "id", required = false) Long id) {
-		ModelAndView mv = new ModelAndView("reservationregister");
+		ModelAndView mv = preparedModelAndView();
 		Reservation reservation = null;
 		if (id == null) {
 			reservation = new Reservation();
 		} else {
 			reservation = reservationRepositoryJpa.findById(id);
 		}
+
+		mv.addObject("reservation", reservation);
+		return mv;
+	}
+
+	/**
+	 * 
+	 * @return retourne ModelAndView
+	 */
+	private ModelAndView preparedModelAndView() {
+		ModelAndView mv = new ModelAndView("reservationregister");
 		List<Formation> formations = formationRepositoryJpa.findAll();
 		mv.addObject("formations", formations);
-		mv.addObject("reservation", reservation);
 		return mv;
 	}
 
@@ -101,12 +111,13 @@ public class ReservationController {
 	public ModelAndView reservationSubmit(
 			@Valid @ModelAttribute Reservation reservation, Errors errors,
 			HttpServletRequest request) {
-		ModelAndView mv = new ModelAndView("reservationregister");
+		ModelAndView mv = preparedModelAndView();
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(new Date());
-		if (cal.getTime().equals(Calendar.FRIDAY))
+		int dayOfweek = cal.get(Calendar.DAY_OF_WEEK);
+		if (dayOfweek == Calendar.FRIDAY)
 			cal.add(Calendar.DAY_OF_WEEK, 3);
-		else if (cal.getTime().equals(Calendar.SATURDAY))
+		else if (dayOfweek == Calendar.SATURDAY)
 			cal.add(Calendar.DAY_OF_WEEK, 2);
 		else
 			cal.add(Calendar.DAY_OF_WEEK, 1);
@@ -136,10 +147,16 @@ public class ReservationController {
 		} else {
 
 			reservationRepositoryJpa.save(reservation);
-			NotificationUtil.addNotificationMessage(reservation.getNom()
-					+ " rendez-vous pour l'inscrisption est pris pour "
-					+ DateFormat.getDateInstance().format(
-							reservation.getDateRdv()));
+			String communication = new StringBuilder()
+					.append(", votre rendez-vous pour l'inscrisption est pris pour le ")
+					.append("<strong>")
+					.append(DateFormat.getDateInstance().format(
+							reservation.getDateRdv()))
+					.append("</strong>")		
+							.toString();
+			NotificationUtil.addCommunicationMessage(reservation.getNom()
+					+ communication);
+
 			mv.setViewName("redirect:home");
 
 		}

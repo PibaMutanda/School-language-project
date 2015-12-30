@@ -14,12 +14,16 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.Where;
 import org.hibernate.validator.constraints.NotEmpty;
 
 /**
@@ -36,7 +40,9 @@ public class Participant {
 	@GeneratedValue
 	private Long id;
 
-	/* Matricule est géré par l'application */
+	/**
+	 * Matricule est géré par l'application
+	 */
 	@Column(unique = true)
 	private String matricule;
 
@@ -79,7 +85,9 @@ public class Participant {
 	@JoinColumn
 	private StatutProfessionnel statutProfessionnel;
 
-	@OneToMany(mappedBy = "participant", fetch = FetchType.EAGER)
+	@ManyToMany(mappedBy = "participants", fetch = FetchType.EAGER)
+	@Fetch(FetchMode.SELECT)
+	@Where(clause = "id is not null")
 	private Set<DetailLocalFormation> detailLocalFormations = new HashSet<DetailLocalFormation>();
 
 	@ManyToOne
@@ -236,7 +244,7 @@ public class Participant {
 	 *            email
 	 */
 	public void setEmail(String email) {
-		email=email.toLowerCase();
+		email = email.toLowerCase();
 		this.email = email;
 	}
 

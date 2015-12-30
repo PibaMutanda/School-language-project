@@ -5,7 +5,7 @@
 <ul role="menu" class="nav nav-pills nav-stacked menu-nav">
 	<c:choose>
 	    <c:when test="${employe.roleEmploye eq 'ADMIN' }">
-            <li><a href="employeregister">Ajouter employé</a></li>
+            <li><a href="employeregister">Ajouter employ&eacute;</a></li>
 			<li><a href="statutprofessionnelregister">Ajouter un Statut
 					Professionnel</a></li>
 			<li><a href="formateurregister">Ajouter un Formateur</a></li>
@@ -24,7 +24,7 @@
 			<li><a href="publishinscription">Publier les dates
 					d&rsquo;inscriptions </a></li>
 			<li><a href="listinscription">La liste des r&eacute;inscriptions</a></li>	
-			<li><a href="listreservation">Agenda pour les inscriptions</a></li>			
+			<li><a href="listreservation">RDV pour inscription</a></li>			
 		</c:when>
 		<c:when test="${ not empty mySession  }">
 			<li><a href="displayprofplanning?id=${formateur.id }">Mon
@@ -51,7 +51,7 @@
 			<li><a href="publishinscription">Publier les dates
 					d&rsquo;inscriptions </a></li>
 			<li><a href="listinscription">La liste des r&eacute;inscriptions</a></li>	
-			<li><a href="listreservation">Agenda pour les inscriptions</a></li>		
+			<li><a href="listreservation">RDV pour  inscription</a></li>		
 		</c:when>
 	</c:choose>
 </ul>

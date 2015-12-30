@@ -89,7 +89,7 @@ public class ParticipantRepositoryJpa extends GenericRepositoryJpa<Participant>
 			Long idDetailLocalForm) {
 		return em
 				.createQuery(
-						"select d.participant from Participant p join p.detailLocalFormations d  where d.id=:id")
+						"select distinct(d.participants) from Participant p join p.detailLocalFormations d  where d.id=:id")
 				.setParameter("id", idDetailLocalForm).getResultList();
 	}
 }

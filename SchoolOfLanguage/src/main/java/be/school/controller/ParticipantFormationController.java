@@ -19,6 +19,7 @@ import be.school.repository.FormationRepository;
 import be.school.repository.LocalRepository;
 import be.school.repository.ParticipantRepository;
 import be.school.service.DetailLocalFormationService;
+import be.school.service.ParticipantService;
 import be.school.util.NotificationUtil;
 
 /**
@@ -33,6 +34,9 @@ public class ParticipantFormationController {
 
 	@Autowired
 	private ParticipantRepository participantRep;
+
+	@Autowired
+	private ParticipantService participantService;
 
 	@Autowired
 	private LocalRepository localRep;
@@ -117,8 +121,9 @@ public class ParticipantFormationController {
 		ModelAndView mv = new ModelAndView("participantformation");
 		Formation formation = formationRep.findById(id);
 		HashSet<Participant> listSetPart = new HashSet<Participant>();
-		// List<DetailLocalFormation>listDetailForm=detailLocalFormaRep.findAllByFormation(formation);
-		List<Participant> listParticipant = participantRep.findAllNews();
+
+		List<Participant> listParticipant = participantService
+				.getParticipantsListForRegistration(formation);
 		for (Participant participant : listParticipant) {
 			listSetPart.add(participant);
 		}
@@ -212,15 +217,17 @@ public class ParticipantFormationController {
 			DetailLocalFormation detailLocalFormation = detailLocalFormaRep
 					.findByLocalFormationNiveau(local2, formation2, niveau);
 			long nbreInscri = detailLocalFormaRep.getParticipantNumber(local2,
-					detailLocalFormation.getSeance());
-			if (Long.parseLong(detailLocalFormation.getQuota()) < nbreInscri) {
+					detailLocalFormation.getSeance(),
+					detailLocalFormation.getId());
+			if (Long.parseLong(detailLocalFormation.getQuota()) <= nbreInscri) {
 				mv.addObject("messageError",
 						"Le quota maximal est déjà atteint");
 				return mv;
 			}
+
 			Participant participant2 = participantRep.findById(participant);
 			participant2.setLocal(local2);
-			detailLocalFormation.setParticipant(participant2);
+			detailLocalFormation.addParticipant(participant2);
 			detailLocalFormation.setNiveau(niveau);
 			participantRep.save(participant2);
 			detailLocalFormaRep.save(detailLocalFormation);
@@ -287,7 +294,7 @@ public class ParticipantFormationController {
 					.findByLocalFormationNiveau(local2, formation2, niveau);
 			Participant participant2 = participantRep.findById(participant);
 			participant2.setLocal(local2);
-			detailLocalFormation.setParticipant(participant2);
+			detailLocalFormation.addParticipant(participant2);
 			detailLocalFormation.setNiveau(niveau);
 			boolean checking = detailLocSerrv.isSameLevelForSameForm(
 					detailLocalFormation, participant2, formation2, niveau);

@@ -62,11 +62,6 @@ public class DetailLocalFormationReposytoryJpa extends
 		query.setParameter("seance", seance);
 		query.setParameter("jour", jour);
 		List delofos = query.getResultList();
-		// List delofos = em
-		// .createQuery(
-		// "select df from DetailLocalFormation df  where df.local= :local and  df.seance= :seance and df.jour= :jour")
-		// .setParameter("local", local).setParameter("seance", seance)
-		// .setParameter("jour", jour).getResultList();
 		if (!delofos.isEmpty())
 			detailFormation = (DetailLocalFormation) delofos.get(0);
 		return detailFormation;
@@ -139,13 +134,13 @@ public class DetailLocalFormationReposytoryJpa extends
 	/**
 	 * {@inheritDoc}
 	 */
-	public Long getParticipantNumber(Local local, Seance seance) {
+	public Long getParticipantNumber(Local local, Seance seance,
+			Long idDetailLocalForm) {
 		return (Long) em
 				.createQuery(
-						"select count (distinct dlf.participant) from DetailLocalFormation dlf where dlf.local=:local and dlf.seance=:seance")
+						"select count (p) from Participant p inner join p.detailLocalFormations dlf  where dlf.id=:id and dlf.local=:local and dlf.seance=:seance")
 				.setParameter("local", local).setParameter("seance", seance)
-				.getSingleResult();
-
+				.setParameter("id", idDetailLocalForm).getSingleResult();
 	}
 
 }

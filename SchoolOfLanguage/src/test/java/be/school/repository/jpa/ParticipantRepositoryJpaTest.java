@@ -68,10 +68,10 @@ public class ParticipantRepositoryJpaTest {
 		Formation formation = formationRepository.findById(1l);
 		List<Participant> listPart = participantRepository
 				.findAllOlds(formation);
-		assertEquals(1, listPart.size());
-		assertThat(listPart.get(0).getGsm(), is("0111145234"));
-		assertThat(listPart.get(0).getEmail(), is("piautanda@live.com"));
-		assertThat(listPart.get(0).getLocal().getNumLocal(), is("4F"));
+		assertEquals(2, listPart.size());
+		assertThat(listPart.get(0).getGsm(), is("0174588888"));
+		assertThat(listPart.get(0).getEmail(), is("jgfpiutnda@live.com"));
+		assertThat(listPart.get(0).getLocal().getNumLocal(), is("3G"));
 		assertThat(listPart.get(0).getDetailLocalFormations().size(), is(1));
 		System.out.println(listPart.get(0).getGsm());
 	}
@@ -79,8 +79,7 @@ public class ParticipantRepositoryJpaTest {
 	@Test
 	public void testGetTotalParticipant() {
 		Long total = participantRepository.getTotalParticipant(1l);
-		assertThat(total, is(1L));
-
+		assertThat(total, is(2L));
 	}
 
 	@SuppressWarnings("unchecked")
@@ -126,20 +125,20 @@ public class ParticipantRepositoryJpaTest {
 	public void testGetParticipantListByDetailLocalFormation() {
 		List<Participant> listPart = participantRepository
 				.getParticipantListByDetailLocalFormation(2l);
-		assertEquals(1, listPart.size());
+		assertEquals(2, listPart.size());
 		assertThat(
 				listPart.get(0),
-				allOf(hasProperty("id", is(Long.valueOf("3"))),
-						hasProperty("email", is("jgfpiutnda@live.com")),
-						hasProperty("gsm", is("0174588888")),
-						hasProperty("nom", is("Marine")),
-						hasProperty("prenom", is("Joelle")),
+				allOf(hasProperty("id", is(Long.valueOf("1"))),
+						hasProperty("email", is("piautanda@live.com")),
+						hasProperty("gsm", is("0111145234")),
+						hasProperty("nom", is("Mutanda")),
+						hasProperty("prenom", is("Piba")),
 						hasProperty("ville", is("Brussels")),
-						hasProperty("codeP", is("1040")),
-						hasProperty("numero", is("5")),
-						hasProperty("matricule", is("784")),
-						hasProperty("rue", is("du bois")),
-						hasProperty("sexe", is(Sexe.FEMME))));
+						hasProperty("codeP", is("1050")),
+						hasProperty("numero", is("220F")),
+						hasProperty("matricule", is("451L")),
+						hasProperty("rue", is("Adolphhe Buyl")),
+						hasProperty("sexe", is(Sexe.HOMME))));
 	}
 
 }

@@ -15,7 +15,7 @@ public interface ParticipantRepository extends GenericRepository<Participant> {
 
 	/**
 	 * 
-	 * @return retourne la liste de participants
+	 * @return retourne la liste des participants
 	 */
 	List<Participant> findAllNews();
 
@@ -23,7 +23,7 @@ public interface ParticipantRepository extends GenericRepository<Participant> {
 	 * 
 	 * @param formation
 	 *            formation
-	 * @return retourne la liste de participants déjà inscrits pour une
+	 * @return retourne la liste des participants déjà inscrits pour une
 	 *         formation
 	 */
 	List<Participant> findAllOlds(Formation formation);
@@ -32,7 +32,7 @@ public interface ParticipantRepository extends GenericRepository<Participant> {
 	 * 
 	 * @param detailLocalForm
 	 *            detailLocalform
-	 * @return retourne le nombre total de participants
+	 * @return retourne le nombre total des participants
 	 */
 	Long getTotalParticipant(Long detailLocalForm);
 
@@ -56,7 +56,7 @@ public interface ParticipantRepository extends GenericRepository<Participant> {
 	 * 
 	 * @param idDetailLocalForm
 	 *            id de detailLocalFormation
-	 * @return retourne la liste de participants qui sont identifiés dans un
+	 * @return retourne la liste des participants qui sont identifiés dans un
 	 *         local
 	 */
 	List<Participant> getParticipantListByDetailLocalFormation(

@@ -39,14 +39,16 @@
 	<Inscription id="2" communicationPaie="654ghdd"
 		montantPaie="100" dateInscription="2016-06-02" participant_id="2" />
 	<DetailLocalFormation id="1" jour="1" niveau="2"
-		quota="10" seance="1" formateur_id="1" formation_id="1" local_id="1"
-		participant_id="1" />
+		quota="10" seance="1" formateur_id="1" formation_id="1" local_id="1" />
 	<DetailLocalFormation id="2" jour="1" niveau="2"
-		quota="10" seance="1" formateur_id="2" formation_id="2" local_id="2"
-		participant_id="3" />
+		quota="10" seance="1" formateur_id="2" formation_id="2" local_id="2"/>
 	<DetailLocalFormation id="3" jour="2" niveau="3"
-		quota="15" seance="1" formateur_id="1" formation_id="2" local_id="2"
-		participant_id="2" />
+		quota="15" seance="1" formateur_id="1" formation_id="2" local_id="2"/>
+	<Detail_Parts participants_id="1"   detailLocalFormations_id="2" />
+	<Detail_Parts participants_id="2"   detailLocalFormations_id="2" />	
+	<Detail_Parts participants_id="3"   detailLocalFormations_id="1" />
+	<Detail_Parts participants_id="4"   detailLocalFormations_id="1" />
+	<Detail_Parts participants_id="1"   detailLocalFormations_id="3" />
 	<PublicationInscription id="1"
 		messageInscription="message publication" dateDebInscr="2016-4-20"
 		dateFinInscr="2016-5-1" employe_id="1" />

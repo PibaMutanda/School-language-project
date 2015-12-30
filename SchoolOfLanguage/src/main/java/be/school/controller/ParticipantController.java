@@ -140,6 +140,11 @@ public class ParticipantController {
 				 * le try catch juste pour gérer NPE
 				 */
 				participant.getStatutProfessionnel();
+				if (participant.getStatutProfessionnel() == null) {
+					mv.addObject("messageError",
+							"Renseignez le statut professionnel");
+					return mv;
+				}
 			} catch (Exception e) {
 
 				mv.addObject("messageError",

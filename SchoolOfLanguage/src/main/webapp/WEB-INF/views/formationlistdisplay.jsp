@@ -8,8 +8,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
-	href="<%=request.getContextPath()%>/resources/css/bootstrap.min.css">
-<link href="<%=request.getContextPath()%>/resources/css/style.css"
+	href="resources/css/bootstrap.min.css">
+<link href="resources/css/style.css"
 	rel="stylesheet" type="text/css">
 <title>Insert title here</title>
 </head>
@@ -24,8 +24,7 @@
 </table> 
 </form>   
 </body>
-<script src="<%=request.getContextPath()%>/resources/js/jquery.js"></script>
-<script src="<%=request.getContextPath()%>/resources/js/jquery-ui.min.js"></script>
-<script
-	src="<%=request.getContextPath()%>/resources/js/bootstrap.min.js"></script>
+<script src="resources/js/jquery.js"></script>
+<script src="resources/js/jquery-ui.min.js"></script>
+<script src="resources/js/bootstrap.min.js"></script>
 </html>

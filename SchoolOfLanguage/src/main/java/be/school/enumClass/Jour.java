@@ -7,7 +7,7 @@ package be.school.enumClass;
  *
  */
 public enum Jour {
-	LUNDI(1), MARDI(2), MERCREDI(3), JEUDI(4), VENDREDI(5);
+	LUNDI(0), MARDI(1), MERCREDI(2), JEUDI(3), VENDREDI(4);
 	/**
 	 * 
 	 * @param index

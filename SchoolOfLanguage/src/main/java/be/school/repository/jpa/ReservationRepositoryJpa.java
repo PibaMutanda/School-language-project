@@ -41,7 +41,7 @@ public class ReservationRepositoryJpa extends GenericRepositoryJpa<Reservation>
 	@Override
 	public List<Reservation> findListByDate(Date date) {
 		return em.createNamedQuery("Reservation.findListByDate")
-				.setParameter("dateReserv", date).getResultList();
+				.setParameter("dateRdv", date).getResultList();
 	}
 
 }

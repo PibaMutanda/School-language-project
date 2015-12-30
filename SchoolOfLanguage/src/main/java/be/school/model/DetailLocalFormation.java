@@ -1,11 +1,17 @@
 package be.school.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.validation.constraints.Pattern;
@@ -30,7 +36,7 @@ public class DetailLocalFormation {
 	private Long id;
 
 	@NotEmpty(message = "Saisir le niveau")
-	@Pattern(message = "Valeur invalide", regexp = "^[0-9]*$")
+	@Pattern(message = "Valeur invalide", regexp = "^[1-9]*$")
 	private String niveau;
 
 	@Pattern(message = "Valeur non valide", regexp = "^[0-9]*$")
@@ -55,9 +61,9 @@ public class DetailLocalFormation {
 	@Enumerated(EnumType.ORDINAL)
 	private Jour jour;
 
-	@ManyToOne
-	@JoinColumn
-	private Participant participant;
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "Detail_Parts")
+	private Set<Participant> participants = new HashSet<Participant>();
 
 	/**
 	 * 
@@ -136,18 +142,29 @@ public class DetailLocalFormation {
 	}
 
 	/**
-	 * @return retourne le participant
+	 * 
+	 * @return retourne l'ensemble de particpants
 	 */
-	public Participant getParticipant() {
-		return participant;
+	public Set<Participant> getParticipants() {
+		return participants;
 	}
 
 	/**
-	 * @param participant
-	 *            the participant to set
+	 * 
+	 * @param participants
+	 *            participants
 	 */
-	public void setParticipant(Participant participant) {
-		this.participant = participant;
+	public void setParticipants(Set<Participant> participants) {
+		this.participants = participants;
+	}
+
+	/**
+	 * 
+	 * @param participant
+	 *            participant
+	 */
+	public void addParticipant(Participant participant) {
+		participants.add(participant);
 	}
 
 	/**

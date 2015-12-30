@@ -7,7 +7,7 @@ package be.school.enumClass;
  *
  */
 public enum Seance {
-	MATIN(1), SOIR(2);
+	MATIN(0), SOIR(1);
 
 	/**
 	 * 

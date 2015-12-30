@@ -29,7 +29,7 @@ import org.springframework.format.annotation.DateTimeFormat.ISO;
  */
 @Entity
 @NamedQueries({
-		@NamedQuery(name = "Reservation.findListByDate", query = "select r from Reservation r where r.dateReserv like :dateReserv"),
+		@NamedQuery(name = "Reservation.findListByDate", query = "select r from Reservation r where r.dateRdv like :dateRdv"),
 		@NamedQuery(name = "Reservation.findAll", query = "select r from Reservation r") })
 public class Reservation {
 
@@ -47,7 +47,7 @@ public class Reservation {
 
 	@NotNull(message = "entrer votre mail")
 	@Column(unique = true)
-	@Pattern(message = "ville mail pas valide", regexp = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$")
+	@Pattern(message = "adressee é-mail non valide", regexp = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$")
 	private String email;
 
 	@Pattern(message = "Numéro de Gsm n'est pas valide, commencez par 0032 ou +32 sans espace", regexp = "^[0]{2}[32]{1}[0-9]{10}$|^[+]{1}[32]{1}[0-9]{10}$")

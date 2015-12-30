@@ -27,10 +27,11 @@
 			<div class="col-sm-2">
 				<h5>Navigation</h5>
 				<ul class="unstyled">
-					<li>Home</li>
-					<li>Services</li>
-					<li>Links</li>
-					<li>Contact</li>
+					<li><a href="home">Home</a></li>
+					<li><a href="formationlist">Nos formations</a></li>
+					<li><a href="showpublishinscription">Inscription</a></li>
+					<li><a href="#">Contactez-nous</a></li>
+					<li><a href="#">A Propos</a></li>
 				</ul>
 			</div>
 			<div class="col-sm-2">

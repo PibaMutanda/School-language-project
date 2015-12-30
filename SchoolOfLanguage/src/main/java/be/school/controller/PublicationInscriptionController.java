@@ -86,8 +86,8 @@ public class PublicationInscriptionController {
 		if (dateFinStr.trim() == null)
 			messageErrors.add("Saisir la date de fin d'inscription");
 		if (dateDebStr.trim() != null && dateFinStr.trim() != null) {
-			dateDeb = DateUtil.parseyyyyMMdd(dateDebStr);
-			dateFin = DateUtil.parseyyyyMMdd(dateFinStr);
+			dateDeb = DateUtil.parseddMMyyyy(dateDebStr);
+			dateFin = DateUtil.parseddMMyyyy(dateFinStr);
 			if (dateDeb.before(dateCourant))
 				messageErrors
 						.add("La date doit être postérieure à la date courante");
@@ -104,12 +104,12 @@ public class PublicationInscriptionController {
 			publicationInscription.setDateFinInscr(dateFin);
 			publicationInscription
 					.setMessageInscription("Les inscriptions vont du "
-							+ dateDebStr + " au  " + dateFinStr);
+							+ DateUtil.formatddMMyyyy(dateDeb) + " au  " + DateUtil.formatddMMyyyy(dateFin));
 			publicationInscription.setEmploye(employe);
 			employeResository.save(employe);
 			publicationInscrRepo.save(publicationInscription);
 			NotificationUtil
-					.addNotificationMessage("Les dates des inscriptions sont publiées!!");
+					.addNotificationMessage("Les dates pour les inscriptions sont publiées!!");
 			mv.setViewName("showpublishinscription");
 			return mv;
 		}

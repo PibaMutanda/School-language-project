@@ -20,8 +20,7 @@ public interface DetailLocalFormationRepository extends
 
 	/**
 	 * 
-	 * @return
-	 *     retourne la liste de detailLocationFormation
+	 * @return retourne la liste de detailLocationFormation
 	 */
 	List<DetailLocalFormation> findAllDistinct();
 
@@ -95,9 +94,12 @@ public interface DetailLocalFormationRepository extends
 	 *            local
 	 * @param seance
 	 *            séance
+	 * @param id
+	 *            id detailLocalFormation
+	 * 
 	 * @return retourne Id du participant affecté à un local et une séance
 	 *         donnés
 	 */
-	Long getParticipantNumber(Local local, Seance seance);
+	Long getParticipantNumber(Local local, Seance seance, Long id);
 
 }

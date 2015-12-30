@@ -45,15 +45,24 @@ public class FormateurFormationController {
 	 */
 	@RequestMapping(value = "/formateurformationdisplay", method = RequestMethod.GET)
 	public ModelAndView formateurFormationDisplay(@RequestParam Long id) {
-		ModelAndView mv = new ModelAndView("formformateurformation");
+		ModelAndView mv = prepareModelAndView();
 		Formateur formateur = formateurRepositoryJpa.findById(id);
-		List detailListForm = detailLocalFormationReposytoryJpa
-				.findAllDistinct();
-		mv.addObject("formateur", formateur);
-		mv.addObject("detailListForm", detailListForm);
+				mv.addObject("formateur", formateur);
+		
 		return mv;
 	}
 
+	/**
+	 * 
+	 * @return retourne ModelAndView
+	 */
+	private ModelAndView prepareModelAndView(){
+		ModelAndView mv = new ModelAndView("formformateurformation");
+		List<DetailLocalFormation> detailListForm = detailLocalFormationReposytoryJpa
+				.findAllDistinct();
+		mv.addObject("detailListForm", detailListForm);
+		return mv;
+	}
 	/**
 	 * 
 	 * @param id
@@ -68,6 +77,7 @@ public class FormateurFormationController {
 		return mv;
 	}
 
+ 	
 	/**
 	 * 
 	 * @param formateur
@@ -79,13 +89,13 @@ public class FormateurFormationController {
 	@RequestMapping(value = "/formateurformsubmit", method = RequestMethod.POST)
 	public ModelAndView formformateurformationSubmit(
 			@RequestParam Long formateur, @RequestParam Long formation) {
-		ModelAndView mv = new ModelAndView("formformateurformation");
+		ModelAndView mv = prepareModelAndView();
 		if (formation == 0) {
 			mv.addObject("messageError", "Choisir une formation");
 			return mv;
 		} else {
 
-			Formateur formateur2 = formateurRepositoryJpa.findById(formation);
+			Formateur formateur2 = formateurRepositoryJpa.findById(formateur);
 			Formation formation2 = formationRep.findById(formation);
 			DetailLocalFormation detailFormation = detailLocalFormationReposytoryJpa
 					.findById(formation);
@@ -104,6 +114,10 @@ public class FormateurFormationController {
 									+ " est déjà pris pour une séance de "
 									+ detailFormation.getJour() + " "
 									+ detailFormation.getSeance());
+					return mv;
+				}
+				if(formateur2.getId()!=detailFormation.getFormateur().getId()){
+					mv.addObject("messageError","Cette formation est déjà donnée par "+detailFormation.getFormateur().getNom());
 					return mv;
 				}
 			}

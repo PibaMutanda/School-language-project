@@ -3,19 +3,23 @@
 <%@page import="be.school.model.Employe"%>
 <html>
 <head>
-<link rel="stylesheet" href="resources/css/bootstrap.min.css">
+<link rel="stylesheet" href="resources/css/jquery-ui.css">
+<link rel="stylesheet" href="resources/css/bootstrap.css">
+<script src="resources/js/jquery.js"></script>
+<script src="resources/js/jquery-ui.min.js"></script>
+<script src="resources/js/bootstrap.js"></script>
 <script>
- $(document).ready(function(){
- 	$("#notification-message").show().delay(5000).fadeOut();   // Was hidden at the beginning.
-	
-// 	var tId;
+	$(document).ready(function() {
+		$("#notification-message").show().delay(5000).fadeOut(); // Was hidden at the beginning.
 
-// 	$("#notification-message").hide().slideDown();
-// 	clearTimeout(tId);
-// 	tId=setTimeout(function(){
-// 	  $("#notification-message").hide();        
-// 	}, 5000);
-});
+		// 	var tId;
+
+		// 	$("#notification-message").hide().slideDown();
+		// 	clearTimeout(tId);
+		// 	tId=setTimeout(function(){
+		// 	  $("#notification-message").hide();        
+		// 	}, 5000);
+	});
 </script>
 </head>
 <nav class="navbar navbar-inverse" role="navigation">
@@ -27,8 +31,8 @@
 						aria-hidden="true"></span></a></li>
 				<li><a href="formationlist">Nos formations</a></li>
 				<li><a href="showpublishinscription">Inscription</a></li>
-				<li><a href="#">Contact us</a></li>
-				<li><a href="#">About</a></li>
+				<li><a href="#">Contactez-nous</a></li>
+				<li><a href="#">A Propos</a></li>
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown" role="button" aria-expanded="false">Dropdown
 						<span class="caret"></span>
@@ -71,17 +75,19 @@
 	</div>
 </nav>
 <div>
-<c:if test="${!empty sessionScope.notifications}">
-<div id="notification-message">
-   <div class="alert alert-success" role="alert">
-         <span class="glyphicon glyphicon-thumbs-up icon-white"></span>
-          <c:forEach items="${sessionScope.notifications}"   var="notif">
-            ${notif.text}<br/>
-          </c:forEach>
-       <% session.removeAttribute("notifications"); %>
-   </div>	
-</div>
-</c:if>
+	<c:if test="${!empty sessionScope.notifications}">
+		<div id="notification-message">
+			<div class="alert alert-success" role="alert">
+				<span class="glyphicon glyphicon-thumbs-up icon-white"></span>
+				<c:forEach items="${sessionScope.notifications}" var="notif">
+            ${notif.text}<br />
+				</c:forEach>
+				<%
+					session.removeAttribute("notifications");
+				%>
+			</div>
+		</div>
+	</c:if>
 </div>
 <div class="container">
 	<div class="jumbotron">
@@ -92,12 +98,5 @@
 		</div>
 		<h2 style="text-align: center;">Hola mundo</h2>
 	</div>
-
 </div>
-
-<script src="resources/js/jquery.js"></script>
-<script
-	src="resources/js/jquery-ui.min.js"></script>
-<script
-	src="resources/js/bootstrap.min.js"></script>
 </html>

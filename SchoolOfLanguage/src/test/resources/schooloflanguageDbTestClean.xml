@@ -10,4 +10,5 @@
 	<Inscription />
 	<DetailLocalFormation />
 	<PublicationInscription />
+	<Detail_Parts />
 </dataset>

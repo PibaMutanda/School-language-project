@@ -109,7 +109,7 @@ public class DetailSpeciLocalFormationController {
 			Long disp = Long.parseLong(detailLocalFormation.getQuota())
 					- dReposytory.getParticipantNumber(
 							detailLocalFormation.getLocal(),
-							detailLocalFormation.getSeance());
+							detailLocalFormation.getSeance(),detailLocalFormation.getId());
 
 			tabDisp[i++] = disp;
 		}
