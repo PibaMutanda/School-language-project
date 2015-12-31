@@ -3,6 +3,12 @@ package be.school.repository.jpa;
 import static org.junit.Assert.*;
 import static org.hamcrest.Matchers.*;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,18 +19,15 @@ import org.springframework.test.context.support.DependencyInjectionTestExecution
 import org.springframework.test.context.support.DirtiesContextTestExecutionListener;
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 
-import be.school.enumClass.Jour;
-import be.school.model.DetailLocalFormation;
-import be.school.model.Local;
-import be.school.repository.DetailLocalFormationRepository;
-import be.school.repository.LocalRepository;
+import be.school.model.Reservation;
+import be.school.repository.ReservationRepository;
 
 import com.github.springtestdbunit.DbUnitTestExecutionListener;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.github.springtestdbunit.annotation.DatabaseTearDown;
 
 /**
- * LocalRepositoryJpaTest Class test
+ * ReservationRepositoryJpaTest Class test
  * 
  * @author P. Mutanda
  *
@@ -37,50 +40,44 @@ import com.github.springtestdbunit.annotation.DatabaseTearDown;
 		DbUnitTestExecutionListener.class })
 @DatabaseSetup(value = "/schooloflanguageDbTest.xml")
 @DatabaseTearDown(value = "/schooloflanguageDbTestClean.xml")
-public class LocalRepositoryJpaTest {
+public class ReservationRepositoryJpaTest {
 
 	@Autowired
-	private LocalRepository localRepository;
-
-	@Autowired
-	private DetailLocalFormationRepository detailLocalFormationRepository;
+	private ReservationRepository reservationRepository;
 
 	@SuppressWarnings("unchecked")
 	@Test
-	public void testFindByNum() {
-		Local local = localRepository.findByNum("4F");
-		assertEquals("20", local.getCapacite());
+	public void testFindByEmail() {
+
+		Reservation reservation = reservationRepository
+				.findByEmail("ndalejen@live.ze");
 		assertThat(
-				local,
+				reservation,
 				allOf(hasProperty("id", is(Long.valueOf("1"))),
-						hasProperty("capacite", is("20")),
-						hasProperty("estLibre", is(Boolean.valueOf("false"))),
-						hasProperty("numLocal", is("4F"))));
-
-	}
-
-	@Test
-	public void tesNottFindByNum() {
-		Local local = localRepository.findByNum("45");
-		assertThat(local, nullValue());
+						hasProperty("nom", is("Ndala")),
+						hasProperty("prenom", is("Jean")),
+						hasProperty("gsm", is("0013245670"))));
+		assertEquals("2016-01-05", reservation.getDateReserv().toString());
+		assertEquals("2016-01-06", reservation.getDateRdv().toString());
 
 	}
 
 	@SuppressWarnings("unchecked")
 	@Test
-	public void testFindByDetalLocalFormation() {
-		DetailLocalFormation detailLocalFormation = detailLocalFormationRepository
-				.findById(2L);
-		Local local = localRepository
-				.findByDetalLocalFormation(detailLocalFormation.getId());
+	public void testFindListByDate() throws ParseException {
+		DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		Date dateRdv = format.parse("2016-5-8");
+		List<Reservation> reservations = reservationRepository
+				.findListByDate(dateRdv);
+		assertThat(reservations.size(), is(1));
 		assertThat(
-				local,
-				allOf(hasProperty("id", is(Long.valueOf("2"))),
-						hasProperty("capacite", is("15")),
-						hasProperty("estLibre", is(Boolean.valueOf("true"))),
-						hasProperty("numLocal", is("3G"))));
-		assertEquals("10", detailLocalFormation.getQuota());
-		assertEquals(Jour.MARDI, detailLocalFormation.getJour());
+				reservations.get(0),
+				allOf(hasProperty("id", is(Long.valueOf(2))),
+						hasProperty("nom", is("Nauno")),
+						hasProperty("prenom", is("Luc")),
+						hasProperty("email", is("naunou@live.ze"))));
+		assertEquals("2016-05-07", reservations.get(0).getDateReserv()
+				.toString());
 	}
 
 }

@@ -3,9 +3,6 @@ package be.school.repository.jpa;
 import static org.junit.Assert.*;
 import static org.hamcrest.Matchers.*;
 
-import java.util.Date;
-import java.util.List;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,15 +13,15 @@ import org.springframework.test.context.support.DependencyInjectionTestExecution
 import org.springframework.test.context.support.DirtiesContextTestExecutionListener;
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 
-import be.school.model.Inscription;
-import be.school.repository.InscriptionRepository;
+import be.school.model.StatutProfessionnel;
+import be.school.repository.StatutProfessionnelRepository;
 
 import com.github.springtestdbunit.DbUnitTestExecutionListener;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.github.springtestdbunit.annotation.DatabaseTearDown;
 
 /**
- * InscriptionRepositoryJpaTest Class test
+ * StatutProfessionelRepositoryJpaTest Class test
  * 
  * @author P. Mutanda
  *
@@ -37,26 +34,20 @@ import com.github.springtestdbunit.annotation.DatabaseTearDown;
 		DbUnitTestExecutionListener.class })
 @DatabaseSetup(value = "/schooloflanguageDbTest.xml")
 @DatabaseTearDown(value = "/schooloflanguageDbTestClean.xml")
-public class InscriptionRepositoryJpaTest {
+public class StatutProfessionelRepositoryJpaTest {
 
 	@Autowired
-	private InscriptionRepository inscriptionRepository;
+	private StatutProfessionnelRepository statutProfessionnelRepository;
 
+	@SuppressWarnings("unchecked")
 	@Test
-	public void testFindByDate() {
-		Inscription inscription = inscriptionRepository.findById(1L);
-		List<Inscription> list = inscriptionRepository.findByDate(inscription
-				.getDateInscription());
-		assertThat(list.size(), is(2));
-		assertEquals("2016-06-02", list.get(0).getDateInscription().toString());
-
-	}
-
-	@Test
-	public void testDateNotFind() {
-		List<Inscription> list = inscriptionRepository.findByDate(new Date());
-		assertThat(0, is(list.size()));
-		assertTrue(list.isEmpty());
+	public void testFindStatutByName() {
+		StatutProfessionnel statutProfessionnel = statutProfessionnelRepository
+				.findStatutByName("Employe");
+		assertThat(
+				statutProfessionnel,
+				allOf(hasProperty("id", is(Long.valueOf(1))),
+						hasProperty("prix", is(Double.valueOf(200)))));
 	}
 
 }

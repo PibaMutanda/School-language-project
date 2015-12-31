@@ -36,12 +36,5 @@ public class PublicationInscriptionRepositoryJpa extends
 		return publicationInscription;
 	}
 
-	// public void delete(PublicationInscription publicationInscription) {
-	// if(publicationInscription.getId()!=null)
-	// em.remove(publicationInscription);
-	// else {
-	// throw new
-	// ObjectNotFoundException("Publication inscription non existante !");
-	// }
-	// }
+	
 }

@@ -25,6 +25,12 @@ import com.github.springtestdbunit.DbUnitTestExecutionListener;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.github.springtestdbunit.annotation.DatabaseTearDown;
 
+/**
+ * ParticipantRepositoryJpaTest Class test
+ * 
+ * @author P. Mutanda
+ *
+ */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "/test-context.xml" })
 @TestExecutionListeners({ DependencyInjectionTestExecutionListener.class,

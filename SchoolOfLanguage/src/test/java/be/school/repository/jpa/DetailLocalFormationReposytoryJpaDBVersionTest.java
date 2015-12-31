@@ -25,6 +25,12 @@ import com.github.springtestdbunit.DbUnitTestExecutionListener;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.github.springtestdbunit.annotation.DatabaseTearDown;
 
+/**
+ * DetailLocalFormationReposytoryJpaDBVersionTest Class test
+ * 
+ * @author P. Mutanda
+ *
+ */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "/test-context.xml" })
 @TestExecutionListeners({ DependencyInjectionTestExecutionListener.class,
@@ -68,7 +74,7 @@ public class DetailLocalFormationReposytoryJpaDBVersionTest {
 		Local local = detailLocalFormation.getLocal();
 		Seance seance = detailLocalFormation.getSeance();
 		Long result = detailLocalFormationRepository.getParticipantNumber(
-				local, seance,detailLocalFormation.getId());
+				local, seance, detailLocalFormation.getId());
 		assertThat(result.longValue(), is(2l));
 		System.out.println("total " + result);
 	}

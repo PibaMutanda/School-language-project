@@ -3,8 +3,10 @@ package be.school.repository.jpa;
 import static org.junit.Assert.*;
 import static org.hamcrest.Matchers.*;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,15 +18,16 @@ import org.springframework.test.context.support.DependencyInjectionTestExecution
 import org.springframework.test.context.support.DirtiesContextTestExecutionListener;
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 
-import be.school.model.Inscription;
-import be.school.repository.InscriptionRepository;
+import be.school.model.Employe.Role;
+import be.school.model.PublicationInscription;
+import be.school.repository.PublicationInscriptionRepository;
 
 import com.github.springtestdbunit.DbUnitTestExecutionListener;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.github.springtestdbunit.annotation.DatabaseTearDown;
 
 /**
- * InscriptionRepositoryJpaTest Class test
+ * PublicationInscriptionRepositoryJpaTest class test
  * 
  * @author P. Mutanda
  *
@@ -37,26 +40,32 @@ import com.github.springtestdbunit.annotation.DatabaseTearDown;
 		DbUnitTestExecutionListener.class })
 @DatabaseSetup(value = "/schooloflanguageDbTest.xml")
 @DatabaseTearDown(value = "/schooloflanguageDbTestClean.xml")
-public class InscriptionRepositoryJpaTest {
+public class PublicationInscriptionRepositoryJpaTest {
 
 	@Autowired
-	private InscriptionRepository inscriptionRepository;
+	private PublicationInscriptionRepository publicationInscriptionRepository;
 
+	@SuppressWarnings("unchecked")
 	@Test
-	public void testFindByDate() {
-		Inscription inscription = inscriptionRepository.findById(1L);
-		List<Inscription> list = inscriptionRepository.findByDate(inscription
-				.getDateInscription());
-		assertThat(list.size(), is(2));
-		assertEquals("2016-06-02", list.get(0).getDateInscription().toString());
+	public void testFindByDate() throws ParseException {
+		String dateFinInscrStr = "2016-8-25";
+		String dateDebInscr = "2016-8-10";
+		DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		Date dateDeb = format.parse(dateDebInscr);
+		Date dateFin = format.parse(dateFinInscrStr);
+		PublicationInscription publicationInscription = publicationInscriptionRepository
+				.findByDate(dateDeb, dateFin);
+		assertThat(
+				publicationInscription,
+				allOf(hasProperty("id", is(Long.valueOf("2"))),
+						hasProperty(
+								"messageInscription",
+								is("les inscriptions commencent à partir de..."))));
+		assertEquals(2, publicationInscription.getEmploye().getId().longValue());
+		assertEquals(Role.ADMIN, publicationInscription.getEmploye()
+				.getRoleEmploye());
+		assertEquals("Justine", publicationInscription.getEmploye().getNom());
 
-	}
-
-	@Test
-	public void testDateNotFind() {
-		List<Inscription> list = inscriptionRepository.findByDate(new Date());
-		assertThat(0, is(list.size()));
-		assertTrue(list.isEmpty());
 	}
 
 }
