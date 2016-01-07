@@ -31,3 +31,10 @@ ul.menu-nav{
 	background-color: black;
 }
  #map_canvas { height: 100% ; width:100%;}
+ h2#titre{
+ text-align: center;
+ font-size: x-large;
+ font-style: italic;
+ font-weight: lighter;
+ background-color: aqua;
+ }

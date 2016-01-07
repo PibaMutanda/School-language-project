@@ -99,7 +99,7 @@ public class ParticipantFormationController {
 		for (Participant participant : listParticipant) {
 			listSetPart.add(participant);
 		}
-		List<Local> listLocal = localRep.findAll();
+		List<Local> listLocal = localRep.findAllbyFormation(formation.getId());
 		mv.addObject("formation", formation);
 		mv.addObject("listLocal", listLocal);
 		mv.addObject("listParticipant", listSetPart);
@@ -127,7 +127,7 @@ public class ParticipantFormationController {
 		for (Participant participant : listParticipant) {
 			listSetPart.add(participant);
 		}
-		List<Local> listLocal = localRep.findAll();
+		List<Local> listLocal = localRep.findAllbyFormation(formation.getId());
 		mv.addObject("listLocal", listLocal);
 		mv.addObject("formation", formation);
 		mv.addObject("listParticipant", listSetPart);
@@ -226,6 +226,15 @@ public class ParticipantFormationController {
 			}
 
 			Participant participant2 = participantRep.findById(participant);
+			if (participantService.hasCoursesForSession(participant2,
+					detailLocalFormation.getSeance(),
+					detailLocalFormation.getJour())) {
+				mv.addObject("messageError", participant2.getNom()
+						+ " est déjà inscrit pour une seance du "
+						+ detailLocalFormation.getJour() + " "
+						+ detailLocalFormation.getSeance());
+				return mv;
+			}
 			participant2.setLocal(local2);
 			detailLocalFormation.addParticipant(participant2);
 			detailLocalFormation.setNiveau(niveau);

@@ -15,8 +15,8 @@
 <body>
 	<c:choose>
 		<c:when test="${not empty employe }">
-			<h3>Inscription d'un nouveau participant pour la formation:
-				${formation.titre } Niveau: ${niveau }</h3>
+			<h2 id="titre">Inscription d'un nouveau participant pour la formation:
+				${formation.titre } Niveau: ${niveau }</h2>
 			<c:forEach items="${messageError }" var="message">
 				<p id="messageErreur">${message }</p>
 			</c:forEach>

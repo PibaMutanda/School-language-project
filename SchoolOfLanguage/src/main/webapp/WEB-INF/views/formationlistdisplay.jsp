@@ -14,6 +14,9 @@
 <title>Insert title here</title>
 </head>
 <body>
+ <c:forEach items="${messageError }" var="message">
+      <p id="messageErreur">${message }</p>
+ </c:forEach>
 <form action="detailFormation" method="get">
 <table class="table table-hover">
     <c:forEach items="${listformations}" var="formation">

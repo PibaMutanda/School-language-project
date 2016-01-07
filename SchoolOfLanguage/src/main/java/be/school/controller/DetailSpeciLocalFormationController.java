@@ -1,5 +1,6 @@
 package be.school.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -81,11 +82,14 @@ public class DetailSpeciLocalFormationController {
 			List<DetailLocalFormation> detailLocalFormations,
 			Formation formation) {
 		ModelAndView mv = new ModelAndView("detailformation");
-		Local local = null;
+		List<Local> locaux = new ArrayList<Local>();
 		if (detailLocalFormations.size() > 0) {
-			local = localRep.findByDetalLocalFormation(detailLocalFormations
-					.get(0).getId());
-			mv.addObject("local", local);
+			for (DetailLocalFormation detailLocalFormation : detailLocalFormations) {
+				Local localbuff = localRep.findByDetalLocalFormation(detailLocalFormation.getId());
+				locaux.add(localbuff);
+			}
+			
+			mv.addObject("local", locaux);
 		}
 		mv.addObject("detailLocalFormations", detailLocalFormations);
 		mv.addObject("formation", formation);

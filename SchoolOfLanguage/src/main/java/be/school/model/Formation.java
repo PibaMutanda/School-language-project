@@ -94,4 +94,5 @@ public class Formation {
 	public Long getId() {
 		return id;
 	}
+	
 }

@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ClassDiagram>
+    <Class name="be.school.model.Reservation" x="1053" y="236">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Association destinationClassName="be.school.model.Formation"
+            endpointName="formations" kind="Simple"/>
+    </Class>
+    <Class name="be.school.model.Inscription" x="622" y="334">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Association destinationClassName="be.school.model.Participant"
+            endpointName="participant" kind="Simple"/>
+    </Class>
+    <Class name="be.school.model.Employe" x="1" y="156">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Association destinationClassName="be.school.model.Employe.Role"
+            endpointName="roleEmploye" kind="Simple"/>
+    </Class>
+    <Class name="be.school.model.Formateur" x="858" y="235">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Association
+            destinationClassName="be.school.model.DetailLocalFormation"
+            endpointName="detailLocalFormations" kind="Simple"/>
+    </Class>
+    <Class name="be.school.model.Participant.Sexe" x="352" y="9">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+    </Class>
+    <Class name="be.school.model.DetailLocalFormation" x="660" y="10">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Association destinationClassName="be.school.model.Formateur"
+            endpointName="formateur" kind="Simple"/>
+        <Association destinationClassName="be.school.model.Formation"
+            endpointName="formation" kind="Simple"/>
+        <Association destinationClassName="be.school.model.Local"
+            endpointName="local" kind="Simple"/>
+        <Association destinationClassName="be.school.model.Participant"
+            endpointName="participants" kind="Simple"/>
+    </Class>
+    <Class name="be.school.model.Formation" x="1030" y="31">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Association
+            destinationClassName="be.school.model.DetailLocalFormation"
+            endpointName="detailLocalFormations" kind="Simple"/>
+    </Class>
+    <Class name="be.school.model.Local" x="405" y="396">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Association
+            destinationClassName="be.school.model.DetailLocalFormation"
+            endpointName="detailLocalFormations" kind="Simple"/>
+        <Association destinationClassName="be.school.model.Participant"
+            endpointName="participants" kind="Simple"/>
+    </Class>
+    <Class name="be.school.model.Participant" x="185" y="46">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Association destinationClassName="be.school.model.Inscription"
+            endpointName="inscriptions" kind="Simple"/>
+        <Association
+            destinationClassName="be.school.model.Participant.Sexe"
+            endpointName="sexe" kind="Simple"/>
+        <Association
+            destinationClassName="be.school.model.DetailLocalFormation"
+            endpointName="detailLocalFormations" kind="Simple"/>
+        <Association
+            destinationClassName="be.school.model.StatutProfessionnel"
+            endpointName="statutProfessionnel" kind="Simple"/>
+        <Association destinationClassName="be.school.model.Local"
+            endpointName="local" kind="Simple"/>
+    </Class>
+    <Class name="be.school.model.StatutProfessionnel" x="173" y="345">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+    </Class>
+    <Class name="be.school.model.PublicationInscription" x="-5" y="397">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Association destinationClassName="be.school.model.Employe"
+            endpointName="employe" kind="Simple"/>
+    </Class>
+    <Class name="be.school.model.Employe.Role" x="45" y="6">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+    </Class>
+</ClassDiagram>

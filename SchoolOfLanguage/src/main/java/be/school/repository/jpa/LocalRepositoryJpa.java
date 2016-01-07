@@ -52,4 +52,16 @@ public class LocalRepositoryJpa extends GenericRepositoryJpa<Local> implements
 		return local;
 
 	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Local> findAllbyFormation(Long idformation) {
+		List<Local> locaux=null;
+		Query query = em.createNamedQuery("Local.findAllbyFormation").setParameter("id", idformation);
+		locaux = query.getResultList();
+		return locaux;
+	}
 }

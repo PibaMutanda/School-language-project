@@ -10,6 +10,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -25,7 +26,9 @@ import org.hibernate.validator.constraints.NotEmpty;
  */
 @Entity
 @Table(name = "LocalCours")
-@NamedQuery(name = "Local.findAll", query = "select l from Local l")
+@NamedQueries({
+		@NamedQuery(name = "Local.findAll", query = "select l from Local l"),
+		@NamedQuery(name = "Local.findAllbyFormation", query = "select l from Local l join l.detailLocalFormations ld where ld.formation.id=:id") })
 public class Local {
 
 	@Id

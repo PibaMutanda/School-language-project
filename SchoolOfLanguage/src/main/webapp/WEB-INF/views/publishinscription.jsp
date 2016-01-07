@@ -17,6 +17,7 @@
 			<c:forEach items="${messageError }" var="message">
 				<p id="messageErreur">${message }</p>
 			</c:forEach>
+			<h2 id="titre">Publier les dates pour les inscriptions</h2>
 			<form action="publishinscriptionsubmit" method="post"
 				class="form-horizontal">
 				<input type="hidden" name="id" value="${employe.id }">

@@ -17,6 +17,7 @@
 	<c:forEach items="${messageError }" var="message">
 		<p id="messageErreur">${message }</p>
 	</c:forEach>
+	<h2 id="titre">Ajouter un participant</h2>
 	<form:form modelAttribute="participant" action="participantsubmit">
 		<table class="table">
 		   <tr><td>Nom</td></tr>

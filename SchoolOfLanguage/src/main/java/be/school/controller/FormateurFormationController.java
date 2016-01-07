@@ -47,8 +47,8 @@ public class FormateurFormationController {
 	public ModelAndView formateurFormationDisplay(@RequestParam Long id) {
 		ModelAndView mv = prepareModelAndView();
 		Formateur formateur = formateurRepositoryJpa.findById(id);
-				mv.addObject("formateur", formateur);
-		
+		mv.addObject("formateur", formateur);
+
 		return mv;
 	}
 
@@ -56,13 +56,14 @@ public class FormateurFormationController {
 	 * 
 	 * @return retourne ModelAndView
 	 */
-	private ModelAndView prepareModelAndView(){
+	private ModelAndView prepareModelAndView() {
 		ModelAndView mv = new ModelAndView("formformateurformation");
 		List<DetailLocalFormation> detailListForm = detailLocalFormationReposytoryJpa
 				.findAllDistinct();
 		mv.addObject("detailListForm", detailListForm);
 		return mv;
 	}
+
 	/**
 	 * 
 	 * @param id
@@ -70,14 +71,24 @@ public class FormateurFormationController {
 	 * @return retourne la page detail formation
 	 */
 	@RequestMapping(value = "/formateurdetaildisplay", method = RequestMethod.GET)
-	public ModelAndView displayDetailFormateur(@RequestParam Long id) {
+	public ModelAndView displayDetailFormateur(
+			@RequestParam(required = false) Long id) {
 		ModelAndView mv = new ModelAndView("formateurdetaildisplay");
-		Formateur formateur = formateurRepositoryJpa.findById(id);
-		mv.addObject("formateur", formateur);
-		return mv;
+		if (id == null) {
+			mv.setViewName("formationlistdisplay");
+			mv.addObject("messageError",
+					"Aucun formateur n'est associé pour cette formation");
+			List<Formation> listFormation = formationRep.findAll();
+			mv.addObject("listformations", listFormation);
+			return mv;
+		} else {
+			Formateur formateur = formateurRepositoryJpa.findById(id);
+			mv.addObject("formateur", formateur);
+			return mv;
+		}
+
 	}
 
- 	
 	/**
 	 * 
 	 * @param formateur
@@ -116,8 +127,11 @@ public class FormateurFormationController {
 									+ detailFormation.getSeance());
 					return mv;
 				}
-				if(formateur2.getId()!=detailFormation.getFormateur().getId()){
-					mv.addObject("messageError","Cette formation est déjà donnée par "+detailFormation.getFormateur().getNom());
+				if (formateur2.getId() != detailFormation.getFormateur()
+						.getId()) {
+					mv.addObject("messageError",
+							"Cette formation est déjà donnée par "
+									+ detailFormation.getFormateur().getNom());
 					return mv;
 				}
 			}

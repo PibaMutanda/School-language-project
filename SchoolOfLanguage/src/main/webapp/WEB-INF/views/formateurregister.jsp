@@ -17,6 +17,7 @@
 			<c:forEach items="${messageError }" var="message">
 				<p id="messageErreur">${message }</p>
 			</c:forEach>
+			<h2 id="titre">Ajouter un formateur</h2>
 			<form:form modelAttribute="formateur" action="formateursubmit">
 				<table class="table">
 					<tr>

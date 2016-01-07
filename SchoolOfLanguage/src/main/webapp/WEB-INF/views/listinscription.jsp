@@ -32,6 +32,7 @@
 				<th>COMMUNICATION  PAYEMENT</th>
 			</tr>
 			<c:forEach items="${listinscription}" var="inscription">
+			<c:set var="tabDet">${inscription.participant.detailLocalFormations }</c:set>
 				<tr>
 					<td>${inscription.participant.sexe }</td>
 					<td>${inscription.participant.nom }</td>

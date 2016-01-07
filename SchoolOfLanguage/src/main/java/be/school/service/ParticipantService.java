@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
+import be.school.enumClass.Jour;
+import be.school.enumClass.Seance;
 import be.school.model.DetailLocalFormation;
 import be.school.model.Formation;
 import be.school.model.Participant;
@@ -65,8 +67,8 @@ public class ParticipantService {
 			resultList.add(participant);
 		}
 		/*
-		 * Secondly find and exclude participants who already are registered for 2
-		 * courses
+		 * Secondly find and exclude participants who already are registered for
+		 * 2 courses
 		 */
 
 		List<Participant> oldParticipants = participantRepository.findAll();
@@ -86,5 +88,30 @@ public class ParticipantService {
 				resultList.add(participant);
 		}
 		return resultList;
+	}
+
+	/**
+	 * 
+	 * @param participant
+	 *            participant
+	 * @param seance
+	 *            seance
+	 * @param jour
+	 *            jour
+	 * @return retourne vrai si le participant est déjà inscrit pour une session
+	 *         du jour
+	 */
+	public boolean hasCoursesForSession(Participant participant, Seance seance,
+			Jour jour) {
+		boolean ok = false;
+		Set<DetailLocalFormation> details = participant
+				.getDetailLocalFormations();
+		for (DetailLocalFormation detailLocalFormation : details) {
+			if ((detailLocalFormation.getJour() == jour)
+					&& (detailLocalFormation.getSeance() == seance))
+				ok = true;
+			break;
+		}
+		return ok;
 	}
 }

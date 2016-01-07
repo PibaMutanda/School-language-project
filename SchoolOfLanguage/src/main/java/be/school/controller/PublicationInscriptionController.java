@@ -86,8 +86,8 @@ public class PublicationInscriptionController {
 		if (dateFinStr.trim() == null)
 			messageErrors.add("Saisir la date de fin d'inscription");
 		if (dateDebStr.trim() != null && dateFinStr.trim() != null) {
-			dateDeb = DateUtil.parseddMMyyyy(dateDebStr);
-			dateFin = DateUtil.parseddMMyyyy(dateFinStr);
+			dateDeb = DateUtil.parseyyyyMMdd(dateDebStr);
+			dateFin = DateUtil.parseyyyyMMdd(dateFinStr);
 			if (dateDeb.before(dateCourant))
 				messageErrors
 						.add("La date doit être postérieure à la date courante");

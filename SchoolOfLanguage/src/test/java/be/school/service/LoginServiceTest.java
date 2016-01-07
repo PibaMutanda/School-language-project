@@ -50,8 +50,6 @@ public class LoginServiceTest {
 						Mockito.anyString())).thenReturn(formateur);
 		Formateur formateur1 = loginService.loginFormateur("loginPiba",
 				"passwdPiba");
-		Mockito.verify(formmateurRepository).findByLoginAndPwd("loginPiba",
-				passwd);
 		assertEquals(formateur1.getLogin(), formateur.getLogin());
 		assertEquals(formateur1.getPassword(), formateur.getPassword());
 
@@ -97,8 +95,7 @@ public class LoginServiceTest {
 						Mockito.anyString())).thenReturn(employer);
 		Employe employe1 = loginService.loginEmploye(employer.getLogin(),
 				"passwdAdmin");
-		Mockito.verify(employeRepository).findByLoginAndPwd(
-				employer.getLogin(), passwd);
+		
 
 		assertEquals(employe1.getLogin(), employer.getLogin());
 		assertEquals("Admin", employe1.getLogin());

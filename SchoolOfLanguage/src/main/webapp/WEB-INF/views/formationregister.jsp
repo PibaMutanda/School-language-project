@@ -20,6 +20,7 @@ $("#notification-message").show().delay(7000).fadeOut();
      <c:forEach items="${messageError }" var="message">
       <p id="messageErreur">${message }</p>
      </c:forEach>
+     <h2 id="titre">Ajouter une formation</h2>
      <form:form action="formationsubmit" modelAttribute="formation">
       <table class="table">
       <tr><td>Formation</td></tr>

@@ -17,7 +17,9 @@
      <c:forEach items="${messageError }" var="message">
       <p id="messageErreur">${message }</p>
      </c:forEach>
+      <h2 id="titre">Ajouter un statut professionnel</h2>
      <form:form modelAttribute="statutProfessionnel" action="statutprofessionnelsubmit">
+    
      <table class="table">
            <tr><td>
               Statut Professionnel

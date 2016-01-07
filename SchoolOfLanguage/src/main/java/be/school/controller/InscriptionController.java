@@ -48,7 +48,7 @@ public class InscriptionController {
 	 * 
 	 * @return retourne ModelAndView
 	 */
-	private ModelAndView prepareModelAnd() {
+	private ModelAndView prepareModelAndView() {
 		ModelAndView mv = new ModelAndView("listinscription");
 		Date currentDate = new Date();
 		String strDate = DateUtil.formatddMMyyyyHHmm(currentDate);
@@ -128,12 +128,16 @@ public class InscriptionController {
 				if (participant != null)
 					sum += participant.getStatutProfessionnel().getPrix();
 			}
-		} else
+		} else {
 			mv.addObject("messageError", "Cochez au moins un cours");
+		}
 		if (participant != null && formations != null) {
 			String communicationforPaid = participant.getMatricule()
 					+ SecurityUtils.generateRandomNumber(4);
 			Inscription inscription = new Inscription();
+			for (String string : formations) {
+				communicationforPaid += "-" + string;
+			}
 			inscription.setCommunicationPaie(communicationforPaid);
 			inscription.setParticipant(participant);
 			inscription.setMontantPaie(sum);
@@ -143,10 +147,8 @@ public class InscriptionController {
 					"Votre r&eacute;inscription est enregistrée, Vous devez payer la somme de ")
 					.append(String.valueOf(sum))
 					.append("  sur le compte BE00 0000 0000 0000 en indiquant comme communication  ")
-					.append("<strong>")
-					.append(communicationforPaid)
-					.append("</strong>")
-					.toString();
+					.append("<strong>").append(communicationforPaid)
+					.append("</strong>").toString();
 			NotificationUtil.addCommunicationMessage(message);
 		} else {
 			mv.addObject(
@@ -162,7 +164,7 @@ public class InscriptionController {
 	 */
 	@RequestMapping(value = "/listinscription", method = RequestMethod.GET)
 	public ModelAndView showListInscription() {
-		return prepareModelAnd();
+		return prepareModelAndView();
 	}
 
 	/**

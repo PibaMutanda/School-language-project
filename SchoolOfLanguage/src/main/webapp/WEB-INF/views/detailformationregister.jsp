@@ -6,8 +6,8 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
-	href="<%=request.getContextPath()%>/resources/css/bootstrap.min.css">
-<link href="<%=request.getContextPath()%>/resources/css/style.css"
+	href="resources/css/bootstrap.min.css">
+<link href="resources/css/style.css"
 	rel="stylesheet" type="text/css">
 <title>Detail Formation</title>
 </head>
@@ -17,6 +17,7 @@
 	<c:forEach items="${messageError }" var="message">
 		<p id="messageErreur">${message }</p>
 	</c:forEach>
+	<h2 id="titre">Associer un local &agrave; une formation</h2>
 	<form:form modelAttribute="detailFormation"
 		action="detailformationsubmit">
       Formation&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<select
