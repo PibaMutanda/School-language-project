@@ -23,6 +23,7 @@
 				<th>GSM</th>
 				<th>DATE RESERVATION</th>
 				<th>DATE RDV</th>
+				<th>FORMATION(S)</th>
 			</tr>
 			<c:forEach items="${listReservation }" var="reserv">
 				<tr>
@@ -32,6 +33,7 @@
 					<td>${reserv.gsm }</td>
 					<td>${reserv.dateReserv }</td>
 					<td>${reserv.dateRdv }</td>
+					<td><c:forEach items="${reserv.formations }" var="formation">${formation.titre }<br></c:forEach></td>
 				</tr>
 			</c:forEach>
 		</table>

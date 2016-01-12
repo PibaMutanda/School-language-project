@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -60,7 +61,7 @@ public class Reservation {
 	@DateTimeFormat(iso = ISO.DATE)
 	private Date dateRdv;
 
-	@OneToMany
+	@OneToMany(fetch=FetchType.EAGER)
 	@JoinColumn
 	private List<Formation> formations = new ArrayList<Formation>();
 

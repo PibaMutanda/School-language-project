@@ -81,13 +81,13 @@ public class PublicationInscriptionController {
 		Date dateCourant = new Date();
 		String dateDebStr = request.getParameter("dateDeb");
 		String dateFinStr = request.getParameter("dateFin");
-		if (dateDebStr.trim() == null)
+		if (null == dateDebStr)
 			messageErrors.add("Saisir la date du début d'inscription");
-		if (dateFinStr.trim() == null)
+		if (null == dateFinStr)
 			messageErrors.add("Saisir la date de fin d'inscription");
-		if (dateDebStr.trim() != null && dateFinStr.trim() != null) {
-			dateDeb = DateUtil.parseyyyyMMdd(dateDebStr);
-			dateFin = DateUtil.parseyyyyMMdd(dateFinStr);
+		if (null != dateDebStr && null != dateFinStr) {
+			dateDeb = DateUtil.parseyyyyMMdd(dateDebStr.trim());
+			dateFin = DateUtil.parseyyyyMMdd(dateFinStr.trim());
 			if (dateDeb.before(dateCourant))
 				messageErrors
 						.add("La date doit être postérieure à la date courante");
@@ -104,7 +104,8 @@ public class PublicationInscriptionController {
 			publicationInscription.setDateFinInscr(dateFin);
 			publicationInscription
 					.setMessageInscription("Les inscriptions vont du "
-							+ DateUtil.formatddMMyyyy(dateDeb) + " au  " + DateUtil.formatddMMyyyy(dateFin));
+							+ DateUtil.formatddMMyyyy(dateDeb) + " au  "
+							+ DateUtil.formatddMMyyyy(dateFin));
 			publicationInscription.setEmploye(employe);
 			employeResository.save(employe);
 			publicationInscrRepo.save(publicationInscription);

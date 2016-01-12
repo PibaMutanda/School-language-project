@@ -1,7 +1,6 @@
 package be.school.controller;
 
 import java.beans.PropertyEditorSupport;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -145,13 +144,13 @@ public class ReservationController {
 			mv.addObject("reservation", reservation);
 
 		} else {
-
+            SimpleDateFormat sdf = new SimpleDateFormat();
+            String dateStr = sdf.format(reservation.getDateRdv());
 			reservationRepositoryJpa.save(reservation);
 			String communication = new StringBuilder()
 					.append(", votre rendez-vous pour l'inscrisption est pris pour le ")
 					.append("<strong>")
-					.append(DateFormat.getDateInstance().format(
-							reservation.getDateRdv()))
+					.append(dateStr)
 					.append("</strong>")		
 							.toString();
 			NotificationUtil.addCommunicationMessage(reservation.getNom()
